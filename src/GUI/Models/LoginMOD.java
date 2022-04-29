@@ -1,4 +1,2 @@
-package GUI.Models;
-
-public class LoginMOD {
+package GUI.Models;public class LoginMOD {
 }
