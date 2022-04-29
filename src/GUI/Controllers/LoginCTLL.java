@@ -1,9 +1,9 @@
-package dk.easv.simulationplatform;
+package GUI.Controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class HelloController {
+public class LoginCTLL {
     @FXML
     private Label welcomeText;
 
