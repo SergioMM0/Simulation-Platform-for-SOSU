@@ -20,7 +20,7 @@ public class Manager implements DALFacade {
     @Override
     public User verifyUsers(String useremail, String password) {
         User user = null;
-       
+
         try (Connection con = dataAccess.getConnection()) {
             String sql = " SELECT * FROM users where users.email = ? AND password = ?";
             PreparedStatement prs = con.prepareStatement(sql);
@@ -30,9 +30,9 @@ public class Manager implements DALFacade {
             while (rs.next()) {
                 int id = rs.getInt("userid");
                 String name = rs.getString("username");
-                String email = rs.getString("email");
+
                 String usertype = rs.getString("usertype");
-              user = new User(id , name , email , usertype );
+              user = new User(id , name , useremail , usertype );
             }
             return user;
 
