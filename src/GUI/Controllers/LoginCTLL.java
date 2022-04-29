@@ -11,9 +11,4 @@ public class LoginCTLL {
     protected void onHelloButtonClick() {
         welcomeText.setText("Welcome to JavaFX Application!");
     }
-
-
-    //8
-
-    //8
 }
