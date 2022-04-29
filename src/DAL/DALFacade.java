@@ -5,6 +5,6 @@ import BE.User;
 public interface DALFacade {
 
 
-    User verifyUsers(String username, String password);
+    User verifyUsers(String useremail, String password);
 
 }
