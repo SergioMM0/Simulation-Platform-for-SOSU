@@ -38,7 +38,7 @@ public class Manager implements DALFacade {
 
 
         } catch (SQLException e) {
-          throw new DalException(e.getMessage());
+          throw new DalException("Connection Lost " , e);
         }
     }
 
@@ -59,7 +59,7 @@ public class Manager implements DALFacade {
             }
 
         } catch (SQLException e) {
-           throw new DalException(e.getMessage());
+            throw new DalException("Connection Lost " , e);
         }
         return users;
     }
@@ -78,7 +78,7 @@ public class Manager implements DALFacade {
             prs.executeUpdate();
 
         } catch (SQLException e) {
-            throw new DalException(e.getMessage());
+            throw new DalException("Connection Lost " , e);
         }
     }
 
@@ -93,7 +93,7 @@ public class Manager implements DALFacade {
             prs.executeUpdate();
 
         } catch (SQLException e) {
-           throw new DalException(e.getMessage());
+            throw new DalException("Connection Lost " , e);
         }
     }
 
@@ -112,7 +112,7 @@ public class Manager implements DALFacade {
             user = new User(newestid(), username, email, usertype);
 
         } catch (SQLException e) {
-            throw new DalException(e.getMessage());
+            throw new DalException("Connection Lost " , e);
         }
         return user;
     }
@@ -128,7 +128,7 @@ public class Manager implements DALFacade {
                 newid = rs.getInt("id");
             }
         } catch (SQLException e) {
-            throw new DalException(e.getMessage());
+            throw new DalException("Connection Lost " , e);
         }
         return newid;
     }
@@ -159,7 +159,7 @@ public class Manager implements DALFacade {
             }
 
         } catch (SQLException e) {
-          throw new DalException(e.getMessage());
+            throw new DalException("Connection Lost " , e);
         }
 
         return users;
