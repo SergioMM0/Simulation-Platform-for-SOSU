@@ -1,54 +1,169 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 
-
-<AnchorPane prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Views.TeacherMain">
-   <children>
-      <TabPane layoutX="20.0" layoutY="20.0" prefHeight="660.0" prefWidth="880.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Overview">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="860.0">
+<TabPane prefHeight="660.0" prefWidth="880.0" tabClosingPolicy="UNAVAILABLE" tabMinHeight="40.0" tabMinWidth="100.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <tabs>
+      <Tab text="General">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="860.0">
+               <children>
+                  <Label layoutX="79.0" layoutY="30.0" text="Student groups" />
+                  <ListView layoutX="240.0" layoutY="65.0" prefHeight="530.0" prefWidth="200.0" />
+                  <Label layoutX="297.0" layoutY="30.0" text="Cases templates" />
+                  <Button layoutX="680.0" layoutY="140.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" />
+                  <Button layoutX="680.0" layoutY="195.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" />
+                  <Button layoutX="680.0" layoutY="85.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" text="Assign case to group" />
+                  <Button layoutX="680.0" layoutY="555.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" text="Close session" />
+                  <ListView layoutX="460.0" layoutY="65.0" prefHeight="530.0" prefWidth="200.0" />
+                  <Label layoutX="511.0" layoutY="30.0" text="Patients templates" />
+                  <Button layoutX="680.0" layoutY="250.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" />
+                  <Button layoutX="680.0" layoutY="305.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" text="Copy patient" />
+                  <Button layoutX="680.0" layoutY="360.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" text="Copy case" />
+                  <Button layoutX="680.0" layoutY="415.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" text="Delete patient" />
+                  <Button layoutX="680.0" layoutY="470.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" text="Delete case" />
+                  <TableView layoutX="20.0" layoutY="65.0" prefHeight="530.0" prefWidth="200.0">
+                    <columns>
+                      <TableColumn prefWidth="140.80001831054688" text="Name" />
+                      <TableColumn prefWidth="58.399993896484375" text="Cases" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Patient overview">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="55.0" layoutY="60.0" text="Name" />
+                  <Label layoutX="55.0" layoutY="130.0" text="Date of Birth" />
+                  <Label layoutX="55.0" layoutY="270.0" text="CPR" />
+                  <Label layoutX="55.0" layoutY="305.0" text="Phone Number" />
+                  <Label layoutX="55.0" layoutY="165.0" text="Gender" />
+                  <Label layoutX="55.0" layoutY="200.0" text="Weight" />
+                  <Label layoutX="55.0" layoutY="235.0" text="Height" />
+                  <Label layoutX="55.0" layoutY="95.0" text="Family name" />
+                  <Label layoutX="55.0" layoutY="340.0" text="Blood type" />
+                  <Label layoutX="55.0" layoutY="375.0" text="Exercise" />
+                  <Label layoutX="55.0" layoutY="410.0" text="Diet" />
+                  <Label layoutX="55.0" layoutY="445.0" text="Alcohol" />
+                  <Label layoutX="55.0" layoutY="480.0" text="Tobacco" />
+                  <Label layoutX="55.0" layoutY="515.0" text="Observations" />
+                  <Line endX="-100.0" endY="447.199951171875" layoutX="255.0" layoutY="110.0" startX="-100.0" startY="-60.0" />
+                  <Label layoutX="190.0" layoutY="60.0" maxWidth="240.0" text="&lt;Name&gt;" />
+                  <Label layoutX="190.0" layoutY="130.0" maxWidth="240.0" text="&lt;Date of Birth&gt;" />
+                  <Label layoutX="190.0" layoutY="270.0" maxWidth="240.0" text="&lt;CPR&gt;" />
+                  <Label layoutX="190.0" layoutY="305.0" maxWidth="240.0" text="&lt;Phone Number&gt;" />
+                  <Label layoutX="190.0" layoutY="165.0" maxWidth="240.0" text="&lt;Gender&gt;" />
+                  <Label layoutX="190.0" layoutY="200.0" maxWidth="240.0" text="&lt;Weight&gt;" />
+                  <Label layoutX="190.0" layoutY="235.0" maxWidth="240.0" text="&lt;Height&gt;" />
+                  <Label layoutX="190.0" layoutY="95.0" maxWidth="240.0" text="&lt;Family name&gt;" />
+                  <Label layoutX="190.0" layoutY="340.0" maxWidth="240.0" text="&lt;Blood type&gt;" />
+                  <Label layoutX="190.0" layoutY="375.0" maxWidth="240.0" text="&lt;Exercise&gt;" />
+                  <Label layoutX="190.0" layoutY="410.0" maxWidth="240.0" text="&lt;Diet&gt;" />
+                  <Label layoutX="190.0" layoutY="445.0" maxWidth="240.0" text="&lt;Alcohol&gt;" />
+                  <Label layoutX="190.0" layoutY="480.0" maxWidth="240.0" text="&lt;Tobacco&gt;" />
+                  <TextArea layoutX="190.0" layoutY="513.0" prefHeight="70.0" prefWidth="240.0" text="&lt;Observations&gt;&#10;" />
+                  <Line endX="-100.0" endY="447.199951171875" layoutX="565.0" layoutY="113.0" startX="-100.0" startY="-60.0" />
+                  <Button layoutX="500.0" layoutY="60.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="New observation" />
+                  <Button layoutX="500.0" layoutY="120.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Medical history" />
+                  <Button layoutX="500.0" layoutY="180.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Add case to this patient" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Group info">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <ListView layoutX="40.0" layoutY="130.0" prefHeight="445.0" prefWidth="200.0" />
+                  <Label layoutX="100.0" layoutY="100.0" text="Cases assigned" />
+                  <Button layoutX="270.0" layoutY="130.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Grade case" />
+                  <Button layoutX="270.0" layoutY="195.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Assign new case" textOverrun="CLIP" />
+                  <Button layoutX="270.0" layoutY="260.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Mark case as graded" />
+                  <ListView layoutX="640.0" layoutY="130.0" prefHeight="445.0" prefWidth="200.0" />
+                  <Label layoutX="704.0" layoutY="100.0" text="Cases graded" />
+                  <Button layoutX="460.0" layoutY="130.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Unmark case as graded" />
+                  <AnchorPane layoutX="40.0" layoutY="14.0" prefHeight="65.0" prefWidth="800.0" style="-fx-background-color: ffffff;">
                      <children>
-                        <ListView layoutX="20.0" layoutY="140.0" prefHeight="470.0" prefWidth="200.0" />
-                        <Label layoutX="96.0" layoutY="108.0" text="Students" />
-                        <ListView layoutX="249.0" layoutY="140.0" prefHeight="470.0" prefWidth="200.0" />
-                        <Label layoutX="334.0" layoutY="108.0" text="Cases" />
-                        <Button layoutX="680.0" layoutY="140.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" text="Button" />
-                        <Button layoutX="780.0" layoutY="140.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" text="Button" />
-                        <Button layoutX="680.0" layoutY="200.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" text="Assign case to student" />
-                        <Button layoutX="680.0" layoutY="260.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" />
+                        <Label layoutX="66.0" layoutY="8.0" text="Group name:" />
+                        <Label layoutX="66.0" layoutY="38.0" text="Students:" />
+                        <Label layoutX="166.0" layoutY="38.0" prefWidth="350.0" text="&lt;Student names&gt;" />
+                        <Label layoutX="166.0" layoutY="8.0" prefWidth="350.0" text="&lt;Group name&gt;" />
+                        <Button layoutX="550.0" layoutY="17.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Manage group" />
                      </children>
                   </AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="Student info">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-          </Tab>
-            <Tab text="Case info">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-               </content>
-            </Tab>
-            <Tab text="Patient overview">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Button layoutX="706.0" layoutY="54.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Create patient" />
-                        <ListView layoutX="20.0" layoutY="140.0" prefHeight="470.0" prefWidth="200.0" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-        </tabs>
-      </TabPane>
-   </children>
-</AnchorPane>
+               </children></AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Case info">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="30.0" layoutY="30.0" text="Case name:" />
+                  <Label layoutX="110.0" layoutY="30.0" prefWidth="200.0" text="&lt;Case name&gt;" />
+                  <Label layoutX="30.0" layoutY="70.0" text="Category" />
+                  <ComboBox layoutX="110.0" layoutY="105.0" prefHeight="26.0" prefWidth="220.0" />
+                  <Label layoutX="30.0" layoutY="110.0" text="Subcategory" />
+                  <ComboBox layoutX="110.0" layoutY="65.0" prefHeight="26.0" prefWidth="220.0" />
+                  <Label layoutX="30.0" layoutY="150.0" prefHeight="18.0" prefWidth="170.0" text="Description of the condition:" />
+                  <TextField layoutX="30.0" layoutY="180.0" prefHeight="90.0" prefWidth="820.0" />
+                  <Label layoutX="30.0" layoutY="300.0" prefHeight="18.0" prefWidth="170.0" text="Cause text:" />
+                  <TextField layoutX="30.0" layoutY="330.0" prefHeight="90.0" prefWidth="820.0" />
+                  <Label layoutX="30.0" layoutY="438.0" prefHeight="18.0" prefWidth="170.0" text="Causal diagnose:" />
+                  <TextField layoutX="30.0" layoutY="468.0" prefHeight="90.0" prefWidth="820.0" />
+               </children></AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Students/Groups">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button layoutX="305.0" layoutY="70.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" text="Add new student" />
+                  <Label layoutX="120.0" layoutY="40.0" text="Students" />
+                  <TableView layoutX="20.0" layoutY="70.0" prefHeight="505.0" prefWidth="250.0">
+                    <columns>
+                      <TableColumn prefWidth="186.4000244140625" text="Name" />
+                      <TableColumn prefWidth="63.20001220703125" text="In group" />
+                    </columns>
+                  </TableView>
+                  <Button layoutX="305.0" layoutY="125.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" text="Edit student" />
+                  <Button layoutX="305.0" layoutY="180.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" text="Delete student" />
+                  <Button layoutX="450.0" layoutY="70.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" text="Create group" />
+                  <Button layoutX="450.0" layoutY="125.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" text="Edit group" />
+                  <Button layoutX="450.0" layoutY="180.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" text="Delete group" />
+                  <TableView layoutX="605.0" layoutY="70.0" prefHeight="505.0" prefWidth="250.0">
+                     <columns>
+                        <TableColumn prefWidth="171.99993896484375" text="Group name" />
+                        <TableColumn prefWidth="79.2000732421875" text="Participants" />
+                     </columns>
+                  </TableView>
+                  <Label layoutX="711.0" layoutY="40.0" text="Groups" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Untitled Tab">
+         <content>
+            <ScrollPane prefHeight="200.0" prefWidth="200.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="694.0" prefWidth="877.0" />
+              </content>
+            </ScrollPane>
+         </content>
+      </Tab>
+   </tabs>
+</TabPane>
