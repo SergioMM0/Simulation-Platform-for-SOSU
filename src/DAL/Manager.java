@@ -153,7 +153,7 @@ public class Manager implements DALFacade {
         int newid = -1;
 
         try (Connection con = dataAccess.getConnection()) {
-            String sql = "SELECT TOP(1) * FROM Patient ORDER by id desc";
+            String sql = "SELECT TOP(1) * FROM Case ORDER by id desc";
             PreparedStatement prs = con.prepareStatement(sql);
             ResultSet rs = prs.executeQuery();
             while (rs.next()) {
@@ -294,7 +294,7 @@ public class Manager implements DALFacade {
             prs.setBoolean(12,alcohol);
             prs.setBoolean(13,tobacco);
             prs.setString(14,observations);
-
+            prs.executeUpdate();
             Patient patient = new Patient(newestidforPatient(),first_name,last_name,dateofBirth,gender,weight,height,cpr,phone_number,blood_type,exercise,diet,alcohol,tobacco,observations);
             return patient ;
         } catch (SQLException e) {
@@ -412,6 +412,7 @@ public class Manager implements DALFacade {
          String sql = "DELETE FROM Case WHERE id = ?";
          PreparedStatement prs = con.prepareStatement(sql);
          prs.setInt(1 , c.getId());
+         prs.executeUpdate();
        } catch (SQLException e) {
          throw new DalException("Connection Lost" , e);
 
@@ -426,7 +427,7 @@ public class Manager implements DALFacade {
             prs.setInt(1 ,patient.getId());
             prs.setInt(2 , c.getId());
             prs.executeUpdate();
-        } catch (SQLException e) {
+        } catch (SQLException e){
             throw new DalException("Connection Lost" , e );
         }
     }
