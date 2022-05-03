@@ -1,9 +1,6 @@
 package DAL;
 
-import BE.Category;
-import BE.Patient;
-import BE.SubCategory;
-import BE.User;
+import BE.*;
 import DAL.DataAccess.DataAccess;
 import DAL.util.DalException;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -137,6 +134,22 @@ public class Manager implements DALFacade {
     }
 
     private int newestidforPatient() throws DalException {
+        int newid = -1;
+
+        try (Connection con = dataAccess.getConnection()) {
+            String sql = "SELECT TOP(1) * FROM Patient ORDER by id desc";
+            PreparedStatement prs = con.prepareStatement(sql);
+            ResultSet rs = prs.executeQuery();
+            while (rs.next()) {
+                newid = rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            throw new DalException("Connection Lost " , e);
+        }
+        return newid;
+    }
+
+    private int newestidforCases() throws DalException {
         int newid = -1;
 
         try (Connection con = dataAccess.getConnection()) {
@@ -326,5 +339,97 @@ public class Manager implements DALFacade {
            throw new DalException("Connection Lost" , e);
         }
     }
+
+    @Override
+    public List<Case> getAllCases() throws DalException {
+        ArrayList<Case> cases = new ArrayList<>();
+        try(Connection connection = dataAccess.getConnection()){
+            String sql = "SELECT * from Case";
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while(rs.next()){
+                int id = rs.getInt("id");
+                String name = ("name");
+                String description_of_the_condition = rs.getString("Description_of_the_condition");
+                String cause_text = rs.getString("Cause_text");
+                String causal_diagnose = rs.getString("Causal_diagnose");
+                String causal_condition = rs.getString("Causal_condition");
+                String citizens_want_goal = rs.getString("Citizens_want_goal");
+
+                Case c = new Case(newestidforCases() , name ,description_of_the_condition,cause_text,causal_diagnose,causal_condition,citizens_want_goal);
+                cases.add(c);
+            }
+            return cases;
+        } catch (SQLException e) {
+           throw new DalException("Connection Lost" , e);
+        }
+    }
+
+    @Override
+    public Case createCase(String name, String description_of_the_condition, String cause_text, String causal_diagnose, String causal_condition, String citizens_want_goal , Category category , SubCategory subCategory) throws DalException {
+       try(Connection con = dataAccess.getConnection()) {
+           String sql = "INSERT INTO [dbo].[Case] ( name ,Description_of_the_condition, Cause_text,Causal_diagnose, Causal_condition ,Citizens_want_goal,catid , subid) VALUES (?,?,?,?,?,?,?);" ;
+           PreparedStatement prs = con.prepareStatement(sql);
+           prs.setString(1 , name);
+           prs.setString(2 ,description_of_the_condition);
+           prs.setString(3 , cause_text);
+           prs.setString(4 ,causal_diagnose);
+           prs.setString(5 , causal_condition);
+           prs.setString(6 ,citizens_want_goal);
+           prs.setInt(7 ,category.getId());
+           prs.setInt(8 ,subCategory.getId());
+            prs.executeUpdate();
+           Case c = new Case(newestidforCases(), name,description_of_the_condition,cause_text,causal_diagnose,causal_condition,citizens_want_goal);
+           return c ;
+       } catch (SQLException e) {
+          throw new DalException("Connection Lost" , e);
+       }
+
+    }
+
+    @Override
+    public void updateCase(Case c, String name, String description_of_the_condition, String cause_text, String causal_diagnose, String causal_condition, String citizens_want_goal) throws DalException {
+        try(Connection con = dataAccess.getConnection()){
+            String sql = "Update Case set name = ? , description_of_the_condition = ? , cause_text = ?  , causal_diagnose = ? , causal_condition = ? , citizens_want_goal = ?  where id = ? ";
+            PreparedStatement prs = con.prepareStatement(sql);
+            prs.setString(1 , name);
+            prs.setString(2 ,description_of_the_condition);
+            prs.setString(3 , cause_text);
+            prs.setString(4 ,causal_diagnose);
+            prs.setString(5 , causal_condition);
+            prs.setString(6 ,citizens_want_goal);
+            prs.setInt(7,c.getId());
+            prs.executeUpdate();
+
+        } catch (SQLException e) {
+           throw new DalException("Connection Lost" , e);
+        }
+    }
+
+    @Override
+    public void deleteCase(Case c) throws DalException {
+       try(Connection con = dataAccess.getConnection()){
+         String sql = "DELETE FROM Case WHERE id = ?";
+         PreparedStatement prs = con.prepareStatement(sql);
+         prs.setInt(1 , c.getId());
+       } catch (SQLException e) {
+         throw new DalException("Connection Lost" , e);
+
+       }
+    }
+
+    @Override
+    public void assignCasetoPatient(Patient patient, Case c) throws DalException {
+        try(Connection con = dataAccess.getConnection()){
+            String sql = "insert into SickPatient (patientid , caseid) values  (?,?)";
+            PreparedStatement prs = con.prepareStatement(sql);
+            prs.setInt(1 ,patient.getId());
+            prs.setInt(2 , c.getId());
+            prs.executeUpdate();
+        } catch (SQLException e) {
+            throw new DalException("Connection Lost" , e );
+        }
+    }
+
 
 }

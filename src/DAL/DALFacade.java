@@ -1,9 +1,6 @@
 package DAL;
 
-import BE.Category;
-import BE.Patient;
-import BE.SubCategory;
-import BE.User;
+import BE.*;
 import DAL.util.DalException;
 
 import java.sql.Timestamp;
@@ -44,4 +41,18 @@ public interface DALFacade {
 
     void deletePatient(Patient patient)throws DalException ;
 
+    //-------------------Case
+
+    List<Case> getAllCases() throws DalException;
+
+    Case createCase(String name, String description_of_the_condition, String cause_text, String causal_diagnose, String causal_condition, String citizens_want_goal , Category category , SubCategory subCategory)throws DalException;
+
+    void updateCase(Case c , String name, String description_of_the_condition, String cause_text, String causal_diagnose, String causal_condition, String citizens_want_goal)throws  DalException ;
+
+    void deleteCase(Case c) throws DalException ;
+
+
+    //-------------------sick patient
+
+    void assignCasetoPatient(Patient patient , Case c ) throws DalException;
 }
