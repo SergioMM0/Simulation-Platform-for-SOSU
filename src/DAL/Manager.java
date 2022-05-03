@@ -112,7 +112,7 @@ public class Manager implements DALFacade {
             prs.setString(3, email);
             prs.setString(4, usertype);
             prs.executeUpdate();
-            user = new User(newestid(), username, email, usertype);
+            user = new User(newestidforuser(), username, email, usertype);
 
         } catch (SQLException e) {
             throw new DalException("Connection Lost " , e);
@@ -120,11 +120,27 @@ public class Manager implements DALFacade {
         return user;
     }
 
-    private int newestid() throws DalException {
+    private int newestidforuser() throws DalException {
         int newid = -1;
 
         try (Connection con = dataAccess.getConnection()) {
             String sql = "SELECT TOP(1) * FROM users ORDER by userid desc";
+            PreparedStatement prs = con.prepareStatement(sql);
+            ResultSet rs = prs.executeQuery();
+            while (rs.next()) {
+                newid = rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            throw new DalException("Connection Lost " , e);
+        }
+        return newid;
+    }
+
+    private int newestidforPatient() throws DalException {
+        int newid = -1;
+
+        try (Connection con = dataAccess.getConnection()) {
+            String sql = "SELECT TOP(1) * FROM Patient ORDER by id desc";
             PreparedStatement prs = con.prepareStatement(sql);
             ResultSet rs = prs.executeQuery();
             while (rs.next()) {
@@ -208,12 +224,6 @@ public class Manager implements DALFacade {
             throw new DalException("Connection Lost" , e);
         }
     }
-    /*
-    int id, String first_name, String last_name, Timestamp dateofBirth, String gender, int weight,
-                   int height, String cpr, String phone_number, String blood_type, String exercise,
-                    String diet, boolean alcohol,
-                   boolean tobacco, String observations
-     */
 
     @Override
     public List<Patient> getAllPatients() throws DalException {
@@ -252,30 +262,69 @@ public class Manager implements DALFacade {
     }
 
     @Override
-    public Patient createPatient(int id, String first_name, String last_name, Timestamp dateofBirth, String gender, int weight, int height, String cpr, String phone_number, String blood_type, String exercise, String diet, boolean alcohol, boolean tobacco, String observations) throws DalException {
+    public Patient createPatient( String first_name, String last_name, Timestamp dateofBirth, String gender, int weight, int height, String cpr, String phone_number, String blood_type, String exercise, String diet, boolean alcohol, boolean tobacco, String observations) throws DalException {
 
         try (Connection con = dataAccess.getConnection()){
-            String sql = "INSERT INTO Patient (first_name, dateofBirth, gender,weight ,height ,cpr , phone_number ,blood_type ,exercise ,diet ,alcohol,tobacco ,observations ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);";
+            String sql = "INSERT INTO Patient (first_name, last_name, dateofBirth, gender,weight ,height ,cpr , phone_number ,blood_type ,exercise ,diet ,alcohol,tobacco ,observations ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
             PreparedStatement prs = con.prepareStatement(sql);
+            prs.setString(1 , first_name);
+            prs.setString(2 , last_name);
+            prs.setTimestamp(3,dateofBirth);
+            prs.setString(4 , gender);
+            prs.setInt(5 ,weight);
+            prs.setInt(6,height);
+            prs.setString(7 ,cpr);
+            prs.setString(8 ,phone_number);
+            prs.setString(9,blood_type);
+            prs.setString(10,exercise);
+            prs.setString(11, diet);
+            prs.setBoolean(12,alcohol);
+            prs.setBoolean(13,tobacco);
+            prs.setString(14,observations);
 
-        } catch (SQLServerException e) {
-            e.printStackTrace();
+            Patient patient = new Patient(newestidforPatient(),first_name,last_name,dateofBirth,gender,weight,height,cpr,phone_number,blood_type,exercise,diet,alcohol,tobacco,observations);
+            return patient ;
         } catch (SQLException e) {
-            e.printStackTrace();
+           throw new DalException("Connectin Lost " , e);
         }
-
-        return null;
     }
 
     @Override
-    public void updatepatient(int id, String first_name, String last_name, Timestamp dateofBirth, String gender, int weight, int height, String cpr, String phone_number, String blood_type, String exercise, String diet, boolean alcohol, boolean tobacco, String observations) throws DalException {
+    public void updatepatient(Patient patient, String first_name, String last_name, Timestamp dateofBirth, String gender, int weight, int height, String cpr, String phone_number, String blood_type, String exercise, String diet, boolean alcohol, boolean tobacco, String observations) throws DalException {
 
+        try (Connection con = dataAccess.getConnection()){
+            String sql = "Update Patient set first_name = ? , last_name = ? , dateoBirth = ? , gender = ? , weight = ? , height = ? , cpr = ? , phone_number = ? , blood_type = ? , exercise = ?  , diet = ? ,alcohol = ?,tobacco = ? ,observations = ? where id = ? ";
+            PreparedStatement prs = con.prepareStatement(sql);
+            prs.setString(1 ,first_name);
+            prs.setString(2 , last_name);
+            prs.setTimestamp(3 , dateofBirth);
+            prs.setString(4 , gender);
+            prs.setInt(5 , weight);
+            prs.setInt(6 ,height);
+            prs.setString(7 ,phone_number);
+            prs.setString(8 , blood_type);
+            prs.setString(9 ,exercise);
+            prs.setString(10 , diet);
+            prs.setBoolean(11 , alcohol);
+            prs.setBoolean(12 , tobacco);
+            prs.setString(13 , observations);
+
+            prs.executeUpdate();
+        } catch (SQLException e) {
+           throw new DalException("Connection Lost" , e);
+        }
     }
 
     @Override
     public void deletePatient(Patient patient) throws DalException {
-
+        try(Connection con = dataAccess.getConnection()){
+            String sql = "DELETE FROM Patient WHERE id = ?";
+            PreparedStatement prs = con.prepareStatement(sql);
+            prs.setInt(1 , patient.getId());
+            prs.executeUpdate();
+        } catch (SQLException e) {
+           throw new DalException("Connection Lost" , e);
+        }
     }
-
 
 }
