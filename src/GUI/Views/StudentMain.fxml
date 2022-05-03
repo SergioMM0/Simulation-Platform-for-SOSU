@@ -1,8 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 
-
-<AnchorPane prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.StudentMainCTLL">
-
-</AnchorPane>
+<TabPane prefHeight="660.0" prefWidth="880.0" tabClosingPolicy="UNAVAILABLE" tabMinHeight="40.0" tabMinWidth="100.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <tabs>
+      <Tab text="General">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <ListView layoutX="40.0" layoutY="130.0" prefHeight="445.0" prefWidth="250.0" />
+                  <Label layoutX="125.0" layoutY="100.0" text="Cases assigned" />
+                  <Button layoutX="340.0" layoutY="130.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Evaluate case" />
+                  <ListView layoutX="590.0" layoutY="130.0" prefHeight="445.0" prefWidth="250.0" />
+                  <Label layoutX="679.0" layoutY="100.0" text="Cases graded" />
+                  <Button layoutX="340.0" layoutY="207.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="See graded case" />
+                  <AnchorPane layoutX="40.0" layoutY="14.0" prefHeight="65.0" prefWidth="800.0" style="-fx-background-color: ffffff;">
+                     <children>
+                        <Label layoutX="66.0" layoutY="8.0" text="Group name:" />
+                        <Label layoutX="66.0" layoutY="38.0" text="Students:" />
+                        <Label layoutX="166.0" layoutY="38.0" prefWidth="350.0" text="&lt;Student names&gt;" />
+                        <Label layoutX="166.0" layoutY="8.0" prefWidth="350.0" text="&lt;Group name&gt;" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Patient overview">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="55.0" layoutY="60.0" text="Name" />
+                  <Label layoutX="55.0" layoutY="130.0" text="Date of Birth" />
+                  <Label layoutX="55.0" layoutY="270.0" text="CPR" />
+                  <Label layoutX="55.0" layoutY="305.0" text="Phone Number" />
+                  <Label layoutX="55.0" layoutY="165.0" text="Gender" />
+                  <Label layoutX="55.0" layoutY="200.0" text="Weight" />
+                  <Label layoutX="55.0" layoutY="235.0" text="Height" />
+                  <Label layoutX="55.0" layoutY="95.0" text="Family name" />
+                  <Label layoutX="55.0" layoutY="340.0" text="Blood type" />
+                  <Label layoutX="55.0" layoutY="375.0" text="Exercise" />
+                  <Label layoutX="55.0" layoutY="410.0" text="Diet" />
+                  <Label layoutX="55.0" layoutY="445.0" text="Alcohol" />
+                  <Label layoutX="55.0" layoutY="480.0" text="Tobacco" />
+                  <Label layoutX="55.0" layoutY="515.0" text="Observations" />
+                  <Line endX="-100.0" endY="447.199951171875" layoutX="255.0" layoutY="110.0" startX="-100.0" startY="-60.0" />
+                  <Label layoutX="190.0" layoutY="60.0" maxWidth="240.0" text="&lt;Name&gt;" />
+                  <Label layoutX="190.0" layoutY="130.0" maxWidth="240.0" text="&lt;Date of Birth&gt;" />
+                  <Label layoutX="190.0" layoutY="270.0" maxWidth="240.0" text="&lt;CPR&gt;" />
+                  <Label layoutX="190.0" layoutY="305.0" maxWidth="240.0" text="&lt;Phone Number&gt;" />
+                  <Label layoutX="190.0" layoutY="165.0" maxWidth="240.0" text="&lt;Gender&gt;" />
+                  <Label layoutX="190.0" layoutY="200.0" maxWidth="240.0" text="&lt;Weight&gt;" />
+                  <Label layoutX="190.0" layoutY="235.0" maxWidth="240.0" text="&lt;Height&gt;" />
+                  <Label layoutX="190.0" layoutY="95.0" maxWidth="240.0" text="&lt;Family name&gt;" />
+                  <Label layoutX="190.0" layoutY="340.0" maxWidth="240.0" text="&lt;Blood type&gt;" />
+                  <Label layoutX="190.0" layoutY="375.0" maxWidth="240.0" text="&lt;Exercise&gt;" />
+                  <Label layoutX="190.0" layoutY="410.0" maxWidth="240.0" text="&lt;Diet&gt;" />
+                  <Label layoutX="190.0" layoutY="445.0" maxWidth="240.0" text="&lt;Alcohol&gt;" />
+                  <Label layoutX="190.0" layoutY="480.0" maxWidth="240.0" text="&lt;Tobacco&gt;" />
+                  <TextArea layoutX="190.0" layoutY="513.0" prefHeight="70.0" prefWidth="240.0" text="&lt;Observations&gt;&#10;" />
+                  <Line endX="-100.0" endY="447.199951171875" layoutX="565.0" layoutY="113.0" startX="-100.0" startY="-60.0" />
+                  <Button layoutX="500.0" layoutY="60.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="New observation" />
+                  <Button layoutX="500.0" layoutY="120.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Medical history" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+   </tabs>
+</TabPane>
