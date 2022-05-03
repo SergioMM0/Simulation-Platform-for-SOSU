@@ -30,8 +30,8 @@
                   <ListView layoutX="460.0" layoutY="65.0" prefHeight="530.0" prefWidth="200.0" />
                   <Label layoutX="511.0" layoutY="30.0" text="Patients templates" />
                   <Button layoutX="680.0" layoutY="250.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" />
-                  <Button layoutX="680.0" layoutY="305.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" text="Copy patient" />
-                  <Button layoutX="680.0" layoutY="360.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" text="Copy case" />
+                  <Button layoutX="680.0" layoutY="305.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" text="Duplicate patient" />
+                  <Button layoutX="680.0" layoutY="360.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" text="Duplicate case" />
                   <Button layoutX="680.0" layoutY="415.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" text="Delete patient" />
                   <Button layoutX="680.0" layoutY="470.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" text="Delete case" />
                   <TableView layoutX="20.0" layoutY="65.0" prefHeight="530.0" prefWidth="200.0">
@@ -80,7 +80,6 @@
                   <Line endX="-100.0" endY="447.199951171875" layoutX="565.0" layoutY="113.0" startX="-100.0" startY="-60.0" />
                   <Button layoutX="500.0" layoutY="60.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="New observation" />
                   <Button layoutX="500.0" layoutY="120.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Medical history" />
-                  <Button layoutX="500.0" layoutY="180.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Add case to this patient" />
                </children>
             </AnchorPane>
          </content>
@@ -92,8 +91,8 @@
                   <ListView layoutX="40.0" layoutY="130.0" prefHeight="445.0" prefWidth="200.0" />
                   <Label layoutX="100.0" layoutY="100.0" text="Cases assigned" />
                   <Button layoutX="270.0" layoutY="130.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Grade case" />
-                  <Button layoutX="270.0" layoutY="195.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Assign new case" textOverrun="CLIP" />
-                  <Button layoutX="270.0" layoutY="260.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Mark case as graded" />
+                  <Button layoutX="270.0" layoutY="250.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Assign new case" textOverrun="CLIP" />
+                  <Button layoutX="270.0" layoutY="190.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Mark case as graded" />
                   <ListView layoutX="640.0" layoutY="130.0" prefHeight="445.0" prefWidth="200.0" />
                   <Label layoutX="704.0" layoutY="100.0" text="Cases graded" />
                   <Button layoutX="460.0" layoutY="130.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Unmark case as graded" />
@@ -106,6 +105,8 @@
                         <Button layoutX="550.0" layoutY="17.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Manage group" />
                      </children>
                   </AnchorPane>
+                  <Button layoutX="270.0" layoutY="310.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="Unassign case" textOverrun="CLIP" />
+                  <Button layoutX="460.0" layoutY="190.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="See graded case" />
                </children></AnchorPane>
          </content>
       </Tab>
