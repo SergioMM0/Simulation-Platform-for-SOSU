@@ -34,11 +34,11 @@ public interface DALFacade {
 
     List<Patient> getAllPatients() throws DalException ;
 
-    Patient createPatient(int id, String first_name, String last_name, Timestamp dateofBirth, String gender, int weight,
+    Patient createPatient( String first_name, String last_name, Timestamp dateofBirth, String gender, int weight,
                           int height, String cpr, String phone_number, String blood_type, String exercise, String diet, boolean alcohol,
                           boolean tobacco, String observations) throws DalException;
 
-    void updatepatient(int id, String first_name, String last_name, Timestamp dateofBirth, String gender, int weight,
+    void updatepatient(Patient patient ,String first_name, String last_name, Timestamp dateofBirth, String gender, int weight,
                        int height, String cpr, String phone_number, String blood_type, String exercise, String diet, boolean alcohol,
                        boolean tobacco, String observations) throws DalException;
 
