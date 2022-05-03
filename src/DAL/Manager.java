@@ -1,5 +1,8 @@
 package DAL;
 
+import BE.Category;
+import BE.Patient;
+import BE.SubCategory;
 import BE.User;
 import DAL.DataAccess.DataAccess;
 import DAL.util.DalException;
@@ -163,6 +166,115 @@ public class Manager implements DALFacade {
         }
 
         return users;
+    }
+
+    @Override
+    public List<Category> getAllCategories() throws DalException {
+        ArrayList<Category> categorirs = new ArrayList<>();
+
+        try (Connection con = dataAccess.getConnection()) {
+            String sql = "Select * from [dbo].[Category]";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                Category category = new Category(id, name);
+                categorirs.add(category);
+            }
+            return categorirs;
+        } catch (SQLException e) {
+            throw new DalException("Connection Lost ", e);
+        }
+    }
+
+    @Override
+    public List<SubCategory> getAllSubCategories(Category category) throws DalException {
+        ArrayList<SubCategory> subCategories = new ArrayList<>();
+        try(Connection connection = dataAccess.getConnection()) {
+            String sql = "select * from [dbo].[subcategory] where CategoryFid = ?";
+            PreparedStatement prs = connection.prepareStatement(sql);
+            prs.setInt(1 , category.getId());
+            prs.execute();
+            ResultSet rs = prs.getResultSet();
+            while (rs.next()){
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                SubCategory subCategory = new SubCategory(id , name);
+                subCategories.add(subCategory);
+            }
+            return subCategories;
+        } catch (SQLException e) {
+            throw new DalException("Connection Lost" , e);
+        }
+    }
+    /*
+    int id, String first_name, String last_name, Timestamp dateofBirth, String gender, int weight,
+                   int height, String cpr, String phone_number, String blood_type, String exercise,
+                    String diet, boolean alcohol,
+                   boolean tobacco, String observations
+     */
+
+    @Override
+    public List<Patient> getAllPatients() throws DalException {
+        ArrayList<Patient> patients = new ArrayList<>();
+        try(Connection con = dataAccess.getConnection()) {
+            String sql = "SELECT * from Patient";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()){
+                int id = rs.getInt("id");
+                String first_name = rs.getString("first_name");
+                String lastname = rs.getString("");
+                Timestamp dateofbirth = rs.getTimestamp("");
+                String gender = rs.getString("");
+                int weight = rs.getInt("");
+                int height = rs.getInt("");
+                String cpr = rs.getString("");
+                String phonenumber = rs.getString("");
+                String blood_type = rs.getString("");
+                String exercise = rs.getString("");
+                String diet = rs.getString("");
+                boolean alcohol = rs.getBoolean("");
+                boolean tobacco = rs.getBoolean("");
+                String observation = rs.getString("");
+
+                Patient patient = new Patient(id,first_name,lastname,dateofbirth,gender,weight,height,
+                                            cpr,phonenumber,blood_type ,exercise,diet,alcohol,tobacco,
+                                            observation);
+                patients.add(patient);
+            }
+            return patients;
+        } catch (SQLException e) {
+           throw new DalException("Connection Lost" , e);
+        }
+
+    }
+
+    @Override
+    public Patient createPatient(int id, String first_name, String last_name, Timestamp dateofBirth, String gender, int weight, int height, String cpr, String phone_number, String blood_type, String exercise, String diet, boolean alcohol, boolean tobacco, String observations) throws DalException {
+
+        try (Connection con = dataAccess.getConnection()){
+            String sql = "INSERT INTO Patient (first_name, dateofBirth, gender,weight ,height ,cpr , phone_number ,blood_type ,exercise ,diet ,alcohol,tobacco ,observations ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);";
+            PreparedStatement prs = con.prepareStatement(sql);
+
+        } catch (SQLServerException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    @Override
+    public void updatepatient(int id, String first_name, String last_name, Timestamp dateofBirth, String gender, int weight, int height, String cpr, String phone_number, String blood_type, String exercise, String diet, boolean alcohol, boolean tobacco, String observations) throws DalException {
+
+    }
+
+    @Override
+    public void deletePatient(Patient patient) throws DalException {
+
     }
 
 
