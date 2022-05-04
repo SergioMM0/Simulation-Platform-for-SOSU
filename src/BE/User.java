@@ -2,12 +2,14 @@ package BE;
 
 public class User {
     private int id;
+    private int schoolID;
     private String name;
     private String email;
     private String userType;
 
-    public User(int id,String name, String email, String userType) {
+    public User(int id,int schoolID, String name, String email, String userType) {
         this.id = id;
+        this.schoolID = schoolID;
         this.name = name;
         this.email = email;
         this.userType = userType;
@@ -19,6 +21,14 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getSchoolID() {
+        return schoolID;
+    }
+
+    public void setSchoolID(int schoolID) {
+        this.schoolID = schoolID;
     }
 
     public String getUserType() {

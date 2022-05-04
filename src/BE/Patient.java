@@ -3,35 +3,35 @@ package BE;
 import java.sql.Timestamp;
 
 public class Patient {
-  private int id ;
-  private String first_name ;
-  private String last_name ;
-  private Timestamp dateofBirth ;
-  private String gender ;
-  private int weight ;
+  private int id;
+  private String first_name;
+  private String last_name;
+  private Timestamp dateOfBirth;
+  private String gender;
+  private int weight;
   private int height;
-  private String cpr ;
-  private String phone_number ;
-  private String blood_type ;
-  private String exercise ;
-  private String diet ;
-  private boolean alcohol ;
-  private boolean tobacco ;
-  private String observations ;
+  private String cpr;
+  private String phoneNumber;
+  private String bloodType;
+  private String exercise;
+  private String diet;
+  private String alcohol;
+  private String tobacco;
+  private String observations;
 
-    public Patient(int id, String first_name, String last_name, Timestamp dateofBirth, String gender, int weight,
-                   int height, String cpr, String phone_number, String blood_type, String exercise, String diet, boolean alcohol,
-                   boolean tobacco, String observations) {
+    public Patient(int id, String first_name, String last_name, Timestamp dateOfBirth, String gender, int weight,
+                   int height, String cpr, String phoneNumber, String bloodType, String exercise, String diet, String alcohol,
+                   String tobacco, String observations) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
-        this.dateofBirth = dateofBirth;
+        this.dateOfBirth = dateOfBirth;
         this.gender = gender;
         this.weight = weight;
         this.height = height;
         this.cpr = cpr;
-        this.phone_number = phone_number;
-        this.blood_type = blood_type;
+        this.phoneNumber = phoneNumber;
+        this.bloodType = bloodType;
         this.exercise = exercise;
         this.diet = diet;
         this.alcohol = alcohol;
@@ -63,12 +63,12 @@ public class Patient {
         this.last_name = last_name;
     }
 
-    public Timestamp getDateofBirth() {
-        return dateofBirth;
+    public Timestamp getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setDateofBirth(Timestamp dateofBirth) {
-        this.dateofBirth = dateofBirth;
+    public void setDateOfBirth(Timestamp dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getGender() {
@@ -103,20 +103,20 @@ public class Patient {
         this.cpr = cpr;
     }
 
-    public String getPhone_number() {
-        return phone_number;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getBlood_type() {
-        return blood_type;
+    public String getBloodType() {
+        return bloodType;
     }
 
-    public void setBlood_type(String blood_type) {
-        this.blood_type = blood_type;
+    public void setBloodType(String bloodType) {
+        this.bloodType = bloodType;
     }
 
     public String getExercise() {
@@ -135,19 +135,19 @@ public class Patient {
         this.diet = diet;
     }
 
-    public boolean isAlcohol() {
+    public String getAlcohol() {
         return alcohol;
     }
 
-    public void setAlcohol(boolean alcohol) {
+    public void setAlcohol(String alcohol) {
         this.alcohol = alcohol;
     }
 
-    public boolean isTobacco() {
+    public String getTobacco() {
         return tobacco;
     }
 
-    public void setTobacco(boolean tobacco) {
+    public void setTobacco(String tobacco) {
         this.tobacco = tobacco;
     }
 

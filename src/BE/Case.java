@@ -4,20 +4,20 @@ public class Case {
 
     private int id ;
     private String name ;
-    private String Description_of_the_condition;
-    private String Cause_text;
-    private String Causal_diagnose;
-    private String Causal_condition;
-    private String Citizens_want_goal;
+    private String conditionDescription;
+    private String cause;
+    private String causalDiagnose;
+    private String causalCondition;
+    private String citizenGoal;
 
-    public Case(int id, String name, String description_of_the_condition, String cause_text, String causal_diagnose, String causal_condition, String citizens_want_goal) {
+    public Case(int id, String name,String conditionDescription,String cause, String causalDiagnose,String causalCondition,String citizenGoal) {
         this.id = id;
         this.name = name;
-        Description_of_the_condition = description_of_the_condition;
-        Cause_text = cause_text;
-        Causal_diagnose = causal_diagnose;
-        Causal_condition = causal_condition;
-        Citizens_want_goal = citizens_want_goal;
+        this.conditionDescription = conditionDescription;
+        this.cause = cause;
+        this.causalDiagnose = causalDiagnose;
+        this.causalCondition = causalCondition;
+        this.citizenGoal = citizenGoal;
     }
 
     public int getId() {
@@ -36,48 +36,56 @@ public class Case {
         this.name = name;
     }
 
-    public String getDescription_of_the_condition() {
-        return Description_of_the_condition;
+    public String getConditionDescription() {
+        return conditionDescription;
     }
 
-    public void setDescription_of_the_condition(String description_of_the_condition) {
-        Description_of_the_condition = description_of_the_condition;
+    public void setConditionDescription(String conditionDescription) {
+        this.conditionDescription = conditionDescription;
     }
 
-    public String getCause_text() {
-        return Cause_text;
+    public String getCause() {
+        return cause;
     }
 
-    public void setCause_text(String cause_text) {
-        Cause_text = cause_text;
+    public void setCause(String cause) {
+        this.cause = cause;
     }
 
-    public String getCausal_diagnose() {
-        return Causal_diagnose;
+    public String getCausalDiagnose() {
+        return causalDiagnose;
     }
 
-    public void setCausal_diagnose(String causal_diagnose) {
-        Causal_diagnose = causal_diagnose;
+    public void setCausalDiagnose(String causalDiagnose) {
+        this.causalDiagnose = causalDiagnose;
     }
 
-    public String getCausal_condition() {
-        return Causal_condition;
+    public String getCausalCondition() {
+        return causalCondition;
     }
 
-    public void setCausal_condition(String causal_condition) {
-        Causal_condition = causal_condition;
+    public void setCausalCondition(String causalCondition) {
+        this.causalCondition = causalCondition;
     }
 
-    public String getCitizens_want_goal() {
-        return Citizens_want_goal;
+    public String getCitizenGoal() {
+        return citizenGoal;
     }
 
-    public void setCitizens_want_goal(String citizens_want_goal) {
-        Citizens_want_goal = citizens_want_goal;
+    public void setCitizenGoal(String citizenGoal) {
+        this.citizenGoal = citizenGoal;
     }
 
     @Override
     public String toString() {
-        return "Case{" + "id=" + id + ", name='" + name + '}';
+        return "Case{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", conditionDescription='" + conditionDescription + '\'' +
+                ", cause='" + cause + '\'' +
+                ", causalDiagnose='" + causalDiagnose + '\'' +
+                ", causalCondition='" + causalCondition + '\'' +
+                ", citizenGoal='" + citizenGoal + '\'' +
+                '}';
     }
 }

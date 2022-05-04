@@ -6,25 +6,24 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="1000.0" prefWidth="860.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Views.NewCase">
+<AnchorPane prefHeight="930.0" prefWidth="860.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Views.NewCase">
    <children>
       <Label layoutX="40.0" layoutY="40.0" text="Case name:" />
       <Label layoutX="490.0" layoutY="40.0" text="Category" />
-      <ComboBox layoutX="575.0" layoutY="75.0" prefHeight="26.0" prefWidth="220.0" />
+      <ComboBox fx:id="caseSubcategoryComboBox" layoutX="575.0" layoutY="75.0" prefHeight="26.0" prefWidth="220.0" />
       <Label layoutX="490.0" layoutY="80.0" text="Subcategory" />
-      <ComboBox layoutX="575.0" layoutY="35.0" prefHeight="26.0" prefWidth="220.0" />
+      <ComboBox fx:id="caseCategoryComboBox" layoutX="575.0" layoutY="35.0" prefHeight="26.0" prefWidth="220.0" />
       <Label layoutX="40.0" layoutY="100.0" prefHeight="18.0" prefWidth="170.0" text="Description of the condition:" />
-      <TextField layoutX="40.0" layoutY="130.0" prefHeight="90.0" prefWidth="780.0" />
+      <TextField fx:id="descriptionOfConditionText" layoutX="40.0" layoutY="130.0" prefHeight="90.0" prefWidth="780.0" />
       <Label layoutX="40.0" layoutY="250.0" prefHeight="18.0" prefWidth="170.0" text="Cause text:" />
-      <TextField layoutX="40.0" layoutY="280.0" prefHeight="90.0" prefWidth="780.0" />
+      <TextField fx:id="causeText" layoutX="40.0" layoutY="280.0" prefHeight="90.0" prefWidth="780.0" />
       <Label layoutX="40.0" layoutY="390.0" prefHeight="18.0" prefWidth="170.0" text="Causal diagnose:" />
-      <TextField layoutX="40.0" layoutY="420.0" prefHeight="90.0" prefWidth="780.0" />
+      <TextField fx:id="causalDiagnoseText" layoutX="40.0" layoutY="420.0" prefHeight="90.0" prefWidth="780.0" />
       <Label layoutX="40.0" layoutY="540.0" prefHeight="18.0" prefWidth="170.0" text="Causal condition:" />
-      <TextField layoutX="40.0" layoutY="570.0" prefHeight="90.0" prefWidth="780.0" />
+      <TextField fx:id="causalConditionText" layoutX="40.0" layoutY="570.0" prefHeight="90.0" prefWidth="780.0" />
       <Label layoutX="40.0" layoutY="690.0" prefHeight="18.0" prefWidth="170.0" text="Citizens want/goal:" />
-      <TextField layoutX="40.0" layoutY="720.0" prefHeight="90.0" prefWidth="780.0" />
-      <Button layoutX="689.0" layoutY="857.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" text="Save changes" />
-      <TextField layoutX="125.0" layoutY="36.0" prefHeight="26.0" prefWidth="320.0" />
+      <TextField fx:id="citizenGoalText" layoutX="40.0" layoutY="720.0" prefHeight="90.0" prefWidth="780.0" />
+      <Button layoutX="689.0" layoutY="857.0" mnemonicParsing="false" onAction="#saveChangesOnCase" prefHeight="40.0" prefWidth="130.0" text="Save changes" />
+      <TextField fx:id="caseNameField" layoutX="125.0" layoutY="36.0" prefHeight="26.0" prefWidth="320.0" />
    </children>
 </AnchorPane>

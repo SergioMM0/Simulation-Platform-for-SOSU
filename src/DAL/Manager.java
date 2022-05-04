@@ -57,7 +57,6 @@ public class Manager implements DALFacade {
                 User user = new User(id, username, email, usertype);
                 users.add(user);
             }
-
         } catch (SQLException e) {
             throw new DalException("Connection Lost " , e);
         }

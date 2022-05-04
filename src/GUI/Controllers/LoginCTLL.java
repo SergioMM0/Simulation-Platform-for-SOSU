@@ -6,6 +6,7 @@ import BLL.BLLManager;
 import BLL.Exceptions.BLLException;
 import DAL.util.DalException;
 import GUI.Alerts.SoftAlert;
+import GUI.Models.LoginMOD;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,13 +45,13 @@ public class LoginCTLL implements Initializable {
     private User logedUser;
     private BLLFacade bllFacade;
     private final String generalCSS = "";
-
+    private LoginMOD loginMOD;
 
     @FXML
     void loginAct(ActionEvent event) {
         if(!emailField.getText().isEmpty() && !passwordField.getText().isEmpty()){
             try{
-                logedUser = bllFacade.checkCredentials(emailField.getText(),passwordField.getText());
+                logedUser = loginMOD.checkCredentials(emailField.getText(),passwordField.getText());
                 switch (logedUser.getUserType()) {
                     case "STUDENT" -> openView("GUI/Views/StudentMain.fxml", generalCSS, "FS3 for Students", 0, 0, false);
                     case "TEACHER" -> openView("GUI/Views/TeacherMain.fxml", generalCSS, "Simulation platform FS3", 0, 0, false);
@@ -86,7 +87,7 @@ public class LoginCTLL implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        bllFacade = new BLLManager();
+        loginMOD = new LoginMOD();
     }
 
 }
