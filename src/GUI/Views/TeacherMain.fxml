@@ -3,7 +3,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -21,13 +20,11 @@
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="860.0">
                <children>
                   <Label layoutX="79.0" layoutY="30.0" text="Student groups" />
-                  <ListView fx:id="casesListGV" layoutX="240.0" layoutY="65.0" prefHeight="530.0" prefWidth="200.0" />
                   <Label layoutX="297.0" layoutY="30.0" text="Cases templates" />
                   <Button layoutX="680.0" layoutY="140.0" mnemonicParsing="false" onAction="#addNewPatient" prefHeight="40.0" prefWidth="180.0" text="Add new patient" />
                   <Button layoutX="680.0" layoutY="195.0" mnemonicParsing="false" onAction="#addNewCase" prefHeight="40.0" prefWidth="180.0" text="Add new case" />
                   <Button layoutX="680.0" layoutY="85.0" mnemonicParsing="false" onAction="#assignCaseToGroup" prefHeight="40.0" prefWidth="180.0" text="Assign case to group" />
                   <Button layoutX="680.0" layoutY="555.0" mnemonicParsing="false" onAction="#logOut" prefHeight="40.0" prefWidth="180.0" text="Close session" />
-                  <ListView fx:id="patientsListGV" layoutX="460.0" layoutY="65.0" prefHeight="530.0" prefWidth="200.0" />
                   <Label layoutX="511.0" layoutY="30.0" text="Patients templates" />
                   <Button layoutX="680.0" layoutY="250.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" />
                   <Button layoutX="680.0" layoutY="305.0" mnemonicParsing="false" onAction="#duplicatePatient" prefHeight="40.0" prefWidth="180.0" text="Duplicate patient" />
@@ -36,9 +33,18 @@
                   <Button layoutX="680.0" layoutY="470.0" mnemonicParsing="false" onAction="#deleteCase" prefHeight="40.0" prefWidth="180.0" text="Delete case" />
                   <TableView fx:id="groupTableGV" layoutX="20.0" layoutY="65.0" prefHeight="530.0" prefWidth="200.0">
                     <columns>
-                      <TableColumn fx:id="nameColGroupsGV" prefWidth="140.80001831054688" text="Name" />
-                      <TableColumn fx:id="casesColGroupsGV" prefWidth="58.399993896484375" text="Cases" />
+                      <TableColumn fx:id="nameColGroupsGV" prefWidth="199.20001220703125" text="Name" />
                     </columns>
+                  </TableView>
+                  <TableView fx:id="casesListGV" layoutX="240.0" layoutY="65.0" prefHeight="530.0" prefWidth="200.0">
+                     <columns>
+                        <TableColumn fx:id="nameColCasesGV" prefWidth="199.20001220703125" text="Name" />
+                     </columns>
+                  </TableView>
+                  <TableView fx:id="patientsListGV" layoutX="460.0" layoutY="65.0" prefHeight="530.0" prefWidth="200.0">
+                     <columns>
+                        <TableColumn fx:id="nameColPatientsGV" prefWidth="199.20001220703125" text="Name" />
+                     </columns>
                   </TableView>
                </children>
             </AnchorPane>
@@ -87,12 +93,10 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <ListView fx:id="casesAssignedList" layoutX="40.0" layoutY="130.0" prefHeight="445.0" prefWidth="200.0" />
                   <Label fx:id="casesAssignedLBL" layoutX="100.0" layoutY="100.0" text="Cases assigned" />
                   <Button layoutX="270.0" layoutY="130.0" mnemonicParsing="false" onAction="#openGradeCase" prefHeight="35.0" prefWidth="150.0" text="Grade case" />
                   <Button layoutX="270.0" layoutY="250.0" mnemonicParsing="false" onAction="#assignNewCaseToGroup" prefHeight="35.0" prefWidth="150.0" text="Assign new case" textOverrun="CLIP" />
                   <Button layoutX="270.0" layoutY="190.0" mnemonicParsing="false" onAction="#markCaseAsGraded" prefHeight="35.0" prefWidth="150.0" text="Mark case as graded" />
-                  <ListView fx:id="casesGradedList" layoutX="640.0" layoutY="130.0" prefHeight="445.0" prefWidth="200.0" />
                   <Label fx:id="casesGradedLBL" layoutX="704.0" layoutY="100.0" text="Cases graded" />
                   <Button layoutX="460.0" layoutY="130.0" mnemonicParsing="false" onAction="#unmarkCaseAsGraded" prefHeight="35.0" prefWidth="150.0" text="Unmark case as graded" />
                   <AnchorPane layoutX="40.0" layoutY="14.0" prefHeight="65.0" prefWidth="800.0" style="-fx-background-color: ffffff;">
@@ -106,6 +110,16 @@
                   </AnchorPane>
                   <Button layoutX="270.0" layoutY="310.0" mnemonicParsing="false" onAction="#unassignSelectedCase" prefHeight="35.0" prefWidth="150.0" text="Unassign case" textOverrun="CLIP" />
                   <Button layoutX="460.0" layoutY="190.0" mnemonicParsing="false" onAction="#openGradedCase" prefHeight="35.0" prefWidth="150.0" text="See graded case" />
+                  <TableView fx:id="casesAssignedList" layoutX="40.0" layoutY="130.0" prefHeight="445.0" prefWidth="200.0">
+                     <columns>
+                        <TableColumn fx:id="nameColCases" prefWidth="199.20001220703125" text="Name" />
+                     </columns>
+                  </TableView>
+                  <TableView fx:id="casesGradedList" layoutX="640.0" layoutY="130.0" prefHeight="445.0" prefWidth="200.0">
+                     <columns>
+                        <TableColumn fx:id="nameColCasesGraded" prefWidth="199.20001220703125" text="Name" />
+                     </columns>
+                  </TableView>
                </children></AnchorPane>
          </content>
       </Tab>

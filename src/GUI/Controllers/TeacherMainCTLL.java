@@ -1,5 +1,8 @@
 package GUI.Controllers;
 
+import BE.Case;
+import BE.Group;
+import BE.Patient;
 import BE.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,19 +29,25 @@ public class TeacherMainCTLL {
     private Label casesAssignedLBL;
 
     @FXML
-    private ListView<?> casesAssignedList;
+    private TableView<Case> casesAssignedList;
 
     @FXML
-    private TableColumn<?, ?> casesColGroupsGV;
+    private TableColumn<Case,String> nameColCases;
 
     @FXML
     private Label casesGradedLBL;
 
     @FXML
-    private ListView<?> casesGradedList;
+    private TableView<Case> casesGradedList;
 
     @FXML
-    private ListView<?> casesListGV;
+    private TableColumn<Case,String> nameColCasesGraded;
+
+    @FXML
+    private TableView<Case> casesListGV;
+
+    @FXML
+    private TableColumn<Group,String>nameColCasesGV;
 
     @FXML
     private TextField causalConditionText;
@@ -62,13 +71,13 @@ public class TeacherMainCTLL {
     private Label groupNameLBL;
 
     @FXML
-    private TableView<?> groupTableGV;
+    private TableView<Group> groupTableGV;
 
     @FXML
     private Label groupsLBL;
 
     @FXML
-    private TableView<?> groupsTable;
+    private TableView<Group> groupsTable;
 
     @FXML
     private TableColumn<?, ?> hasGroupCol;
@@ -80,7 +89,7 @@ public class TeacherMainCTLL {
     private TextArea medicalHistoryTextArea;
 
     @FXML
-    private TableColumn<?, ?> nameColGroupsGV;
+    private TableColumn<Group, String> nameColGroupsGV;
 
     @FXML
     private TableColumn<?, ?> participantsCol;
@@ -125,10 +134,13 @@ public class TeacherMainCTLL {
     private Label patientWeightLBL;
 
     @FXML
-    private ListView<?> patientsListGV;
+    private TableView<Patient> patientsListGV;
 
     @FXML
-    private TableColumn<?, ?> studentNameCol;
+    private TableColumn<Patient,String> nameColPatientsGV;
+
+    @FXML
+    private TableColumn<Group,String> studentNameCol;
 
     @FXML
     private Label studentNamesLBL;
@@ -143,6 +155,10 @@ public class TeacherMainCTLL {
 
     public void setUser(User user){
         this.logedUser = user;
+    }
+
+    private void populateGroupsTable(){
+
     }
 
     @FXML
