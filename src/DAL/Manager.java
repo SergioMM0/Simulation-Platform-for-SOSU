@@ -344,14 +344,7 @@ public class Manager implements DALFacade {
         }
     }
 
-    /*
-    SELECT  [case].[id]  ,  [case].[name] , Description_of_the_condition , Cause_text , Causal_diagnose , Causal_condition ,Citizens_want_goal , first_name , last_name , [Category].[name] ,[subcategory].[issue]
-	fROM    Category join subcategory on Category.categoryid = subcategory.CategoryFid
-				JOIN [Case] on subcategory.subcategoryID = [Case].subid
-	             join SickPatient on [Case].[id] = [SickPatient].[caseid]
-			     join [Patient]  on  SickPatient.patientid  = [Patient].[id]
-			     join School  on  Patient.schoolid = School.id where School.id  =1
-     */
+
 
     @Override
     public List<Case> getAllCases(int schoolid) throws DalException {
