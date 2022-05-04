@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 
-<TabPane prefHeight="660.0" prefWidth="880.0" tabClosingPolicy="UNAVAILABLE" tabMinHeight="40.0" tabMinWidth="100.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane prefHeight="660.0" prefWidth="880.0" tabClosingPolicy="UNAVAILABLE" tabMinHeight="40.0" tabMinWidth="100.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.TeacherMainCTLL">
    <tabs>
       <Tab text="General">
          <content>
