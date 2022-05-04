@@ -9,8 +9,9 @@ public class Case {
     private String causalDiagnose;
     private String causalCondition;
     private String citizenGoal;
-
-    public Case(int id, String name,String conditionDescription,String cause, String causalDiagnose,String causalCondition,String citizenGoal) {
+    private int categoryid ;
+    private int subcategoryid ;
+    public Case(int id, String name,String conditionDescription,String cause, String causalDiagnose,String causalCondition,String citizenGoal , int categoryid , int subcategoryid) {
         this.id = id;
         this.name = name;
         this.conditionDescription = conditionDescription;
@@ -18,6 +19,8 @@ public class Case {
         this.causalDiagnose = causalDiagnose;
         this.causalCondition = causalCondition;
         this.citizenGoal = citizenGoal;
+        this.categoryid = categoryid ;
+        this.subcategoryid = categoryid;
     }
 
     public int getId() {
@@ -74,6 +77,22 @@ public class Case {
 
     public void setCitizenGoal(String citizenGoal) {
         this.citizenGoal = citizenGoal;
+    }
+
+    public int getCategoryid() {
+        return categoryid;
+    }
+
+    public void setCategoryid(int categoryid) {
+        this.categoryid = categoryid;
+    }
+
+    public int getSubcategoryid() {
+        return subcategoryid;
+    }
+
+    public void setSubcategoryid(int subcategoryid) {
+        this.subcategoryid = subcategoryid;
     }
 
     @Override

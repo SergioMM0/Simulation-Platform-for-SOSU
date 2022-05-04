@@ -18,10 +18,12 @@ public class Patient {
   private String alcohol;
   private String tobacco;
   private String observations;
+  private int schoolid ;
+  private int teacherid ;
 
     public Patient(int id, String first_name, String last_name, Timestamp dateOfBirth, String gender, int weight,
                    int height, String cpr, String phoneNumber, String bloodType, String exercise, String diet, String alcohol,
-                   String tobacco, String observations) {
+                   String tobacco, String observations , int schoolid , int teacherid ) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -37,6 +39,9 @@ public class Patient {
         this.alcohol = alcohol;
         this.tobacco = tobacco;
         this.observations = observations;
+        this.schoolid = schoolid;
+        this.teacherid = teacherid ;
+
     }
 
     public int getId() {
@@ -157,6 +162,22 @@ public class Patient {
 
     public void setObservations(String observations) {
         this.observations = observations;
+    }
+
+    public int getSchoolid() {
+        return schoolid;
+    }
+
+    public void setSchoolid(int schoolid) {
+        this.schoolid = schoolid;
+    }
+
+    public int getTeacherid() {
+        return teacherid;
+    }
+
+    public void setTeacherid(int teacherid) {
+        this.teacherid = teacherid;
     }
 
     @Override

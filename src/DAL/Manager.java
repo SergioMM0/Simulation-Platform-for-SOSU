@@ -30,9 +30,9 @@ public class Manager implements DALFacade {
             while (rs.next()) {
                 int id = rs.getInt("userid");
                 String name = rs.getString("username");
-
+                int schoolid = rs.getInt("schoolid");
                 String usertype = rs.getString("usertype");
-              user = new User(id , name , useremail , usertype );
+              user = new User(id , schoolid,name , useremail , usertype );
             }
             return user;
 
@@ -54,7 +54,8 @@ public class Manager implements DALFacade {
                 String username = rs.getString("username");
                 String email = rs.getString("email");
                 String usertype = rs.getString("usertype");
-                User user = new User(id, username, email, usertype);
+                int schoolid = rs.getInt("schooid");
+                User user = new User(id,schoolid , username, email, usertype);
                 users.add(user);
             }
         } catch (SQLException e) {
@@ -97,7 +98,7 @@ public class Manager implements DALFacade {
     }
 
     @Override
-    public User addUser(String username, String password, String email, String usertype) throws DalException {
+    public User addUser(String username,int schoolid ,String password, String email, String usertype) throws DalException {
         User user ;
         try (Connection con = dataAccess.getConnection()) {
             String sql = "INSERT INTO users(username , password, email , usertype)" +
@@ -108,7 +109,7 @@ public class Manager implements DALFacade {
             prs.setString(3, email);
             prs.setString(4, usertype);
             prs.executeUpdate();
-            user = new User(newestidforuser(), username, email, usertype);
+            user = new User(newestidforuser(),schoolid, username, email, usertype);
 
         } catch (SQLException e) {
             throw new DalException("Connection Lost " , e);
@@ -185,7 +186,7 @@ public class Manager implements DALFacade {
                 String email = rs.getString("email");
                 String usertype = rs.getString("usertype");
 
-                User user = new User(id, username, email, usertype);
+                User user = new User(id,1 ,username, email, usertype);
                 users.add(user);
             }
 
@@ -236,34 +237,36 @@ public class Manager implements DALFacade {
             throw new DalException("Connection Lost" , e);
         }
     }
-
+        // get all patients where school id is ?
     @Override
-    public List<Patient> getAllPatients() throws DalException {
+    public List<Patient> getAllPatients(int schoolid) throws DalException {
         ArrayList<Patient> patients = new ArrayList<>();
         try(Connection con = dataAccess.getConnection()) {
-            String sql = "SELECT * from Patient";
-            Statement statement = con.createStatement();
-            ResultSet rs = statement.executeQuery(sql);
+            String sql = "SELECT * from Patient where schoolid = ? ";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setInt(1, schoolid);
+            statement.execute();
+            ResultSet rs = statement.getResultSet();
             while (rs.next()){
                 int id = rs.getInt("id");
                 String first_name = rs.getString("first_name");
-                String lastname = rs.getString("");
-                Timestamp dateofbirth = rs.getTimestamp("");
-                String gender = rs.getString("");
-                int weight = rs.getInt("");
-                int height = rs.getInt("");
-                String cpr = rs.getString("");
-                String phonenumber = rs.getString("");
-                String blood_type = rs.getString("");
-                String exercise = rs.getString("");
-                String diet = rs.getString("");
-                boolean alcohol = rs.getBoolean("");
-                boolean tobacco = rs.getBoolean("");
-                String observation = rs.getString("");
-
+                String lastname = rs.getString("last_name");
+                Timestamp dateofbirth = rs.getTimestamp("dateofBirth");
+                String gender = rs.getString("gender");
+                int weight = rs.getInt("weight");
+                int height = rs.getInt("height");
+                String cpr = rs.getString("cpr");
+                String phonenumber = rs.getString("phone_number");
+                String blood_type = rs.getString("blood_type");
+                String exercise = rs.getString("exercise");
+                String diet = rs.getString("diet");
+                String alcohol = rs.getString("alcohol");
+                String tobacco = rs.getString("tobacco");
+                String observation = rs.getString("observations");
+                int teacherid = rs.getInt("teacherid");
                 Patient patient = new Patient(id,first_name,lastname,dateofbirth,gender,weight,height,
                                             cpr,phonenumber,blood_type ,exercise,diet,alcohol,tobacco,
-                                            observation);
+                                            observation, schoolid , teacherid);
                 patients.add(patient);
             }
             return patients;
@@ -274,10 +277,10 @@ public class Manager implements DALFacade {
     }
 
     @Override
-    public Patient createPatient( String first_name, String last_name, Timestamp dateofBirth, String gender, int weight, int height, String cpr, String phone_number, String blood_type, String exercise, String diet, boolean alcohol, boolean tobacco, String observations) throws DalException {
+    public Patient createPatient( String first_name, String last_name, Timestamp dateofBirth, String gender, int weight, int height, String cpr, String phone_number, String blood_type, String exercise, String diet, String alcohol, String tobacco, String observations , int schoolid , int teacherid) throws DalException {
 
         try (Connection con = dataAccess.getConnection()){
-            String sql = "INSERT INTO Patient (first_name, last_name, dateofBirth, gender,weight ,height ,cpr , phone_number ,blood_type ,exercise ,diet ,alcohol,tobacco ,observations ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+            String sql = "INSERT INTO Patient (first_name, last_name, dateofBirth, gender,weight ,height ,cpr , phone_number ,blood_type ,exercise ,diet ,alcohol,tobacco ,observations,schoolid,teacherid ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setString(1 , first_name);
             prs.setString(2 , last_name);
@@ -290,11 +293,13 @@ public class Manager implements DALFacade {
             prs.setString(9,blood_type);
             prs.setString(10,exercise);
             prs.setString(11, diet);
-            prs.setBoolean(12,alcohol);
-            prs.setBoolean(13,tobacco);
+            prs.setString(12,alcohol);
+            prs.setString(13,tobacco);
             prs.setString(14,observations);
+            prs.setInt(15,schoolid);
+            prs.setInt(16,teacherid);
             prs.executeUpdate();
-            Patient patient = new Patient(newestidforPatient(),first_name,last_name,dateofBirth,gender,weight,height,cpr,phone_number,blood_type,exercise,diet,alcohol,tobacco,observations);
+            Patient patient = new Patient(newestidforPatient(),first_name,last_name,dateofBirth,gender,weight,height,cpr,phone_number,blood_type,exercise,diet,alcohol,tobacco,observations , schoolid , teacherid);
             return patient ;
         } catch (SQLException e) {
            throw new DalException("Connectin Lost " , e);
@@ -302,7 +307,7 @@ public class Manager implements DALFacade {
     }
 
     @Override
-    public void updatepatient(Patient patient, String first_name, String last_name, Timestamp dateofBirth, String gender, int weight, int height, String cpr, String phone_number, String blood_type, String exercise, String diet, boolean alcohol, boolean tobacco, String observations) throws DalException {
+    public void updatepatient(Patient patient, String first_name, String last_name, Timestamp dateofBirth, String gender, int weight, int height, String cpr, String phone_number, String blood_type, String exercise, String diet, String alcohol, String tobacco, String observations) throws DalException {
 
         try (Connection con = dataAccess.getConnection()){
             String sql = "Update Patient set first_name = ? , last_name = ? , dateoBirth = ? , gender = ? , weight = ? , height = ? , cpr = ? , phone_number = ? , blood_type = ? , exercise = ?  , diet = ? ,alcohol = ?,tobacco = ? ,observations = ? where id = ? ";
@@ -317,8 +322,8 @@ public class Manager implements DALFacade {
             prs.setString(8 , blood_type);
             prs.setString(9 ,exercise);
             prs.setString(10 , diet);
-            prs.setBoolean(11 , alcohol);
-            prs.setBoolean(12 , tobacco);
+            prs.setString(11 , alcohol);
+            prs.setString(12 , tobacco);
             prs.setString(13 , observations);
 
             prs.executeUpdate();
@@ -339,13 +344,29 @@ public class Manager implements DALFacade {
         }
     }
 
+    /*
+    SELECT  [case].[id]  ,  [case].[name] , Description_of_the_condition , Cause_text , Causal_diagnose , Causal_condition ,Citizens_want_goal , first_name , last_name , [Category].[name] ,[subcategory].[issue]
+	fROM    Category join subcategory on Category.categoryid = subcategory.CategoryFid
+				JOIN [Case] on subcategory.subcategoryID = [Case].subid
+	             join SickPatient on [Case].[id] = [SickPatient].[caseid]
+			     join [Patient]  on  SickPatient.patientid  = [Patient].[id]
+			     join School  on  Patient.schoolid = School.id where School.id  =1
+     */
+
     @Override
-    public List<Case> getAllCases() throws DalException {
+    public List<Case> getAllCases(int schoolid) throws DalException {
         ArrayList<Case> cases = new ArrayList<>();
         try(Connection connection = dataAccess.getConnection()){
-            String sql = "SELECT * from Case";
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(sql);
+            String sql = "SELECT  [case].[id]  ,  [case].[name] , Description_of_the_condition , Cause_text , Causal_diagnose , Causal_condition ,Citizens_want_goal" +
+                    "from [Case]" +
+                    "join SickPatient on [Case].[id] = [SickPatient].[caseid] "+
+                    "join [Patient]  on  SickPatient.patientid  = [Patient].[id]"+
+                    "join School  on  Patient.schoolid = School.id" +
+                                         "where School.id  = ? ";
+            PreparedStatement prs = connection.prepareStatement(sql);
+            prs.setInt(1 , schoolid);
+            prs.execute();
+            ResultSet rs = prs.getResultSet();
             while(rs.next()){
                 int id = rs.getInt("id");
                 String name = ("name");
@@ -354,8 +375,9 @@ public class Manager implements DALFacade {
                 String causal_diagnose = rs.getString("Causal_diagnose");
                 String causal_condition = rs.getString("Causal_condition");
                 String citizens_want_goal = rs.getString("Citizens_want_goal");
-
-                Case c = new Case(newestidforCases() , name ,description_of_the_condition,cause_text,causal_diagnose,causal_condition,citizens_want_goal);
+                int catid = rs.getInt("catid");
+                int subcat = rs.getInt("subid");
+                Case c = new Case(newestidforCases() , name ,description_of_the_condition,cause_text,causal_diagnose,causal_condition,citizens_want_goal , catid ,subcat);
                 cases.add(c);
             }
             return cases;
@@ -378,7 +400,7 @@ public class Manager implements DALFacade {
            prs.setInt(7 ,category.getId());
            prs.setInt(8 ,subCategory.getId());
             prs.executeUpdate();
-           Case c = new Case(newestidforCases(), name,description_of_the_condition,cause_text,causal_diagnose,causal_condition,citizens_want_goal);
+           Case c = new Case(newestidforCases(), name,description_of_the_condition,cause_text,causal_diagnose,causal_condition,citizens_want_goal ,category.getId() , subCategory.getId());
            return c ;
        } catch (SQLException e) {
           throw new DalException("Connection Lost" , e);
