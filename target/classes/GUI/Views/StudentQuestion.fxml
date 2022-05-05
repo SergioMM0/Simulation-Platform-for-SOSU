@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="817.0" prefWidth="1191.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.StudentQuestionCTLL">
+   <children>
+      <TabPane layoutY="-1.0" prefHeight="817.0" prefWidth="1191.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Self-care">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="149.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../Downloads/Human.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="349.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="572.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="783.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="977.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                        <CheckBox layoutX="234.0" layoutY="202.0" mnemonicParsing="false" text="0" />
+                        <CheckBox layoutX="410.0" layoutY="202.0" mnemonicParsing="false" text="1" />
+                        <CheckBox layoutX="596.0" layoutY="202.0" mnemonicParsing="false" text="2" />
+                        <CheckBox layoutX="783.0" layoutY="202.0" mnemonicParsing="false" text="3" />
+                        <CheckBox layoutX="1008.0" layoutY="202.0" mnemonicParsing="false" text="4" />
+                        <TabPane layoutX="-2.0" layoutY="294.0" prefHeight="492.0" prefWidth="1191.0" tabClosingPolicy="UNAVAILABLE">
+                          <tabs>
+                            <Tab text="Wash">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutY="-1.0" prefHeight="467.0" prefWidth="212.0" text="Wash and dry on the body and&#10;body parts using water and&#10;appropriate cleansers e.g. take&#10;bath, shower, wash hands and&#10;feet, face and hair and dry&#10;yourself with towel." />
+                                          <TextArea layoutX="219.0" layoutY="8.0" prefHeight="453.0" prefWidth="200.0" text="Can manage on their own,&#10;possibly. when using eg&#10;bath bench, grip&#10;by shower,&#10;toe washer, toe dryer,&#10;back bath brush." />
+                                          <TextArea layoutX="431.0" layoutY="8.0" prefHeight="453.0" prefWidth="200.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, eg get ready for&#10;the bath, remember&#10;about washing under&#10;fast arm." />
+                                          <TextArea layoutX="639.0" layoutY="8.0" prefHeight="452.0" prefWidth="200.0" text="Need foranyone&#10;help, eg help with&#10;washing and / or&#10;dry out, lower&#10;hygiene." />
+                                          <TextArea layoutX="846.0" layoutY="8.0" prefHeight="450.0" prefWidth="182.0" text="Need fora lot of&#10;help, men&#10;can for example help&#10;helps to&#10;wash / dry&#10;hands, face,&#10;upper body, possibly&#10;under guidance." />
+                                          <TextArea layoutX="1032.0" layoutY="8.0" prefHeight="448.0" prefWidth="153.0" text="Need forhelp&#10;to everythingin&#10;connection with&#10;to wash." />
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                            <Tab text="Go to the bathroom">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutX="6.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" text="Plan and perform toilet visits for&#10;excretion of waste products&#10;(menstruation, urine and faeces)&#10;and subsequent cleaning." />
+                                          <TextArea layoutX="206.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
+                                          <TextArea layoutX="406.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
+                                          <TextArea layoutX="606.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
+                                          <TextArea layoutX="806.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
+                                          <TextArea layoutX="1008.0" layoutY="8.0" prefHeight="200.0" prefWidth="177.0" />
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                              <Tab text="Body care">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="247.0" prefWidth="220.0" text="Care of the parts of the body that&#10;need other care than washing and&#10;drying e.g. skin, face, teeth, hair,&#10;nails and genitals." />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Undressing and dressing">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="288.0" prefWidth="240.0" text="Perform compound actions in&#10;connection with on- and&#10;undressing, to take&#10;footwear on and off in&#10;order and in&#10;in accordance with the social&#10;context and climatic conditions&#10;such as wear, straighten and&#10;defecate shirts, blouses,&#10;trousers, underwear, […],&#10;gloves, coats, shoes, boots,&#10;sandals and slippers." />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Eat">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutY="8.0" prefHeight="270.0" prefWidth="235.0" text="Perform complex actions in&#10;connection with eating food that&#10;is served to one, get the food up&#10;to the mouth and eat in a&#10;culturally accepted way, cut or&#10;break the food into pieces, open&#10;bottles and cans, use eating&#10;utensils, attend meals and&#10;festivities ." />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Drinking">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutX="6.0" layoutY="6.0" prefHeight="317.0" prefWidth="230.0" text="Hold on to a drink, take the drink&#10;up to your mouth and drink in a&#10;culturally accepted way, mix, stir&#10;and pour drinks up, open bottles&#10;and cans, use straws or drinks of&#10;running water from a tap or a&#10;spring; breastfeeding." />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Take care of your own health">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutX="8.0" layoutY="7.0" prefHeight="312.0" prefWidth="243.0" text="Ensure his well-being, health and&#10;physical and mental&#10;well-being by e.g. to eat a&#10;varied diet, have an&#10;appropriate level of physical&#10;activity, stay warm or cool,&#10;avoid damage to health, have&#10;safe sex incl. use of condoms,&#10;get vaccinated and follow" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Food intake">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutX="6.0" layoutY="6.0" prefHeight="339.0" prefWidth="239.0" text="Ingestion and processing of&#10;foods and liquids by mouth.&#10;Incl .: to suck, chew, bite and&#10;process food in the oral cavity,&#10;saliva, to swallow, vomit, spit and&#10;vomit; conditions such as&#10;dysphagia, aspiration of food, […],&#10;insufficient saliva production." />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                          </tabs>
+                        </TabPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Practical tasks">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="149.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../Downloads/Human.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="349.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="572.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="783.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="977.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                        <CheckBox layoutX="234.0" layoutY="202.0" mnemonicParsing="false" text="0" />
+                        <CheckBox layoutX="410.0" layoutY="202.0" mnemonicParsing="false" text="1" />
+                        <CheckBox layoutX="596.0" layoutY="202.0" mnemonicParsing="false" text="2" />
+                        <CheckBox layoutX="783.0" layoutY="202.0" mnemonicParsing="false" text="3" />
+                        <CheckBox layoutX="1008.0" layoutY="202.0" mnemonicParsing="false" text="4" />
+                        <TabPane layoutX="-2.0" layoutY="294.0" prefHeight="492.0" prefWidth="1191.0" tabClosingPolicy="UNAVAILABLE">
+                           <tabs>
+                              <Tab text="Perform daily routines">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutY="-1.0" prefHeight="467.0" prefWidth="212.0" text="Perform simple, complex and&#10;complex actions for planning,&#10;managing and implementing&#10;daily recurring routines or&#10;duties such as. to adhere to&#10;times and make plans for&#10;special activities during the&#10;day." />
+                                          <TextArea layoutX="219.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" text="Can manage on their own,&#10;possibly. when using eg&#10;bath bench, grip&#10;by shower,&#10;toe washer, toe dryer,&#10;back bath brush." />
+                                          <TextArea layoutX="431.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, eg get ready for&#10;the bath, remember&#10;about washing under&#10;fast arm." />
+                                          <TextArea layoutX="639.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" text="Need foranyone&#10;help, eg help with&#10;washing and / or&#10;dry out, lower&#10;hygiene." />
+                                          <TextArea layoutX="846.0" layoutY="8.0" prefHeight="200.0" prefWidth="182.0" text="Need fora lot of&#10;help, men&#10;can for example help&#10;helps to&#10;wash / dry&#10;hands, face,&#10;upper body, possibly&#10;under guidance." />
+                                          <TextArea layoutX="1032.0" layoutY="8.0" prefHeight="200.0" prefWidth="153.0" text="Need forhelp&#10;to everythingin&#10;connection with&#10;to wash." />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Acquire goods and services">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutX="6.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" text="Select, provide and transport&#10;goods that are necessary in&#10;daily life such as. to choose,&#10;buy,&#10;transport and store food,&#10;drink, clothing, cleaning&#10;products, fuel,&#10;household items and tools;&#10;provide&#10;utensils and service." />
+                                          <TextArea layoutX="206.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
+                                          <TextArea layoutX="406.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
+                                          <TextArea layoutX="606.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
+                                          <TextArea layoutX="806.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
+                                          <TextArea layoutX="1008.0" layoutY="8.0" prefHeight="200.0" prefWidth="177.0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Cook">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutY="6.0" prefHeight="247.0" prefWidth="220.0" text="Plan, prepare and serve simple&#10;or complex meals to oneself and&#10;others such as. to put together a&#10;meal, select appetizing food and&#10;drink,&#10;providing ingredients for&#10;preparing meals; prepare food&#10;and drink for cooking, make&#10;hot and cold food and drink,&#10;serve the food." />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Do housework">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="288.0" prefWidth="240.0" text="Keep house by cleaning,&#10;washing clothes, use&#10;household appliances, store food and&#10;throw away rubbish, e.g. by sweeping,&#10;moping, drying tables, […] keeping&#10;order in rooms and living rooms, in&#10;cupboards and drawers; collect, wash,&#10;dry and iron clothes; clean footwear; use&#10;broom, brushes and vacuum cleaner;&#10;use&#10;washer, dryer and iron." />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                           </tabs>
+                        </TabPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Mobility">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="149.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../Downloads/Human.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="349.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="572.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="783.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="977.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                        <CheckBox layoutX="234.0" layoutY="202.0" mnemonicParsing="false" text="0" />
+                        <CheckBox layoutX="410.0" layoutY="202.0" mnemonicParsing="false" text="1" />
+                        <CheckBox layoutX="596.0" layoutY="202.0" mnemonicParsing="false" text="2" />
+                        <CheckBox layoutX="783.0" layoutY="202.0" mnemonicParsing="false" text="3" />
+                        <CheckBox layoutX="1008.0" layoutY="202.0" mnemonicParsing="false" text="4" />
+                        <TabPane layoutX="-2.0" layoutY="294.0" prefHeight="492.0" prefWidth="1191.0" tabClosingPolicy="UNAVAILABLE">
+                           <tabs>
+                              <Tab text="Change body position">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutY="-1.0" prefHeight="467.0" prefWidth="212.0" text="Change body position and move&#10;from one place to another such as.&#10;to move from a chair to a supine&#10;position and switch to and from a&#10;kneeling or squatting position." />
+                                          <TextArea layoutX="219.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" text="Can manage on their own,&#10;possibly. when using eg&#10;bath bench, grip&#10;by shower,&#10;toe washer, toe dryer,&#10;back bath brush." />
+                                          <TextArea layoutX="431.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, eg get ready for&#10;the bath, remember&#10;about washing under&#10;fast arm." />
+                                          <TextArea layoutX="639.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" text="Need foranyone&#10;help, eg help with&#10;washing and / or&#10;dry out, lower&#10;hygiene." />
+                                          <TextArea layoutX="846.0" layoutY="8.0" prefHeight="200.0" prefWidth="182.0" text="Need fora lot of&#10;help, men&#10;can for example help&#10;helps to&#10;wash / dry&#10;hands, face,&#10;upper body, possibly&#10;under guidance." />
+                                          <TextArea layoutX="1032.0" layoutY="8.0" prefHeight="200.0" prefWidth="153.0" text="Need forhelp&#10;to everythingin&#10;connection with&#10;to wash." />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Move">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutX="6.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" text="Moving from one surface to&#10;another such as. to slide across a&#10;bench or move from bed to chair&#10;without changing the position of&#10;the body" />
+                                          <TextArea layoutX="206.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
+                                          <TextArea layoutX="406.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
+                                          <TextArea layoutX="606.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
+                                          <TextArea layoutX="806.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
+                                          <TextArea layoutX="1008.0" layoutY="8.0" prefHeight="200.0" prefWidth="177.0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Lift and carry">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutY="6.0" prefHeight="247.0" prefWidth="220.0" text="Lift an object up and move&#10;something from one place to&#10;another such as. to lift a cup or&#10;carry a child from one room to&#10;another." />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Go">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="288.0" prefWidth="240.0" text="Move foot step by step on a&#10;surface so that one foot&#10;constantly rests on the surface,&#10;as when&#10;strolls, walks forwards, backwards&#10;or sideways." />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Move around">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="288.0" prefWidth="240.0" text="Move from one place to another&#10;in ways other than by walking&#10;[…]." />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="The journey in different surroundings">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="288.0" prefWidth="240.0" text="Walking and moving in different&#10;environments such as. to walk&#10;between rooms in the house, inside a&#10;building or down the street." />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Use means of transport">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="288.0" prefWidth="240.0" text="Use means of transport as&#10;passengers to move around&#10;such as. to be driven in a car or&#10;drive by […] taxi, bus, train,&#10;tram, subway, ship or plane." />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Endurance">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="288.0" prefWidth="240.0" text="Functions determining the&#10;respiratory and cardiovascular&#10;capacity required for physical&#10;exertion." />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Muscle strength">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="288.0" prefWidth="240.0" text="The force that arises from the&#10;contraction of a muscle or a muscle&#10;group." />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                           </tabs>
+                        </TabPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Mental functions">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="149.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../Downloads/Human.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="349.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="572.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="783.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="977.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                        <CheckBox layoutX="234.0" layoutY="202.0" mnemonicParsing="false" text="0" />
+                        <CheckBox layoutX="410.0" layoutY="202.0" mnemonicParsing="false" text="1" />
+                        <CheckBox layoutX="596.0" layoutY="202.0" mnemonicParsing="false" text="2" />
+                        <CheckBox layoutX="783.0" layoutY="202.0" mnemonicParsing="false" text="3" />
+                        <CheckBox layoutX="1008.0" layoutY="202.0" mnemonicParsing="false" text="4" />
+                        <TabPane layoutX="-2.0" layoutY="294.0" prefHeight="492.0" prefWidth="1191.0" tabClosingPolicy="UNAVAILABLE">
+                           <tabs>
+                              <Tab text="Acquire skills">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutY="-1.0" prefHeight="467.0" prefWidth="212.0" text="Develop basic and complex&#10;competencies in complex&#10;actions or tasks with the aim&#10;of initiating and completing&#10;the acquisition of a skill, such&#10;as&#10;handling tools or games such&#10;as chess." />
+                                          <TextArea layoutX="219.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" text="Can manage on their own,&#10;possibly. when using eg&#10;bath bench, grip&#10;by shower,&#10;toe washer, toe dryer,&#10;back bath brush." />
+                                          <TextArea layoutX="431.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, eg get ready for&#10;the bath, remember&#10;about washing under&#10;fast arm." />
+                                          <TextArea layoutX="639.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" text="Need foranyone&#10;help, eg help with&#10;washing and / or&#10;dry out, lower&#10;hygiene." />
+                                          <TextArea layoutX="846.0" layoutY="8.0" prefHeight="200.0" prefWidth="182.0" text="Need fora lot of&#10;help, men&#10;can for example help&#10;helps to&#10;wash / dry&#10;hands, face,&#10;upper body, possibly&#10;under guidance." />
+                                          <TextArea layoutX="1032.0" layoutY="8.0" prefHeight="200.0" prefWidth="153.0" text="Need forhelp&#10;to everythingin&#10;connection with&#10;to wash." />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Problem solving">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutX="6.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" text="Solving questions or situations&#10;by identifying and analyzing&#10;topics, developing&#10;options and solutions,&#10;evaluate possible effects of&#10;solutions and implement a&#10;chosen solution such as by&#10;solving a&#10;discrepancy between two&#10;persons." />
+                                          <TextArea layoutX="206.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
+                                          <TextArea layoutX="406.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
+                                          <TextArea layoutX="606.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
+                                          <TextArea layoutX="806.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
+                                          <TextArea layoutX="1008.0" layoutY="8.0" prefHeight="200.0" prefWidth="177.0" />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Apply communication equipment and techniques">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutY="6.0" prefHeight="247.0" prefWidth="220.0" text="Apply equipment, techniques and&#10;other means with&#10;communication purposes&#10;such as to call a friend." />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Orientation ability">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="288.0" prefWidth="240.0" text="Overall mental&#10;functions determining knowledge&#10;of and finding the relationships to&#10;oneself, to others, to time, place&#10;and other surroundings." />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Energy and action">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="288.0" prefWidth="240.0" text="Overall mental&#10;functions of a physiological and&#10;psychological nature which cause&#10;the person to achieve&#10;meeting specific needs and&#10;overall objectives in a&#10;sustained manner." />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Memory">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="288.0" prefWidth="240.0" text="Specific mental functions&#10;determining registration,&#10;storage recall of&#10;information as needed." />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Emotional functions">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="288.0" prefWidth="240.0" text="Specific mental functions&#10;associated with emotions and&#10;affective components of the mind." />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="Overall cognitive functions">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="288.0" prefWidth="240.0" text="FSpecific mental functions are&#10;primarily associated with the&#10;forehead lobes of the brain&#10;comprehensive complex targeted&#10;behaviors such as decision making,&#10;abstract thinking, planning and&#10;implementation of plans, mental&#10;flexibility and adaptation of behavior&#10;according to&#10;circumstances, so-called&#10;executive functions." />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                           </tabs>
+                        </TabPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Community life">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="173.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../Downloads/Human.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="349.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="572.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="783.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="977.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                        <CheckBox layoutX="234.0" layoutY="202.0" mnemonicParsing="false" text="0" />
+                        <CheckBox layoutX="410.0" layoutY="202.0" mnemonicParsing="false" text="1" />
+                        <CheckBox layoutX="596.0" layoutY="202.0" mnemonicParsing="false" text="2" />
+                        <CheckBox layoutX="783.0" layoutY="202.0" mnemonicParsing="false" text="3" />
+                        <CheckBox layoutX="1008.0" layoutY="202.0" mnemonicParsing="false" text="4" />
+                        <TabPane layoutX="-2.0" layoutY="294.0" prefHeight="492.0" prefWidth="1191.0" tabClosingPolicy="UNAVAILABLE">
+                           <tabs>
+                              <Tab text="Have paid employment">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea layoutY="-1.0" prefHeight="467.0" prefWidth="212.0" text="Participate in all aspects of&#10;a job, occupation or other&#10;type of employment […]." />
+                                          <TextArea layoutX="219.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" text="Can handle himself." />
+                                          <TextArea layoutX="431.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, eg to&#10;meeting on time&#10;at work." />
+                                          <TextArea layoutX="639.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" text="Need foranyone&#10;help, eg to&#10;prepare / follow&#10;a structure of&#10;the work in relation to&#10;the work tasks." />
+                                          <TextArea layoutX="846.0" layoutY="8.0" prefHeight="200.0" prefWidth="182.0" text="Need onea lot&#10;of help, men&#10;can, for example, perform all&#10;or part of it himself&#10;concrete, known&#10;and delimited&#10;tasks." />
+                                          <TextArea layoutX="1032.0" layoutY="8.0" prefHeight="200.0" prefWidth="153.0" text="Is not able to&#10;have paid&#10;occupation." />
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                           </tabs>
+                        </TabPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
