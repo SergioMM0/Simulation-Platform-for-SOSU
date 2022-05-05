@@ -8,4 +8,11 @@ import java.util.List;
 
 public interface DAOSubCategory {
     List<SubCategory> getAllSubCategories(Category category) throws DalException;
+
+    SubCategory createCategory(String name)throws DalException;
+
+    void updateCategory(Category category , String name );
+
+    void deleteCategory(Category category);
+
 }

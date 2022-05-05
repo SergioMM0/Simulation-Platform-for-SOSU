@@ -4,7 +4,6 @@ import BE.Patient;
 import DAL.DataAccess.DataAccess;
 import DAL.Interface.DAOPatient;
 import DAL.util.DalException;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +78,7 @@ public class DALPatient implements DAOPatient {
             Patient patient = new Patient(newestidforPatient(),first_name,last_name,dateofBirth,gender,weight,height,cpr,phone_number,blood_type,exercise,diet,alcohol,tobacco,observations , schoolid , teacherid);
             return patient ;
         } catch (SQLException e) {
-            throw new DalException("Connectin Lost " , e);
+            throw new DalException("Connection Lost " , e);
         }
     }
 

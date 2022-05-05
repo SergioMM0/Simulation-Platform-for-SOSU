@@ -40,4 +40,19 @@ public class DALSubCategory implements DAOSubCategory {
             throw new DalException("Connection Lost" , e);
         }
     }
+
+    @Override
+    public SubCategory createCategory(String name) throws DalException {
+        return null;
+    }
+
+    @Override
+    public void updateCategory(Category category, String name) {
+
+    }
+
+    @Override
+    public void deleteCategory(Category category) {
+
+    }
 }

@@ -11,7 +11,8 @@ public interface DAOCategory {
 
     Category createCategory() throws DalException;
 
-    void updateCategory() throws DalException ;
+    void updateCategory(Category category , String name) throws DalException ;
 
-    //void delete
+   void deleteCategory(Category category);
+
 }
