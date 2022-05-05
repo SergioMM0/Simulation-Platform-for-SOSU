@@ -11,7 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -158,6 +157,7 @@ public class TeacherMainCTLL {
     private TableView<?> studentsTable;
 
     private User logedUser;
+    private static final String generalCSS = "";
 
     public void setUser(User user){
         this.logedUser = user;
@@ -169,7 +169,7 @@ public class TeacherMainCTLL {
 
     @FXML
     void addNewCase(ActionEvent event) {
-
+        openView("GUI/Views/CreateCase.fxml",generalCSS,"Create new case",860,660,false);
     }
 
     @FXML
