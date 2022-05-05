@@ -6,6 +6,9 @@ import BE.Patient;
 import BE.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -13,6 +16,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class TeacherMainCTLL {
 
@@ -284,6 +290,28 @@ public class TeacherMainCTLL {
     @FXML
     void unmarkCaseAsGraded(ActionEvent event) {
 
+    }
+
+    private void openView(String resource, String css, String title, int width,int height,boolean resizable){
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getClassLoader().getResource(resource));
+        Parent root = null;
+        try{root = loader.load();}
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        assert root != null;
+        root.getStylesheets().add(css);
+        Stage stage = new Stage();
+        stage.setTitle(title);
+        stage.setScene(new Scene(root,width,height));
+        stage.setResizable(resizable);
+        stage.show();
+    }
+
+    private void closeWindow(){
+        Stage st = (Stage) groupTableGV.getScene().getWindow();
+        st.close();
     }
 
 }

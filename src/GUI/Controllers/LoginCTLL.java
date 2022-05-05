@@ -54,7 +54,7 @@ public class LoginCTLL implements Initializable {
                 logedUser = loginMOD.checkCredentials(emailField.getText(),passwordField.getText());
                 switch (logedUser.getUserType()) {
                     case "STUDENT" -> openView("GUI/Views/StudentMain.fxml", generalCSS, "FS3 for Students", 0, 0, false);
-                    case "TEACHER" -> openView("GUI/Views/TeacherMain.fxml", generalCSS, "Simulation platform FS3", 0, 0, false);
+                    case "TEACHER" -> openView("GUI/Views/TeacherMain.fxml", generalCSS, "Simulation platform FS3", 880, 660, false);
                 }
             }catch (DalException | BLLException exception){ //TODO review message in DAL
                 new SoftAlert(exception.getMessage());

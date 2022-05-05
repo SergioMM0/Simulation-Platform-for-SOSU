@@ -3,7 +3,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -94,12 +93,10 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <ListView fx:id="casesAssignedList" layoutX="40.0" layoutY="130.0" prefHeight="445.0" prefWidth="200.0" />
                   <Label fx:id="casesAssignedLBL" layoutX="100.0" layoutY="100.0" text="Cases assigned" />
                   <Button layoutX="270.0" layoutY="130.0" mnemonicParsing="false" onAction="#openGradeCase" prefHeight="35.0" prefWidth="150.0" text="Grade case" />
                   <Button layoutX="270.0" layoutY="250.0" mnemonicParsing="false" onAction="#assignNewCaseToGroup" prefHeight="35.0" prefWidth="150.0" text="Assign new case" textOverrun="CLIP" />
                   <Button layoutX="270.0" layoutY="190.0" mnemonicParsing="false" onAction="#markCaseAsGraded" prefHeight="35.0" prefWidth="150.0" text="Mark case as graded" />
-                  <ListView fx:id="casesGradedList" layoutX="640.0" layoutY="130.0" prefHeight="445.0" prefWidth="200.0" />
                   <Label fx:id="casesGradedLBL" layoutX="704.0" layoutY="100.0" text="Cases graded" />
                   <Button layoutX="460.0" layoutY="130.0" mnemonicParsing="false" onAction="#unmarkCaseAsGraded" prefHeight="35.0" prefWidth="150.0" text="Unmark case as graded" />
                   <AnchorPane layoutX="40.0" layoutY="14.0" prefHeight="65.0" prefWidth="800.0" style="-fx-background-color: ffffff;">
@@ -113,6 +110,16 @@
                   </AnchorPane>
                   <Button layoutX="270.0" layoutY="310.0" mnemonicParsing="false" onAction="#unassignSelectedCase" prefHeight="35.0" prefWidth="150.0" text="Unassign case" textOverrun="CLIP" />
                   <Button layoutX="460.0" layoutY="190.0" mnemonicParsing="false" onAction="#openGradedCase" prefHeight="35.0" prefWidth="150.0" text="See graded case" />
+                  <TableView fx:id="casesAssignedList" layoutX="40.0" layoutY="130.0" prefHeight="445.0" prefWidth="200.0">
+                     <columns>
+                        <TableColumn fx:id="nameColCases" prefWidth="199.20001220703125" text="Name" />
+                     </columns>
+                  </TableView>
+                  <TableView fx:id="casesGradedList" layoutX="640.0" layoutY="130.0" prefHeight="445.0" prefWidth="200.0">
+                     <columns>
+                        <TableColumn fx:id="nameColCasesGraded" prefWidth="199.20001220703125" text="Name" />
+                     </columns>
+                  </TableView>
                </children></AnchorPane>
          </content>
       </Tab>
