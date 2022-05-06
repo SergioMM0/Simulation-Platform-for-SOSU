@@ -12,7 +12,7 @@ public interface DALFacade {
 
     void createCase(Case c , Category category , SubCategory subCategory)throws DalException;
 
-    void updateCase(Case c , String name, String description_of_the_condition, String cause_text, String causal_diagnose, String causal_condition, String citizens_want_goal)throws  DalException ;
+    void updateCase(Case c)throws  DalException ;
 
     void deleteCase(Case c) throws DalException ;
 
@@ -20,7 +20,7 @@ public interface DALFacade {
 
     void createCategory(Category category) throws DalException;
 
-    void updateCategory(Category category , String name) throws DalException ;
+    void updateCategory(Category category) throws DalException ;
 
     void deleteCategory(Category category)throws DalException;
 

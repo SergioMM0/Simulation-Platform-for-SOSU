@@ -35,8 +35,8 @@ public class Manager implements DALFacade {
     }
 
     @Override
-    public void updateCase(Case c, String name, String description_of_the_condition, String cause_text, String causal_diagnose, String causal_condition, String citizens_want_goal) throws DalException {
-        daoCase.updateCase(c , name ,description_of_the_condition,cause_text,causal_diagnose,causal_condition,citizens_want_goal);
+    public void updateCase(Case c) throws DalException {
+        daoCase.updateCase(c);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class Manager implements DALFacade {
     }
 
     @Override
-    public void updateCategory(Category category, String name) throws DalException {
+    public void updateCategory(Category category) throws DalException {
 
     }
 

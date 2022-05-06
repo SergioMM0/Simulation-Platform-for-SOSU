@@ -42,8 +42,6 @@ public class DALCase  {
                 String causal_diagnose = rs.getString("Causal_diagnose");
                 String causal_condition = rs.getString("Causal_condition");
                 String citizens_want_goal = rs.getString("Citizens_want_goal");
-                int catid = rs.getInt("catid");
-                int subcat = rs.getInt("subid");
                 Case c = new Case(newestidforCases() , name ,description_of_the_condition,cause_text,causal_diagnose,causal_condition,citizens_want_goal );
                 cases.add(c);
             }
@@ -74,16 +72,16 @@ public class DALCase  {
     }
 
 
-    public void updateCase(Case c, String name, String description_of_the_condition, String cause_text, String causal_diagnose, String causal_condition, String citizens_want_goal) throws DalException {
+    public void updateCase(Case c) throws DalException {
         try(Connection con = dataAccess.getConnection()){
             String sql = "Update Case set name = ? , description_of_the_condition = ? , cause_text = ?  , causal_diagnose = ? , causal_condition = ? , citizens_want_goal = ?  where id = ? ";
             PreparedStatement prs = con.prepareStatement(sql);
-            prs.setString(1 , name);
-            prs.setString(2 ,description_of_the_condition);
-            prs.setString(3 , cause_text);
-            prs.setString(4 ,causal_diagnose);
-            prs.setString(5 , causal_condition);
-            prs.setString(6 ,citizens_want_goal);
+            prs.setString(1 , c.getName());
+            prs.setString(2 ,c.getConditionDescription());
+            prs.setString(3 , c.getCause());
+            prs.setString(4 ,c.getCausalDiagnose());
+            prs.setString(5 , c.getCausalCondition());
+            prs.setString(6 ,c.getCitizenGoal());
             prs.setInt(7,c.getId());
             prs.executeUpdate();
 
