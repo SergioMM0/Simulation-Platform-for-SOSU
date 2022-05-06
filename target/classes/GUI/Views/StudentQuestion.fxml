@@ -36,12 +36,12 @@
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutY="-1.0" prefHeight="467.0" prefWidth="212.0" text="Wash and dry on the body and&#10;body parts using water and&#10;appropriate cleansers e.g. take&#10;bath, shower, wash hands and&#10;feet, face and hair and dry&#10;yourself with towel.&#10;&#10;Incl .: wash body parts, wash the whole&#10;body and dry yourself.&#10;&#10;Excl .: body care; go to the bathroom." />
-                                          <TextArea layoutX="219.0" layoutY="8.0" prefHeight="453.0" prefWidth="200.0" text="Can manage on their own,&#10;possibly. when using eg&#10;bath bench, grip&#10;by shower,&#10;toe washer, toe dryer,&#10;back bath brush." />
-                                          <TextArea layoutX="431.0" layoutY="8.0" prefHeight="453.0" prefWidth="200.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, eg get ready for&#10;the bath, remember&#10;about washing under&#10;fast arm." />
-                                          <TextArea layoutX="639.0" layoutY="8.0" prefHeight="452.0" prefWidth="200.0" text="Need foranyone&#10;help, eg help with&#10;washing and / or&#10;dry out, lower&#10;hygiene." />
-                                          <TextArea layoutX="846.0" layoutY="8.0" prefHeight="450.0" prefWidth="182.0" text="Need fora lot of&#10;help, men&#10;can for example help&#10;helps to&#10;wash / dry&#10;hands, face,&#10;upper body, possibly&#10;under guidance." />
-                                          <TextArea layoutX="1032.0" layoutY="8.0" prefHeight="448.0" prefWidth="153.0" text="Need forhelp&#10;to everythingin&#10;connection with&#10;to wash." />
+                                          <TextArea layoutY="-1.0" prefHeight="387.0" prefWidth="219.0" text="Wash and dry on the body and&#10;body parts using water and&#10;appropriate cleansers e.g. take&#10;bath, shower, wash hands and&#10;feet, face and hair and dry&#10;yourself with towel.&#10;&#10;Incl .: wash body parts, wash the whole&#10;body and dry yourself.&#10;&#10;Excl .: body care; go to the bathroom." />
+                                          <TextArea layoutX="219.0" layoutY="-1.0" prefHeight="388.0" prefWidth="200.0" text="Can manage on their own,&#10;possibly. when using eg&#10;bath bench, grip&#10;by shower,&#10;toe washer, toe dryer,&#10;back bath brush." />
+                                          <TextArea layoutX="419.0" layoutY="-1.0" prefHeight="386.0" prefWidth="200.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, eg get ready for&#10;the bath, remember&#10;about washing under&#10;fast arm." />
+                                          <TextArea layoutX="619.0" prefHeight="387.0" prefWidth="200.0" text="Need foranyone&#10;help, eg help with&#10;washing and / or&#10;dry out, lower&#10;hygiene." />
+                                          <TextArea layoutX="819.0" layoutY="1.0" prefHeight="385.0" prefWidth="182.0" text="Need fora lot of&#10;help, men&#10;can for example help&#10;helps to&#10;wash / dry&#10;hands, face,&#10;upper body, possibly&#10;under guidance." />
+                                          <TextArea layoutX="1007.0" layoutY="2.0" prefHeight="383.0" prefWidth="171.0" text="Need forhelp&#10;to everythingin&#10;connection with&#10;to wash." />
                                        </children>
                                     </AnchorPane>
                               </content>

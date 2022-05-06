@@ -74,14 +74,16 @@ public class NewCaseCTLL implements Initializable {
     }
 
     @FXML
-    void catSelected(ActionEvent event) { //Is it better to have a listener for this? maybe. TODO To test
+    void catSelected(ActionEvent event) { //TODO GUI tested and running, works fine without listener. When solved issue with Subcategories in DAL -> TO TEST
         if(!categoryComboBox.getValue().isEmpty()){
             try {
                 for(SubCategory subCat : model.getAllSubcategories(model.getChosenCategory(categoryComboBox.getValue()))){
                     subcategoryComboBox.getItems().add(subCat.getName());
                 }
             } catch (DalException dalException) {
+                dalException.printStackTrace();
                 new SoftAlert(dalException.getMessage());
+                subcategoryComboBox.getItems().add("Delete me, injected through GUI by zrh");
             }
         }
     }
@@ -106,8 +108,9 @@ public class NewCaseCTLL implements Initializable {
                         model.getChosenSubCategory(categoryComboBox.getValue())
                 );
                 closeWindow();
-            } catch (DalException e) {
-                new SoftAlert(e.getMessage());
+            } catch (DalException dalException) {
+                dalException.printStackTrace();
+                new SoftAlert(dalException.getMessage());
             }
         }
     }
