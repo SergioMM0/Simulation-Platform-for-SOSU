@@ -29,7 +29,7 @@ public class DALSubCategory {
             prs.execute();
             ResultSet rs = prs.getResultSet();
             while (rs.next()){
-                int id = rs.getInt("id");
+                int id = rs.getInt("subcategoryID");
                 String name = rs.getString("name");
                 SubCategory subCategory = new SubCategory(id , name);
                 subCategories.add(subCategory);
