@@ -85,7 +85,7 @@ public class Manager implements DALFacade {
 
     @Override
     public void deleteSubCategory(SubCategory subCategory) throws DalException {
-        deleteSubCategory(subCategory);
+        daoSubCategory.deleteSubCategory(subCategory);
     }
 
     @Override
