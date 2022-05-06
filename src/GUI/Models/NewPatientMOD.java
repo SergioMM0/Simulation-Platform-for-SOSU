@@ -1,13 +1,22 @@
 package GUI.Models;
 
+import BE.Patient;
+import BLL.BLLFacade;
+import BLL.BLLManager;
+import DAL.util.DalException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class NewPatientMOD {
 
+    private BLLFacade bllFacade;
 
     public NewPatientMOD(){
+        bllFacade = new BLLManager();
+    }
 
+    public void createPatient(Patient patient)throws DalException {
+        bllFacade.createPatient(patient);
     }
 
     //Combo boxes Hardcoded until we implement danish and english lang, so we will read from a file instead

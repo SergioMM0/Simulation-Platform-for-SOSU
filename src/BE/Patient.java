@@ -3,27 +3,27 @@ package BE;
 import java.sql.Timestamp;
 
 public class Patient {
-  private int id;
-  private String first_name;
-  private String last_name;
-  private Timestamp dateOfBirth;
-  private String gender;
-  private int weight;
-  private int height;
-  private String cpr;
-  private String phoneNumber;
-  private String bloodType;
-  private String exercise;
-  private String diet;
-  private String alcohol;
-  private String tobacco;
-  private String observations;
-  private int schoolid ;
-  private int teacherid ;
+    private int id;
+    private String first_name;
+    private String last_name;
+    private Timestamp dateOfBirth;
+    private String gender;
+    private int weight;
+    private int height;
+    private String cpr;
+    private String phoneNumber;
+    private String bloodType;
+    private String exercise;
+    private String diet;
+    private String alcohol;
+    private String tobacco;
+    private String observations;
+    private int schoolid;
+    private int teacherid;
 
     public Patient(int id, String first_name, String last_name, Timestamp dateOfBirth, String gender, int weight,
                    int height, String cpr, String phoneNumber, String bloodType, String exercise, String diet, String alcohol,
-                   String tobacco, String observations , int schoolid , int teacherid ) {
+                   String tobacco, String observations, int schoolid, int teacherid) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -40,7 +40,7 @@ public class Patient {
         this.tobacco = tobacco;
         this.observations = observations;
         this.schoolid = schoolid;
-        this.teacherid = teacherid ;
+        this.teacherid = teacherid;
 
     }
 
@@ -183,6 +183,6 @@ public class Patient {
     @Override
     public String toString() {
         return "Patient{" +
-                "id=" + id + ", first_name='" + first_name  + ", last_name='" + last_name + '}';
+                "id=" + id + ", first_name='" + first_name + ", last_name='" + last_name + '}';
     }
 }

@@ -1,9 +1,6 @@
 package BLL;
 
-import BE.Case;
-import BE.Category;
-import BE.SubCategory;
-import BE.User;
+import BE.*;
 import BLL.Exceptions.BLLException;
 import DAL.util.DalException;
 
@@ -18,4 +15,6 @@ public interface BLLFacade {
     List<Category> getAllCategories() throws DalException;
 
     List<SubCategory> getAllSubcategories(Category category) throws DalException;
+
+    void createPatient(Patient patient) throws DalException;
 }
