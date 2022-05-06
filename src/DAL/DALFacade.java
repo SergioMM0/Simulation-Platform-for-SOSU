@@ -46,7 +46,7 @@ public interface DALFacade {
 
     List<Patient> getAllPatients(int schoolid) throws DalException;
 
-    void createPatient(Patient patient, int schoolid , int teacherid) throws DalException;
+    void createPatient(Patient patient, School school , User user) throws DalException;
     //
     void updatepatient(Patient patient) throws DalException;
         //

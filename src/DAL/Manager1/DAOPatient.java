@@ -1,6 +1,8 @@
 package DAL.Manager1;
 
 import BE.Patient;
+import BE.School;
+import BE.User;
 import DAL.DataAccess.DataAccess;
 import DAL.util.DalException;
 import java.sql.*;
@@ -52,7 +54,7 @@ public class DAOPatient {
     }
 
 
-    public void createPatient( Patient patient , int schoolid , int teacherid) throws DalException {
+    public void createPatient(Patient patient , School school, User user) throws DalException {
 
         try (Connection con = dataAccess.getConnection()){
             String sql = "INSERT INTO Patient (first_name, last_name, dateofBirth, gender,weight ,height ,cpr , phone_number ,blood_type ,exercise ,diet ,alcohol,tobacco ,observations,schoolid,teacherid ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
@@ -71,8 +73,8 @@ public class DAOPatient {
             prs.setString(12,patient.getAlcohol());
             prs.setString(13,patient.getTobacco());
             prs.setString(14,patient.getObservations());
-            prs.setInt(15,schoolid);
-            prs.setInt(16,teacherid);
+            prs.setInt(15,school.getId());
+            prs.setInt(16,user.getId());
             prs.executeUpdate();
         } catch (SQLException e) {
             throw new DalException("Connection Lost " , e);

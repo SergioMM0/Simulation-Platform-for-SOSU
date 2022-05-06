@@ -124,8 +124,8 @@ public class Manager implements DALFacade {
     }
 
     @Override
-    public void createPatient( Patient patient, int schoolid, int teacherid) throws DalException {
-       daoPatient.createPatient(patient , schoolid , teacherid);
+    public void createPatient( Patient patient, School school, User user) throws DalException {
+       daoPatient.createPatient(patient , school , user);
     }
 
     @Override
