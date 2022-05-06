@@ -2,21 +2,20 @@ package DAL.Manager1;
 
 import BE.User;
 import DAL.DataAccess.DataAccess;
-import DAL.Interface.DAOUser;
 import DAL.util.DalException;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DALUser implements DAOUser {
+public class DALUser {
     private final DataAccess dataAccess;
 
     public DALUser() {
         dataAccess = new DataAccess();
     }
 
-    @Override
+
     public User verifyUsers(String useremail, String password)throws DalException {
         User user = null;
 
@@ -41,7 +40,7 @@ public class DALUser implements DAOUser {
         }
     }
 
-    @Override
+
     public List<User> getAllUsers() throws DalException {
         ArrayList<User> users = new ArrayList<>();
         try (Connection con = dataAccess.getConnection()) {
@@ -63,7 +62,7 @@ public class DALUser implements DAOUser {
         return users;
     }
 
-    @Override
+
     public void updateuser(User user, String username, String email, String userType) throws DalException {
         try (Connection con = dataAccess.getConnection()) {
             String sql = "UPDATE users SET username = ?  , email = ?  , usertype = ?  WHERE userid = ? ";
@@ -81,7 +80,6 @@ public class DALUser implements DAOUser {
         }
     }
 
-    @Override
     public void deleteuser(User user) throws DalException {
         try (Connection con = dataAccess.getConnection()) {
 
@@ -96,7 +94,7 @@ public class DALUser implements DAOUser {
         }
     }
 
-    @Override
+
     public User addUser(String username,int schoolid ,String password, String email, String usertype) throws DalException {
         User user ;
         try (Connection con = dataAccess.getConnection()) {
@@ -132,7 +130,7 @@ public class DALUser implements DAOUser {
         return newid;
     }
 
-    @Override
+
     public List<User> searchForUser(String query) throws DalException {
         List<User> users = new ArrayList<>();
 

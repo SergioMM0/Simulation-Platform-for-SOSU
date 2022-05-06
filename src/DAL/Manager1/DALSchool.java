@@ -2,15 +2,13 @@ package DAL.Manager1;
 
 import BE.School;
 import DAL.DataAccess.DataAccess;
-import DAL.Interface.DAOSchool;
 import DAL.util.DalException;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DALSchool implements DAOSchool {
+public class DALSchool  {
 
     private final DataAccess dataAccess;
 
@@ -18,7 +16,7 @@ public class DALSchool implements DAOSchool {
         dataAccess = new DataAccess();
     }
 
-    @Override
+
     public List<School> getAllSchhol()throws DalException {
         ArrayList<School> getAllSchools = new ArrayList<>();
         try(Connection con = dataAccess.getConnection()){
@@ -37,7 +35,7 @@ public class DALSchool implements DAOSchool {
         }
     }
 
-    @Override
+
     public School createSchool(String name) throws DalException{
         try(Connection con = dataAccess.getConnection()) {
             String sql = "insert  into [dbo].[School] (name ) values  (?)";
@@ -51,7 +49,7 @@ public class DALSchool implements DAOSchool {
         return null;
     }
 
-    @Override
+
     public void updateSchool(String name , School school )throws DalException {
       try(Connection con = dataAccess.getConnection()) {
         String sql = "UPDATE School SET name = ?  where id = ? ";
@@ -64,7 +62,7 @@ public class DALSchool implements DAOSchool {
       }
     }
 
-    @Override
+
     public void deleteSchool(School school ) throws DalException{
     try(Connection con = dataAccess.getConnection()) {
         String sql ="Delete from School where id = ?";

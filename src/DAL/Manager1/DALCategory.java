@@ -2,7 +2,6 @@ package DAL.Manager1;
 
 import BE.Category;
 import DAL.DataAccess.DataAccess;
-import DAL.Interface.DAOCategory;
 import DAL.util.DalException;
 
 import java.sql.Connection;
@@ -12,14 +11,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DALCategory implements DAOCategory {
+public class DALCategory  {
     private final DataAccess dataAccess;
 
     public DALCategory() {
         dataAccess = new DataAccess();
     }
 
-    @Override
+
     public List<Category> getAllCategories() throws DalException {
         ArrayList<Category> categorirs = new ArrayList<>();
 
@@ -39,17 +38,17 @@ public class DALCategory implements DAOCategory {
         }
     }
 
-    @Override
-    public Category createCategory() throws DalException {
-        return null;
+
+    public void createCategory(Category category) throws DalException {
+
     }
 
-    @Override
+
     public void updateCategory(Category category, String name) throws DalException {
 
     }
 
-    @Override
+
     public void deleteCategory(Category category) {
 
     }

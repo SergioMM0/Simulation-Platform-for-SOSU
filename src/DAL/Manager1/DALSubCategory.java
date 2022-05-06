@@ -3,7 +3,6 @@ package DAL.Manager1;
 import BE.Category;
 import BE.SubCategory;
 import DAL.DataAccess.DataAccess;
-import DAL.Interface.DAOSubCategory;
 import DAL.util.DalException;
 
 import java.sql.Connection;
@@ -13,14 +12,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DALSubCategory implements DAOSubCategory {
+public class DALSubCategory {
     private final DataAccess dataAccess;
 
     public DALSubCategory() {
         dataAccess = new DataAccess();
     }
 
-    @Override
+
     public List<SubCategory> getAllSubCategories(Category category) throws DalException {
         ArrayList<SubCategory> subCategories = new ArrayList<>();
         try(Connection connection = dataAccess.getConnection()) {
@@ -41,18 +40,18 @@ public class DALSubCategory implements DAOSubCategory {
         }
     }
 
-    @Override
-    public SubCategory createCategory(String name) throws DalException {
-        return null;
-    }
 
-    @Override
-    public void updateCategory(Category category, String name) {
+    public void createSubCategory(SubCategory subCategory) throws DalException {
 
     }
 
-    @Override
-    public void deleteCategory(Category category) {
+
+    public void updateSubCategory(Category category, String name)throws DalException  {
+
+    }
+
+
+    public void deleteSubCategory(Category category)throws DalException  {
 
     }
 }

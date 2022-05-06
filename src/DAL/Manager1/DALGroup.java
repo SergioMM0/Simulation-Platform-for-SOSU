@@ -3,13 +3,12 @@ package DAL.Manager1;
 import BE.Group;
 import BE.User;
 import DAL.DataAccess.DataAccess;
-import DAL.Interface.DAOGroup;
 import DAL.util.DalException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DALGroup implements DAOGroup {
+public class DALGroup {
 
     private final DataAccess dataAccess ;
 
@@ -17,7 +16,7 @@ public class DALGroup implements DAOGroup {
         dataAccess = new DataAccess();
     }
 
-    @Override
+
     public List<Group> getAllGroups() throws DalException{
         ArrayList<Group> getAllGruops = new ArrayList<>();
         try(Connection con = dataAccess.getConnection()) {
@@ -37,7 +36,7 @@ public class DALGroup implements DAOGroup {
         }
     }
 
-    @Override
+
     public Group createGroup(String name)throws DalException {
         ArrayList<User> users = new ArrayList<>();
         try(Connection con = dataAccess.getConnection()) {
@@ -53,7 +52,7 @@ public class DALGroup implements DAOGroup {
 
     }
 
-    @Override
+
     public void updateGroup( Group group , String name )throws DalException {
         try(Connection con = dataAccess.getConnection()){
             String sql = "UPDATE Groups SET name = ?  where id = ?";
@@ -66,7 +65,7 @@ public class DALGroup implements DAOGroup {
         }
     }
 
-    @Override
+
     public void deleteGroup(Group group) throws DalException{
         try(Connection con = dataAccess.getConnection()) {
             String sql = "Delete from Groups where id = ?";
@@ -80,7 +79,7 @@ public class DALGroup implements DAOGroup {
 
     }
 
-    @Override
+
     public List<User> getUsersInGroup(int id) throws DalException {
         ArrayList<User> usersinGroup = new ArrayList<>();
 
@@ -107,7 +106,7 @@ public class DALGroup implements DAOGroup {
         }
     }
 
-    @Override
+
     public void addUsertoGroup(Group group, User user) throws DalException {
         try(Connection con = dataAccess.getConnection()) {
             String sql = "INSERT INTO GroupUsers(studentid,Groupid) VALUES (?,?)";
@@ -120,7 +119,7 @@ public class DALGroup implements DAOGroup {
         }
     }
 
-    @Override
+
     public void removeUserFromGroup(User user) throws DalException {
         try (Connection con = dataAccess.getConnection()) {
             String sql = "DELETE FROM GroupUsers WHERE studentid = ? ";

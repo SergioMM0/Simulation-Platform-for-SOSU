@@ -18,6 +18,7 @@ public class BLLManager implements BLLFacade{
 
     public BLLManager(){
         dalFacade = new Manager();
+
     }
 
     @Override
@@ -32,7 +33,7 @@ public class BLLManager implements BLLFacade{
     @Override
     public void createCase(Case newCase, Category category, SubCategory subCategory) throws DalException {
         //TODO change parameters in DAL so a Case BE is parsed instead of split CASE variables && void return type
-        //dalFacade.createCase(newCase,category,subCategory);
+        dalFacade.createCase(newCase,category,subCategory);
     }
 
     @Override

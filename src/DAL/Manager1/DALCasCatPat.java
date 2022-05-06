@@ -4,13 +4,12 @@ import BE.Case;
 import BE.Group;
 import BE.Patient;
 import DAL.DataAccess.DataAccess;
-import DAL.Interface.DAOCasCatPat;
 import DAL.util.DalException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class DALCasCatPat implements DAOCasCatPat {
+public class DALCasCatPat{
 
     private final DataAccess dataAccess;
 
@@ -18,7 +17,7 @@ public class DALCasCatPat implements DAOCasCatPat {
         dataAccess = new DataAccess();
     }
 
-    @Override
+
     public void assignCasetoPatient(Patient patient, Case c) throws DalException {
         try(Connection con = dataAccess.getConnection()){
             String sql = "insert into SickPatient (patientid , caseid) values  (?,?)";
@@ -31,7 +30,7 @@ public class DALCasCatPat implements DAOCasCatPat {
         }
     }
 
-    @Override
+
     public void assignCaseToPatientToGroup(Patient p, Case c, Group g) throws DalException {
         try(Connection con = dataAccess.getConnection()) {
             String sql = "insert into SickPatient (patientid , caseid , Groupid) values  (?,?,?)";

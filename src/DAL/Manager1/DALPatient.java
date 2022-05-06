@@ -2,19 +2,18 @@ package DAL.Manager1;
 
 import BE.Patient;
 import DAL.DataAccess.DataAccess;
-import DAL.Interface.DAOPatient;
 import DAL.util.DalException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DALPatient implements DAOPatient {
+public class DALPatient  {
     private final DataAccess dataAccess;
 
     public DALPatient() {
         dataAccess = new DataAccess();
     }
-    @Override
+
     public List<Patient> getAllPatients(int schoolid) throws DalException {
         ArrayList<Patient> patients = new ArrayList<>();
         try(Connection con = dataAccess.getConnection()) {
@@ -52,7 +51,7 @@ public class DALPatient implements DAOPatient {
 
     }
 
-    @Override
+
     public Patient createPatient( String first_name, String last_name, Timestamp dateofBirth, String gender, int weight, int height, String cpr, String phone_number, String blood_type, String exercise, String diet, String alcohol, String tobacco, String observations , int schoolid , int teacherid) throws DalException {
 
         try (Connection con = dataAccess.getConnection()){
@@ -82,7 +81,7 @@ public class DALPatient implements DAOPatient {
         }
     }
 
-    @Override
+
     public void updatepatient(Patient patient, String first_name, String last_name, Timestamp dateofBirth, String gender, int weight, int height, String cpr, String phone_number, String blood_type, String exercise, String diet, String alcohol, String tobacco, String observations) throws DalException {
 
         try (Connection con = dataAccess.getConnection()){
@@ -108,7 +107,7 @@ public class DALPatient implements DAOPatient {
         }
     }
 
-    @Override
+
     public void deletePatient(Patient patient) throws DalException {
         try(Connection con = dataAccess.getConnection()){
             String sql = "DELETE FROM Patient WHERE id = ?";
