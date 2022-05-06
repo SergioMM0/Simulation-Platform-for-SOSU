@@ -6,6 +6,7 @@ import BE.SubCategory;
 import BLL.BLLFacade;
 import BLL.BLLManager;
 import DAL.util.DalException;
+import GUI.Alerts.SoftAlert;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -29,6 +30,9 @@ public class NewCaseMOD {
     public ObservableList<SubCategory> getAllSubcategories(Category category) throws DalException{
         allSubcategories.clear();
         allSubcategories.addAll(bllFacade.getAllSubcategories(category));
+        for(SubCategory subCategory : allSubcategories){
+            System.out.println(subCategory);
+        }
         return allSubcategories;
     }
 
@@ -50,6 +54,7 @@ public class NewCaseMOD {
             if(subCategory.getName().equals(subCatName)){
                 return subCategory;
             }
+            else new SoftAlert("hmmmmm");
         }
         return null;
     }

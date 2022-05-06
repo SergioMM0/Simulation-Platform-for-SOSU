@@ -68,22 +68,20 @@ public class NewCaseCTLL implements Initializable {
                 categoryComboBox.getItems().add(cat.getName());
             }
         }catch (DalException dalException){
-            dalException.printStackTrace();
             new SoftAlert(dalException.getMessage());
         }
     }
 
     @FXML
-    void catSelected(ActionEvent event) { //TODO GUI tested and running, works fine without listener. When solved issue with Subcategories in DAL -> TO TEST
+    void catSelected(ActionEvent event) {
         if(!categoryComboBox.getValue().isEmpty()){
             try {
+                subcategoryComboBox.getItems().clear();
                 for(SubCategory subCat : model.getAllSubcategories(model.getChosenCategory(categoryComboBox.getValue()))){
                     subcategoryComboBox.getItems().add(subCat.getName());
                 }
             } catch (DalException dalException) {
-                dalException.printStackTrace();
                 new SoftAlert(dalException.getMessage());
-                subcategoryComboBox.getItems().add("Delete me, injected through GUI by zrh");
             }
         }
     }
@@ -105,11 +103,10 @@ public class NewCaseCTLL implements Initializable {
                         citizenGoalField.getText()),
 
                         model.getChosenCategory(categoryComboBox.getValue()),
-                        model.getChosenSubCategory(categoryComboBox.getValue())
+                        model.getChosenSubCategory(subcategoryComboBox.getValue())
                 );
                 closeWindow();
             } catch (DalException dalException) {
-                dalException.printStackTrace();
                 new SoftAlert(dalException.getMessage());
             }
         }

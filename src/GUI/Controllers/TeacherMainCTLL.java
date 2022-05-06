@@ -174,7 +174,7 @@ public class TeacherMainCTLL {
 
     @FXML
     void addNewPatient(ActionEvent event) {
-
+        openView("GUI/Views/CreatePatient.fxml",generalCSS,"Create new patient",500,650,false);
     }
 
     @FXML

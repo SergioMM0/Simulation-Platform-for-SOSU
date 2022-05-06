@@ -28,6 +28,9 @@ public class SubCategory {
 
     @Override
     public String toString() {
-        return name;
+        return "SubCategory{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
