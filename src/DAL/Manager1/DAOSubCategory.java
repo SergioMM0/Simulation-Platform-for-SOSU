@@ -30,7 +30,7 @@ public class DAOSubCategory {
             ResultSet rs = prs.getResultSet();
             while (rs.next()){
                 int id = rs.getInt("subcategoryID");
-                String name = rs.getString("name");
+                String name = rs.getString("issue");
                 SubCategory subCategory = new SubCategory(id , name);
                 subCategories.add(subCategory);
             }
