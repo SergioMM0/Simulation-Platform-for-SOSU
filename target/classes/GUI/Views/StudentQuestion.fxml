@@ -16,7 +16,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="149.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="187.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../../../../Downloads/Human.png" />
                            </image>
@@ -36,7 +36,7 @@
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutY="-1.0" prefHeight="467.0" prefWidth="212.0" text="Wash and dry on the body and&#10;body parts using water and&#10;appropriate cleansers e.g. take&#10;bath, shower, wash hands and&#10;feet, face and hair and dry&#10;yourself with towel." />
+                                          <TextArea layoutY="-1.0" prefHeight="467.0" prefWidth="212.0" text="Wash and dry on the body and&#10;body parts using water and&#10;appropriate cleansers e.g. take&#10;bath, shower, wash hands and&#10;feet, face and hair and dry&#10;yourself with towel.&#10;&#10;Incl .: wash body parts, wash the whole&#10;body and dry yourself.&#10;&#10;Excl .: body care; go to the bathroom." />
                                           <TextArea layoutX="219.0" layoutY="8.0" prefHeight="453.0" prefWidth="200.0" text="Can manage on their own,&#10;possibly. when using eg&#10;bath bench, grip&#10;by shower,&#10;toe washer, toe dryer,&#10;back bath brush." />
                                           <TextArea layoutX="431.0" layoutY="8.0" prefHeight="453.0" prefWidth="200.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, eg get ready for&#10;the bath, remember&#10;about washing under&#10;fast arm." />
                                           <TextArea layoutX="639.0" layoutY="8.0" prefHeight="452.0" prefWidth="200.0" text="Need foranyone&#10;help, eg help with&#10;washing and / or&#10;dry out, lower&#10;hygiene." />
@@ -50,12 +50,12 @@
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutX="6.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" text="Plan and perform toilet visits for&#10;excretion of waste products&#10;(menstruation, urine and faeces)&#10;and subsequent cleaning." />
-                                          <TextArea layoutX="206.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
-                                          <TextArea layoutX="406.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
-                                          <TextArea layoutX="606.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
-                                          <TextArea layoutX="806.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
-                                          <TextArea layoutX="1008.0" layoutY="8.0" prefHeight="200.0" prefWidth="177.0" />
+                                          <TextArea layoutX="6.0" layoutY="8.0" prefHeight="357.0" prefWidth="200.0" text="Plan and perform toilet visits for&#10;excretion of waste products&#10;(menstruation, urine and faeces)&#10;and subsequent cleaning.&#10;&#10;&#10;Incl .: control urination, defecation&#10;and menstruation&#10;Excl .: wash; body care." />
+                                          <TextArea layoutX="206.0" layoutY="8.0" prefHeight="354.0" prefWidth="200.0" text="Can manage on their own,&#10;possibly. with the use of&#10;eg flask,&#10;toilet seat, washing&#10;drying toilet,&#10;toilet brush with&#10;long shaft." />
+                                          <TextArea layoutX="406.0" layoutY="8.0" prefHeight="352.0" prefWidth="200.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, e.g.&#10;reminder about&#10;toilet visits,&#10;emptying of&#10;pelvis / flask,&#10;help with diapers&#10;at night." />
+                                          <TextArea layoutX="606.0" layoutY="8.0" prefHeight="351.0" prefWidth="200.0" text="Need foranyone&#10;help, eg change&#10;diapers, place&#10;diaper / catheter&#10;proper, hygiene,&#10;drag&#10;trousers up and&#10;down by&#10;toilet visits." />
+                                          <TextArea layoutX="806.0" layoutY="8.0" prefHeight="351.0" prefWidth="200.0" text="Need fora lot of&#10;help, able to&#10;participate in parts, eg&#10;take the initiative&#10;toilet visits, dry&#10;himself knows&#10;urination, even&#10;wash hands." />
+                                          <TextArea layoutX="1008.0" layoutY="8.0" prefHeight="351.0" prefWidth="177.0" text="Need forhelp&#10;to everythingin&#10;connection with&#10;toilet visits." />
                                        </children>
                                     </AnchorPane>
                               </content>
@@ -64,7 +64,12 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="247.0" prefWidth="220.0" text="Care of the parts of the body that&#10;need other care than washing and&#10;drying e.g. skin, face, teeth, hair,&#10;nails and genitals." />
+                                          <TextArea layoutX="7.0" prefHeight="337.0" prefWidth="220.0" text="Care of the parts of the body that&#10;need other care than washing and&#10;drying e.g. skin, face, teeth, hair,&#10;nails and genitals.&#10;&#10;Incl .: skin care, dental care,&#10;hair care, nail care.&#10;Excl .: wash; go to the bathroom." />
+                                          <TextArea layoutX="227.0" prefHeight="336.0" prefWidth="187.0" text="Can manage on their own,&#10;possibly. when using eg&#10;cream applicators,&#10;long comb or&#10;prosthetic&#10;toothbrush with&#10;suction cups." />
+                                          <TextArea layoutX="414.0" prefHeight="335.0" prefWidth="187.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, eg make a&#10;toothbrush ready,&#10;find&#10;razor&#10;or scratches out,&#10;clean nails." />
+                                          <TextArea layoutX="602.0" prefHeight="332.0" prefWidth="187.0" text="Need foranyone&#10;help, fx&#10;shaving a&#10;part of the face,&#10;ordinary&#10;nail care" />
+                                          <TextArea layoutX="789.0" prefHeight="330.0" prefWidth="188.0" text="Need fora lot of&#10;help, men&#10;can eg brush&#10;teeth, combed hair,&#10;Possibly. below&#10;guiding." />
+                                          <TextArea layoutX="977.0" prefHeight="329.0" prefWidth="200.0" text="Need forhelp&#10;to albody care." />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -73,7 +78,12 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="288.0" prefWidth="240.0" text="Perform compound actions in&#10;connection with on- and&#10;undressing, to take&#10;footwear on and off in&#10;order and in&#10;in accordance with the social&#10;context and climatic conditions&#10;such as wear, straighten and&#10;defecate shirts, blouses,&#10;trousers, underwear, […],&#10;gloves, coats, shoes, boots,&#10;sandals and slippers." />
+                                          <TextArea layoutX="7.0" prefHeight="323.0" prefWidth="240.0" text="Perform compound actions in&#10;connection with on- and&#10;undressing, to take&#10;footwear on and off in&#10;order and in&#10;in accordance with the social&#10;context and climatic conditions&#10;such as wear, straighten and&#10;defecate shirts, blouses,&#10;trousers, underwear, […],&#10;gloves, coats, shoes, boots,&#10;sandals and slippers.&#10;&#10;Incl .: put clothes on and off incl.&#10;shoes and socks and choose&#10;appropriate attire." />
+                                          <TextArea layoutX="247.0" prefHeight="319.0" prefWidth="182.0" text="Can manage on their&#10;own, possibly. with use&#10;of sock applicator /&#10;decreases, far&#10;shoehorn,&#10;button hook." />
+                                          <TextArea layoutX="429.0" prefHeight="318.0" prefWidth="189.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, eg for&#10;closing buttons,&#10;zippers, bras, shoes;&#10;guidance by&#10;choice of clothes,&#10;reminder about&#10;change of clothes" />
+                                          <TextArea layoutX="618.0" prefHeight="319.0" prefWidth="185.0" text="Need foranyone&#10;help, eg to all&#10;lower&#10;dress,&#10;body-worn&#10;Assistive devices" />
+                                          <TextArea layoutX="803.0" prefHeight="314.0" prefWidth="189.0" text="Need fora lot of&#10;help, men&#10;can perhaps choose&#10;eg desired&#10;clothing, take&#10;clothes on brisk&#10;arm / leg below&#10;detailed&#10;guiding." />
+                                          <TextArea layoutX="992.0" prefHeight="315.0" prefWidth="198.0" text="Need forhelp&#10;to everythingwhen&#10;undressing and dressing." />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -82,7 +92,12 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutY="8.0" prefHeight="270.0" prefWidth="235.0" text="Perform complex actions in&#10;connection with eating food that&#10;is served to one, get the food up&#10;to the mouth and eat in a&#10;culturally accepted way, cut or&#10;break the food into pieces, open&#10;bottles and cans, use eating&#10;utensils, attend meals and&#10;festivities ." />
+                                          <TextArea prefHeight="372.0" prefWidth="235.0" text="Perform complex actions in&#10;connection with eating food that&#10;is served to one, get the food up&#10;to the mouth and eat in a&#10;culturally accepted way, cut or&#10;break the food into pieces, open&#10;bottles and cans, use eating&#10;utensils, attend meals and&#10;festivities .&#10;&#10;Excl .: drinking." />
+                                          <TextArea layoutX="235.0" prefHeight="372.0" prefWidth="184.0" text="Can manage on its&#10;own, eg by using&#10;arthritis-friendly cutlery,&#10;plate with&#10;non-slip bottom,&#10;eating robot." />
+                                          <TextArea layoutX="419.0" prefHeight="369.0" prefWidth="192.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, eg cutting&#10;the food in pieces,&#10;take lid off, scoop up&#10;from dishes." />
+                                          <TextArea layoutX="611.0" prefHeight="371.0" prefWidth="192.0" text="Need foranyone&#10;help, eg to&#10;eat parts of&#10;the food as&#10;soup, sure&#10;appropriate&#10;eating position,&#10;guides to&#10;start." />
+                                          <TextArea layoutX="803.0" prefHeight="362.0" prefWidth="185.0" text="Need fora lot of&#10;help, able to&#10;Possibly. break food&#10;into pieces, use one&#10;eating utensils" />
+                                          <TextArea layoutX="988.0" prefHeight="362.0" prefWidth="200.0" text="Need forhelp&#10;to aleating, eg&#10;being fed." />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -91,7 +106,12 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutX="6.0" layoutY="6.0" prefHeight="317.0" prefWidth="230.0" text="Hold on to a drink, take the drink&#10;up to your mouth and drink in a&#10;culturally accepted way, mix, stir&#10;and pour drinks up, open bottles&#10;and cans, use straws or drinks of&#10;running water from a tap or a&#10;spring; breastfeeding." />
+                                          <TextArea layoutX="6.0" prefHeight="326.0" prefWidth="230.0" text="Hold on to a drink, take the drink&#10;up to your mouth and drink in a&#10;culturally accepted way, mix, stir&#10;and pour drinks up, open bottles&#10;and cans, use straws or drinks of&#10;running water from a tap or a&#10;spring; breastfeeding.&#10;&#10;Excl .: eat." />
+                                          <TextArea layoutX="236.0" prefHeight="323.0" prefWidth="189.0" text="Can manage on their&#10;own, possibly. when&#10;using heavy cups,&#10;straw,&#10;screw cap opener,&#10;electric&#10;can opener." />
+                                          <TextArea layoutX="425.0" prefHeight="322.0" prefWidth="190.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, eg to&#10;mix juice, open&#10;milk carton,&#10;guides to&#10;drinking." />
+                                          <TextArea layoutX="615.0" prefHeight="322.0" prefWidth="194.0" text="Need foranyone&#10;help, eg pouring&#10;into a glass, milk in&#10;the coffee,&#10;thickener&#10;in liquids, safe&#10;appropriate&#10;drinking position." />
+                                          <TextArea layoutX="809.0" prefHeight="321.0" prefWidth="193.0" text="Need fora lot of&#10;help, may need&#10;help&#10;to grab the cup&#10;but can&#10;eg lifting spout cup&#10;the last part&#10;to the mouth, possibly.&#10;under guidance." />
+                                          <TextArea layoutX="1002.0" prefHeight="318.0" prefWidth="187.0" text="Need forhelp&#10;to everythingto&#10;could drink." />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -100,7 +120,12 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutX="8.0" layoutY="7.0" prefHeight="312.0" prefWidth="243.0" text="Ensure his well-being, health and&#10;physical and mental&#10;well-being by e.g. to eat a&#10;varied diet, have an&#10;appropriate level of physical&#10;activity, stay warm or cool,&#10;avoid damage to health, have&#10;safe sex incl. use of condoms,&#10;get vaccinated and follow" />
+                                          <TextArea layoutX="8.0" prefHeight="326.0" prefWidth="243.0" text="Ensure his well-being, health and&#10;physical and mental&#10;well-being by e.g. to eat a&#10;varied diet, have an&#10;appropriate level of physical&#10;activity, stay warm or cool,&#10;avoid damage to health, have&#10;safe sex incl. use of condoms,&#10;get vaccinated and follow&#10;&#10;regular&#10;health examinations.&#10;&#10;Incl .: ensure his physical well-being,&#10;have appropriate diet and exercise&#10;habits; take care of your own health." />
+                                          <TextArea layoutX="251.0" prefHeight="326.0" prefWidth="191.0" text="Can manage on its&#10;own, eg by using&#10;calendar to&#10;remember flu&#10;vaccination." />
+                                          <TextArea layoutX="442.0" layoutY="-5.0" prefHeight="332.0" prefWidth="191.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, e.g.&#10;information about&#10;possible health&#10;and activity offers,&#10;guidance on&#10;vaccination,&#10;reminded that&#10;drink and eat." />
+                                          <TextArea layoutX="633.0" prefHeight="327.0" prefWidth="183.0" text="Need foranyone&#10;help, fx&#10;guidance on&#10;balanced diet,&#10;regulation of&#10;drugs,&#10;contact own&#10;doctor or&#10;dentist, follow&#10;regular&#10;health examination&#10;elser." />
+                                          <TextArea layoutX="816.0" prefHeight="327.0" prefWidth="180.0" text="Need fora lot of&#10;help, eg to stay&#10;suitably warm&#10;or cooled,&#10;detailed&#10;guidance to&#10;remember outerwear when&#10;it is cold,&#10;targeted&#10;prevent&#10;deterioration of&#10;disease or&#10;ability to function,&#10;but can possibly.&#10;participate in e.g.&#10;exercise during&#10;guiding; enjoyed&#10;to eat and&#10;drinking." />
+                                          <TextArea layoutX="996.0" prefHeight="326.0" prefWidth="189.0" text="Can not even take care&#10;of on their own&#10;health,&#10;including&#10;prevent&#10;deterioration of&#10;illness or loss&#10;of functionality" />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -109,7 +134,12 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutX="6.0" layoutY="6.0" prefHeight="339.0" prefWidth="239.0" text="Ingestion and processing of&#10;foods and liquids by mouth.&#10;Incl .: to suck, chew, bite and&#10;process food in the oral cavity,&#10;saliva, to swallow, vomit, spit and&#10;vomit; conditions such as&#10;dysphagia, aspiration of food, […],&#10;insufficient saliva production." />
+                                          <TextArea layoutX="6.0" layoutY="6.0" prefHeight="339.0" prefWidth="239.0" text="Ingestion and processing of&#10;foods and liquids by mouth.&#10;Incl .: to suck, chew, bite and&#10;process food in the oral cavity,&#10;saliva, to swallow, vomit, spit and&#10;vomit; conditions such as&#10;dysphagia, aspiration of food, […],&#10;insufficient saliva production.&#10;&#10;Excl .: sensations related to the&#10;digestive system." />
+                                          <TextArea layoutX="245.0" layoutY="6.0" prefHeight="337.0" prefWidth="192.0" text="Can manage on their&#10;own, possibly. with&#10;the use of e.g.&#10;means." />
+                                          <TextArea layoutX="437.0" layoutY="6.0" prefHeight="335.0" prefWidth="190.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, e.g.&#10;reminder or&#10;guidance on that&#10;apply&#10;thickening&#10;means." />
+                                          <TextArea layoutX="627.0" layoutY="6.0" prefHeight="330.0" prefWidth="185.0" text="Need foranyone&#10;help, fx&#10;guide to&#10;deselect&#10;difficult&#10;edible&#10;foods (cool,&#10;hard, slimy&#10;provocative) and&#10;eat in appropriate&#10;tempo and&#10;mouth-watering bites." />
+                                          <TextArea layoutX="812.0" layoutY="6.0" prefHeight="328.0" prefWidth="180.0" text="Need fora lot of&#10;help, able to&#10;Possibly. consume food&#10;after e.g.&#10;oral stimulation&#10;and tongue exercises&#10;before the meal,&#10;or consume food&#10;and liquid below&#10;detailed&#10;guiding or&#10;supervision." />
+                                          <TextArea layoutX="992.0" layoutY="6.0" prefHeight="326.0" prefWidth="187.0" text="Need forhelp&#10;to everythingin&#10;connection with&#10;food intake." />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -144,12 +174,12 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutY="-1.0" prefHeight="467.0" prefWidth="212.0" text="Perform simple, complex and&#10;complex actions for planning,&#10;managing and implementing&#10;daily recurring routines or&#10;duties such as. to adhere to&#10;times and make plans for&#10;special activities during the&#10;day." />
-                                          <TextArea layoutX="219.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" text="Can manage on their own,&#10;possibly. when using eg&#10;bath bench, grip&#10;by shower,&#10;toe washer, toe dryer,&#10;back bath brush." />
-                                          <TextArea layoutX="431.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, eg get ready for&#10;the bath, remember&#10;about washing under&#10;fast arm." />
-                                          <TextArea layoutX="639.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" text="Need foranyone&#10;help, eg help with&#10;washing and / or&#10;dry out, lower&#10;hygiene." />
-                                          <TextArea layoutX="846.0" layoutY="8.0" prefHeight="200.0" prefWidth="182.0" text="Need fora lot of&#10;help, men&#10;can for example help&#10;helps to&#10;wash / dry&#10;hands, face,&#10;upper body, possibly&#10;under guidance." />
-                                          <TextArea layoutX="1032.0" layoutY="8.0" prefHeight="200.0" prefWidth="153.0" text="Need forhelp&#10;to everythingin&#10;connection with&#10;to wash." />
+                                          <TextArea layoutY="-1.0" prefHeight="383.0" prefWidth="212.0" text="Perform simple, complex and&#10;complex actions for planning,&#10;managing and implementing&#10;daily recurring routines or&#10;duties such as. to adhere to&#10;times and make plans for&#10;special activities during the&#10;day.&#10;&#10;Incl .: manage and implement&#10;daily routines; control one's own&#10;level of activity.&#10;Excl .: undertake several task." />
+                                          <TextArea layoutX="219.0" layoutY="8.0" prefHeight="371.0" prefWidth="200.0" text="Can manage on their own,&#10;possibly. when using eg&#10;calendar,&#10;reminder via clock." />
+                                          <TextArea layoutX="431.0" layoutY="8.0" prefHeight="369.0" prefWidth="200.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, eg become&#10;reminded that&#10;perform / participate in&#10;does notroutine&#10;activities and&#10;apply/&#10;update&#10;calendar." />
+                                          <TextArea layoutX="639.0" layoutY="8.0" prefHeight="367.0" prefWidth="200.0" text="Need foranyone&#10;help, eg be&#10;reminded&#10;daily and&#10;frequently&#10;recurrent&#10;chores and&#10;agreements" />
+                                          <TextArea layoutX="846.0" layoutY="8.0" prefHeight="363.0" prefWidth="182.0" text="Need fora lot of&#10;help, to be able&#10;to create&#10;context and&#10;structure i&#10;everyday&#10;activities, however&#10;can, for example,&#10;participate in some of&#10;everyday&#10;activities, if&#10;the citizen becomes&#10;initiated." />
+                                          <TextArea layoutX="1032.0" layoutY="8.0" prefHeight="361.0" prefWidth="153.0" text="Needed&#10;help with everythingto be&#10;able to perform&#10;daily routines." />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -158,12 +188,12 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutX="6.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" text="Select, provide and transport&#10;goods that are necessary in&#10;daily life such as. to choose,&#10;buy,&#10;transport and store food,&#10;drink, clothing, cleaning&#10;products, fuel,&#10;household items and tools;&#10;provide&#10;utensils and service." />
-                                          <TextArea layoutX="206.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
-                                          <TextArea layoutX="406.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
-                                          <TextArea layoutX="606.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
-                                          <TextArea layoutX="806.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
-                                          <TextArea layoutX="1008.0" layoutY="8.0" prefHeight="200.0" prefWidth="177.0" />
+                                          <TextArea layoutX="6.0" layoutY="8.0" prefHeight="337.0" prefWidth="200.0" text="Select, provide and transport&#10;goods that are necessary in&#10;daily life such as. to choose,&#10;buy,&#10;transport and store food,&#10;drink, clothing, cleaning&#10;products, fuel,&#10;household items and tools;&#10;provide&#10;utensils and service.&#10;&#10;Incl .: purchase and&#10;procure daily necessities.&#10;Excl .: get housing." />
+                                          <TextArea layoutX="206.0" layoutY="8.0" prefHeight="336.0" prefWidth="200.0" text="Can manage on their own,&#10;possibly. when using eg&#10;shopping trolley." />
+                                          <TextArea layoutX="406.0" layoutY="8.0" prefHeight="334.0" prefWidth="200.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, eg transport&#10;and handling of&#10;heavy goods." />
+                                          <TextArea layoutX="606.0" layoutY="8.0" prefHeight="331.0" prefWidth="200.0" text="Need foranyone&#10;help, eg to order&#10;goods and&#10;services,&#10;write&#10;the shopping list,&#10;put heavy goods&#10;in place." />
+                                          <TextArea layoutX="806.0" layoutY="8.0" prefHeight="328.0" prefWidth="200.0" text="Need fora lot of&#10;help, men&#10;can for example inform&#10;about some desired&#10;goods and&#10;services,&#10;as well as put&#10;some items on&#10;space." />
+                                          <TextArea layoutX="1008.0" layoutY="8.0" prefHeight="326.0" prefWidth="177.0" text="Needed&#10;help with everything&#10;to be able to obtain&#10;goods and&#10;services." />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -172,7 +202,12 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutY="6.0" prefHeight="247.0" prefWidth="220.0" text="Plan, prepare and serve simple&#10;or complex meals to oneself and&#10;others such as. to put together a&#10;meal, select appetizing food and&#10;drink,&#10;providing ingredients for&#10;preparing meals; prepare food&#10;and drink for cooking, make&#10;hot and cold food and drink,&#10;serve the food." />
+                                          <TextArea layoutY="6.0" prefHeight="365.0" prefWidth="220.0" text="Plan, prepare and serve simple&#10;or complex meals to oneself and&#10;others such as. to put together a&#10;meal, select appetizing food and&#10;drink,&#10;providing ingredients for&#10;preparing meals; prepare food&#10;and drink for cooking, make&#10;hot and cold food and drink,&#10;serve the food.&#10;&#10;Incl .: prepare simple&#10;and complex meals.&#10;Excl .: eat; drinking; procure&#10;goods and services […]." />
+                                          <TextArea layoutX="220.0" layoutY="6.0" prefHeight="370.0" prefWidth="189.0" text="Can manage on their own,&#10;possibly. when using eg&#10;strainer lid for pot,&#10;arthritis friendly&#10;tools,&#10;raised&#10;cutting board, Ypotato peeler,&#10;electric&#10;can opener." />
+                                          <TextArea layoutX="409.0" layoutY="6.0" prefHeight="368.0" prefWidth="181.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, eg that&#10;open / close&#10;packaging, quiet&#10;ingredients forward,&#10;cut bread, take&#10;food out of&#10;the freezer." />
+                                          <TextArea layoutX="590.0" layoutY="6.0" prefHeight="364.0" prefWidth="182.0" text="Need foranyone&#10;helpto eg that&#10;cook and&#10;anrette&#10;breakfast and&#10;dinner and&#10;/ or heating&#10;of dinner.&#10;Can even find&#10;prepared food&#10;forward." />
+                                          <TextArea layoutX="772.0" layoutY="6.0" prefHeight="363.0" prefWidth="184.0" text="Need onea lot of&#10;helpto cook,&#10;serve&#10;and serve everyone&#10;meals.&#10;But can e.g.&#10;participate by&#10;spread bread when&#10;everything is put forward,&#10;make coffee when&#10;the coffee machine is&#10;made ready, or&#10;peel fruit and&#10;green." />
+                                          <TextArea layoutX="956.0" layoutY="6.0" prefHeight="361.0" prefWidth="200.0" text="Needed&#10;help with everythingin&#10;connection with&#10;to cook." />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -181,7 +216,12 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="288.0" prefWidth="240.0" text="Keep house by cleaning,&#10;washing clothes, use&#10;household appliances, store food and&#10;throw away rubbish, e.g. by sweeping,&#10;moping, drying tables, […] keeping&#10;order in rooms and living rooms, in&#10;cupboards and drawers; collect, wash,&#10;dry and iron clothes; clean footwear; use&#10;broom, brushes and vacuum cleaner;&#10;use&#10;washer, dryer and iron." />
+                                          <TextArea prefHeight="357.0" prefWidth="240.0" text="Keep house by cleaning,&#10;washing clothes, use&#10;household appliances, store food and&#10;throw away rubbish, e.g. by sweeping,&#10;moping, drying tables, […] keeping&#10;order in rooms and living rooms, in&#10;cupboards and drawers; collect, wash,&#10;dry and iron clothes; clean footwear; use&#10;broom, brushes and vacuum cleaner;&#10;use&#10;washer, dryer and iron.&#10;&#10;Incl .: laundry and drying of clothes;&#10;clean the stove and&#10;kitchen utensils; cleaning of living&#10;quarters; […] And dispose of&#10;waste.&#10;Excl .: obtain housing; procure&#10;goods and services; Cook; fit&#10;belongings; help others." />
+                                          <TextArea layoutX="240.0" prefHeight="356.0" prefWidth="192.0" text="Can manage on their&#10;own, possibly. when&#10;using eg mop system,&#10;laundry basket on&#10;wheels, dust brush on&#10;long shaft." />
+                                          <TextArea layoutX="426.0" prefHeight="353.0" prefWidth="183.0" text="Needed&#10;minimal helpto&#10;some concrete&#10;parts, eg one of&#10;following:&#10;vacuuming&#10;and / or floor washing,&#10;bathroom, change&#10;of bed linen,&#10;handling of&#10;large laundry,&#10;remove waste" />
+                                          <TextArea layoutX="609.0" prefHeight="351.0" prefWidth="194.0" text="For example,&#10;need any helpto&#10;vacuuming,&#10;and / or floor washing,&#10;bathroom,&#10;wipe dust off,&#10;change and wash&#10;bed linen,&#10;hang laundry&#10;up / take laundry&#10;down." />
+                                          <TextArea layoutX="803.0" prefHeight="347.0" prefWidth="190.0" text="Neededa lot of&#10;helpto most&#10;cleaning&#10;tasks eg everything&#10;around laundry,&#10;dishes.&#10;Can participate in&#10;individual parts of&#10;the domestic&#10;work, eg dry&#10;dust off on&#10;available&#10;surfaces, dry&#10;dish of, lay&#10;clothes together." />
+                                          <TextArea layoutX="993.0" prefHeight="348.0" prefWidth="193.0" text="Needed&#10;help for everyone&#10;sub-functions in&#10;connection with&#10;housework." />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -216,12 +256,12 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutY="-1.0" prefHeight="467.0" prefWidth="212.0" text="Change body position and move&#10;from one place to another such as.&#10;to move from a chair to a supine&#10;position and switch to and from a&#10;kneeling or squatting position." />
-                                          <TextArea layoutX="219.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" text="Can manage on their own,&#10;possibly. when using eg&#10;bath bench, grip&#10;by shower,&#10;toe washer, toe dryer,&#10;back bath brush." />
-                                          <TextArea layoutX="431.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, eg get ready for&#10;the bath, remember&#10;about washing under&#10;fast arm." />
-                                          <TextArea layoutX="639.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" text="Need foranyone&#10;help, eg help with&#10;washing and / or&#10;dry out, lower&#10;hygiene." />
-                                          <TextArea layoutX="846.0" layoutY="8.0" prefHeight="200.0" prefWidth="182.0" text="Need fora lot of&#10;help, men&#10;can for example help&#10;helps to&#10;wash / dry&#10;hands, face,&#10;upper body, possibly&#10;under guidance." />
-                                          <TextArea layoutX="1032.0" layoutY="8.0" prefHeight="200.0" prefWidth="153.0" text="Need forhelp&#10;to everythingin&#10;connection with&#10;to wash." />
+                                          <TextArea layoutY="-1.0" prefHeight="401.0" prefWidth="212.0" text="Change body position and move&#10;from one place to another such as.&#10;to move from a chair to a supine&#10;position and switch to and from a&#10;kneeling or squatting position.&#10;&#10;Incl .: changing position from lying&#10;to standing, kneeling to standing,&#10;standing to sitting, squatting or&#10;kneeling, bending and changing&#10;the weight distribution of the body.&#10;Excl .: move." />
+                                          <TextArea layoutX="212.0" layoutY="2.0" prefHeight="388.0" prefWidth="200.0" text="Can manage on its&#10;own, eg by using&#10;bricks underneath&#10;chair legs, walker,&#10;electric&#10;headboard,&#10;toilet raiser,&#10;bed hangers." />
+                                          <TextArea layoutX="412.0" layoutY="4.0" prefHeight="384.0" prefWidth="200.0" text="Needed&#10;minimal helpto&#10;some concrete&#10;parts, eg to&#10;pick things up from the&#10;floor, light support&#10;to get from&#10;seated to&#10;standing up. Supervision of&#10;security&#10;reasons&#10;eg when changing&#10;between chair / bed." />
+                                          <TextArea layoutX="612.0" layoutY="-1.0" prefHeight="379.0" prefWidth="200.0" text="Needed&#10;any help, eg to&#10;get from seated&#10;to&#10;lying and&#10;vise versa." />
+                                          <TextArea layoutX="812.0" layoutY="1.0" prefHeight="375.0" prefWidth="182.0" text="Neededa great dealhelp.&#10;Can, for example,&#10;participate when changes&#10;need to be made&#10;body position, eg from&#10;standing to&#10;sitting; and can&#10;Cooperation/&#10;avoid that&#10;counteract&#10;change in&#10;body position." />
+                                          <TextArea layoutX="994.0" layoutY="1.0" prefHeight="375.0" prefWidth="188.0" text="Can not contribute&#10;to change&#10;body position." />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -230,12 +270,12 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutX="6.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" text="Moving from one surface to&#10;another such as. to slide across a&#10;bench or move from bed to chair&#10;without changing the position of&#10;the body" />
-                                          <TextArea layoutX="206.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
-                                          <TextArea layoutX="406.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
-                                          <TextArea layoutX="606.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
-                                          <TextArea layoutX="806.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
-                                          <TextArea layoutX="1008.0" layoutY="8.0" prefHeight="200.0" prefWidth="177.0" />
+                                          <TextArea layoutX="6.0" layoutY="8.0" prefHeight="340.0" prefWidth="200.0" text="Moving from one surface to&#10;another such as. to slide across a&#10;bench or move from bed to chair&#10;without changing the position of&#10;the body.&#10;&#10;Incl .: move while sitting or&#10;lying down." />
+                                          <TextArea layoutX="206.0" layoutY="8.0" prefHeight="341.0" prefWidth="200.0" text="Can manage on its&#10;own, eg by using&#10;electric&#10;headboard,&#10;bed hangers,&#10;sliding board." />
+                                          <TextArea layoutX="406.0" layoutY="8.0" prefHeight="338.0" prefWidth="200.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;share by&#10;relocation in&#10;horizontal plane, e.g.&#10;from chair to toilet,&#10;possibly. with the help of&#10;sliding boards,&#10;location of&#10;aids or&#10;oral&#10;guiding." />
+                                          <TextArea layoutX="606.0" layoutY="8.0" prefHeight="336.0" prefWidth="200.0" text="Need foranyone&#10;help, eg to&#10;complicated&#10;and or&#10;burdensome&#10;transfers,&#10;both physically and&#10;oral&#10;guiding.&#10;Can, for example, turn&#10;itself off&#10;adjacent to&#10;supine, however&#10;not from&#10;supine to&#10;lateral." />
+                                          <TextArea layoutX="806.0" layoutY="8.0" prefHeight="332.0" prefWidth="200.0" text="Need fora lot of&#10;help, eg to turn&#10;in bed and camp.&#10;Can, for example, collaborate&#10;or avoid that&#10;counteract&#10;relocation and&#10;bearing" />
+                                          <TextArea layoutX="1008.0" layoutY="8.0" prefHeight="328.0" prefWidth="177.0" text="Can not move&#10;on their own" />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -244,7 +284,12 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutY="6.0" prefHeight="247.0" prefWidth="220.0" text="Lift an object up and move&#10;something from one place to&#10;another such as. to lift a cup or&#10;carry a child from one room to&#10;another." />
+                                          <TextArea prefHeight="347.0" prefWidth="220.0" text="Lift an object up and move&#10;something from one place to&#10;another such as. to lift a cup or&#10;carry a child from one room to&#10;another&#10;&#10;Incl .: lifting, carrying in the hands or&#10;on the arms, on the shoulders, on&#10;the head, on the back and on the&#10;hip; put things aside." />
+                                          <TextArea layoutX="220.0" prefHeight="349.0" prefWidth="190.0" text="Can manage on its&#10;own, eg by using&#10;trolley, walker." />
+                                          <TextArea layoutX="410.0" prefHeight="350.0" prefWidth="189.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, eg instructions&#10;about&#10;appropriate&#10;ways to carry, or&#10;help with lifting the&#10;tongue&#10;objects such as&#10;laundry basket,&#10;hill with&#10;service for more&#10;persons." />
+                                          <TextArea layoutX="599.0" prefHeight="352.0" prefWidth="190.0" text="Need foranyone&#10;help, eg to&#10;lift / move&#10;heavier or&#10;unmanageable&#10;objects in&#10;same room as&#10;a hill with&#10;some&#10;glass / cups." />
+                                          <TextArea layoutX="789.0" prefHeight="351.0" prefWidth="184.0" text="Need fora lot of&#10;help, men&#10;can, for example, move a&#10;glass from cabinet to&#10;table in the same&#10;room." />
+                                          <TextArea layoutX="973.0" layoutY="1.0" prefHeight="351.0" prefWidth="200.0" text="Can not even lift&#10;and carry." />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -253,7 +298,12 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="288.0" prefWidth="240.0" text="Move foot step by step on a&#10;surface so that one foot&#10;constantly rests on the surface,&#10;as when&#10;strolls, walks forwards, backwards&#10;or sideways." />
+                                          <TextArea layoutX="7.0" prefHeight="350.0" prefWidth="240.0" text="Move foot step by step on a&#10;surface so that one foot&#10;constantly rests on the surface,&#10;as when&#10;strolls, walks forwards, backwards&#10;or sideways.&#10;&#10;Incl .: go over short and long&#10;distances; walk on different&#10;surfaces; walk around&#10;obstacles.&#10;Excl .: move; move around." />
+                                          <TextArea layoutX="247.0" prefHeight="350.0" prefWidth="188.0" text="Can handle itself&#10;both inside and out&#10;outdoors, possibly. by&#10;use of eg walker&#10;or cane." />
+                                          <TextArea layoutX="435.0" prefHeight="352.0" prefWidth="191.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, to be able to&#10;walk, eg organize&#10;an appropriate walk&#10;and breaks, or&#10;personal accompaniment&#10;on longer trips&#10;due to uncertainty&#10;in relation to balance." />
+                                          <TextArea layoutX="626.0" prefHeight="350.0" prefWidth="193.0" text="Need foranyone&#10;help, eg to&#10;bypass furniture&#10;and safe use of&#10;assistive devices." />
+                                          <TextArea layoutX="819.0" prefHeight="346.0" prefWidth="180.0" text="Need fora lot of&#10;help, men&#10;can, for example, go short&#10;stretch by physical&#10;or orally&#10;guiding and possibly&#10;aid." />
+                                          <TextArea layoutX="999.0" prefHeight="345.0" prefWidth="190.0" text="Is not even able to&#10;walk." />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -262,7 +312,12 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="288.0" prefWidth="240.0" text="Move from one place to another&#10;in ways other than by walking&#10;[…]." />
+                                          <TextArea layoutX="7.0" prefHeight="309.0" prefWidth="240.0" text="Move from one place to another&#10;in ways other than by walking&#10;[…].&#10;&#10;Incl .: crawling, climbing, running, jogging,&#10;jumping, jumping and swimming, walking on&#10;steps / stairs / ladders.&#10;&#10;Excl .: move; go" />
+                                          <TextArea layoutX="247.0" prefHeight="312.0" prefWidth="190.0" text="Can manage on their&#10;own, possibly. when&#10;using handrails, cane,&#10;stair lift." />
+                                          <TextArea layoutX="437.0" prefHeight="315.0" prefWidth="187.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, e.g.&#10;supportive hand&#10;by stairway." />
+                                          <TextArea layoutX="624.0" prefHeight="316.0" prefWidth="187.0" text="Need foranyone&#10;help, eg guides&#10;to place&#10;feet properly&#10;by stairway." />
+                                          <TextArea layoutX="811.0" prefHeight="319.0" prefWidth="200.0" text="Need fora lot of&#10;help, men&#10;can eg use&#10;stair lift, if any&#10;is an accompanying person." />
+                                          <TextArea layoutX="1011.0" prefHeight="317.0" prefWidth="184.0" text="Needed&#10;help with&#10;everythingto move&#10;around." />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -271,7 +326,12 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="288.0" prefWidth="240.0" text="Walking and moving in different&#10;environments such as. to walk&#10;between rooms in the house, inside a&#10;building or down the street." />
+                                          <TextArea layoutX="7.0" prefHeight="335.0" prefWidth="240.0" text="Walking and moving in different&#10;environments such as. to walk&#10;between rooms in the house, inside a&#10;building or down the street&#10;&#10;&#10;Incl .: move in the home, walk, inde.&#10;crawl or climb in the home, walk&#10;or move in buildings other than&#10;the home and outside the home&#10;and other buildings." />
+                                          <TextArea layoutX="247.0" prefHeight="337.0" prefWidth="188.0" text="Can handle itself&#10;both indoors&#10;and outdoors, e.g.&#10;when using a&#10;cane, walker or&#10;wheelchair." />
+                                          <TextArea layoutX="435.0" prefHeight="340.0" prefWidth="186.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, have perhaps&#10;need small&#10;breaks along the way,&#10;or guidance&#10;on the move within&#10;and outside in&#10;unknown&#10;surroundings." />
+                                          <TextArea layoutX="621.0" prefHeight="342.0" prefWidth="189.0" text="Need foranyone&#10;help, eg to move&#10;outdoors&#10;on familiar terrain,&#10;get to and from one&#10;room in the home to&#10;another (eg to and&#10;from the bathroom),&#10;walk over doorstep." />
+                                          <TextArea layoutX="810.0" prefHeight="344.0" prefWidth="189.0" text="Need fora lot of&#10;help, men&#10;can for example move in&#10;a single room in&#10;housing." />
+                                          <TextArea layoutX="999.0" prefHeight="344.0" prefWidth="192.0" text="Can not move&#10;on their own in&#10;various&#10;surroundings,&#10;neither out nor&#10;Incl .: move in the home, walk, inde." />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -280,7 +340,12 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="288.0" prefWidth="240.0" text="Use means of transport as&#10;passengers to move around&#10;such as. to be driven in a car or&#10;drive by […] taxi, bus, train,&#10;tram, subway, ship or plane." />
+                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="393.0" prefWidth="240.0" text="Use means of transport as&#10;passengers to move around&#10;such as. to be driven in a car or&#10;drive by […] taxi, bus, train,&#10;tram, subway, ship or plane.&#10;&#10;Incl .: use means of transport&#10;pulled by a person;&#10;use of private&#10;motorized or public&#10;transport.&#10;Excl .: the use of&#10;equipment; drive." />
+                                          <TextArea layoutX="247.0" prefHeight="400.0" prefWidth="176.0" text="Can manage on their&#10;own, possibly. when&#10;using eg chair or walker." />
+                                          <TextArea layoutX="423.0" prefHeight="401.0" prefWidth="172.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, eg to&#10;get in and out&#10;of a car, buy&#10;ticket, get walker&#10;up in the bus, be&#10;reminded that&#10;be ready for&#10;pickup." />
+                                          <TextArea layoutX="596.0" prefHeight="401.0" prefWidth="182.0" text="Need foranyone&#10;help, eg to&#10;use&#10;service buses,&#10;get in and out&#10;of collective&#10;transport." />
+                                          <TextArea layoutX="778.0" prefHeight="400.0" prefWidth="200.0" text="Need fora lot of&#10;help, men&#10;can, for example,&#10;help with planning&#10;and procure&#10;help." />
+                                          <TextArea layoutX="978.0" prefHeight="397.0" prefWidth="200.0" text="Needed&#10;help with everythingin&#10;connection with&#10;use of&#10;means of transport." />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -289,7 +354,12 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="288.0" prefWidth="240.0" text="Functions determining the&#10;respiratory and cardiovascular&#10;capacity required for physical&#10;exertion." />
+                                          <TextArea layoutX="7.0" prefHeight="288.0" prefWidth="240.0" text="Functions determining the&#10;respiratory and cardiovascular&#10;capacity required for physical&#10;exertion.&#10;&#10;Incl .: physical endurance, aerobic&#10;capacity, exhaustion.&#10;Excl .: cardiovascular functions;&#10;hematological features;&#10;respiration; the functions of the&#10;respiratory muscles; other&#10;respiratory functions." />
+                                          <TextArea layoutX="247.0" prefHeight="200.0" prefWidth="182.0" text="Can manage on their own,&#10;possibly. when using eg&#10;oxygen." />
+                                          <TextArea layoutX="429.0" prefHeight="200.0" prefWidth="186.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, eg to&#10;dispose&#10;the forces of that&#10;structure them&#10;daily activities&#10;over&#10;day / week." />
+                                          <TextArea layoutX="615.0" prefHeight="200.0" prefWidth="200.0" text="Need foranyone&#10;helpto&#10;specific&#10;activities, eg bathing,&#10;vacuuming,&#10;carry and move&#10;heavy objects." />
+                                          <TextArea layoutX="815.0" prefHeight="200.0" prefWidth="190.0" text="Need fora lot of&#10;help, men&#10;can eg wash / dry&#10;parts of the body,&#10;attend&#10;stationary&#10;activities or&#10;light practical&#10;tasks, such as&#10;sit down and&#10;wipe light things off" />
+                                          <TextArea layoutX="1005.0" prefHeight="200.0" prefWidth="187.0" text="Can not&#10;physical&#10;efforts." />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -298,7 +368,12 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="288.0" prefWidth="240.0" text="The force that arises from the&#10;contraction of a muscle or a muscle&#10;group." />
+                                          <TextArea prefHeight="440.0" prefWidth="240.0" text="The force that arises from the&#10;contraction of a muscle or a muscle&#10;group.&#10;Incl .: strength in specific muscles and&#10;muscle groups, muscles in one&#10;extremity, in one half of the body, in&#10;the lower body, in all extremities, in&#10;the trunk and in all muscles of the&#10;body; conditions such as decreased&#10;force in small muscles of feet and&#10;hands, paresis, paralysis,&#10;monoplegia, hemiplegia, paraplegia,&#10;tetraplegia, akinetic mutism.&#10;Excl .: muscle tone; muscular&#10;endurance; functions of&#10;structures in and around the eye." />
+                                          <TextArea layoutX="240.0" prefHeight="439.0" prefWidth="189.0" text="Can manage on their&#10;own, possibly. when&#10;using wrist or&#10;bone splint." />
+                                          <TextArea layoutX="429.0" prefHeight="434.0" prefWidth="182.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;share eg light&#10;physical support or&#10;guidance to&#10;lift and move&#10;eg a hand or a&#10;foot, in&#10;connection with&#10;a simple, specific&#10;activity." />
+                                          <TextArea layoutX="611.0" prefHeight="432.0" prefWidth="182.0" text="Need foranyone&#10;helpto eg that&#10;lift, hold or&#10;move one arm&#10;or a leg in&#10;connection with&#10;one or more&#10;activities." />
+                                          <TextArea layoutX="793.0" prefHeight="432.0" prefWidth="181.0" text="Need fora lot of&#10;helpeg to&#10;activate one&#10;half of&#10;the body." />
+                                          <TextArea layoutX="977.0" prefHeight="431.0" prefWidth="200.0" text="Have none&#10;muscle power throughout&#10;or parts of&#10;the body" />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -333,12 +408,12 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutY="-1.0" prefHeight="467.0" prefWidth="212.0" text="Develop basic and complex&#10;competencies in complex&#10;actions or tasks with the aim&#10;of initiating and completing&#10;the acquisition of a skill, such&#10;as&#10;handling tools or games such&#10;as chess." />
-                                          <TextArea layoutX="219.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" text="Can manage on their own,&#10;possibly. when using eg&#10;bath bench, grip&#10;by shower,&#10;toe washer, toe dryer,&#10;back bath brush." />
-                                          <TextArea layoutX="431.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, eg get ready for&#10;the bath, remember&#10;about washing under&#10;fast arm." />
-                                          <TextArea layoutX="639.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" text="Need foranyone&#10;help, eg help with&#10;washing and / or&#10;dry out, lower&#10;hygiene." />
-                                          <TextArea layoutX="846.0" layoutY="8.0" prefHeight="200.0" prefWidth="182.0" text="Need fora lot of&#10;help, men&#10;can for example help&#10;helps to&#10;wash / dry&#10;hands, face,&#10;upper body, possibly&#10;under guidance." />
-                                          <TextArea layoutX="1032.0" layoutY="8.0" prefHeight="200.0" prefWidth="153.0" text="Need forhelp&#10;to everythingin&#10;connection with&#10;to wash." />
+                                          <TextArea layoutY="-1.0" prefHeight="467.0" prefWidth="212.0" text="Develop basic and complex&#10;competencies in complex&#10;actions or tasks with the aim&#10;of initiating and completing&#10;the acquisition of a skill, such&#10;as&#10;handling tools or games such&#10;as chess.&#10;&#10;Incl .: acquisition of basic&#10;and complex skills." />
+                                          <TextArea layoutX="212.0" layoutY="-1.0" prefHeight="453.0" prefWidth="200.0" text="Can even dedicate&#10;say new&#10;skills." />
+                                          <TextArea layoutX="412.0" layoutY="-1.0" prefHeight="454.0" prefWidth="208.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, eg training&#10;or guidance in&#10;to apply new&#10;aids such as&#10;wash-dry toilet,&#10;GPS,&#10;screen visits,&#10;telemedicine or&#10;visual aids." />
+                                          <TextArea layoutX="620.0" prefHeight="444.0" prefWidth="200.0" text="Need foranyone&#10;help, fx&#10;training in basic&#10;skills in&#10;everyday life. Eg i&#10;the order of&#10;use of tools&#10;and machines such as&#10;vacuum cleaner,&#10;microwave, ny&#10;washing machine, new&#10;stocking wearer." />
+                                          <TextArea layoutX="820.0" layoutY="4.0" prefHeight="436.0" prefWidth="195.0" text="Need fora lot of&#10;help, men&#10;can eg after&#10;physical or oral&#10;guiding dedicate&#10;sig basale&#10;skills in few&#10;concrete and&#10;well known&#10;situations such as that&#10;use comb,&#10;toothbrush or&#10;fork&#10;appropriate,&#10;or put clothes on&#10;properly&#10;order." />
+                                          <TextArea layoutX="1015.0" layoutY="4.0" prefHeight="435.0" prefWidth="167.0" text="Unable to&#10;acquire basic&#10;skills." />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -347,12 +422,12 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutX="6.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" text="Solving questions or situations&#10;by identifying and analyzing&#10;topics, developing&#10;options and solutions,&#10;evaluate possible effects of&#10;solutions and implement a&#10;chosen solution such as by&#10;solving a&#10;discrepancy between two&#10;persons." />
-                                          <TextArea layoutX="206.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
-                                          <TextArea layoutX="406.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
-                                          <TextArea layoutX="606.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
-                                          <TextArea layoutX="806.0" layoutY="8.0" prefHeight="200.0" prefWidth="200.0" />
-                                          <TextArea layoutX="1008.0" layoutY="8.0" prefHeight="200.0" prefWidth="177.0" />
+                                          <TextArea layoutX="6.0" layoutY="8.0" prefHeight="331.0" prefWidth="200.0" text="Solving questions or situations&#10;by identifying and analyzing&#10;topics, developing&#10;options and solutions,&#10;evaluate possible effects of&#10;solutions and implement a&#10;chosen solution such as by&#10;solving a&#10;discrepancy between two&#10;persons.&#10;&#10;Incl .: solve simple and complex&#10;problems.&#10;Excl .: think; make decisions." />
+                                          <TextArea layoutX="206.0" layoutY="8.0" prefHeight="327.0" prefWidth="200.0" text="No need&#10;help to solve&#10;any. problems." />
+                                          <TextArea layoutX="406.0" layoutY="8.0" prefHeight="328.0" prefWidth="200.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, eg to&#10;adjust known&#10;medicine in relation to new&#10;prescription, or&#10;change in name of&#10;known medicine.&#10;Or to oversee&#10;and relate to&#10;situations where&#10;the citizen can not&#10;pull on&#10;earlier&#10;experiences, e.g.&#10;deal with that one&#10;dement nabo&#10;takes off&#10;unwanted visits." />
+                                          <TextArea layoutX="606.0" layoutY="8.0" prefHeight="322.0" prefWidth="200.0" text="Need foranyone&#10;help, eg to&#10;oversee new ones&#10;challenges in&#10;everyday life,&#10;assess&#10;opportunities and&#10;consequences. Eg&#10;relate to an&#10;impending&#10;relocation." />
+                                          <TextArea layoutX="806.0" layoutY="8.0" prefHeight="319.0" prefWidth="200.0" text="Need fora lot of&#10;help, men&#10;can with guidance&#10;solve simple&#10;questions and&#10;situations in&#10;everyday life, e.g.&#10;choose cold cuts in&#10;the refrigerator, lubricate&#10;the food and put&#10;cold cuts left on&#10;keel; choose&#10;attire that&#10;fits the weather." />
+                                          <TextArea layoutX="1008.0" layoutY="8.0" prefHeight="318.0" prefWidth="177.0" text="Can not solve&#10;everyday&#10;known problems&#10;and situations." />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -361,7 +436,12 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutY="6.0" prefHeight="247.0" prefWidth="220.0" text="Apply equipment, techniques and&#10;other means with&#10;communication purposes&#10;such as to call a friend." />
+                                          <TextArea layoutY="6.0" prefHeight="321.0" prefWidth="220.0" text="Apply equipment, techniques and&#10;other means with&#10;communication purposes&#10;such as to call a friend.&#10;&#10;&#10;Incl .: use of&#10;telecommunications equipment,&#10;writing equipment and&#10;communication technology.&#10;" />
+                                          <TextArea layoutX="220.0" prefHeight="324.0" prefWidth="185.0" text="Can manage on their own,&#10;eg with the help of&#10;touchpad, PC&#10;with speech, sign to&#10;speech." />
+                                          <TextArea layoutX="405.0" prefHeight="321.0" prefWidth="176.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, eg to&#10;set up / prepare&#10;telephone,&#10;touchpad, PC,&#10;tablet." />
+                                          <TextArea layoutX="581.0" prefHeight="318.0" prefWidth="184.0" text="Need foranyone&#10;help, eg to&#10;operation of&#10;telephone,&#10;touchpad, PC,&#10;tablet" />
+                                          <TextArea layoutX="765.0" prefHeight="313.0" prefWidth="200.0" text="Need fora lot of&#10;help, men&#10;can eg use&#10;phone with&#10;coded numbers,&#10;operate emergency calls,&#10;guides in use&#10;of touchpad" />
+                                          <TextArea layoutX="977.0" layoutY="6.0" prefHeight="301.0" prefWidth="200.0" text="Can not even&#10;use&#10;communication&#10;equipment and -&#10;techniques, and e.g.&#10;do not call&#10;help." />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -370,7 +450,12 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="288.0" prefWidth="240.0" text="Overall mental&#10;functions determining knowledge&#10;of and finding the relationships to&#10;oneself, to others, to time, place&#10;and other surroundings." />
+                                          <TextArea layoutX="7.0" prefHeight="352.0" prefWidth="240.0" text="Overall mental&#10;functions determining knowledge&#10;of and finding the relationships to&#10;oneself, to others, to time, place&#10;and other surroundings&#10;&#10;Incl .: orientation in time, place and&#10;own data, orientation about oneself&#10;and others, disorientation in time,&#10;place and own data.&#10;&#10;&#10;Excl .: state of consciousness,&#10;attention, memory." />
+                                          <TextArea layoutX="248.0" prefHeight="349.0" prefWidth="179.0" text="No need&#10;help to&#10;handle any&#10;reduced reduced&#10;orientation ability." />
+                                          <TextArea layoutX="427.0" prefHeight="346.0" prefWidth="179.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, eg lighter&#10;guidance in time,&#10;find around in&#10;unknown&#10;surroundings." />
+                                          <TextArea layoutX="606.0" prefHeight="344.0" prefWidth="180.0" text="Need foranyone&#10;help, eg be&#10;reminded&#10;the time of one&#10;activity, become&#10;followed on the way&#10;or reminded&#10;relationships" />
+                                          <TextArea layoutX="786.0" prefHeight="343.0" prefWidth="183.0" text="Need fora lot of&#10;help, men&#10;can for example confirm&#10;information on&#10;own data and&#10;places, possibly. after&#10;guiding." />
+                                          <TextArea layoutX="969.0" prefHeight="341.0" prefWidth="200.0" text="Unable to&#10;orientate&#10;neither in relation&#10;to time, place or&#10;oneself." />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -379,7 +464,12 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="288.0" prefWidth="240.0" text="Overall mental&#10;functions of a physiological and&#10;psychological nature which cause&#10;the person to achieve&#10;meeting specific needs and&#10;overall objectives in a&#10;sustained manner." />
+                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="334.0" prefWidth="240.0" text="Overall mental&#10;functions of a physiological and&#10;psychological nature which cause&#10;the person to achieve&#10;meeting specific needs and&#10;overall objectives in a&#10;sustained manner.&#10;&#10;&#10;Incl .: energy level, motivation,&#10;appetite, cravings (incl. for&#10;substances that can be abused) and&#10;impulse control.&#10;&#10;Excl .: state of consciousness,&#10;temperament and personality,&#10;sleep, psychomotor&#10;features; emotional functions." />
+                                          <TextArea layoutX="247.0" prefHeight="344.0" prefWidth="189.0" text="No need&#10;help to&#10;handle any&#10;reduced energy and&#10;power of action." />
+                                          <TextArea layoutX="436.0" prefHeight="343.0" prefWidth="189.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, eg become&#10;reminded of needs,&#10;wants and&#10;decisions on&#10;to perform tasks,&#10;as one physically&#10;powers, eg train&#10;after guidance.&#10;Maintain strategy&#10;for stop of&#10;abuse." />
+                                          <TextArea layoutX="625.0" prefHeight="339.0" prefWidth="182.0" text="Need foranyone&#10;help, fx&#10;encouragement i&#10;everyday to&#10;perform the physical&#10;tasks it is&#10;possible. Guidance&#10;in strategies to&#10;control&#10;impulses to e.g.&#10;abuse." />
+                                          <TextArea layoutX="807.0" prefHeight="335.0" prefWidth="182.0" text="Need onea lot&#10;of help, men&#10;can e.g. below&#10;guidance maintain&#10;concrete and&#10;delimited&#10;activities such as&#10;get dressed, finish&#10;eating, or&#10;check&#10;abuse." />
+                                          <TextArea layoutX="989.0" prefHeight="334.0" prefWidth="190.0" text="Unable to&#10;Act&#10;appropriate&#10;to meet its&#10;needs, or&#10;check&#10;abuse" />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -388,7 +478,12 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="288.0" prefWidth="240.0" text="Specific mental functions&#10;determining registration,&#10;storage recall of&#10;information as needed." />
+                                          <TextArea prefHeight="345.0" prefWidth="240.0" text="Specific mental functions&#10;determining registration,&#10;storage recall of&#10;information as needed.&#10;&#10;Incl .: short-term and songs via stimuli.&#10;long-term memory,&#10;immediate recollection, […];&#10;amnesia.&#10;&#10;Excl .: state of consciousness,&#10;orientation, intellectual&#10;functions, attention;&#10;perception; thought,&#10;overall cognitive&#10;features, special&#10;language functions;&#10;calculation functions." />
+                                          <TextArea layoutX="240.0" prefHeight="342.0" prefWidth="171.0" text="No problems&#10;remembering&#10;uses evt.&#10;calendar as&#10;support" />
+                                          <TextArea layoutX="411.0" prefHeight="338.0" prefWidth="186.0" text="Can pretty much&#10;remember that&#10;essential, have&#10;need for&#10;minimal helpto&#10;some concrete&#10;parts, eg to remember&#10;special and nonrecurrent&#10;agreements." />
+                                          <TextArea layoutX="596.0" prefHeight="334.0" prefWidth="182.0" text="Need foranyone&#10;help,eg oral&#10;guidance to&#10;tasks of the day&#10;and agreements, are recalled&#10;about medicine." />
+                                          <TextArea layoutX="778.0" prefHeight="334.0" prefWidth="190.0" text="Need fora lot of&#10;help, men&#10;can e.g. remember&#10;daily routines and&#10;close people,&#10;Possibly. using&#10;physical and oral&#10;guiding." />
+                                          <TextArea layoutX="968.0" layoutY="5.0" prefHeight="325.0" prefWidth="220.0" text="Unable to&#10;remember but can&#10;Possibly. recall&#10;automated&#10;movements and&#10;Incl .: short-term and songs via stimuli." />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -397,7 +492,12 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="288.0" prefWidth="240.0" text="Specific mental functions&#10;associated with emotions and&#10;affective components of the mind." />
+                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="288.0" prefWidth="240.0" text="Specific mental functions&#10;associated with emotions and&#10;affective components of the mind.&#10;&#10;&#10;Incl .: functions determining&#10;adequate emotions, regulation&#10;and range of emotions; affect;&#10;sadness, happiness, love, fear,&#10;anger, hatred, tension, anxiety,&#10;joy, sorrow; emotional lability;&#10;emotional discharge.&#10;&#10;Excl .: temperament and&#10;personality, energy and&#10;drive." />
+                                          <TextArea layoutX="247.0" layoutY="8.0" prefHeight="284.0" prefWidth="189.0" text="Can handle even&#10;her feelings." />
+                                          <TextArea layoutX="436.0" layoutY="8.0" prefHeight="281.0" prefWidth="180.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;parts, eg to&#10;remember, reflect&#10;over and handle&#10;a concrete&#10;feeling, eg by&#10;loneliness,&#10;relatives&#10;disease or&#10;recent death.&#10;Support to&#10;resume&#10;togetherness that provides&#10;community and&#10;joy, eg volunteers&#10;clubs after losses&#10;of spouse" />
+                                          <TextArea layoutX="616.0" layoutY="8.0" prefHeight="281.0" prefWidth="186.0" text="Need foranyone&#10;help, eg to act&#10;on needs&#10;for help with&#10;long-lasting&#10;feelings of anxiety,&#10;sadness.&#10;Regulate and&#10;stabilize emotions&#10;in contact with&#10;other people,&#10;eg to avoid&#10;outbursts of anger." />
+                                          <TextArea layoutX="802.0" layoutY="8.0" prefHeight="278.0" prefWidth="194.0" text="Need fora lot of&#10;help, men&#10;can, for example,&#10;express being&#10;emotional&#10;congested, and&#10;during oral&#10;guiding&#10;stabilize emotions&#10;and upscale&#10;other people&#10;and situations." />
+                                          <TextArea layoutX="1002.0" layoutY="8.0" prefHeight="273.0" prefWidth="188.0" text="Can not regulate&#10;emotions in&#10;various&#10;situations." />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -406,7 +506,12 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="288.0" prefWidth="240.0" text="FSpecific mental functions are&#10;primarily associated with the&#10;forehead lobes of the brain&#10;comprehensive complex targeted&#10;behaviors such as decision making,&#10;abstract thinking, planning and&#10;implementation of plans, mental&#10;flexibility and adaptation of behavior&#10;according to&#10;circumstances, so-called&#10;executive functions." />
+                                          <TextArea layoutX="7.0" layoutY="8.0" prefHeight="402.0" prefWidth="240.0" text="Specific mental functions are&#10;primarily associated with the&#10;forehead lobes of the brain&#10;comprehensive complex targeted&#10;behaviors such as decision making,&#10;abstract thinking, planning and&#10;implementation of plans, mental&#10;flexibility and adaptation of behavior&#10;according to&#10;circumstances, so-called&#10;executive functions.&#10;&#10;Incl .: abstraction and&#10;organization of ideas;&#10;administration of time, insight and&#10;judgment, concept formation,&#10;categorization, cognitive&#10;flexibility.&#10;&#10;Excl .: memory, thinking,&#10;language functions,&#10;calculation functions" />
+                                          <TextArea layoutX="247.0" layoutY="8.0" prefHeight="401.0" prefWidth="181.0" text="Can handle himself." />
+                                          <TextArea layoutX="442.0" layoutY="8.0" prefHeight="398.0" prefWidth="197.0" text="Need for&#10;minimal helpto&#10;some concrete&#10;share.&#10;For example, get guidance&#10;in relation to your own&#10;behavior,&#10;planning or&#10;judgment by&#10;frustration over&#10;a missed appointment;&#10;support to&#10;adjust to new, eg&#10;new&#10;contact person." />
+                                          <TextArea layoutX="643.0" layoutY="8.0" prefHeight="396.0" prefWidth="190.0" text="Need foranyone&#10;help, eg supported&#10;in avoiding&#10;confusion and&#10;set in motion if&#10;suddenly&#10;a new one arises&#10;situation that does not&#10;is part of the&#10;planned and&#10;structured&#10;everyday, eg in&#10;case of loss of&#10;spouse or&#10;newly emerged&#10;disease." />
+                                          <TextArea layoutX="835.0" layoutY="8.0" prefHeight="394.0" prefWidth="171.0" text="Need fora lot of&#10;help, men&#10;can e.g. via&#10;oral&#10;guiding participate in&#10;known activities,&#10;and act and&#10;take&#10;uncomplicated&#10;choice and&#10;decisions." />
+                                          <TextArea layoutX="1006.0" layoutY="8.0" prefHeight="389.0" prefWidth="180.0" text="Can not understand&#10;own and others&#10;behavior and take&#10;appropriate&#10;decisions, have&#10;Possibly. need for&#10;shielding or&#10;derivation." />
                                        </children>
                                     </AnchorPane>
                                  </content>
