@@ -7,10 +7,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DALPatient  {
+public class DAOPatient {
     private final DataAccess dataAccess;
 
-    public DALPatient() {
+    public DAOPatient() {
         dataAccess = new DataAccess();
     }
 
@@ -52,55 +52,56 @@ public class DALPatient  {
     }
 
 
-    public Patient createPatient( String first_name, String last_name, Timestamp dateofBirth, String gender, int weight, int height, String cpr, String phone_number, String blood_type, String exercise, String diet, String alcohol, String tobacco, String observations , int schoolid , int teacherid) throws DalException {
+    public void createPatient( Patient patient , int schoolid , int teacherid) throws DalException {
 
         try (Connection con = dataAccess.getConnection()){
             String sql = "INSERT INTO Patient (first_name, last_name, dateofBirth, gender,weight ,height ,cpr , phone_number ,blood_type ,exercise ,diet ,alcohol,tobacco ,observations,schoolid,teacherid ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
             PreparedStatement prs = con.prepareStatement(sql);
-            prs.setString(1 , first_name);
-            prs.setString(2 , last_name);
-            prs.setTimestamp(3,dateofBirth);
-            prs.setString(4 , gender);
-            prs.setInt(5 ,weight);
-            prs.setInt(6,height);
-            prs.setString(7 ,cpr);
-            prs.setString(8 ,phone_number);
-            prs.setString(9,blood_type);
-            prs.setString(10,exercise);
-            prs.setString(11, diet);
-            prs.setString(12,alcohol);
-            prs.setString(13,tobacco);
-            prs.setString(14,observations);
+            prs.setString(1 , patient.getFirst_name());
+            prs.setString(2 , patient.getLast_name());
+            prs.setTimestamp(3,patient.getDateOfBirth());
+            prs.setString(4 , patient.getGender());
+            prs.setInt(5 ,patient.getWeight());
+            prs.setInt(6,patient.getHeight());
+            prs.setString(7 ,patient.getCpr());
+            prs.setString(8 , patient.getPhoneNumber());
+            prs.setString(9,patient.getBloodType());
+            prs.setString(10,patient.getExercise());
+            prs.setString(11, patient.getDiet());
+            prs.setString(12,patient.getAlcohol());
+            prs.setString(13,patient.getTobacco());
+            prs.setString(14,patient.getObservations());
             prs.setInt(15,schoolid);
             prs.setInt(16,teacherid);
             prs.executeUpdate();
-            Patient patient = new Patient(newestidforPatient(),first_name,last_name,dateofBirth,gender,weight,height,cpr,phone_number,blood_type,exercise,diet,alcohol,tobacco,observations , schoolid , teacherid);
-            return patient ;
         } catch (SQLException e) {
             throw new DalException("Connection Lost " , e);
         }
     }
 
 
-    public void updatepatient(Patient patient, String first_name, String last_name, Timestamp dateofBirth, String gender, int weight, int height, String cpr, String phone_number, String blood_type, String exercise, String diet, String alcohol, String tobacco, String observations) throws DalException {
+    public void updatepatient(Patient patient) throws DalException {
 
         try (Connection con = dataAccess.getConnection()){
-            String sql = "Update Patient set first_name = ? , last_name = ? , dateoBirth = ? , gender = ? , weight = ? , height = ? , cpr = ? , phone_number = ? , blood_type = ? , exercise = ?  , diet = ? ,alcohol = ?,tobacco = ? ,observations = ? where id = ? ";
+            String sql = "Update Patient set first_name = ? , last_name = ? , dateoBirth = ? , gender = ? " +
+                    ", weight = ? , height = ? , cpr = ? , phone_number = ? , blood_type = ? , exercise = ?  " +
+                    ", diet = ? ,alcohol = ?,tobacco = ? ,observations = ? where id = ? ";
             PreparedStatement prs = con.prepareStatement(sql);
-            prs.setString(1 ,first_name);
-            prs.setString(2 , last_name);
-            prs.setTimestamp(3 , dateofBirth);
-            prs.setString(4 , gender);
-            prs.setInt(5 , weight);
-            prs.setInt(6 ,height);
-            prs.setString(7 ,phone_number);
-            prs.setString(8 , blood_type);
-            prs.setString(9 ,exercise);
-            prs.setString(10 , diet);
-            prs.setString(11 , alcohol);
-            prs.setString(12 , tobacco);
-            prs.setString(13 , observations);
-
+            prs.setString(1 , patient.getFirst_name());
+            prs.setString(2 , patient.getLast_name());
+            prs.setTimestamp(3,patient.getDateOfBirth());
+            prs.setString(4 , patient.getGender());
+            prs.setInt(5 ,patient.getWeight());
+            prs.setInt(6,patient.getHeight());
+            prs.setString(7 ,patient.getCpr());
+            prs.setString(8 , patient.getPhoneNumber());
+            prs.setString(9,patient.getBloodType());
+            prs.setString(10,patient.getExercise());
+            prs.setString(11, patient.getDiet());
+            prs.setString(12,patient.getAlcohol());
+            prs.setString(13,patient.getTobacco());
+            prs.setString(14,patient.getObservations());
+            prs.setInt(15, patient.getId());
             prs.executeUpdate();
         } catch (SQLException e) {
             throw new DalException("Connection Lost" , e);

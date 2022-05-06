@@ -1,26 +1,30 @@
 package DAL;
 
 import BE.*;
-import DAL.Manager1.DALCase;
-import DAL.Manager1.DALCategory;
-import DAL.Manager1.DALSubCategory;
-import DAL.Manager1.DALUser;
+import DAL.Manager1.*;
 import DAL.util.DalException;
 
-import java.sql.*;
 import java.util.List;
 
 public class Manager implements DALFacade {
 
-    private final DALCase daoCase ;
-    private final DALCategory daoCategory ;
-    private final DALSubCategory daoSubCategory;
-    private final DALUser daoUser;
+    private final DAOCase daoCase ;
+    private final DAOCategory daoCategory ;
+    private final DAOSubCategory daoSubCategory;
+    private final DAOUser daoUser;
+    private final DAOPatient daoPatient ;
+    private final DAOSchool daoSchool;
+    private final DAOGroup daoGroup;
+    private final DAOCasCatPat daoCasCatPat;
     public Manager() {
-        daoCase = new DALCase();
-        daoCategory = new DALCategory();
-        daoSubCategory = new DALSubCategory();
-        daoUser = new DALUser();
+        daoCase = new DAOCase();
+        daoCategory = new DAOCategory();
+        daoSubCategory = new DAOSubCategory();
+        daoUser = new DAOUser();
+        daoPatient = new DAOPatient();
+        daoSchool = new DAOSchool();
+        daoGroup = new DAOGroup();
+        daoCasCatPat = new DAOCasCatPat();
     }
 
 
@@ -51,17 +55,17 @@ public class Manager implements DALFacade {
 
     @Override
     public void createCategory(Category category) throws DalException {
-
+            daoCategory.createCategory(category);
     }
 
     @Override
     public void updateCategory(Category category) throws DalException {
-
+        daoCategory.updateCategory(category);
     }
 
     @Override
     public void deleteCategory(Category category) {
-
+        daoCategory.deleteCategory(category);
     }
 
     @Override
@@ -71,17 +75,17 @@ public class Manager implements DALFacade {
 
     @Override
     public void createSubCategory(SubCategory subCategory) throws DalException {
-
+        daoSubCategory.createSubCategory(subCategory);
     }
 
     @Override
-    public void updateSubCategory(Category category, String name) throws DalException {
-
+    public void updateSubCategory(SubCategory category) throws DalException {
+        daoSubCategory.updateSubCategory(category);
     }
 
     @Override
-    public void deleteSubCategory(Category category) throws DalException {
-
+    public void deleteSubCategory(SubCategory subCategory) throws DalException {
+        deleteSubCategory(subCategory);
     }
 
     @Override
@@ -91,106 +95,106 @@ public class Manager implements DALFacade {
 
     @Override
     public List<User> getAllUsers() throws DalException {
-        return null;
+        return daoUser.getAllUsers();
     }
 
     @Override
-    public void updateuser(User user, String username, String email, String userType) throws DalException {
-
+    public void updateuser(User user) throws DalException {
+        daoUser.updateuser(user);
     }
 
     @Override
     public void deleteuser(User user) throws DalException {
-
+        daoUser.deleteuser(user);
     }
 
     @Override
-    public User addUser(String username, int schoolid, String password, String email, String usertype) throws DalException {
-        return null;
+    public void addUser(User user , int schoolid , String password) throws DalException {
+         daoUser.addUser(user ,schoolid ,password);
     }
 
     @Override
     public List<User> searchForUser(String query) throws DalException {
-        return null;
+        return daoUser.searchForUser(query);
     }
 
     @Override
     public List<Patient> getAllPatients(int schoolid) throws DalException {
-        return null;
+        return daoPatient.getAllPatients(schoolid);
     }
 
     @Override
-    public Patient createPatient(String first_name, String last_name, Timestamp dateofBirth, String gender, int weight, int height, String cpr, String phone_number, String blood_type, String exercise, String diet, String alcohol, String tobacco, String observations, int schoolid, int teacherid) throws DalException {
-        return null;
+    public void createPatient( Patient patient, int schoolid, int teacherid) throws DalException {
+       daoPatient.createPatient(patient , schoolid , teacherid);
     }
 
     @Override
-    public void updatepatient(Patient patient, String first_name, String last_name, Timestamp dateofBirth, String gender, int weight, int height, String cpr, String phone_number, String blood_type, String exercise, String diet, String alcohol, String tobacco, String observations) throws DalException {
-
+    public void updatepatient(Patient patient) throws DalException {
+        daoPatient.updatepatient(patient);
     }
 
     @Override
     public void deletePatient(Patient patient) throws DalException {
-
+        daoPatient.deletePatient(patient);
     }
 
     @Override
     public List<School> getAllSchhol() throws DalException {
-        return null;
+        return daoSchool.getAllSchhol();
     }
 
     @Override
-    public School createSchool(String name) throws DalException {
-        return null;
+    public void createSchool(School school) throws DalException {
+        daoSchool.createSchool(school);
     }
 
     @Override
-    public void updateSchool(String name, School school) throws DalException {
-
+    public void updateSchool(School school) throws DalException {
+        daoSchool.updateSchool(school);
     }
 
     @Override
     public void deleteSchool(School school) throws DalException {
-
+        daoSchool.deleteSchool(school);
     }
 
     @Override
     public List<Group> getAllGroups() throws DalException {
-        return null;
+        return daoGroup.getAllGroups();
     }
 
     @Override
-    public Group createGroup(String name) throws DalException {
-        return null;
+    public void createGroup(Group group) throws DalException {
+      daoGroup.createGroup(group);
     }
 
     @Override
-    public void updateGroup(Group group, String name) throws DalException {
-
+    public void updateGroup(Group group) throws DalException {
+        daoGroup.updateGroup(group);
     }
 
     @Override
     public void deleteGroup(Group group) throws DalException {
-
+        daoGroup.deleteGroup(group);
     }
 
     @Override
     public List<User> getUsersInGroup(int id) throws DalException {
-        return null;
+        return daoGroup.getUsersInGroup(id);
     }
 
     @Override
     public void addUsertoGroup(Group group, User user) throws DalException {
-
+        daoGroup.addUsertoGroup(group ,user);
     }
 
     @Override
     public void removeUserFromGroup(User user) throws DalException {
-
+        daoGroup.removeUserFromGroup(user);
     }
 
     @Override
     public void assignCaseToPatientToGroup(Patient p, Case c, Group g) throws DalException {
-
+        daoCasCatPat.assignCaseToPatientToGroup(p ,c ,g);
     }
 }

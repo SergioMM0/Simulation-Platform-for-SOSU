@@ -8,11 +8,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DALGroup {
+public class DAOGroup {
 
     private final DataAccess dataAccess ;
 
-    public DALGroup(){
+    public DAOGroup(){
         dataAccess = new DataAccess();
     }
 
@@ -37,27 +37,24 @@ public class DALGroup {
     }
 
 
-    public Group createGroup(String name)throws DalException {
+    public void createGroup(Group group)throws DalException {
         ArrayList<User> users = new ArrayList<>();
         try(Connection con = dataAccess.getConnection()) {
             String sql = "INSERT INTO Groups (Title) VALUES (?)";
             PreparedStatement prs = con.prepareStatement(sql);
-            prs.setString(1 , name);
+            prs.setString(1 , group.getName());
             prs.executeUpdate();
-
-            return new Group(newestidforGroup(), name , users);
         } catch (SQLException e) {
             throw new DalException("couldn't create new group " , e );
         }
-
     }
 
 
-    public void updateGroup( Group group , String name )throws DalException {
+    public void updateGroup( Group group)throws DalException {
         try(Connection con = dataAccess.getConnection()){
             String sql = "UPDATE Groups SET name = ?  where id = ?";
             PreparedStatement prs = con.prepareStatement(sql);
-            prs.setString(1 , name );
+            prs.setString(1 , group.getName() );
             prs.setInt(2 , group.getId());
             prs.executeUpdate();
         } catch (SQLException e) {

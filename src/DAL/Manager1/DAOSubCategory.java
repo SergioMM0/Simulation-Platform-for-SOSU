@@ -12,10 +12,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DALSubCategory {
+public class DAOSubCategory {
     private final DataAccess dataAccess;
 
-    public DALSubCategory() {
+    public DAOSubCategory() {
         dataAccess = new DataAccess();
     }
 
@@ -46,12 +46,12 @@ public class DALSubCategory {
     }
 
 
-    public void updateSubCategory(Category category, String name)throws DalException  {
+    public void updateSubCategory(SubCategory subCategory)throws DalException  {
 
     }
 
 
-    public void deleteSubCategory(Category category)throws DalException  {
+    public void deleteSubCategory(SubCategory subCategory)throws DalException  {
 
     }
 }

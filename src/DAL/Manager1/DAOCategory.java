@@ -11,10 +11,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DALCategory  {
+public class DAOCategory {
     private final DataAccess dataAccess;
 
-    public DALCategory() {
+    public DAOCategory() {
         dataAccess = new DataAccess();
     }
 
@@ -44,7 +44,7 @@ public class DALCategory  {
     }
 
 
-    public void updateCategory(Category category, String name) throws DalException {
+    public void updateCategory(Category category) throws DalException {
 
     }
 

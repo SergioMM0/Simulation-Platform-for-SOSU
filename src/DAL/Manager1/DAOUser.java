@@ -8,10 +8,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DALUser {
+public class DAOUser {
     private final DataAccess dataAccess;
 
-    public DALUser() {
+    public DAOUser() {
         dataAccess = new DataAccess();
     }
 
@@ -63,14 +63,14 @@ public class DALUser {
     }
 
 
-    public void updateuser(User user, String username, String email, String userType) throws DalException {
+    public void updateuser(User user) throws DalException {
         try (Connection con = dataAccess.getConnection()) {
             String sql = "UPDATE users SET username = ?  , email = ?  , usertype = ?  WHERE userid = ? ";
 
             PreparedStatement prs = con.prepareStatement(sql);
-            prs.setString(1, username);
-            prs.setString(2, email);
-            prs.setString(3, userType);
+            prs.setString(1, user.getName());
+            prs.setString(2, user.getEmail());
+            prs.setString(3, user.getUserType());
             prs.setInt(4, user.getId());
 
             prs.executeUpdate();
@@ -95,23 +95,22 @@ public class DALUser {
     }
 
 
-    public User addUser(String username,int schoolid ,String password, String email, String usertype) throws DalException {
-        User user ;
-        try (Connection con = dataAccess.getConnection()) {
-            String sql = "INSERT INTO users(username , password, email , usertype)" +
-                    "VALUES  (?,?,?,?)";
-            PreparedStatement prs = con.prepareStatement(sql);
-            prs.setString(1, username);
-            prs.setString(2, password);
-            prs.setString(3, email);
-            prs.setString(4, usertype);
-            prs.executeUpdate();
-            user = new User(newestidforuser(),schoolid, username, email, usertype);
+    public void addUser(User user,int schoolid ,String password) throws DalException {
 
+        try (Connection con = dataAccess.getConnection()) {
+            String sql = "INSERT INTO users(username , password, email , usertype , schoolid)" +
+                    "VALUES  (?,?,?,?,?)";
+            PreparedStatement prs = con.prepareStatement(sql);
+            prs.setString(1, user.getName());
+            prs.setString(2, password);
+            prs.setString(3, user.getEmail());
+            prs.setString(4, user.getUserType());
+            prs.setInt(5 , schoolid);
+            prs.executeUpdate();
         } catch (SQLException e) {
             throw new DalException("Connection Lost " , e);
         }
-        return user;
+
     }
 
     private int newestidforuser() throws DalException {

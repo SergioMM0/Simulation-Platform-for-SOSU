@@ -13,11 +13,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DALCase  {
+public class DAOCase {
 
     private final DataAccess dataAccess;
 
-    public DALCase() {
+    public DAOCase() {
         dataAccess = new DataAccess();
     }
 
@@ -54,7 +54,8 @@ public class DALCase  {
 
     public void createCase(Case c , Category category , SubCategory subCategory) throws DalException {
         try(Connection con = dataAccess.getConnection()) {
-            String sql = "INSERT INTO [dbo].[Case] ( name ,Description_of_the_condition, Cause_text,Causal_diagnose, Causal_condition ,Citizens_want_goal,catid , subid) VALUES (?,?,?,?,?,?,?, ?);" ;
+            String sql = "INSERT INTO [dbo].[Case] ( name ,Description_of_the_condition, Cause_text,Causal_diagnose, Causal_condition ,Citizens_want_goal,catid , subid) " +
+                    "VALUES (?,?,?,?,?,?,?, ?);" ;
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setString(1 , c.getName());
             prs.setString(2 ,c.getConditionDescription());
@@ -74,7 +75,8 @@ public class DALCase  {
 
     public void updateCase(Case c) throws DalException {
         try(Connection con = dataAccess.getConnection()){
-            String sql = "Update Case set name = ? , description_of_the_condition = ? , cause_text = ?  , causal_diagnose = ? , causal_condition = ? , citizens_want_goal = ?  where id = ? ";
+            String sql = "Update Case set name = ? , description_of_the_condition = ? , cause_text = ?  , causal_diagnose = ? , causal_condition = ? , citizens_want_goal = ? " +
+                    " where id = ? ";
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setString(1 , c.getName());
             prs.setString(2 ,c.getConditionDescription());

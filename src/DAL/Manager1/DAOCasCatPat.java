@@ -9,11 +9,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class DALCasCatPat{
+public class DAOCasCatPat {
 
     private final DataAccess dataAccess;
 
-    public DALCasCatPat() {
+    public DAOCasCatPat() {
         dataAccess = new DataAccess();
     }
 

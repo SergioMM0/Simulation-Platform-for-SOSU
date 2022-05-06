@@ -8,11 +8,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DALSchool  {
+public class DAOSchool {
 
     private final DataAccess dataAccess;
 
-    public DALSchool() {
+    public DAOSchool() {
         dataAccess = new DataAccess();
     }
 
@@ -36,25 +36,25 @@ public class DALSchool  {
     }
 
 
-    public School createSchool(String name) throws DalException{
+    public void createSchool(School school) throws DalException{
         try(Connection con = dataAccess.getConnection()) {
             String sql = "insert  into [dbo].[School] (name ) values  (?)";
             PreparedStatement prs = con.prepareStatement(sql);
-            prs.setString(1 , name);
+            prs.setString(1 , school.getName());
             prs.execute();
 
         } catch (SQLException e) {
            throw new DalException("Couldnot create a school " , e );
         }
-        return null;
+
     }
 
 
-    public void updateSchool(String name , School school )throws DalException {
+    public void updateSchool(School school )throws DalException {
       try(Connection con = dataAccess.getConnection()) {
         String sql = "UPDATE School SET name = ?  where id = ? ";
         PreparedStatement prs = con.prepareStatement(sql);
-        prs.setString(1, name );
+        prs.setString(1, school.getName() );
         prs.setInt(2 , school.getId());
         prs.executeUpdate();
       } catch (SQLException e) {
