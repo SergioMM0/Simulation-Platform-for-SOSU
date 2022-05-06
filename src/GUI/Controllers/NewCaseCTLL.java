@@ -68,6 +68,7 @@ public class NewCaseCTLL implements Initializable {
                 categoryComboBox.getItems().add(cat.getName());
             }
         }catch (DalException dalException){
+            dalException.printStackTrace();
             new SoftAlert(dalException.getMessage());
         }
     }
