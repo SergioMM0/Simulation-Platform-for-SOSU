@@ -27,7 +27,7 @@ public class DALCategory  {
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
-                int id = rs.getInt("id");
+                int id = rs.getInt("categoryid");
                 String name = rs.getString("name");
                 Category category = new Category(id, name);
                 categorirs.add(category);
