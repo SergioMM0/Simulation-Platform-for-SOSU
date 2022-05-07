@@ -54,10 +54,10 @@ public class DAOPatient {
     }
 
 
-    public void createPatient(Patient patient , School school, User user) throws DalException {
+    public void createPatient(Patient patient , School school) throws DalException {
 
         try (Connection con = dataAccess.getConnection()){
-            String sql = "INSERT INTO Patient (first_name, last_name, dateofBirth, gender,weight ,height ,cpr , phone_number ,blood_type ,exercise ,diet ,alcohol,tobacco ,observations,schoolid,teacherid ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+            String sql = "INSERT INTO Patient (first_name, last_name, dateofBirth, gender,weight ,height ,cpr , phone_number ,blood_type ,exercise ,diet ,alcohol,tobacco ,observations,schoolid) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setString(1 , patient.getFirst_name());
             prs.setString(2 , patient.getLast_name());
@@ -74,7 +74,6 @@ public class DAOPatient {
             prs.setString(13,patient.getTobacco());
             prs.setString(14,patient.getObservations());
             prs.setInt(15,school.getId());
-            prs.setInt(16,user.getId());
             prs.executeUpdate();
         } catch (SQLException e) {
             throw new DalException("Connection Lost " , e);
