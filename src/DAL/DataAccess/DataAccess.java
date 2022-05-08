@@ -12,7 +12,7 @@ public class DataAccess {
 
      private final SQLServerDataSource dataSource;
 
-     public DataAccess() {
+     public DataAccess()  {
 
           dataSource = new SQLServerDataSource();
           try (InputStream input = new FileInputStream("data/database.properties")) {
