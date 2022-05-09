@@ -1,6 +1,7 @@
 package GUI.Controllers;
 
 import BE.Patient;
+import BE.User;
 import DAL.util.DalException;
 import GUI.Alerts.SoftAlert;
 import GUI.Models.NewPatientMOD;
@@ -14,7 +15,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
@@ -69,6 +69,7 @@ public class NewPatientCTLL implements Initializable {
     private TextField weightField;
 
     private NewPatientMOD model;
+    private User user;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -91,6 +92,8 @@ public class NewPatientCTLL implements Initializable {
         closeWindow();
     }
 
+    //TODO TEST this class when DAL is secondly fixed (15:48 9/5)
+
     @FXML
     void createPatient(ActionEvent event) {
         if(fieldsAreFiled()){
@@ -99,7 +102,7 @@ public class NewPatientCTLL implements Initializable {
                         0,
                         nameField.getText(),
                         familyNameField.getText(),
-                        Timestamp.valueOf(String.valueOf(dateOfBirthPicker.getValue())),
+                        dateOfBirthPicker.getValue(),
                         genderComboBox.getValue(),
                         weightField.getText(),
                         heightField.getText(),
@@ -111,16 +114,12 @@ public class NewPatientCTLL implements Initializable {
                         alcoholComboBox.getValue(),
                         tobaccoComboBox.getValue(),
                         observationsField.getText(),
-                        getSchoolID()
+                        user.getSchoolID()
                 ));
             } catch(DalException dalException){
                 new SoftAlert(dalException.getMessage());
             }
         }
-    }
-
-    private int getSchoolID() {
-        return 0; //TODO Waiting for DAL fix to test and make injection in controllers for schoolID
     }
 
     private boolean fieldsAreFiled() {
@@ -130,10 +129,10 @@ public class NewPatientCTLL implements Initializable {
         } else if (familyNameField.getText().isEmpty()) {
             new SoftAlert("Please introduce the family name of the patient");
             return false;
-        } else if (LocalDate.now().compareTo(dateOfBirthPicker.getValue()) <= 0 || dateOfBirthPicker.getValue() == null) {
+        } else if (dateOfBirthPicker.getValue().isBefore(LocalDate.now()) || dateOfBirthPicker.getValue() == null) {
             new SoftAlert("Please select a correct date of birth for the patient");
             return false;
-        } else if (genderComboBox.getValue().isEmpty()) {
+        } else if (genderComboBox.getSelectionModel().isEmpty() || genderComboBox.hasProperties()) {
             new SoftAlert("Please introduce the gender of the patient");
             return false;
         } else if (weightField.getText().isEmpty()) {
@@ -148,19 +147,19 @@ public class NewPatientCTLL implements Initializable {
         } else if (phoneNumberField.getText().isEmpty()) { //Phone number is optional
             phoneNumberField.setText("No phone number");
             return false;
-        } else if (bloodTypeComboBox.getValue().isEmpty()) {
+        } else if (bloodTypeComboBox.getSelectionModel().isEmpty()) {
             new SoftAlert("Please introduce the blood type of the patient");
             return false;
-        } else if (exerciseComboBox.getValue().isEmpty()) {
+        } else if (exerciseComboBox.getSelectionModel().isEmpty()) {
             new SoftAlert("Please introduce the amount of exercise the patient does");
             return false;
-        } else if (dietComboBox.getValue().isEmpty()) {
+        } else if (dietComboBox.getSelectionModel().isEmpty()) {
             new SoftAlert("Please introduce a statement for the diet of the patient");
             return false;
-        } else if (alcoholComboBox.getValue().isEmpty()) {
+        } else if (alcoholComboBox.getSelectionModel().isEmpty()) {
             new SoftAlert("Please introduce an statement for the alcohol consumption of the patient");
             return false;
-        } else if (tobaccoComboBox.getValue().isEmpty()) {
+        } else if (tobaccoComboBox.getSelectionModel().isEmpty()) {
             new SoftAlert("Please introduce an statement for the tobacco consumption of the patient");
             return false;
         } else if (observationsField.getText().isEmpty()) { //including an observation when creation a patient can be optional
@@ -173,6 +172,10 @@ public class NewPatientCTLL implements Initializable {
     private void closeWindow(){
         Stage st = (Stage) cancelButton.getScene().getWindow();
         st.close();
+    }
+
+    public void setUser(User logedUser) {
+        this.user = logedUser;
     }
 }
 

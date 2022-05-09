@@ -1,12 +1,12 @@
 package BE;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
 
 public class Patient {
     private int id;
     private String first_name;
     private String last_name;
-    private Timestamp dateOfBirth;
+    private LocalDate dateOfBirth;
     private String gender;
     private String weight;
     private String height;
@@ -20,7 +20,7 @@ public class Patient {
     private String observations;
     private int schoolid;
 
-    public Patient(int id, String first_name, String last_name, Timestamp dateOfBirth, String gender, String weight,
+    public Patient(int id, String first_name, String last_name, LocalDate dateOfBirth, String gender, String weight,
                    String height, String cpr, String phoneNumber, String bloodType, String exercise, String diet, String alcohol,
                    String tobacco, String observations, int schoolid) {
         this.id = id;
@@ -65,11 +65,11 @@ public class Patient {
         this.last_name = last_name;
     }
 
-    public Timestamp getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Timestamp dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

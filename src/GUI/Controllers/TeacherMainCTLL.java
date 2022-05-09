@@ -156,10 +156,10 @@ public class TeacherMainCTLL {
     @FXML
     private TableView<?> studentsTable;
 
-    private static User logedUser;
+    private User logedUser;
     private final String generalCSS = "";
 
-    public static void setUser(User user){
+    public void setUser(User user){
         logedUser = user;
     }
 
@@ -301,6 +301,9 @@ public class TeacherMainCTLL {
             e.printStackTrace();
         }
         assert root != null;
+        if(resource.equals("GUI/Views/CreatePatient.fxml")){
+            loader.<NewPatientCTLL>getController().setUser(logedUser);
+        }
         root.getStylesheets().add(css);
         Stage stage = new Stage();
         stage.setTitle(title);
