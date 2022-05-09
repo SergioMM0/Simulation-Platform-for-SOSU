@@ -94,19 +94,33 @@ public class NewPatientCTLL implements Initializable {
     @FXML
     void createPatient(ActionEvent event) {
         if(fieldsAreFiled()){
-/*
-            model.createPatient(new Patient(
-                    0,
-                    nameField.getText(),
-                    familyNameField.getText(),
-                    Timestamp.valueOf(String.valueOf(dateOfBirthPicker.getValue())),
-                    genderComboBox.getValue(),
-                    weightField.getText(),
-
-
-            ));
- */
+            try{
+                model.createPatient(new Patient(
+                        0,
+                        nameField.getText(),
+                        familyNameField.getText(),
+                        Timestamp.valueOf(String.valueOf(dateOfBirthPicker.getValue())),
+                        genderComboBox.getValue(),
+                        weightField.getText(),
+                        heightField.getText(),
+                        cprField.getText(),
+                        phoneNumberField.getText(),
+                        bloodTypeComboBox.getValue(),
+                        exerciseComboBox.getValue(),
+                        dietComboBox.getValue(),
+                        alcoholComboBox.getValue(),
+                        tobaccoComboBox.getValue(),
+                        observationsField.getText(),
+                        getSchoolID()
+                ));
+            } catch(DalException dalException){
+                new SoftAlert(dalException.getMessage());
+            }
         }
+    }
+
+    private int getSchoolID() {
+        return 0; //TODO Waiting for DAL fix to test and make injection in controllers for schoolID
     }
 
     private boolean fieldsAreFiled() {
@@ -132,7 +146,7 @@ public class NewPatientCTLL implements Initializable {
             new SoftAlert("Please introduce the CPR of the patient");
             return false;
         } else if (phoneNumberField.getText().isEmpty()) { //Phone number is optional
-            phoneNumberField.setText("00 00 00 00");
+            phoneNumberField.setText("No phone number");
             return false;
         } else if (bloodTypeComboBox.getValue().isEmpty()) {
             new SoftAlert("Please introduce the blood type of the patient");
