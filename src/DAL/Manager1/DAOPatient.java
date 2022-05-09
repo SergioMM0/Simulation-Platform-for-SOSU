@@ -67,7 +67,7 @@ public class DAOPatient {
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setString(1 , patient.getFirst_name());
             prs.setString(2 , patient.getLast_name());
-            prs.setTimestamp(3,patient.getDateOfBirth());
+            prs.setDate(3, Date.valueOf(patient.getDateOfBirth()));
             prs.setString(4 , patient.getGender());
             prs.setString(5 ,patient.getWeight());
             prs.setString(6,patient.getHeight());
@@ -96,7 +96,7 @@ public class DAOPatient {
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setString(1 , patient.getFirst_name());
             prs.setString(2 , patient.getLast_name());
-            prs.setTimestamp(3,patient.getDateOfBirth());
+            prs.setDate(3,Date.valueOf(patient.getDateOfBirth()));
             prs.setString(4 , patient.getGender());
             prs.setString(5 ,patient.getWeight());
             prs.setString(6,patient.getHeight());

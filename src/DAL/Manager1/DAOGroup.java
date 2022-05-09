@@ -28,7 +28,7 @@ public class DAOGroup {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
                 int schoolID = rs.getInt("Schoolid");
-                Group group = new Group(id , name , null , schoolID);
+                Group group = new Group(id , name , getUsersInGroup(id) , schoolID);
                 getAllGruops.add(group);
             }
             return getAllGruops;
@@ -39,7 +39,7 @@ public class DAOGroup {
 
 
     public void createGroup(Group group)throws DalException {
-        ArrayList<User> users = new ArrayList<>();
+
         try(Connection con = dataAccess.getConnection()) {
             String sql = "INSERT INTO Groups (Title) VALUES (?)";
             PreparedStatement prs = con.prepareStatement(sql);
