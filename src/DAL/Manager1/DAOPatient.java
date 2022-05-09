@@ -6,6 +6,7 @@ import BE.User;
 import DAL.DataAccess.DataAccess;
 import DAL.util.DalException;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class DAOPatient {
                 int id = rs.getInt("id");
                 String first_name = rs.getString("first_name");
                 String lastname = rs.getString("last_name");
-                Timestamp dateofbirth = rs.getTimestamp("dateofBirth");
+                Date dateofbirth = rs.getDate("dateofBirth");
                 String gender = rs.getString("gender");
                 String  weight = rs.getString("weight");
                 String  height = rs.getString("height");
@@ -41,7 +42,7 @@ public class DAOPatient {
                 String tobacco = rs.getString("tobacco");
                 String observation = rs.getString("observations");
 
-                Patient patient = new Patient(id,first_name,lastname,dateofbirth,gender,weight,height,
+                Patient patient = new Patient(id,first_name,lastname,convertToLocalDateViaSqlDate(dateofbirth),gender,weight,height,
                         cpr,phonenumber,blood_type ,exercise,diet,alcohol,tobacco,
                         observation, schoolid );
                 patients.add(patient);
@@ -53,6 +54,9 @@ public class DAOPatient {
 
     }
 
+    public LocalDate convertToLocalDateViaSqlDate(Date dateToConvert) {
+        return new java.sql.Date(dateToConvert.getTime()).toLocalDate();
+    }
 
     public void createPatient(Patient patient ) throws DalException {
 

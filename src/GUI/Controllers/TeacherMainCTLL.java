@@ -178,7 +178,7 @@ public class TeacherMainCTLL implements Initializable {
         try{
             groupTableGV.getItems().addAll(model.getAllGroups(logedUser.getSchoolID()));
             nameColGroupsGV.setCellValueFactory(new PropertyValueFactory<>("name")); //Might be with the first letter in capital
-        }catch (DalException dalException){
+        }catch (DalException dalException){A
             new SoftAlert(dalException.getMessage());
         }
     }
