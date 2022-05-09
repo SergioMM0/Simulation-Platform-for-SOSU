@@ -156,11 +156,11 @@ public class TeacherMainCTLL {
     @FXML
     private TableView<?> studentsTable;
 
-    private User logedUser;
-    private static final String generalCSS = "";
+    private static User logedUser;
+    private final String generalCSS = "";
 
-    public void setUser(User user){
-        this.logedUser = user;
+    public static void setUser(User user){
+        logedUser = user;
     }
 
     private void populateGroupsTable(){
