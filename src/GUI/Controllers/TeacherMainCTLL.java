@@ -178,7 +178,7 @@ public class TeacherMainCTLL implements Initializable {
         try{
             groupTableGV.getItems().addAll(model.getAllGroups(logedUser.getSchoolID()));
             nameColGroupsGV.setCellValueFactory(new PropertyValueFactory<>("name")); //Might be with the first letter in capital
-        }catch (DalException dalException){A
+        }catch (DalException dalException){
             new SoftAlert(dalException.getMessage());
         }
     }
@@ -221,9 +221,6 @@ public class TeacherMainCTLL implements Initializable {
         try{
             caseNameField.setText(casesListGV.getSelectionModel().getSelectedItem().getName());
             caseCategoryComboBox.getItems().addAll(model.getAllCategories());
-            caseCategoryComboBox.getSelectionModel().select(
-                    caseCategoryComboBox.getItems().indexOf(casesListGV.getSelectionModel().getSelectedItem().get)
-            );
         }catch (DalException dalException){
             new SoftAlert(dalException.getMessage());
         }
