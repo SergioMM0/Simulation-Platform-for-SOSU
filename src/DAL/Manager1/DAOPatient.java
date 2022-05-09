@@ -30,8 +30,8 @@ public class DAOPatient {
                 String lastname = rs.getString("last_name");
                 Timestamp dateofbirth = rs.getTimestamp("dateofBirth");
                 String gender = rs.getString("gender");
-                int weight = rs.getInt("weight");
-                int height = rs.getInt("height");
+                String  weight = rs.getString("weight");
+                String  height = rs.getString("height");
                 String cpr = rs.getString("cpr");
                 String phonenumber = rs.getString("phone_number");
                 String blood_type = rs.getString("blood_type");
@@ -40,10 +40,10 @@ public class DAOPatient {
                 String alcohol = rs.getString("alcohol");
                 String tobacco = rs.getString("tobacco");
                 String observation = rs.getString("observations");
-                int teacherid = rs.getInt("teacherid");
+
                 Patient patient = new Patient(id,first_name,lastname,dateofbirth,gender,weight,height,
                         cpr,phonenumber,blood_type ,exercise,diet,alcohol,tobacco,
-                        observation, schoolid , teacherid);
+                        observation, schoolid );
                 patients.add(patient);
             }
             return patients;
@@ -54,17 +54,19 @@ public class DAOPatient {
     }
 
 
-    public void createPatient(Patient patient , School school) throws DalException {
+    public void createPatient(Patient patient ) throws DalException {
 
         try (Connection con = dataAccess.getConnection()){
-            String sql = "INSERT INTO Patient (first_name, last_name, dateofBirth, gender,weight ,height ,cpr , phone_number ,blood_type ,exercise ,diet ,alcohol,tobacco ,observations,schoolid) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+            String sql = "INSERT INTO Patient (first_name, last_name, dateofBirth, gender,weight ,height ,cpr ," +
+                    " phone_number ,blood_type ,exercise ,diet ,alcohol,tobacco ,observations,schoolid) " +
+                    "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setString(1 , patient.getFirst_name());
             prs.setString(2 , patient.getLast_name());
             prs.setTimestamp(3,patient.getDateOfBirth());
             prs.setString(4 , patient.getGender());
-            prs.setInt(5 ,patient.getWeight());
-            prs.setInt(6,patient.getHeight());
+            prs.setString(5 ,patient.getWeight());
+            prs.setString(6,patient.getHeight());
             prs.setString(7 ,patient.getCpr());
             prs.setString(8 , patient.getPhoneNumber());
             prs.setString(9,patient.getBloodType());
@@ -73,7 +75,7 @@ public class DAOPatient {
             prs.setString(12,patient.getAlcohol());
             prs.setString(13,patient.getTobacco());
             prs.setString(14,patient.getObservations());
-            prs.setInt(15,school.getId());
+            prs.setInt(15,patient.getSchoolid());
             prs.executeUpdate();
         } catch (SQLException e) {
             throw new DalException("Connection Lost " , e);
@@ -92,8 +94,8 @@ public class DAOPatient {
             prs.setString(2 , patient.getLast_name());
             prs.setTimestamp(3,patient.getDateOfBirth());
             prs.setString(4 , patient.getGender());
-            prs.setInt(5 ,patient.getWeight());
-            prs.setInt(6,patient.getHeight());
+            prs.setString(5 ,patient.getWeight());
+            prs.setString(6,patient.getHeight());
             prs.setString(7 ,patient.getCpr());
             prs.setString(8 , patient.getPhoneNumber());
             prs.setString(9,patient.getBloodType());
