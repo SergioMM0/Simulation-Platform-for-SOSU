@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 
-<TabPane prefHeight="660.0" prefWidth="880.0" tabClosingPolicy="UNAVAILABLE" tabMinHeight="40.0" tabMinWidth="100.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane prefHeight="660.0" prefWidth="880.0" tabClosingPolicy="UNAVAILABLE" tabMinHeight="40.0" tabMinWidth="100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.StudentMainCTLL">
    <tabs>
       <Tab text="General">
          <content>
@@ -17,7 +17,7 @@
                <children>
                   <ListView layoutX="40.0" layoutY="130.0" prefHeight="445.0" prefWidth="250.0" />
                   <Label layoutX="125.0" layoutY="100.0" text="Cases assigned" />
-                  <Button layoutX="340.0" layoutY="130.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Evaluate case" />
+                  <Button layoutX="340.0" layoutY="130.0" mnemonicParsing="false" onAction="#openEvaluate" prefHeight="50.0" prefWidth="200.0" text="Evaluate case" />
                   <ListView layoutX="590.0" layoutY="130.0" prefHeight="445.0" prefWidth="250.0" />
                   <Label layoutX="679.0" layoutY="100.0" text="Cases graded" />
                   <Button layoutX="340.0" layoutY="207.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="See graded case" />
@@ -29,6 +29,7 @@
                         <Label layoutX="166.0" layoutY="8.0" prefWidth="350.0" text="&lt;Group name&gt;" />
                      </children>
                   </AnchorPane>
+                  <Button layoutX="344.0" layoutY="273.0" mnemonicParsing="false" onAction="#openQuestionare" prefHeight="46.0" prefWidth="192.0" text="Opern Questionaire" />
                </children>
             </AnchorPane>
          </content>

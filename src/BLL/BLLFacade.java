@@ -17,4 +17,7 @@ public interface BLLFacade {
     List<SubCategory> getAllSubcategories(Category category) throws DalException;
 
     void createPatient(Patient patient) throws DalException;
+    void saveStudentQuestionAnswer(StudentQuestionaireAnswer answer) throws DalException;
+    StudentQuestion getFirstQuestion() throws DalException;
+    StudentQuestion getNextQuestion(StudentQuestion question) throws DalException;
 }

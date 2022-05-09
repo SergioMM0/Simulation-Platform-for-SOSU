@@ -3,7 +3,6 @@ package DAL;
 import BE.*;
 import DAL.util.DalException;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 public interface DALFacade {
@@ -77,6 +76,9 @@ public interface DALFacade {
     void assignCaseToPatientToGroup(Patient p , Case c , Group g) throws DalException;
 
 
+    void addStudentQuestionAnswer(StudentQuestionaireAnswer answer) throws DalException;
 
+    StudentQuestion getFirstStudentQuestion() throws DalException;
 
+    StudentQuestion getNextStudentQuestion(int id) throws DalException;
 }

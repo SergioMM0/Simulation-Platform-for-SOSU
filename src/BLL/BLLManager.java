@@ -47,5 +47,20 @@ public class BLLManager implements BLLFacade{
         //dalFacade.createPatient(patient);
     }
 
+    @Override
+    public void saveStudentQuestionAnswer(StudentQuestionaireAnswer answer) throws DalException {
+        dalFacade.addStudentQuestionAnswer(answer);
+    }
+
+    @Override
+    public StudentQuestion getFirstQuestion() throws DalException {
+        return dalFacade.getFirstStudentQuestion();
+    }
+
+    @Override
+    public StudentQuestion getNextQuestion(StudentQuestion question) throws DalException {
+        return dalFacade.getNextStudentQuestion(question.getId());
+    }
+
 
 }

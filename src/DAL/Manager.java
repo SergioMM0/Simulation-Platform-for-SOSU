@@ -4,18 +4,22 @@ import BE.*;
 import DAL.Manager1.*;
 import DAL.util.DalException;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 public class Manager implements DALFacade {
 
-    private final DAOCase daoCase ;
-    private final DAOCategory daoCategory ;
+    private final DAOCase daoCase;
+    private final DAOCategory daoCategory;
     private final DAOSubCategory daoSubCategory;
     private final DAOUser daoUser;
-    private final DAOPatient daoPatient ;
+    private final DAOPatient daoPatient;
     private final DAOSchool daoSchool;
     private final DAOGroup daoGroup;
     private final DAOCasCatPat daoCasCatPat;
+    private final DAOStudentQuestion daoStudentQuestion;
+
     public Manager() {
         daoCase = new DAOCase();
         daoCategory = new DAOCategory();
@@ -25,17 +29,18 @@ public class Manager implements DALFacade {
         daoSchool = new DAOSchool();
         daoGroup = new DAOGroup();
         daoCasCatPat = new DAOCasCatPat();
+        daoStudentQuestion = new DAOStudentQuestion();
     }
 
 
     @Override
     public List<Case> getAllCases(int schoolid) throws DalException {
-      return   daoCase.getAllCases(schoolid);
+        return daoCase.getAllCases(schoolid);
     }
 
     @Override
     public void createCase(Case c, Category category, SubCategory subCategory) throws DalException {
-        daoCase.createCase(c ,category ,subCategory);
+        daoCase.createCase(c, category, subCategory);
     }
 
     @Override
@@ -55,7 +60,7 @@ public class Manager implements DALFacade {
 
     @Override
     public void createCategory(Category category) throws DalException {
-            daoCategory.createCategory(category);
+        daoCategory.createCategory(category);
     }
 
     @Override
@@ -90,7 +95,7 @@ public class Manager implements DALFacade {
 
     @Override
     public User verifyUsers(String useremail, String password) throws DalException {
-        return daoUser.verifyUsers(useremail,password);
+        return daoUser.verifyUsers(useremail, password);
     }
 
     @Override
@@ -109,8 +114,8 @@ public class Manager implements DALFacade {
     }
 
     @Override
-    public void addUser(User user , int schoolid , String password) throws DalException {
-         daoUser.addUser(user ,schoolid ,password);
+    public void addUser(User user, int schoolid, String password) throws DalException {
+        daoUser.addUser(user, schoolid, password);
     }
 
     @Override
@@ -124,8 +129,8 @@ public class Manager implements DALFacade {
     }
 
     @Override
-    public void createPatient( Patient patient) throws DalException {
-       daoPatient.createPatient(patient  );
+    public void createPatient(Patient patient) throws DalException {
+        daoPatient.createPatient(patient);
     }
 
     @Override
@@ -165,7 +170,7 @@ public class Manager implements DALFacade {
 
     @Override
     public void createGroup(Group group) throws DalException {
-      daoGroup.createGroup(group);
+        daoGroup.createGroup(group);
     }
 
     @Override
@@ -185,7 +190,7 @@ public class Manager implements DALFacade {
 
     @Override
     public void addUsertoGroup(Group group, User user) throws DalException {
-        daoGroup.addUsertoGroup(group ,user);
+        daoGroup.addUsertoGroup(group, user);
     }
 
     @Override
@@ -195,6 +200,28 @@ public class Manager implements DALFacade {
 
     @Override
     public void assignCaseToPatientToGroup(Patient p, Case c, Group g) throws DalException {
-        daoCasCatPat.assignCaseToPatientToGroup(p ,c ,g);
+        daoCasCatPat.assignCaseToPatientToGroup(p, c, g);
+    }
+
+    @Override
+    public void addStudentQuestionAnswer(StudentQuestionaireAnswer answer) throws DalException {
+        daoStudentQuestion.addStudentQuestionAnswer(answer);
+    }
+
+    @Override
+    public StudentQuestion getFirstStudentQuestion() throws DalException {
+        var questionaireId=daoStudentQuestion.addQuestionaire();
+        StudentQuestion question = daoStudentQuestion.getAllQuestions().get(0);
+        question.setQuestionaireId(questionaireId);
+        return question;
+    }
+
+    @Override
+    public StudentQuestion getNextStudentQuestion(int id) throws DalException {
+        List<StudentQuestion> questions = daoStudentQuestion.getAllQuestions();
+        Optional<StudentQuestion> nextQuestion =
+                questions.stream().filter(question -> question.getId() > id).min(Comparator.comparingInt(StudentQuestion::getId));
+        if (nextQuestion.isPresent()) return nextQuestion.get();
+        return null;
     }
 }
