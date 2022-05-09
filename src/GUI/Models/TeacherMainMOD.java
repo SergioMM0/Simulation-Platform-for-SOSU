@@ -1,6 +1,7 @@
 package GUI.Models;
 
 import BE.Case;
+import BE.Category;
 import BE.Group;
 import BE.Patient;
 import BLL.BLLFacade;
@@ -15,12 +16,14 @@ public class TeacherMainMOD {
     private ObservableList<Group> allGroups;
     private ObservableList<Case> allCases;
     private ObservableList<Patient> allPatients;
+    private ObservableList<Category> allCategories;
 
     public TeacherMainMOD(){
         bllFacade = new BLLManager();
         allGroups = FXCollections.observableArrayList();
         allCases = FXCollections.observableArrayList();
         allPatients = FXCollections.observableArrayList();
+        allCategories = FXCollections.observableArrayList();
     }
 
 
@@ -95,4 +98,8 @@ public class TeacherMainMOD {
     }
 
 
+    public ObservableList<Category> getAllCategories() throws DalException {
+        allCategories.addAll(bllFacade.getAllCategories());
+        return allCategories;
+    }
 }
