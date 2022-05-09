@@ -19,11 +19,10 @@ public class Patient {
     private String tobacco;
     private String observations;
     private int schoolid;
-    private int teacherid;
 
     public Patient(int id, String first_name, String last_name, Timestamp dateOfBirth, String gender, int weight,
                    int height, String cpr, String phoneNumber, String bloodType, String exercise, String diet, String alcohol,
-                   String tobacco, String observations, int schoolid, int teacherid) {
+                   String tobacco, String observations, int schoolid) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -40,8 +39,6 @@ public class Patient {
         this.tobacco = tobacco;
         this.observations = observations;
         this.schoolid = schoolid;
-        this.teacherid = teacherid;
-
     }
 
     public int getId() {
@@ -172,17 +169,25 @@ public class Patient {
         this.schoolid = schoolid;
     }
 
-    public int getTeacherid() {
-        return teacherid;
-    }
-
-    public void setTeacherid(int teacherid) {
-        this.teacherid = teacherid;
-    }
-
     @Override
     public String toString() {
         return "Patient{" +
-                "id=" + id + ", first_name='" + first_name + ", last_name='" + last_name + '}';
+                "id=" + id +
+                ", first_name='" + first_name + '\'' +
+                ", last_name='" + last_name + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", gender='" + gender + '\'' +
+                ", weight=" + weight +
+                ", height=" + height +
+                ", cpr='" + cpr + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", bloodType='" + bloodType + '\'' +
+                ", exercise='" + exercise + '\'' +
+                ", diet='" + diet + '\'' +
+                ", alcohol='" + alcohol + '\'' +
+                ", tobacco='" + tobacco + '\'' +
+                ", observations='" + observations + '\'' +
+                ", schoolid=" + schoolid +
+                '}';
     }
 }
