@@ -17,17 +17,18 @@ public class DAOGroup {
     }
 
 
-    public List<Group> getAllGroups() throws DalException{
+    public List<Group> getAllGroups(int schoolId) throws DalException{
         ArrayList<Group> getAllGruops = new ArrayList<>();
         try(Connection con = dataAccess.getConnection()) {
-            String sql = "SELECT * FROM Groups";
-            Statement statement = con.createStatement();
-            ResultSet rs = statement.executeQuery(sql);
+            String sql = "SELECT * FROM Groups where Schoolid = ?";
+            PreparedStatement prs = con.prepareCall(sql);
+            prs.setInt(1 , schoolId);
+            ResultSet rs = prs.getResultSet();
             while(rs.next()){
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
-
-                Group group = new Group(id , name , null);
+                int schoolID = rs.getInt("Schoolid");
+                Group group = new Group(id , name , null , schoolID);
                 getAllGruops.add(group);
             }
             return getAllGruops;

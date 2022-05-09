@@ -7,11 +7,12 @@ public class Group {
     private int id;
     private String name;
     private List<User> members;
-
-    public Group(int id, String name, List<User> members) {
+    private int SchoolID ;
+    public Group(int id, String name, List<User> members , int SchoolID) {
         this.id = id;
         this.name = name;
         this.members = members;
+        this.SchoolID = SchoolID ;
     }
 
     public int getId() {
@@ -41,4 +42,13 @@ public class Group {
     public int getParticipants(){
         return this.members.size();
     }
+
+    public int getSchoolID() {
+        return SchoolID;
+    }
+
+    public void setSchoolID(int schoolID) {
+        SchoolID = schoolID;
+    }
 }
+

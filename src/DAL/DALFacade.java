@@ -59,7 +59,7 @@ public interface DALFacade {
         //
     void deleteSchool(School school)throws DalException;
 
-    List<Group> getAllGroups()throws DalException;
+    List<Group> getAllGroups(int schoolID)throws DalException;
 
     void createGroup(Group group)throws DalException;
         //

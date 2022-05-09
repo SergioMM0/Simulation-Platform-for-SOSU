@@ -164,8 +164,8 @@ public class Manager implements DALFacade {
     }
 
     @Override
-    public List<Group> getAllGroups() throws DalException {
-        return daoGroup.getAllGroups();
+    public List<Group> getAllGroups(int schoolID) throws DalException {
+        return daoGroup.getAllGroups(schoolID);
     }
 
     @Override
