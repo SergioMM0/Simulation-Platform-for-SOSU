@@ -4,22 +4,25 @@ import BE.Case;
 import BE.Group;
 import BE.Patient;
 import BE.User;
+import DAL.util.DalException;
+import GUI.Alerts.SoftAlert;
+import GUI.Models.TeacherMainMOD;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class TeacherMainCTLL {
+public class TeacherMainCTLL implements Initializable {
 
     @FXML
     private ComboBox<?> caseCategoryComboBox;
@@ -100,46 +103,48 @@ public class TeacherMainCTLL {
     private TableColumn<?, ?> participantsCol;
 
     @FXML
-    private Label patientAlcoholLBL;
-
-    @FXML
-    private Label patientBloodTypeLBL;
-
-    @FXML
-    private Label patientCPRLBL;
-
-    @FXML
-    private Label patientDateOfBirthLBL;
-
-    @FXML
-    private Label patientDietLBL;
-
-    @FXML
-    private Label patientExerciseLBL;
-
-    @FXML
-    private Label patientFamilyNameLBL;
-
-    @FXML
-    private Label patientGenderLBL;
-
-    @FXML
-    private Label patientHeightLBL;
-
-    @FXML
-    private Label patientNameLBL;
-
-    @FXML
-    private Label patientPhoneNumberLBL;
-
-    @FXML
-    private Label patientTobaccoLBL;
-
-    @FXML
-    private Label patientWeightLBL;
-
-    @FXML
     private TableView<Patient> patientsListGV;
+    @FXML
+    private ComboBox<?> alcoholComboBox;
+
+    @FXML
+    private ComboBox<?> bloodTypeComboBox;
+
+    @FXML
+    private TextField cprField;
+
+    @FXML
+    private DatePicker dateOfBirthPicker;
+
+    @FXML
+    private ComboBox<?> dietComboBox;
+
+    @FXML
+    private ComboBox<?> exerciseComboBox;
+
+    @FXML
+    private TextField familyNameField;
+
+    @FXML
+    private ComboBox<?> genderComboBox;
+
+    @FXML
+    private TextField heightField;
+
+    @FXML
+    private TextField nameField;
+
+    @FXML
+    private TextField observationsField;
+
+    @FXML
+    private TextField phoneNumberField;
+
+    @FXML
+    private ComboBox<?> tobaccoComboBox;
+
+    @FXML
+    private TextField weightField;
 
     @FXML
     private TableColumn<Patient,String> nameColPatientsGV;
@@ -158,13 +163,45 @@ public class TeacherMainCTLL {
 
     private User logedUser;
     private final String generalCSS = "";
+    private TeacherMainMOD model;
 
     public void setUser(User user){
         logedUser = user;
     }
 
-    private void populateGroupsTable(){
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        model = new TeacherMainMOD();
+        populateGroupsTable();
+        populateCasesTable();
+        populatePatientsTable();
+    }
 
+    private void populateGroupsTable() {
+        try{
+            groupTableGV.getItems().addAll(model.getAllGroups(logedUser.getSchoolID()));
+            nameColGroupsGV.setCellValueFactory(new PropertyValueFactory<>("name")); //Might be with the first letter in capital
+        }catch (DalException dalException){
+            new SoftAlert(dalException.getMessage());
+        }
+    }
+
+    private void populateCasesTable() {
+        try{
+            casesListGV.getItems().addAll(model.getAllCases(logedUser.getSchoolID()));
+            nameColCasesGV.setCellValueFactory(new PropertyValueFactory<>("name"));
+        }catch (DalException dalException){
+            new SoftAlert(dalException.getMessage());
+        }
+    }
+
+    private void populatePatientsTable(){
+        try{
+            patientsListGV.getItems().addAll(model.getAllPatients(logedUser.getSchoolID()));
+            nameColPatientsGV.setCellValueFactory(new PropertyValueFactory<>("first_name"));
+        }catch (DalException dalException){
+            new SoftAlert(dalException.getMessage());
+        }
     }
 
     @FXML
@@ -175,6 +212,28 @@ public class TeacherMainCTLL {
     @FXML
     void addNewPatient(ActionEvent event) {
         openView("GUI/Views/CreatePatient.fxml",generalCSS,"Create new patient",500,650,false);
+    }
+
+    @FXML
+    void groupIsSelected(MouseEvent event) {
+
+    }
+
+    @FXML
+    void caseIsSelected(MouseEvent event) {
+    }
+
+    @FXML
+    void patientIsSelected(MouseEvent event) {
+        nameField.setText(patientsListGV.getSelectionModel().getSelectedItem().getFirst_name());
+        familyNameField.setText(patientsListGV.getSelectionModel().getSelectedItem().getLast_name());
+        dateOfBirthPicker.setValue(patientsListGV.getSelectionModel().getSelectedItem().getDateOfBirth());
+        genderComboBox.setSelectionModel();
+    }
+
+    @FXML
+    public void updatePatient(ActionEvent actionEvent) {
+
     }
 
     @FXML
@@ -316,5 +375,4 @@ public class TeacherMainCTLL {
         Stage st = (Stage) groupTableGV.getScene().getWindow();
         st.close();
     }
-
 }

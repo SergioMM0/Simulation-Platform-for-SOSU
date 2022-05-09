@@ -44,7 +44,22 @@ public class BLLManager implements BLLFacade{
 
     @Override
     public void createPatient(Patient patient) throws DalException {
-        //dalFacade.createPatient(patient);
+        dalFacade.createPatient(patient);
+    }
+
+    @Override
+    public List<Group> getAllGroups(int schoolID) throws DalException {
+        return dalFacade.getAllGroups(schoolID);
+    }
+
+    @Override
+    public List<Case> getAllCases(int schoolID) throws DalException {
+        return dalFacade.getAllCases(schoolID);
+    }
+
+    @Override
+    public List<Patient> getAllPatients(int schoolID) throws DalException {
+        return dalFacade.getAllPatients(schoolID);
     }
 
 

@@ -3,6 +3,7 @@ package BLL;
 import BE.*;
 import BLL.Exceptions.BLLException;
 import DAL.util.DalException;
+import javafx.collections.ObservableList;
 
 import java.util.List;
 
@@ -17,4 +18,10 @@ public interface BLLFacade {
     List<SubCategory> getAllSubcategories(Category category) throws DalException;
 
     void createPatient(Patient patient) throws DalException;
+
+    List<Group> getAllGroups(int schoolID) throws DalException;
+
+    List<Case> getAllCases(int schoolID) throws DalException;
+
+    List<Patient> getAllPatients(int schoolID) throws DalException;
 }
