@@ -8,8 +8,8 @@ public class Patient {
     private String last_name;
     private Timestamp dateOfBirth;
     private String gender;
-    private int weight;
-    private int height;
+    private String weight;
+    private String height;
     private String cpr;
     private String phoneNumber;
     private String bloodType;
@@ -20,8 +20,8 @@ public class Patient {
     private String observations;
     private int schoolid;
 
-    public Patient(int id, String first_name, String last_name, Timestamp dateOfBirth, String gender, int weight,
-                   int height, String cpr, String phoneNumber, String bloodType, String exercise, String diet, String alcohol,
+    public Patient(int id, String first_name, String last_name, Timestamp dateOfBirth, String gender, String weight,
+                   String height, String cpr, String phoneNumber, String bloodType, String exercise, String diet, String alcohol,
                    String tobacco, String observations, int schoolid) {
         this.id = id;
         this.first_name = first_name;
@@ -81,19 +81,19 @@ public class Patient {
         this.gender = gender;
     }
 
-    public int getWeight() {
+    public String getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(String weight) {
         this.weight = weight;
     }
 
-    public int getHeight() {
+    public String getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(String height) {
         this.height = height;
     }
 

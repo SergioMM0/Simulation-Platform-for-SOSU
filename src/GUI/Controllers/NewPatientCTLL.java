@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
@@ -73,6 +74,7 @@ public class NewPatientCTLL implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         model = new NewPatientMOD();
         populateComboBoxes();
+
     }
 
     private void populateComboBoxes() {
@@ -92,7 +94,18 @@ public class NewPatientCTLL implements Initializable {
     @FXML
     void createPatient(ActionEvent event) {
         if(fieldsAreFiled()){
+/*
+            model.createPatient(new Patient(
+                    0,
+                    nameField.getText(),
+                    familyNameField.getText(),
+                    Timestamp.valueOf(String.valueOf(dateOfBirthPicker.getValue())),
+                    genderComboBox.getValue(),
+                    weightField.getText(),
 
+
+            ));
+ */
         }
     }
 

@@ -44,7 +44,6 @@ public class BLLManager implements BLLFacade{
 
     @Override
     public void createPatient(Patient patient) throws DalException {
-        //TODO Change parameters in DAL so schoolID is given by the class itself
         //dalFacade.createPatient(patient);
     }
 
