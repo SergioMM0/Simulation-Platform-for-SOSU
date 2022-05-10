@@ -5,8 +5,6 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
@@ -15,15 +13,6 @@
    <children>
   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
          <children>
-            <ImageView fitHeight="124.0" fitWidth="126.0" layoutX="226.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../../../../Downloads/Human.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="106.0" fitWidth="150.0" layoutX="424.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fitHeight="104.0" fitWidth="150.0" layoutX="633.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fitHeight="105.0" fitWidth="150.0" layoutX="828.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fitHeight="97.0" fitWidth="150.0" layoutX="977.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
             <TextArea fx:id="questionText" layoutX="66.0" layoutY="286.0" prefHeight="436.0" prefWidth="247.0" text="Wash and dry on the body and&#10;body parts using water and&#10;appropriate cleansers e.g. take&#10;bath, shower, wash hands and&#10;feet, face and hair and dry&#10;yourself with towel.&#10;&#10;Incl .: wash body parts, wash the whole&#10;body and dry yourself.&#10;&#10;Excl .: body care; go to the bathroom." />
             <HBox layoutX="387.0" layoutY="729.0" prefHeight="45.0" prefWidth="706.0" style="-fx-spacing: 100;">
                <children>
@@ -38,11 +27,6 @@
                   <RadioButton fx:id="state4radio" mnemonicParsing="false" prefHeight="35.0" prefWidth="50.0" text="4" toggleGroup="$group" />
                </children>
             </HBox>
-            <Label fx:id="titleLabel" layoutX="574.0" layoutY="242.0" text="Wash">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
             <HBox layoutX="312.0" layoutY="286.0" prefHeight="436.0" prefWidth="770.0">
                <children>
                   <TextArea fx:id="state0text" prefHeight="436.0" prefWidth="171.0" text="Can manage on their own,&#10;possibly. when using eg&#10;bath bench, grip&#10;by shower,&#10;toe washer, toe dryer,&#10;back bath brush." />
@@ -53,13 +37,18 @@
                </children>
             </HBox>
             <Button layoutX="1093.0" layoutY="739.0" mnemonicParsing="false" onAction="#saveQuestionAndLoadNext" text="Save and Next" />
-            <Label fx:id="categoryLable" layoutX="554.0" layoutY="123.0" text="Self-care">
-               <font>
-                  <Font size="36.0" />
-               </font>
-            </Label>
             <Label fx:id="quesitonIdLable" layoutX="66.0" layoutY="215.0" visible="false" />
          </children>
       </AnchorPane>
+      <Label fx:id="categoryLable" layoutX="521.0" layoutY="114.0" text="Self-care">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="titleLabel" layoutX="568.0" layoutY="199.0" text="Wash">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
