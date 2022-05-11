@@ -1,6 +1,7 @@
 package BE;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Patient {
     private int id;
@@ -18,6 +19,7 @@ public class Patient {
     private String alcohol;
     private String tobacco;
     private String observations;
+    private List<String> observationsList;
     private int schoolid;
 
     public Patient(int id, String first_name, String last_name, LocalDate dateOfBirth, String gender, String weight,
@@ -38,6 +40,25 @@ public class Patient {
         this.alcohol = alcohol;
         this.tobacco = tobacco;
         this.observations = observations;
+        this.schoolid = schoolid;
+    }
+
+    public Patient(int id, String first_name, String last_name, LocalDate dateOfBirth, String gender, String weight, String height, String cpr, String phoneNumber, String bloodType, String exercise, String diet, String alcohol, String tobacco, List<String> observationsList, int schoolid) {
+        this.id = id;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+        this.weight = weight;
+        this.height = height;
+        this.cpr = cpr;
+        this.phoneNumber = phoneNumber;
+        this.bloodType = bloodType;
+        this.exercise = exercise;
+        this.diet = diet;
+        this.alcohol = alcohol;
+        this.tobacco = tobacco;
+        this.observationsList = observationsList;
         this.schoolid = schoolid;
     }
 
@@ -167,6 +188,14 @@ public class Patient {
 
     public void setSchoolid(int schoolid) {
         this.schoolid = schoolid;
+    }
+
+    public List<String> getObservationsList() {
+        return observationsList;
+    }
+
+    public void setObservationsList(List<String> observationsList) {
+        this.observationsList = observationsList;
     }
 
     @Override

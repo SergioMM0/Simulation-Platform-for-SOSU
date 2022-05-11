@@ -6,27 +6,24 @@ public class Case {
     private String name ;
     private String conditionDescription;
     private String cause;
-    private String causalDiagnose;
-    private String causalCondition;
-    private String citizenGoal;
+    private String category;
+    private String subCategory;
 
-    public Case(int id, String name,String conditionDescription,String cause, String causalDiagnose,String causalCondition,String citizenGoal) {
+    public Case(int id, String name,String conditionDescription,String cause, String category, String subCategory) {
         this.id = id;
         this.name = name;
         this.conditionDescription = conditionDescription;
         this.cause = cause;
-        this.causalDiagnose = causalDiagnose;
-        this.causalCondition = causalCondition;
-        this.citizenGoal = citizenGoal;
+        this.category = category;
+        this.subCategory = subCategory;
     }
 
-    public Case(String name, String conditionDescription, String cause, String causalDiagnose, String causalCondition, String citizenGoal) {
+    public Case(String name, String conditionDescription, String cause, String category, String subCategory) {
         this.name = name;
         this.conditionDescription = conditionDescription;
         this.cause = cause;
-        this.causalDiagnose = causalDiagnose;
-        this.causalCondition = causalCondition;
-        this.citizenGoal = citizenGoal;
+        this.category = category;
+        this.subCategory = subCategory;
     }
 
     public int getId() {
@@ -61,28 +58,20 @@ public class Case {
         this.cause = cause;
     }
 
-    public String getCausalDiagnose() {
-        return causalDiagnose;
+    public String getCategory() {
+        return category;
     }
 
-    public void setCausalDiagnose(String causalDiagnose) {
-        this.causalDiagnose = causalDiagnose;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public String getCausalCondition() {
-        return causalCondition;
+    public String getSubCategory() {
+        return subCategory;
     }
 
-    public void setCausalCondition(String causalCondition) {
-        this.causalCondition = causalCondition;
-    }
-
-    public String getCitizenGoal() {
-        return citizenGoal;
-    }
-
-    public void setCitizenGoal(String citizenGoal) {
-        this.citizenGoal = citizenGoal;
+    public void setSubCategory(String subCategory) {
+        this.subCategory = subCategory;
     }
 
     @Override
@@ -92,9 +81,8 @@ public class Case {
                 ", name='" + name + '\'' +
                 ", conditionDescription='" + conditionDescription + '\'' +
                 ", cause='" + cause + '\'' +
-                ", causalDiagnose='" + causalDiagnose + '\'' +
-                ", causalCondition='" + causalCondition + '\'' +
-                ", citizenGoal='" + citizenGoal + '\'' +
+                ", category='" + category + '\'' +
+                ", subCategory='" + subCategory + '\'' +
                 '}';
     }
 }

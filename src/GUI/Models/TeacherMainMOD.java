@@ -1,7 +1,6 @@
 package GUI.Models;
 
 import BE.Case;
-import BE.Category;
 import BE.Group;
 import BE.Patient;
 import BLL.BLLFacade;
@@ -16,7 +15,8 @@ public class TeacherMainMOD {
     private ObservableList<Group> allGroups;
     private ObservableList<Case> allCases;
     private ObservableList<Patient> allPatients;
-    private ObservableList<Category> allCategories;
+    private ObservableList<String> allCategories;
+    private ObservableList<String> subCategories;
 
     public TeacherMainMOD(){
         bllFacade = new BLLManager();
@@ -24,6 +24,7 @@ public class TeacherMainMOD {
         allCases = FXCollections.observableArrayList();
         allPatients = FXCollections.observableArrayList();
         allCategories = FXCollections.observableArrayList();
+        subCategories = FXCollections.observableArrayList();
     }
 
 
@@ -46,15 +47,26 @@ public class TeacherMainMOD {
         allPatients.add(patient);
     }
 
+    public ObservableList<String> getAllCategories() throws DalException {
+        allCategories.addAll(bllFacade.getAllCategories());
+        return allCategories;
+    }
+
     public ObservableList<Patient> getObservablePatients() {
         return allPatients;
     }
 
-    //TODO Review2
-    public ObservableList<Category> getAllCategories() throws DalException {
-        allCategories.addAll(bllFacade.getAllCategories());
-        return allCategories;
+    public ObservableList<String> getSubCategoriesOf(String category) throws DalException{
+        subCategories.addAll(bllFacade.getAllSubcategories(category));
+        return subCategories;
     }
+
+
+
+
+
+
+
 
     //TODO DELETE THE FOLLOWING WHEN IMPLEMENTED TO READ FROM FILE
 

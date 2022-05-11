@@ -27,18 +27,21 @@ public class BLLManager implements BLLFacade{
     }
 
     @Override
-    public void createCase(Case newCase, Category category, SubCategory subCategory) throws DalException {
-        dalFacade.createCase(newCase,category,subCategory);
+    public void createCase(Case newCase) throws DalException {
+        dalFacade.createCase(newCase);
+        //TODO collision with Category and Subcategory reformat
     }
 
     @Override
-    public List<Category> getAllCategories() throws DalException {
+    public List<String> getAllCategories() throws DalException {
         return dalFacade.getAllCategories();
+        //TODO return all categories as a list of strings
     }
 
     @Override
-    public List<SubCategory> getAllSubcategories(Category category) throws DalException {
+    public List<String> getAllSubcategories(String category) throws DalException {
         return dalFacade.getAllSubCategories(category);
+        //TODO return all subcategories as a list of strings
     }
 
     @Override

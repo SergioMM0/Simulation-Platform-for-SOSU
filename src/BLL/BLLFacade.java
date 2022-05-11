@@ -3,7 +3,6 @@ package BLL;
 import BE.*;
 import BLL.Exceptions.BLLException;
 import DAL.util.DalException;
-import javafx.collections.ObservableList;
 
 import java.util.List;
 
@@ -11,11 +10,11 @@ public interface BLLFacade {
 
     User checkCredentials(String email, String password) throws DalException, BLLException;
 
-    void createCase(Case newCase, Category category, SubCategory subCategory) throws DalException;
+    void createCase(Case newCase) throws DalException;
 
-    List<Category> getAllCategories() throws DalException;
+    List<String> getAllCategories() throws DalException;
 
-    List<SubCategory> getAllSubcategories(Category category) throws DalException;
+    List<String> getAllSubcategories(String category) throws DalException;
 
     void createPatient(Patient patient) throws DalException;
 

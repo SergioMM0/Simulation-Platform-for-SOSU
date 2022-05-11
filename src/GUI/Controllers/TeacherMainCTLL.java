@@ -22,13 +22,13 @@ import java.util.ResourceBundle;
 public class TeacherMainCTLL {
 
     @FXML
-    private ComboBox<Category> caseCategoryComboBox;
+    private ComboBox<String> caseCategoryComboBox;
 
     @FXML
     private TextField caseNameField;
 
     @FXML
-    private ComboBox<?> caseSubcategoryComboBox;
+    private ComboBox<String> caseSubcategoryComboBox;
 
     @FXML
     private Label casesAssignedLBL;
@@ -172,7 +172,7 @@ public class TeacherMainCTLL {
 
     public void initializeView() {
         populateGroupsTable();
-        //populateCasesTable(); being debugged
+        populateCasesTable();
         populatePatientsTable();
     }
 
@@ -212,15 +212,6 @@ public class TeacherMainCTLL {
         patientsListGV.getItems().addAll(model.getObservablePatients());
     }
 
-    public void repopulatePatientsTable(){
-        try{
-            patientsListGV.getItems().addAll(model.getAllPatients(logedUser.getSchoolID()));
-            nameColPatientsGV.setCellValueFactory(new PropertyValueFactory<>("first_name"));
-        }catch (DalException dalException){
-            new SoftAlert(dalException.getMessage());
-        }
-    }
-
     @FXML
     void addNewCase(ActionEvent event) {
         openView("GUI/Views/CreateCase.fxml",generalCSS,"Create new case",860,660,false);
@@ -241,6 +232,22 @@ public class TeacherMainCTLL {
         try{
             caseNameField.setText(casesListGV.getSelectionModel().getSelectedItem().getName());
             caseCategoryComboBox.getItems().addAll(model.getAllCategories());
+            caseSubcategoryComboBox.getItems().addAll(model.getSubCategoriesOf(
+                    casesListGV.getSelectionModel().getSelectedItem().getCategory()));
+            descriptionOfConditionText.setText(casesListGV.getSelectionModel().getSelectedItem().getConditionDescription());
+            causeText.setText(casesListGV.getSelectionModel().getSelectedItem().getCause());
+            //population of case in case info when selected in general view
+
+            caseCategoryComboBox.getSelectionModel().select(
+                    caseCategoryComboBox.getItems().indexOf(
+                            casesListGV.getSelectionModel().getSelectedItem().getCategory()));
+            //selects the category specified for the case
+
+            caseSubcategoryComboBox.getSelectionModel().select(
+                    caseSubcategoryComboBox.getItems().indexOf(
+                            casesListGV.getSelectionModel().getSelectedItem().getSubCategory()));
+            //selects the subcategory specified for the case
+
         }catch (DalException dalException){
             new SoftAlert(dalException.getMessage());
         }
