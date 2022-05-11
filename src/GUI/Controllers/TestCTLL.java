@@ -1,5 +1,8 @@
 package GUI.Controllers;
 
+import BE.StudentQuestion;
+import BE.StudentQuestionaireAnswer;
+import GUI.Models.StudentQuestionMOD;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -40,13 +43,33 @@ public class TestCTLL implements Initializable {
     public RadioButton state5radio;
     @FXML
     public RadioButton state6radio;
+    @FXML
+    public Label quesitonIdLable;
+
+    StudentQuestionMOD model = new StudentQuestionMOD();    //use model to operation and contact with bll
+    StudentQuestion currentQuesiton;
 
     public void saveQuestionAndLoadNext(ActionEvent event) {
+        //save question then load next question
+        int state = getState();             //calculate the selected state
+        StudentQuestionaireAnswer answer = new StudentQuestionaireAnswer(0, Integer.parseInt(quesitonIdLable.getText()), state, 0); //create answer object
+
+        model.saveStudentQuestionAnswer(answer);            //save answer to database
+        currentQuesiton = model.getNextQuestion(currentQuesiton);       //load next question
+        if(currentQuesiton==null)return;        //questions finished
+        setQuestion(currentQuesiton);           //set current question to controls
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         insertimage();
+        currentQuesiton=model.GetFirstQuestion();       //get first question
+        setQuestion(currentQuesiton);
+    }
+    private void setQuestion(StudentQuestion question) {
+        categoryLable.setText(question.getCategory());
+        titleLabel.setText(question.getTitle());
+        quesitonIdLable.setText(question.getId() + "");
     }
 
     private void insertimage() {
@@ -61,5 +84,18 @@ public class TestCTLL implements Initializable {
         image3.setImage(imagethree);
         image4.setImage(imagefour);
         image5.setImage(imagefive);
+    }
+
+    private int getState() {
+        var state = 0;
+        if (state1radio.isSelected())
+            state = 1;
+        if (state2radio.isSelected())
+            state = 2;
+        if (state3radio.isSelected())
+            state = 3;
+        if (state4radio.isSelected())
+            state = 4;
+        return state;
     }
 }
