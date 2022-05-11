@@ -3,11 +3,14 @@ package GUI.Models;
 import BE.Case;
 import BE.Group;
 import BE.Patient;
+import BE.User;
 import BLL.BLLFacade;
 import BLL.BLLManager;
 import DAL.util.DalException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.util.Locale;
 
 public class TeacherMainMOD {
 
@@ -17,6 +20,7 @@ public class TeacherMainMOD {
     private ObservableList<Patient> allPatients;
     private ObservableList<String> allCategories;
     private ObservableList<String> subCategories;
+    private ObservableList<User> allStudents;
 
     public TeacherMainMOD(){
         bllFacade = new BLLManager();
@@ -25,6 +29,7 @@ public class TeacherMainMOD {
         allPatients = FXCollections.observableArrayList();
         allCategories = FXCollections.observableArrayList();
         subCategories = FXCollections.observableArrayList();
+        allStudents = FXCollections.observableArrayList();
     }
 
 
@@ -69,6 +74,26 @@ public class TeacherMainMOD {
         return subCategories;
     }
 
+    public void addObservableStudent(User user){
+        allStudents.add(user);
+    }
+
+    public ObservableList<User> getObservableStudents(){
+        return allStudents;
+    }
+
+    public void updateStudentInTable(User student) {
+        for(User user : allStudents){
+            if(user.getName().equals(student.getName())){
+                user.setName(student.getName());
+                user.setEmail(student.getEmail());
+            }
+        }
+    }
+
+    public void deleteStudent(User student) throws DalException {
+        bllFacade.deleteStudent(student);
+    }
 
 
 

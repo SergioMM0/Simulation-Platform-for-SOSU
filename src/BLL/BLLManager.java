@@ -65,6 +65,28 @@ public class BLLManager implements BLLFacade{
     }
 
     @Override
+    public void addNewStudent(User user) throws DalException {
+        dalFacade.addNewStudent(user);
+        //TODO Implement this :D
+    }
+
+    @Override
+    public void updateStudent(User student) throws DalException {
+        dalFacade.updateStudent(student);
+        //TODO implement this :D
+        // The password of the student will be the name of the student so: student.getName() xd ||
+        // Do not delete the following annotation, is for the exam:
+
+        //The password of the student will be the name
+    }
+
+    @Override
+    public void deleteStudent(User student) throws DalException {
+        dalFacade.deleteStudent(student);
+        //TODO implement :D
+    }
+
+    @Override
     public void saveStudentQuestionAnswer(StudentQuestionaireAnswer answer) throws DalException {
         dalFacade.addStudentQuestionAnswer(answer);
     }
@@ -78,5 +100,7 @@ public class BLLManager implements BLLFacade{
     public StudentQuestion getNextQuestion(StudentQuestion question) throws DalException {
         return dalFacade.getNextStudentQuestion(question.getId());
     }
+
+
 
 }

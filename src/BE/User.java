@@ -15,6 +15,13 @@ public class User {
         this.userType = userType;
     }
 
+    public User(int schoolID, String name, String email, String userType) {
+        this.schoolID = schoolID;
+        this.name = name;
+        this.email = email;
+        this.userType = userType;
+    }
+
     public int getId() {
         return id;
     }
