@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -45,6 +46,10 @@ public class TestCTLL implements Initializable {
     public RadioButton state6radio;
     @FXML
     public Label quesitonIdLable;
+    //@FXML
+    //private Label questionLabel;
+    @FXML
+    private TextArea textFieldQuestion;
 
     StudentQuestionMOD model = new StudentQuestionMOD();    //use model to operation and contact with bll
     StudentQuestion currentQuesiton;
@@ -70,7 +75,7 @@ public class TestCTLL implements Initializable {
         categoryLable.setText(question.getCategory());
         titleLabel.setText(question.getTitle());
         quesitonIdLable.setText(question.getId() + "");
-        questionText.setText(question.getQuestion());
+        textFieldQuestion.setText(question.getQuestion());
     }
 
     private void insertimage() {
@@ -88,15 +93,15 @@ public class TestCTLL implements Initializable {
     }
 
     private int getState() {
-        var state = 0;
+        var state = 1;
         if (state1radio.isSelected())
-            state = 1;
-        if (state2radio.isSelected())
             state = 2;
-        if (state3radio.isSelected())
+        if (state2radio.isSelected())
             state = 3;
-        if (state4radio.isSelected())
+        if (state3radio.isSelected())
             state = 4;
+        if (state4radio.isSelected())
+            state = 5;
         return state;
     }
 }
