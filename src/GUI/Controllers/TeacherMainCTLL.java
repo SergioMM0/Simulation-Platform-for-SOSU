@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class TeacherMainCTLL implements Initializable {
+public class TeacherMainCTLL {
 
     @FXML
     private ComboBox<Category> caseCategoryComboBox;
@@ -166,12 +166,12 @@ public class TeacherMainCTLL implements Initializable {
         logedUser = user;
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public TeacherMainCTLL(){
         model = new TeacherMainMOD();
+    }
+
+    public void initializeView() {
         populateGroupsTable();
-        populateCasesTable();
-        populatePatientsTable();
     }
 
     private void populateGroupsTable() {
@@ -179,6 +179,7 @@ public class TeacherMainCTLL implements Initializable {
             groupTableGV.getItems().addAll(model.getAllGroups(logedUser.getSchoolID()));
             nameColGroupsGV.setCellValueFactory(new PropertyValueFactory<>("name")); //Might be with the first letter in capital
         }catch (DalException dalException){
+            dalException.printStackTrace();
             new SoftAlert(dalException.getMessage());
         }
     }
