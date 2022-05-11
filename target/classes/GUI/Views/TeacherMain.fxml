@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
@@ -31,17 +32,17 @@
                   <Button layoutX="680.0" layoutY="360.0" mnemonicParsing="false" onAction="#duplicateCase" prefHeight="40.0" prefWidth="180.0" text="Duplicate case" />
                   <Button layoutX="680.0" layoutY="415.0" mnemonicParsing="false" onAction="#deletePatient" prefHeight="40.0" prefWidth="180.0" text="Delete patient" />
                   <Button layoutX="680.0" layoutY="470.0" mnemonicParsing="false" onAction="#deleteCase" prefHeight="40.0" prefWidth="180.0" text="Delete case" />
-                  <TableView fx:id="groupTableGV" layoutX="20.0" layoutY="65.0" prefHeight="530.0" prefWidth="200.0">
+                  <TableView fx:id="groupTableGV" layoutX="20.0" layoutY="65.0" onMouseClicked="#groupIsSelected" prefHeight="530.0" prefWidth="200.0">
                     <columns>
                       <TableColumn fx:id="nameColGroupsGV" prefWidth="199.20001220703125" text="Name" />
                     </columns>
                   </TableView>
-                  <TableView fx:id="casesListGV" layoutX="240.0" layoutY="65.0" prefHeight="530.0" prefWidth="200.0">
+                  <TableView fx:id="casesListGV" layoutX="240.0" layoutY="65.0" onMouseClicked="#caseIsSelected" prefHeight="530.0" prefWidth="200.0">
                      <columns>
                         <TableColumn fx:id="nameColCasesGV" prefWidth="199.20001220703125" text="Name" />
                      </columns>
                   </TableView>
-                  <TableView fx:id="patientsListGV" layoutX="460.0" layoutY="65.0" prefHeight="530.0" prefWidth="200.0">
+                  <TableView fx:id="patientsListGV" layoutX="460.0" layoutY="65.0" onMouseClicked="#patientIsSelected" prefHeight="530.0" prefWidth="200.0">
                      <columns>
                         <TableColumn fx:id="nameColPatientsGV" prefWidth="199.20001220703125" text="Name" />
                      </columns>
@@ -68,23 +69,24 @@
                   <Label layoutX="55.0" layoutY="445.0" text="Alcohol" />
                   <Label layoutX="55.0" layoutY="480.0" text="Tobacco" />
                   <Line endX="-100.0" endY="447.199951171875" layoutX="255.0" layoutY="110.0" startX="-100.0" startY="-60.0" />
-                  <Label fx:id="patientNameLBL" layoutX="190.0" layoutY="60.0" maxWidth="240.0" text="&lt;Name&gt;" />
-                  <Label fx:id="patientDateOfBirthLBL" layoutX="190.0" layoutY="130.0" maxWidth="240.0" text="&lt;Date of Birth&gt;" />
-                  <Label fx:id="patientCPRLBL" layoutX="190.0" layoutY="270.0" maxWidth="240.0" text="&lt;CPR&gt;" />
-                  <Label fx:id="patientPhoneNumberLBL" layoutX="190.0" layoutY="305.0" maxWidth="240.0" text="&lt;Phone Number&gt;" />
-                  <Label fx:id="patientGenderLBL" layoutX="190.0" layoutY="165.0" maxWidth="240.0" text="&lt;Gender&gt;" />
-                  <Label fx:id="patientWeightLBL" layoutX="190.0" layoutY="200.0" maxWidth="240.0" text="&lt;Weight&gt;" />
-                  <Label fx:id="patientHeightLBL" layoutX="190.0" layoutY="235.0" maxWidth="240.0" text="&lt;Height&gt;" />
-                  <Label fx:id="patientFamilyNameLBL" layoutX="190.0" layoutY="95.0" maxWidth="240.0" text="&lt;Family name&gt;" />
-                  <Label fx:id="patientBloodTypeLBL" layoutX="190.0" layoutY="340.0" maxWidth="240.0" text="&lt;Blood type&gt;" />
-                  <Label fx:id="patientExerciseLBL" layoutX="190.0" layoutY="375.0" maxWidth="240.0" text="&lt;Exercise&gt;" />
-                  <Label fx:id="patientDietLBL" layoutX="190.0" layoutY="410.0" maxWidth="240.0" text="&lt;Diet&gt;" />
-                  <Label fx:id="patientAlcoholLBL" layoutX="190.0" layoutY="445.0" maxWidth="240.0" text="&lt;Alcohol&gt;" />
-                  <Label fx:id="patientTobaccoLBL" layoutX="190.0" layoutY="480.0" maxWidth="240.0" text="&lt;Tobacco&gt;" />
-                  <Line endX="-100.0" endY="447.199951171875" layoutX="565.0" layoutY="113.0" startX="-100.0" startY="-60.0" />
+                  <Line endX="-100.0" endY="447.199951171875" layoutX="565.0" layoutY="110.0" startX="-100.0" startY="-60.0" />
                   <Button layoutX="602.0" layoutY="60.0" mnemonicParsing="false" onAction="#newObservation" prefHeight="35.0" prefWidth="150.0" text="New observation" />
                   <Label fx:id="medicalHistoryLBL" layoutX="637.0" layoutY="121.0" text="Medical history" />
                   <TextArea fx:id="medicalHistoryTextArea" layoutX="497.0" layoutY="150.0" prefHeight="422.0" prefWidth="360.0" />
+                  <Button layoutX="239.0" layoutY="525.0" mnemonicParsing="false" onAction="#updatePatient" prefHeight="35.0" prefWidth="150.0" text="Update patient" />
+                  <TextField fx:id="nameField" layoutX="175.0" layoutY="55.0" prefHeight="0.0" prefWidth="270.0" />
+                  <TextField fx:id="familyNameField" layoutX="175.0" layoutY="90.0" prefHeight="0.0" prefWidth="270.0" />
+                  <ComboBox fx:id="genderComboBox" layoutX="175.0" layoutY="160.0" prefHeight="0.0" prefWidth="270.0" />
+                  <TextField fx:id="weightField" layoutX="175.0" layoutY="195.0" prefHeight="0.0" prefWidth="270.0" />
+                  <TextField fx:id="heightField" layoutX="175.0" layoutY="230.0" prefHeight="0.0" prefWidth="270.0" />
+                  <TextField fx:id="phoneNumberField" layoutX="175.0" layoutY="300.0" prefHeight="0.0" prefWidth="270.0" />
+                  <TextField fx:id="cprField" layoutX="175.0" layoutY="265.0" prefHeight="0.0" prefWidth="270.0" />
+                  <ComboBox fx:id="bloodTypeComboBox" layoutX="175.0" layoutY="335.0" prefHeight="0.0" prefWidth="270.0" />
+                  <ComboBox fx:id="exerciseComboBox" layoutX="175.0" layoutY="370.0" prefHeight="0.0" prefWidth="270.0" />
+                  <ComboBox fx:id="dietComboBox" layoutX="175.0" layoutY="405.0" prefHeight="0.0" prefWidth="270.0" />
+                  <ComboBox fx:id="alcoholComboBox" layoutX="175.0" layoutY="440.0" prefHeight="0.0" prefWidth="270.0" />
+                  <ComboBox fx:id="tobaccoComboBox" layoutX="175.0" layoutY="475.0" prefHeight="0.0" prefWidth="270.0" />
+                  <DatePicker fx:id="dateOfBirthPicker" layoutX="175.0" layoutY="125.0" prefHeight="26.0" prefWidth="270.0" />
                </children>
             </AnchorPane>
          </content>
