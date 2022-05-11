@@ -172,6 +172,7 @@ public class TeacherMainCTLL {
 
     public void initializeView() {
         populateGroupsTable();
+        populateCasesTable();
     }
 
     private void populateGroupsTable() {
@@ -189,6 +190,7 @@ public class TeacherMainCTLL {
             casesListGV.getItems().addAll(model.getAllCases(logedUser.getSchoolID()));
             nameColCasesGV.setCellValueFactory(new PropertyValueFactory<>("name"));
         }catch (DalException dalException){
+            dalException.printStackTrace();
             new SoftAlert(dalException.getMessage());
         }
     }
