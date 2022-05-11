@@ -565,3 +565,29 @@
               // factory pattren
               // Async threads
               //
+
+
+
+                      try {
+                                 DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                                 Date  date1 = dateFormat.parse(String.valueOf(dateOfBirthPicker.getValue()));
+                                 long time1 = date1.getTime();
+                                 Timestamp stamp1 = new Timestamp(time1);
+                             } catch (ParseException e) {
+                                 e.printStackTrace();
+                             }
+
+                    java.util.Date Ust = new Date();
+                            java.sql.Date date = new java.sql.Date(Ust.getTime());
+
+ DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            Date date1 = dateFormat.parse(startdateid.getText());
+            Date date2 = dateFormat.parse(enddateid.getText());
+            long time1 = date1.getTime();
+            long time2 = date2.getTime();
+            Timestamp stamp1 = new Timestamp(time1);
+            Timestamp stamp2 = new Timestamp(time2);
+            String name = eventnameid.getText();
+            String locations = eventlocid.getText();
+            String notes = eventinfoid.getText();
+            String locationGuidance = locationguideid.getText();

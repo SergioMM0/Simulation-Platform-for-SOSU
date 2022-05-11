@@ -31,10 +31,13 @@ public class DAOGroup {
                 Group group = new Group(id , name , getUsersInGroup(id) , schoolID);
                 getAllGruops.add(group);
             }
-            return getAllGruops;
+
         } catch (SQLException e) {
            throw new DalException("couldn't retrieve the groups " , e );
+        } catch (  NullPointerException ignored){
+
         }
+        return getAllGruops;
     }
 
 
