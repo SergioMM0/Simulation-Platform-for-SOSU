@@ -172,7 +172,8 @@ public class TeacherMainCTLL {
 
     public void initializeView() {
         populateGroupsTable();
-        populateCasesTable();
+        //populateCasesTable(); being debugged
+        populatePatientsTable();
     }
 
     private void populateGroupsTable() {
@@ -196,6 +197,22 @@ public class TeacherMainCTLL {
     }
 
     private void populatePatientsTable(){
+        try{
+            patientsListGV.getItems().addAll(model.getAllPatients(logedUser.getSchoolID()));
+            nameColPatientsGV.setCellValueFactory(new PropertyValueFactory<>("first_name"));
+        }catch (DalException dalException){
+            new SoftAlert(dalException.getMessage());
+        }
+    }
+
+
+    public void addPatientToList(Patient patient) {
+        model.addPatientToList(patient);
+        patientsListGV.getItems().clear();
+        patientsListGV.getItems().addAll(model.getObservablePatients());
+    }
+
+    public void repopulatePatientsTable(){
         try{
             patientsListGV.getItems().addAll(model.getAllPatients(logedUser.getSchoolID()));
             nameColPatientsGV.setCellValueFactory(new PropertyValueFactory<>("first_name"));
@@ -395,6 +412,7 @@ public class TeacherMainCTLL {
         assert root != null;
         if(resource.equals("GUI/Views/CreatePatient.fxml")){
             loader.<NewPatientCTLL>getController().setUser(logedUser);
+            loader.<NewPatientCTLL>getController().setController(this);
         }
         root.getStylesheets().add(css);
         Stage stage = new Stage();

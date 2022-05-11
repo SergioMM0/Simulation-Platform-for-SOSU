@@ -42,6 +42,20 @@ public class TeacherMainMOD {
         return allPatients;
     }
 
+    public void addPatientToList(Patient patient) {
+        allPatients.add(patient);
+    }
+
+    public ObservableList<Patient> getObservablePatients() {
+        return allPatients;
+    }
+
+    //TODO Review2
+    public ObservableList<Category> getAllCategories() throws DalException {
+        allCategories.addAll(bllFacade.getAllCategories());
+        return allCategories;
+    }
+
     //TODO DELETE THE FOLLOWING WHEN IMPLEMENTED TO READ FROM FILE
 
     public ObservableList<String> getGenders() {
@@ -95,11 +109,5 @@ public class TeacherMainMOD {
         tobacco.add("Social smoker");
         tobacco.add("I got a ferrari bcs I don't smoke");
         return tobacco;
-    }
-
-
-    public ObservableList<Category> getAllCategories() throws DalException {
-        allCategories.addAll(bllFacade.getAllCategories());
-        return allCategories;
     }
 }
