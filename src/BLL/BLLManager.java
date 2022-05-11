@@ -15,7 +15,6 @@ public class BLLManager implements BLLFacade{
 
     public BLLManager(){
         dalFacade = new Manager();
-
     }
 
     @Override
@@ -76,6 +75,5 @@ public class BLLManager implements BLLFacade{
     public StudentQuestion getNextQuestion(StudentQuestion question) throws DalException {
         return dalFacade.getNextStudentQuestion(question.getId());
     }
-
 
 }

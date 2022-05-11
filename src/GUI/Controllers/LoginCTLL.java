@@ -83,6 +83,7 @@ public class LoginCTLL implements Initializable {
             loader.<StudentMainCTLL>getController().setUser(logedUser);
         }else if(logedUser.getUserType().equals("TEACHER")){
             loader.<TeacherMainCTLL>getController().setUser(logedUser);
+            loader.<TeacherMainCTLL>getController().initializeView();
         }
         //  loader.<TeacherMainCTLL>getController().setController(this);
         Stage stage = new Stage();
