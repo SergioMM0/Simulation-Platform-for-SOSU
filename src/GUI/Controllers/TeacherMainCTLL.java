@@ -212,6 +212,13 @@ public class TeacherMainCTLL {
         patientsListGV.getItems().addAll(model.getObservablePatients());
     }
 
+
+    public void addCaseToList(Case newCase) {
+        model.addCaseToList(newCase);
+        casesListGV.getItems().clear();
+        casesListGV.getItems().addAll(model.getObservableCases());
+    }
+
     @FXML
     void addNewCase(ActionEvent event) {
         openView("GUI/Views/CreateCase.fxml",generalCSS,"Create new case",860,660,false);
@@ -224,7 +231,7 @@ public class TeacherMainCTLL {
 
     @FXML
     void groupIsSelected(MouseEvent event) {
-
+        
     }
 
     @FXML
@@ -420,6 +427,9 @@ public class TeacherMainCTLL {
         if(resource.equals("GUI/Views/CreatePatient.fxml")){
             loader.<NewPatientCTLL>getController().setUser(logedUser);
             loader.<NewPatientCTLL>getController().setController(this);
+        }
+        if(resource.equals("GUI/Views/CreateCase.fxml")){
+            loader.<NewCaseCTLL>getController().setController(this);
         }
         root.getStylesheets().add(css);
         Stage stage = new Stage();

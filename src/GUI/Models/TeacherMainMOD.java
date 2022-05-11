@@ -56,6 +56,14 @@ public class TeacherMainMOD {
         return allPatients;
     }
 
+    public void addCaseToList(Case newCase) {
+        allCases.add(newCase);
+    }
+
+    public ObservableList<Case> getObservableCases(){
+        return allCases;
+    }
+
     public ObservableList<String> getSubCategoriesOf(String category) throws DalException{
         subCategories.addAll(bllFacade.getAllSubcategories(category));
         return subCategories;

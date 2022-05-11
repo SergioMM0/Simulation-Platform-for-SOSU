@@ -92,8 +92,6 @@ public class NewPatientCTLL implements Initializable {
         closeWindow();
     }
 
-    //TODO TEST this class when DAL is secondly fixed (15:48 9/5)
-
     @FXML
     void createPatient(ActionEvent event) {
         if(fieldsAreFiled()){

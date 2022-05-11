@@ -43,6 +43,7 @@ public class NewCaseCTLL implements Initializable {
     private ComboBox<String> subcategoryComboBox;
 
     private NewCaseMOD model;
+    private TeacherMainCTLL teacherMainCTLL;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -79,12 +80,14 @@ public class NewCaseCTLL implements Initializable {
     void saveNewCase(ActionEvent event) {
         if(fieldsAreFiled()){
             try {
-                model.createCase(new Case(nameField.getText(),
+                Case newCase = new Case(nameField.getText(),
                         descriptionOfCondition.getText(),
                         causeTextField.getText(),
                         categoryComboBox.getValue(),
-                        subcategoryComboBox.getValue()));
+                        subcategoryComboBox.getValue());
+                model.createCase(newCase);
                 closeWindow();
+                teacherMainCTLL.addCaseToList(newCase);
             } catch (DalException dalException) {
                 new SoftAlert(dalException.getMessage());
             }
@@ -118,6 +121,10 @@ public class NewCaseCTLL implements Initializable {
     private void closeWindow() {
         Stage st = (Stage) cancelBtn.getScene().getWindow();
         st.close();
+    }
+
+    public void setController(TeacherMainCTLL teacherMainCTLL) {
+        this.teacherMainCTLL = teacherMainCTLL;
     }
 }
 
