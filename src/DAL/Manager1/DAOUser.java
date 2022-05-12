@@ -63,15 +63,16 @@ public class DAOUser {
     }
 
 
-    public void updateuser(User user) throws DalException {
+    public void updateuser(User user , String password) throws DalException {
         try (Connection con = dataAccess.getConnection()) {
-            String sql = "UPDATE users SET username = ?  , email = ?  , usertype = ?  WHERE userid = ? ";
+            String sql = "UPDATE users SET username = ?  , email = ?  , usertype = ? , password = ? WHERE userid = ? ";
 
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setString(1, user.getName());
             prs.setString(2, user.getEmail());
             prs.setString(3, user.getUserType());
-            prs.setInt(4, user.getId());
+            prs.setString(4, password);
+            prs.setInt(5 , user.getId());
 
             prs.executeUpdate();
 
@@ -95,7 +96,7 @@ public class DAOUser {
     }
 
 
-    public void addUser(User user,int schoolid ,String password) throws DalException {
+    public void addUser(User user ,String password) throws DalException {
 
         try (Connection con = dataAccess.getConnection()) {
             String sql = "INSERT INTO users(username , password, email , usertype , schoolid)" +
@@ -105,7 +106,7 @@ public class DAOUser {
             prs.setString(2, password);
             prs.setString(3, user.getEmail());
             prs.setString(4, user.getUserType());
-            prs.setInt(5 , schoolid);
+            prs.setInt(5 , user.getSchoolID());
             prs.executeUpdate();
         } catch (SQLException e) {
             throw new DalException("Connection Lost " , e);
