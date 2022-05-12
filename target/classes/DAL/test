@@ -591,3 +591,27 @@
             String locations = eventlocid.getText();
             String notes = eventinfoid.getText();
             String locationGuidance = locationguideid.getText();
+
+            private int newestidforCases() throws DalException {
+                    int newid = -1;
+
+                    try (Connection con = dataAccess.getConnection()) {
+                        String sql = "SELECT TOP(1) * FROM Case ORDER by id desc";
+                        PreparedStatement prs = con.prepareStatement(sql);
+                        ResultSet rs = prs.executeQuery();
+                        while (rs.next()) {
+                            newid = rs.getInt("id");
+                        }
+                    } catch (SQLException e) {
+                        throw new DalException("Connection Lost " , e);
+                    }
+                    return newid;
+                }
+
+                select  [Case].[id] ,  [Case].[name] ,  [Case].[Description_of_the_condition] , [Case].[Cause_text] ,[Category].[name] , [subcategory].[issue]\n" +
+                                    "from [Case] join Category on [Case].catid = [Category].categoryid" +
+                                    "join subcategory on [Case].[subid] = [subcategory].subcategoryID" +
+                                    "join SickPatient on [Case].[id] = [SickPatient].[caseid] "+
+                                    "join [Patient]  on  SickPatient.patientid  = [Patient].[id]"+
+                                    "join School  on  Patient.schoolid = School.id" +
+                                    "where School.id  = ?

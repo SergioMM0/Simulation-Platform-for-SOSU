@@ -19,17 +19,6 @@ public class NewCaseMOD {
         allSubcategories = FXCollections.observableArrayList();
     }
 
-    public ObservableList<String> getAllCategories() throws DalException {
-        allCategories.addAll(bllFacade.getAllCategories());
-        return allCategories;
-    }
-
-    public ObservableList<String> getAllSubcategories(String category) throws DalException{
-        allSubcategories.clear();
-        allSubcategories.addAll(bllFacade.getAllSubcategories(category));
-        return allSubcategories;
-    }
-
     public void createCase(Case newCase) throws DalException {
         bllFacade.createCase(newCase);
     }
