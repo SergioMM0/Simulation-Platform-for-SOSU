@@ -15,12 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 public class NewPatientCTLL implements Initializable {
@@ -75,12 +70,12 @@ public class NewPatientCTLL implements Initializable {
 
     private NewPatientMOD model;
     private User user;
+    private TeacherMainCTLL teacherMainCTLL;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         model = new NewPatientMOD();
         populateComboBoxes();
-
     }
 
     private void populateComboBoxes() {
@@ -97,13 +92,11 @@ public class NewPatientCTLL implements Initializable {
         closeWindow();
     }
 
-    //TODO TEST this class when DAL is secondly fixed (15:48 9/5)
-
     @FXML
     void createPatient(ActionEvent event) {
         if(fieldsAreFiled()){
             try{
-                model.createPatient(new Patient(
+                Patient patient = new Patient(
                         0,
                         nameField.getText(),
                         familyNameField.getText(),
@@ -120,7 +113,10 @@ public class NewPatientCTLL implements Initializable {
                         tobaccoComboBox.getValue(),
                         observationsField.getText(),
                         user.getSchoolID()
-                ));
+                );
+                model.createPatient(patient);
+                closeWindow();
+                teacherMainCTLL.addPatientToList(patient);
             } catch(DalException dalException){
                 new SoftAlert(dalException.getMessage());
             }
@@ -134,7 +130,7 @@ public class NewPatientCTLL implements Initializable {
         } else if (familyNameField.getText().isEmpty()) {
             new SoftAlert("Please introduce the family name of the patient");
             return false;
-        } else if (dateOfBirthPicker.getValue().isBefore(LocalDate.now()) || dateOfBirthPicker.getValue() == null) {
+        } else if (dateOfBirthPicker.getValue().isAfter(LocalDate.now()) || dateOfBirthPicker.getValue() == null) {
             new SoftAlert("Please select a correct date of birth for the patient");
             return false;
         } else if (genderComboBox.getSelectionModel().isEmpty() || genderComboBox.hasProperties()) {
@@ -177,6 +173,10 @@ public class NewPatientCTLL implements Initializable {
     private void closeWindow(){
         Stage st = (Stage) cancelButton.getScene().getWindow();
         st.close();
+    }
+
+    public void setController(TeacherMainCTLL teacherMainCTLL) {
+        this.teacherMainCTLL = teacherMainCTLL;
     }
 
     public void setUser(User logedUser) {

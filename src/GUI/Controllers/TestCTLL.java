@@ -75,7 +75,11 @@ public class TestCTLL implements Initializable {
         categoryLable.setText(question.getCategory());
         titleLabel.setText(question.getTitle());
         quesitonIdLable.setText(question.getId() + "");
+
         textFieldQuestion.setText(question.getQuestion());
+
+        //questionText.setText(question.getQuestion());
+
     }
 
     private void insertimage() {

@@ -22,13 +22,13 @@ import java.util.ResourceBundle;
 public class TeacherMainCTLL {
 
     @FXML
-    private ComboBox<Category> caseCategoryComboBox;
+    private ComboBox<String> caseCategoryComboBox;
 
     @FXML
     private TextField caseNameField;
 
     @FXML
-    private ComboBox<?> caseSubcategoryComboBox;
+    private ComboBox<String> caseSubcategoryComboBox;
 
     @FXML
     private Label casesAssignedLBL;
@@ -156,7 +156,7 @@ public class TeacherMainCTLL {
     private Label studentsLBL;
 
     @FXML
-    private TableView<?> studentsTable;
+    private TableView<User> studentsTable;
 
     private User logedUser;
     private final String generalCSS = "";
@@ -173,6 +173,7 @@ public class TeacherMainCTLL {
     public void initializeView() {
         populateGroupsTable();
         populateCasesTable();
+        populatePatientsTable();
     }
 
     private void populateGroupsTable() {
@@ -204,14 +205,28 @@ public class TeacherMainCTLL {
         }
     }
 
+
+    public void addPatientToList(Patient patient) {
+        model.addPatientToList(patient);
+        patientsListGV.getItems().clear();
+        patientsListGV.getItems().addAll(model.getObservablePatients());
+    }
+
+
+    public void addCaseToList(Case newCase) {
+        model.addCaseToList(newCase);
+        casesListGV.getItems().clear();
+        casesListGV.getItems().addAll(model.getObservableCases());
+    }
+
     @FXML
     void addNewCase(ActionEvent event) {
-        openView("GUI/Views/CreateCase.fxml",generalCSS,"Create new case",860,660,false);
+        openView("GUI/Views/CreateCase.fxml",generalCSS,"Create new case",860,660,false,0);
     }
 
     @FXML
     void addNewPatient(ActionEvent event) {
-        openView("GUI/Views/CreatePatient.fxml",generalCSS,"Create new patient",500,650,false);
+        openView("GUI/Views/CreatePatient.fxml",generalCSS,"Create new patient",500,650,false,0);
     }
 
     @FXML
@@ -224,6 +239,22 @@ public class TeacherMainCTLL {
         try{
             caseNameField.setText(casesListGV.getSelectionModel().getSelectedItem().getName());
             caseCategoryComboBox.getItems().addAll(model.getAllCategories());
+            caseSubcategoryComboBox.getItems().addAll(model.getSubCategoriesOf(
+                    casesListGV.getSelectionModel().getSelectedItem().getCategory()));
+            descriptionOfConditionText.setText(casesListGV.getSelectionModel().getSelectedItem().getConditionDescription());
+            causeText.setText(casesListGV.getSelectionModel().getSelectedItem().getCause());
+            //population of case in case info when selected in general view
+
+            caseCategoryComboBox.getSelectionModel().select(
+                    caseCategoryComboBox.getItems().indexOf(
+                            casesListGV.getSelectionModel().getSelectedItem().getCategory()));
+            //selects the category specified for the case
+
+            caseSubcategoryComboBox.getSelectionModel().select(
+                    caseSubcategoryComboBox.getItems().indexOf(
+                            casesListGV.getSelectionModel().getSelectedItem().getSubCategory()));
+            //selects the subcategory specified for the case
+
         }catch (DalException dalException){
             new SoftAlert(dalException.getMessage());
         }
@@ -271,7 +302,18 @@ public class TeacherMainCTLL {
 
     @FXML
     void addNewStudent(ActionEvent event) {
+        openView("GUI/Views/ManageStudent.fxml",generalCSS,"Add new Student",400,220,false,1);
+    }
 
+    public void addStudentToTable(User user) {
+        model.addObservableStudent(user);
+    }
+
+
+    public void updateStudentInTable(User student) {
+        model.updateStudentInTable(student);
+        studentsTable.getItems().clear();
+        studentsTable.getItems().addAll(model.getObservableStudents());
     }
 
     @FXML
@@ -311,7 +353,13 @@ public class TeacherMainCTLL {
 
     @FXML
     void deleteStudent(ActionEvent event) {
-
+        try{
+            model.deleteStudent(studentsTable.getSelectionModel().getSelectedItem());
+            studentsTable.getItems().clear();
+            studentsTable.getItems().addAll(model.getObservableStudents());
+        }catch (DalException dalException) {
+            new SoftAlert(dalException.getMessage());
+        }
     }
 
     @FXML
@@ -331,7 +379,7 @@ public class TeacherMainCTLL {
 
     @FXML
     void editStudent(ActionEvent event) {
-
+        openView("GUI/Views/ManageStudent.fxml",generalCSS,"Edit student",400,220,false,2);
     }
 
     @FXML
@@ -384,7 +432,7 @@ public class TeacherMainCTLL {
 
     }
 
-    private void openView(String resource, String css, String title, int width,int height,boolean resizable){
+    private void openView(String resource, String css, String title, int width,int height,boolean resizable, int operationType){
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getClassLoader().getResource(resource));
         Parent root = null;
@@ -395,6 +443,21 @@ public class TeacherMainCTLL {
         assert root != null;
         if(resource.equals("GUI/Views/CreatePatient.fxml")){
             loader.<NewPatientCTLL>getController().setUser(logedUser);
+            loader.<NewPatientCTLL>getController().setController(this);
+        }
+        if(resource.equals("GUI/Views/CreateCase.fxml")){
+            loader.<NewCaseCTLL>getController().setController(this);
+        }
+        if(resource.equals("GUI/Views/ManageStudent.fxml") && operationType == 1){
+            loader.<ManageStudentCTLL>getController().setUser(logedUser);
+            loader.<ManageStudentCTLL>getController().setController(this);
+            loader.<ManageStudentCTLL>getController().setOperationType(operationType);
+        }
+        if(resource.equals("GUI/Views/ManageStudent.fxml") && operationType == 2){
+            loader.<ManageStudentCTLL>getController().setUser(logedUser);
+            loader.<ManageStudentCTLL>getController().setController(this);
+            loader.<ManageStudentCTLL>getController().setOperationType(operationType);
+            loader.<ManageStudentCTLL>getController().setStudent(studentsTable.getSelectionModel().getSelectedItem());
         }
         root.getStylesheets().add(css);
         Stage stage = new Stage();

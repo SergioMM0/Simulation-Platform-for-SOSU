@@ -27,18 +27,21 @@ public class BLLManager implements BLLFacade{
     }
 
     @Override
-    public void createCase(Case newCase, Category category, SubCategory subCategory) throws DalException {
-        dalFacade.createCase(newCase,category,subCategory);
+    public void createCase(Case newCase) throws DalException {
+        dalFacade.createCase(newCase);
+        //TODO collision with Category and Subcategory reformat
     }
 
     @Override
-    public List<Category> getAllCategories() throws DalException {
+    public List<String> getAllCategories() throws DalException {
         return dalFacade.getAllCategories();
+        //TODO return all categories as a list of strings
     }
 
     @Override
-    public List<SubCategory> getAllSubcategories(Category category) throws DalException {
+    public List<String> getAllSubcategories(String category) throws DalException {
         return dalFacade.getAllSubCategories(category);
+        //TODO return all subcategories as a list of strings
     }
 
     @Override
@@ -62,6 +65,28 @@ public class BLLManager implements BLLFacade{
     }
 
     @Override
+    public void addNewStudent(User user) throws DalException {
+        dalFacade.addNewStudent(user);
+        //TODO Implement this :D
+    }
+
+    @Override
+    public void updateStudent(User student) throws DalException {
+        dalFacade.updateStudent(student);
+        //TODO implement this :D
+        // The password of the student will be the name of the student so: student.getName() xd ||
+        // Do not delete the following annotation, is for the exam:
+
+        //The password of the student will be the name
+    }
+
+    @Override
+    public void deleteStudent(User student) throws DalException {
+        dalFacade.deleteStudent(student);
+        //TODO implement :D
+    }
+
+    @Override
     public void saveStudentQuestionAnswer(StudentQuestionaireAnswer answer) throws DalException {
         dalFacade.addStudentQuestionAnswer(answer);
     }
@@ -75,5 +100,7 @@ public class BLLManager implements BLLFacade{
     public StudentQuestion getNextQuestion(StudentQuestion question) throws DalException {
         return dalFacade.getNextStudentQuestion(question.getId());
     }
+
+
 
 }

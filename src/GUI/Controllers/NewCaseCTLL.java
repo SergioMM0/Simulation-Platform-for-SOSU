@@ -1,8 +1,6 @@
 package GUI.Controllers;
 
 import BE.Case;
-import BE.Category;
-import BE.SubCategory;
 import DAL.util.DalException;
 import GUI.Alerts.SoftAlert;
 import GUI.Models.NewCaseMOD;
@@ -16,7 +14,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class NewCaseCTLL implements Initializable {
@@ -31,16 +28,7 @@ public class NewCaseCTLL implements Initializable {
     private ComboBox<String> categoryComboBox;
 
     @FXML
-    private TextField causalConditionField;
-
-    @FXML
-    private TextField causalDiagnoseField;
-
-    @FXML
     private TextField causeTextField;
-
-    @FXML
-    private TextField citizenGoalField;
 
     @FXML
     private TextField descriptionOfCondition;
@@ -55,6 +43,7 @@ public class NewCaseCTLL implements Initializable {
     private ComboBox<String> subcategoryComboBox;
 
     private NewCaseMOD model;
+    private TeacherMainCTLL teacherMainCTLL;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -64,9 +53,7 @@ public class NewCaseCTLL implements Initializable {
 
     public void populateCategories(){
         try{
-            for(Category cat : model.getAllCategories()){
-                categoryComboBox.getItems().add(cat.getName());
-            }
+            categoryComboBox.getItems().addAll(model.getAllCategories());
         }catch (DalException dalException){
             new SoftAlert(dalException.getMessage());
         }
@@ -77,9 +64,7 @@ public class NewCaseCTLL implements Initializable {
         if(!categoryComboBox.getValue().isEmpty()){
             try {
                 subcategoryComboBox.getItems().clear();
-                for(SubCategory subCat : model.getAllSubcategories(model.getChosenCategory(categoryComboBox.getValue()))){
-                    subcategoryComboBox.getItems().add(subCat.getName());
-                }
+                subcategoryComboBox.getItems().addAll(model.getAllSubcategories(categoryComboBox.getValue()));
             } catch (DalException dalException) {
                 new SoftAlert(dalException.getMessage());
             }
@@ -95,17 +80,14 @@ public class NewCaseCTLL implements Initializable {
     void saveNewCase(ActionEvent event) {
         if(fieldsAreFiled()){
             try {
-                model.createCase(new Case(nameField.getText(),
+                Case newCase = new Case(nameField.getText(),
                         descriptionOfCondition.getText(),
                         causeTextField.getText(),
-                        causalDiagnoseField.getText(),
-                        causalConditionField.getText(),
-                        citizenGoalField.getText()),
-
-                        model.getChosenCategory(categoryComboBox.getValue()),
-                        model.getChosenSubCategory(subcategoryComboBox.getValue())
-                );
+                        categoryComboBox.getValue(),
+                        subcategoryComboBox.getValue());
+                model.createCase(newCase);
                 closeWindow();
+                teacherMainCTLL.addCaseToList(newCase);
             } catch (DalException dalException) {
                 new SoftAlert(dalException.getMessage());
             }
@@ -133,24 +115,16 @@ public class NewCaseCTLL implements Initializable {
             new SoftAlert("Please introduce a valid description of the cause");
             return false;
         }
-        else if(causalDiagnoseField.getText().isEmpty()){
-            new SoftAlert("Please introduce a valid description of the causal diagnosis");
-            return false;
-        }
-        else if(causalConditionField.getText().isEmpty()){
-            new SoftAlert("Please introduce a valid description of the causal condition");
-            return false;
-        }
-        else if(citizenGoalField.getText().isEmpty()){
-            new SoftAlert("Please introduce a valid description of the citizen goal");
-            return false;
-        }
         else return true;
     }
 
     private void closeWindow() {
         Stage st = (Stage) cancelBtn.getScene().getWindow();
         st.close();
+    }
+
+    public void setController(TeacherMainCTLL teacherMainCTLL) {
+        this.teacherMainCTLL = teacherMainCTLL;
     }
 }
 

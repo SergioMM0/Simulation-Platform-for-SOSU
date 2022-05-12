@@ -1,14 +1,16 @@
 package GUI.Models;
 
 import BE.Case;
-import BE.Category;
 import BE.Group;
 import BE.Patient;
+import BE.User;
 import BLL.BLLFacade;
 import BLL.BLLManager;
 import DAL.util.DalException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.util.Locale;
 
 public class TeacherMainMOD {
 
@@ -16,7 +18,9 @@ public class TeacherMainMOD {
     private ObservableList<Group> allGroups;
     private ObservableList<Case> allCases;
     private ObservableList<Patient> allPatients;
-    private ObservableList<Category> allCategories;
+    private ObservableList<String> allCategories;
+    private ObservableList<String> subCategories;
+    private ObservableList<User> allStudents;
 
     public TeacherMainMOD(){
         bllFacade = new BLLManager();
@@ -24,6 +28,8 @@ public class TeacherMainMOD {
         allCases = FXCollections.observableArrayList();
         allPatients = FXCollections.observableArrayList();
         allCategories = FXCollections.observableArrayList();
+        subCategories = FXCollections.observableArrayList();
+        allStudents = FXCollections.observableArrayList();
     }
 
 
@@ -41,6 +47,59 @@ public class TeacherMainMOD {
         allPatients.addAll(bllFacade.getAllPatients(schoolID));
         return allPatients;
     }
+
+    public void addPatientToList(Patient patient) {
+        allPatients.add(patient);
+    }
+
+    public ObservableList<String> getAllCategories() throws DalException {
+        allCategories.addAll(bllFacade.getAllCategories());
+        return allCategories;
+    }
+
+    public ObservableList<Patient> getObservablePatients() {
+        return allPatients;
+    }
+
+    public void addCaseToList(Case newCase) {
+        allCases.add(newCase);
+    }
+
+    public ObservableList<Case> getObservableCases(){
+        return allCases;
+    }
+
+    public ObservableList<String> getSubCategoriesOf(String category) throws DalException{
+        subCategories.addAll(bllFacade.getAllSubcategories(category));
+        return subCategories;
+    }
+
+    public void addObservableStudent(User user){
+        allStudents.add(user);
+    }
+
+    public ObservableList<User> getObservableStudents(){
+        return allStudents;
+    }
+
+    public void updateStudentInTable(User student) {
+        for(User user : allStudents){
+            if(user.getName().equals(student.getName())){
+                user.setName(student.getName());
+                user.setEmail(student.getEmail());
+            }
+        }
+    }
+
+    public void deleteStudent(User student) throws DalException {
+        bllFacade.deleteStudent(student);
+    }
+
+
+
+
+
+
 
     //TODO DELETE THE FOLLOWING WHEN IMPLEMENTED TO READ FROM FILE
 
@@ -95,11 +154,5 @@ public class TeacherMainMOD {
         tobacco.add("Social smoker");
         tobacco.add("I got a ferrari bcs I don't smoke");
         return tobacco;
-    }
-
-
-    public ObservableList<Category> getAllCategories() throws DalException {
-        allCategories.addAll(bllFacade.getAllCategories());
-        return allCategories;
     }
 }
