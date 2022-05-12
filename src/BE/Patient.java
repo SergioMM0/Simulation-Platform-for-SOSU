@@ -43,7 +43,10 @@ public class Patient {
         this.schoolid = schoolid;
     }
 
-    public Patient(int id, String first_name, String last_name, LocalDate dateOfBirth, String gender, String weight, String height, String cpr, String phoneNumber, String bloodType, String exercise, String diet, String alcohol, String tobacco, List<String> observationsList, int schoolid) {
+    public Patient(int id, String first_name, String last_name, LocalDate dateOfBirth, String gender,
+                   String weight, String height, String cpr, String phoneNumber, String bloodType,
+                   String exercise, String diet, String alcohol, String tobacco,
+                   List<String> observationsList, int schoolid) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
