@@ -4,6 +4,7 @@ import BE.*;
 import DAL.util.DalException;
 import GUI.Alerts.SoftAlert;
 import GUI.Models.TeacherMainMOD;
+import GUI.Util.CatAndSubC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -161,6 +162,7 @@ public class TeacherMainCTLL {
     private User logedUser;
     private final String generalCSS = "";
     private TeacherMainMOD model;
+    private CatAndSubC catAndSubC;
 
     public void setUser(User user){
         logedUser = user;
@@ -168,6 +170,7 @@ public class TeacherMainCTLL {
 
     public TeacherMainCTLL(){
         model = new TeacherMainMOD();
+        catAndSubC = CatAndSubC.getInstance();
     }
 
     public void initializeView() {
@@ -201,6 +204,7 @@ public class TeacherMainCTLL {
             patientsListGV.getItems().addAll(model.getAllPatients(logedUser.getSchoolID()));
             nameColPatientsGV.setCellValueFactory(new PropertyValueFactory<>("first_name"));
         }catch (DalException dalException){
+            dalException.printStackTrace();
             new SoftAlert(dalException.getMessage());
         }
     }
@@ -236,10 +240,10 @@ public class TeacherMainCTLL {
 
     @FXML
     void caseIsSelected(MouseEvent event) {
-        try{
+
             caseNameField.setText(casesListGV.getSelectionModel().getSelectedItem().getName());
-            caseCategoryComboBox.getItems().addAll(model.getAllCategories());
-            caseSubcategoryComboBox.getItems().addAll(model.getSubCategoriesOf(
+            caseCategoryComboBox.getItems().addAll(catAndSubC.getCategories());
+            caseSubcategoryComboBox.getItems().addAll(catAndSubC.getSubcategoriesOf(
                     casesListGV.getSelectionModel().getSelectedItem().getCategory()));
             descriptionOfConditionText.setText(casesListGV.getSelectionModel().getSelectedItem().getConditionDescription());
             causeText.setText(casesListGV.getSelectionModel().getSelectedItem().getCause());
@@ -255,9 +259,6 @@ public class TeacherMainCTLL {
                             casesListGV.getSelectionModel().getSelectedItem().getSubCategory()));
             //selects the subcategory specified for the case
 
-        }catch (DalException dalException){
-            new SoftAlert(dalException.getMessage());
-        }
     }
 
     @FXML

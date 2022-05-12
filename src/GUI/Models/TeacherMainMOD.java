@@ -52,11 +52,6 @@ public class TeacherMainMOD {
         allPatients.add(patient);
     }
 
-    public ObservableList<String> getAllCategories() throws DalException {
-        allCategories.addAll(bllFacade.getAllCategories());
-        return allCategories;
-    }
-
     public ObservableList<Patient> getObservablePatients() {
         return allPatients;
     }
@@ -67,11 +62,6 @@ public class TeacherMainMOD {
 
     public ObservableList<Case> getObservableCases(){
         return allCases;
-    }
-
-    public ObservableList<String> getSubCategoriesOf(String category) throws DalException{
-        subCategories.addAll(bllFacade.getAllSubcategories(category));
-        return subCategories;
     }
 
     public void addObservableStudent(User user){
