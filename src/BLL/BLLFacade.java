@@ -12,10 +12,6 @@ public interface BLLFacade {
 
     void createCase(Case newCase) throws DalException;
 
-    List<String> getAllCategories() throws DalException;
-
-    List<String> getAllSubcategories(String category) throws DalException;
-
     void createPatient(Patient patient) throws DalException;
 
     void saveStudentQuestionAnswer(StudentQuestionaireAnswer answer) throws DalException;

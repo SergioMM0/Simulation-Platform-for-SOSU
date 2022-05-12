@@ -10,9 +10,10 @@ public class StudentQuestion {
     private String state2;
     private String state3;
     private String state4;
+    private String state5 ;
     private int questionaireId;
 
-    public StudentQuestion(int id, String category, String title, String question, String state0, String state1, String state2, String state3, String state4) {
+    public StudentQuestion(int id, String category, String title, String question, String state0, String state1, String state2, String state3, String state4 , String state5) {
         this.id = id;
         this.category = category;
         this.title = title;
@@ -22,6 +23,7 @@ public class StudentQuestion {
         this.state2 = state2;
         this.state3 = state3;
         this.state4 = state4;
+        this.state5 = state5 ;
     }
 
     public StudentQuestion() {
@@ -105,5 +107,30 @@ public class StudentQuestion {
 
     public void setQuestionaireId(int questionaireId) {
         this.questionaireId=questionaireId;
+    }
+
+    public String getState5() {
+        return state5;
+    }
+
+    public void setState5(String state5) {
+        this.state5 = state5;
+    }
+
+    @Override
+    public String toString() {
+        return "StudentQuestion{" +
+                "id=" + id +
+                ", category='" + category + '\'' +
+                ", title='" + title + '\'' +
+                ", question='" + question + '\'' +
+                ", state0='" + state0 + '\'' +
+                ", state1='" + state1 + '\'' +
+                ", state2='" + state2 + '\'' +
+                ", state3='" + state3 + '\'' +
+                ", state4='" + state4 + '\'' +
+                ", state5='" + state5 + '\'' +
+                ", questionaireId=" + questionaireId +
+                '}';
     }
 }

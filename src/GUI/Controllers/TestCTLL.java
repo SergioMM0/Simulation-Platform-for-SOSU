@@ -106,6 +106,9 @@ public class TestCTLL implements Initializable {
             state = 4;
         if (state4radio.isSelected())
             state = 5;
+        if(state5radio.isSelected())
+            state = 6 ;
+
         return state;
     }
 }

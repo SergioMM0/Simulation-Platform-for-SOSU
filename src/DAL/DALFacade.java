@@ -19,11 +19,11 @@ public interface DALFacade {
 
     List<User> getAllUsers() throws DalException;
 
-    void updateuser(User user , String password ) throws DalException;  //
+    void updateuser(User user) throws DalException;  //
 
     void deleteuser(User user) throws DalException;
 
-    void addUser(User user , String password) throws DalException; //
+    void addUser(User user ) throws DalException; //
 
     List<User> searchForUser (String query) throws DalException;
 

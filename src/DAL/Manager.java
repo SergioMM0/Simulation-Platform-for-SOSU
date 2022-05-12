@@ -60,8 +60,8 @@ public class Manager implements DALFacade {
     }
 
     @Override
-    public void updateuser(User user , String text) throws DalException {
-        daoUser.updateuser(user , text);
+    public void updateuser(User user ) throws DalException {
+        daoUser.updateuser(user );
     }
 
     @Override
@@ -70,8 +70,8 @@ public class Manager implements DALFacade {
     }
 
     @Override
-    public void addUser(User user, String password) throws DalException {
-        daoUser.addUser(user, password);
+    public void addUser(User user) throws DalException {
+        daoUser.addUser(user);
     }
 
     @Override

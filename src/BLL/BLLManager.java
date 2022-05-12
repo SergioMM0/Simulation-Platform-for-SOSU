@@ -33,18 +33,6 @@ public class BLLManager implements BLLFacade{
     }
 
     @Override
-    public List<String> getAllCategories() throws DalException {
-        return dalFacade.getAllCategories();
-        //TODO return all categories as a list of strings
-    }
-
-    @Override
-    public List<String> getAllSubcategories(String category) throws DalException {
-        return dalFacade.getAllSubCategories(category);
-        //TODO return all subcategories as a list of strings
-    }
-
-    @Override
     public void createPatient(Patient patient) throws DalException {
         dalFacade.createPatient(patient);
     }
@@ -66,13 +54,13 @@ public class BLLManager implements BLLFacade{
 
     @Override
     public void addNewStudent(User user) throws DalException {
-        dalFacade.addNewStudent(user);
+        dalFacade.addUser(user);
         //TODO Implement this :D
     }
 
     @Override
     public void updateStudent(User student) throws DalException {
-        dalFacade.updateStudent(student);
+        dalFacade.updateuser(student);
         //TODO implement this :D
         // The password of the student will be the name of the student so: student.getName() xd ||
         // Do not delete the following annotation, is for the exam:
@@ -82,7 +70,7 @@ public class BLLManager implements BLLFacade{
 
     @Override
     public void deleteStudent(User student) throws DalException {
-        dalFacade.deleteStudent(student);
+        dalFacade.deleteuser(student);
         //TODO implement :D
     }
 
