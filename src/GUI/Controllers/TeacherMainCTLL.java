@@ -204,6 +204,7 @@ public class TeacherMainCTLL {
             patientsListGV.getItems().addAll(model.getAllPatients(logedUser.getSchoolID()));
             nameColPatientsGV.setCellValueFactory(new PropertyValueFactory<>("first_name"));
         }catch (DalException dalException){
+            dalException.printStackTrace();
             new SoftAlert(dalException.getMessage());
         }
     }
