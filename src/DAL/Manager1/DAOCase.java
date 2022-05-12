@@ -22,9 +22,8 @@ public class DAOCase {
         ArrayList<Case> cases = new ArrayList<>();
         try(Connection connection = dataAccess.getConnection()){
             String sql = "select  [Case].[id] ,  [Case].[name] ,  [Case].[Description_of_the_condition] , [Case].[Cause_text] ,CategoryName , SubCategoryName\n" +
-                    "from [Case]join [Patient]  on  SickPatient.patientid  = [Patient].[id]"+
-                    "join School  on  Patient.schoolid = School.id" +
-                    "where School.id  = ? ";
+                    "from [Case] " +
+                    "where schoolid  = ? ";
             PreparedStatement prs = connection.prepareStatement(sql);
             prs.setInt(1 , schoolid);
             prs.execute();

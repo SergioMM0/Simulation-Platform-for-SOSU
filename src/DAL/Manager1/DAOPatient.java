@@ -35,16 +35,10 @@ public class DAOPatient {
                 String  height = rs.getString("height");
                 String cpr = rs.getString("cpr");
                 String phonenumber = rs.getString("phone_number");
-                String blood_type = rs.getString("blood_type");
-                String exercise = rs.getString("exercise");
-                String diet = rs.getString("diet");
-                String alcohol = rs.getString("alcohol");
-                String tobacco = rs.getString("tobacco");
                 String observation = rs.getString("observations");
 
                 Patient patient = new Patient(id,first_name,lastname,convertToLocalDateViaSqlDate(dateofbirth),gender,weight,height,
-                        cpr,phonenumber,blood_type ,exercise,diet,alcohol,tobacco,
-                        observation, schoolid );
+                        cpr,phonenumber, observation, schoolid );
                 patients.add(patient);
             }
             return patients;
@@ -62,8 +56,8 @@ public class DAOPatient {
 
         try (Connection con = dataAccess.getConnection()){
             String sql = "INSERT INTO Patient (first_name, last_name, dateofBirth, gender,weight ,height ,cpr ," +
-                    " phone_number ,blood_type ,exercise ,diet ,alcohol,tobacco ,observations,schoolid) " +
-                    "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+                    " phone_number ,observations,schoolid) " +
+                    "VALUES (?,?,?,?,?,?,?,?,?,?);";
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setString(1 , patient.getFirst_name());
             prs.setString(2 , patient.getLast_name());
@@ -73,20 +67,15 @@ public class DAOPatient {
             prs.setString(6,patient.getHeight());
             prs.setString(7 ,patient.getCpr());
             prs.setString(8 , patient.getPhoneNumber());
-            prs.setString(9,patient.getBloodType());
-            prs.setString(10,patient.getExercise());
-            prs.setString(11, patient.getDiet());
-            prs.setString(12,patient.getAlcohol());
-            prs.setString(13,patient.getTobacco());
-            prs.setString(14,patient.getObservations());
-            prs.setInt(15,patient.getSchoolid());
+            prs.setString(9,patient.getObservations());
+            prs.setInt(10,patient.getSchoolid());
             prs.executeUpdate();
         } catch (SQLException e) {
             throw new DalException("Connection Lost " , e);
         }
     }
 
-
+/*
     public void updatepatient(Patient patient) throws DalException {
 
         try (Connection con = dataAccess.getConnection()){
@@ -114,6 +103,8 @@ public class DAOPatient {
             throw new DalException("Connection Lost" , e);
         }
     }
+
+ */
 
 
     public void deletePatient(Patient patient) throws DalException {

@@ -89,10 +89,10 @@ public class Manager implements DALFacade {
         daoPatient.createPatient(patient);
     }
 
-    @Override
-    public void updatepatient(Patient patient) throws DalException {
-        daoPatient.updatepatient(patient);
-    }
+   // @Override
+   // public void updatepatient(Patient patient) throws DalException {
+   //     daoPatient.updatepatient(patient);
+   // }
 
     @Override
     public void deletePatient(Patient patient) throws DalException {
