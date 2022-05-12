@@ -90,8 +90,9 @@ public class DAOUser {
             prs.executeUpdate();
 
         } catch (SQLException e) {
-            throw new DalException("Connection Lost " , e);
+            throw new DalException("Connection Lost ", e);
         }
+
     }
 
 
