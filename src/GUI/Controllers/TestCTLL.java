@@ -46,8 +46,6 @@ public class TestCTLL implements Initializable {
     public RadioButton state6radio;
     @FXML
     public Label quesitonIdLable;
-    //@FXML
-    //private Label questionLabel;
     @FXML
     private TextArea textFieldQuestion;
 
@@ -75,10 +73,7 @@ public class TestCTLL implements Initializable {
         categoryLable.setText(question.getCategory());
         titleLabel.setText(question.getTitle());
         quesitonIdLable.setText(question.getId() + "");
-
         textFieldQuestion.setText(question.getQuestion());
-
-        //questionText.setText(question.getQuestion());
 
     }
 
