@@ -11,8 +11,6 @@ import java.util.Optional;
 public class Manager implements DALFacade {
 
     private final DAOCase daoCase;
-    private final DAOCategory daoCategory;
-    private final DAOSubCategory daoSubCategory;
     private final DAOUser daoUser;
     private final DAOPatient daoPatient;
     private final DAOSchool daoSchool;
@@ -22,8 +20,6 @@ public class Manager implements DALFacade {
 
     public Manager() {
         daoCase = new DAOCase();
-        daoCategory = new DAOCategory();
-        daoSubCategory = new DAOSubCategory();
         daoUser = new DAOUser();
         daoPatient = new DAOPatient();
         daoSchool = new DAOSchool();
@@ -39,8 +35,8 @@ public class Manager implements DALFacade {
     }
 
     @Override
-    public void createCase(Case c, Category category, SubCategory subCategory) throws DalException {
-        daoCase.createCase(c, category, subCategory);
+    public void createCase(Case c) throws DalException {
+        daoCase.createCase(c);
     }
 
     @Override
@@ -51,46 +47,6 @@ public class Manager implements DALFacade {
     @Override
     public void deleteCase(Case c) throws DalException {
         daoCase.deleteCase(c);
-    }
-
-    @Override
-    public List<Category> getAllCategories() throws DalException {
-        return daoCategory.getAllCategories();
-    }
-
-    @Override
-    public void createCategory(Category category) throws DalException {
-        daoCategory.createCategory(category);
-    }
-
-    @Override
-    public void updateCategory(Category category) throws DalException {
-        daoCategory.updateCategory(category);
-    }
-
-    @Override
-    public void deleteCategory(Category category) {
-        daoCategory.deleteCategory(category);
-    }
-
-    @Override
-    public List<SubCategory> getAllSubCategories(Category category) throws DalException {
-        return daoSubCategory.getAllSubCategories(category);
-    }
-
-    @Override
-    public void createSubCategory(SubCategory subCategory) throws DalException {
-        daoSubCategory.createSubCategory(subCategory);
-    }
-
-    @Override
-    public void updateSubCategory(SubCategory category) throws DalException {
-        daoSubCategory.updateSubCategory(category);
-    }
-
-    @Override
-    public void deleteSubCategory(SubCategory subCategory) throws DalException {
-        daoSubCategory.deleteSubCategory(subCategory);
     }
 
     @Override

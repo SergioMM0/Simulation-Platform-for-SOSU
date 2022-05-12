@@ -9,27 +9,11 @@ public interface DALFacade {
 
     List<Case> getAllCases(int schoolid) throws DalException;
 
-    void createCase(Case c , Category category , SubCategory subCategory)throws DalException;
+    void createCase(Case c)throws DalException;
 
     void updateCase(Case c)throws  DalException ;
 
     void deleteCase(Case c) throws DalException ;
-
-    List<Category> getAllCategories() throws DalException;
-
-    void createCategory(Category category) throws DalException;
-
-    void updateCategory(Category category) throws DalException ;
-
-    void deleteCategory(Category category)throws DalException;
-
-    List<SubCategory> getAllSubCategories(Category category) throws DalException;
-
-    void createSubCategory(SubCategory subCategory)throws DalException;
-
-    void updateSubCategory(SubCategory subCategory)throws DalException;
-
-    void deleteSubCategory(SubCategory subCategory)throws DalException;
 
     User verifyUsers(String useremail, String password) throws DalException;
 
