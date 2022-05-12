@@ -14,7 +14,7 @@ public interface BLLFacade {
 
     void createPatient(Patient patient) throws DalException;
 
-    void saveStudentQuestionAnswer(StudentQuestionaireAnswer answer) throws DalException;
+    void saveStudentQuestionAnswer(StudentQuestionnaireAnswer answer) throws DalException;
 
     StudentQuestion getFirstQuestion() throws DalException;
 

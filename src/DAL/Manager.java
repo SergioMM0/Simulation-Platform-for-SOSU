@@ -160,7 +160,7 @@ public class Manager implements DALFacade {
     }
 
     @Override
-    public void addStudentQuestionAnswer(StudentQuestionaireAnswer answer) throws DalException {
+    public void addStudentQuestionAnswer(StudentQuestionnaireAnswer answer) throws DalException {
         daoStudentQuestion.addStudentQuestionAnswer(answer);
     }
 

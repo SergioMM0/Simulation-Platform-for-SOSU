@@ -1,7 +1,7 @@
 package GUI.Models;
 
 import BE.StudentQuestion;
-import BE.StudentQuestionaireAnswer;
+import BE.StudentQuestionnaireAnswer;
 import BLL.BLLFacade;
 import BLL.BLLManager;
 import DAL.util.DalException;
@@ -25,8 +25,8 @@ public class StudentQuestionMOD {
         return null;
     }
 
-    public void saveStudentQuestionAnswer(StudentQuestionaireAnswer answer) {
-        answer.setQuestioanireId(questionaireId);           //using questionaire Id in answers
+    public void saveStudentQuestionAnswer(StudentQuestionnaireAnswer answer) {
+        answer.setQuestionnaireId(questionaireId);           //using questionaire Id in answers
         try {
             bll.saveStudentQuestionAnswer(answer);
         } catch (DalException e) {

@@ -60,7 +60,7 @@ public interface DALFacade {
     void assignCaseToPatientToGroup(Patient p , Case c , Group g) throws DalException;
 
 
-    void addStudentQuestionAnswer(StudentQuestionaireAnswer answer) throws DalException;
+    void addStudentQuestionAnswer(StudentQuestionnaireAnswer answer) throws DalException;
 
     StudentQuestion getFirstStudentQuestion() throws DalException;
 

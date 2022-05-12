@@ -74,7 +74,7 @@ public class BLLManager implements BLLFacade{
     }
 
     @Override
-    public void saveStudentQuestionAnswer(StudentQuestionaireAnswer answer) throws DalException {
+    public void saveStudentQuestionAnswer(StudentQuestionnaireAnswer answer) throws DalException {
         dalFacade.addStudentQuestionAnswer(answer);
     }
 

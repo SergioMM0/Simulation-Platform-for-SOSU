@@ -1,7 +1,7 @@
 package GUI.Controllers;
 
 import BE.StudentQuestion;
-import BE.StudentQuestionaireAnswer;
+import BE.StudentQuestionnaireAnswer;
 import GUI.Models.StudentQuestionMOD;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -64,7 +64,7 @@ public class StudentQuestion2CTLL {
     @FXML
     void saveQuestionAndLoadNext(ActionEvent event) {           //save question then load next question
         int state = getState();             //calculate the selected state
-        StudentQuestionaireAnswer answer = new StudentQuestionaireAnswer(0, Integer.parseInt(quesitonIdLable.getText()), state, 0); //create answer object
+        StudentQuestionnaireAnswer answer = new StudentQuestionnaireAnswer(0, Integer.parseInt(quesitonIdLable.getText()), state, 0); //create answer object
 
         model.saveStudentQuestionAnswer(answer);            //save answer to database
         currentQuesiton = model.getNextQuestion(currentQuesiton);       //load next question

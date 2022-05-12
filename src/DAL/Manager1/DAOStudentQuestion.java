@@ -1,7 +1,7 @@
 package DAL.Manager1;
 
 import BE.StudentQuestion;
-import BE.StudentQuestionaireAnswer;
+import BE.StudentQuestionnaireAnswer;
 import DAL.DataAccess.DataAccess;
 import DAL.util.DalException;
 
@@ -16,13 +16,13 @@ public class DAOStudentQuestion {
         dataAccess = new DataAccess();
     }
 
-    public void addStudentQuestionAnswer(StudentQuestionaireAnswer answer) throws DalException {
+    public void addStudentQuestionAnswer(StudentQuestionnaireAnswer answer) throws DalException {
         try (Connection con = dataAccess.getConnection()) {
             String sql = "insert  into [dbo].[StudentQuestionAnswer] (questionId,state,questionaireId )values  (?,?,?)";
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setInt(1, answer.getQuestionId());
             prs.setInt(2, answer.getState());
-            prs.setInt(3, answer.getQuestioanireId());
+            prs.setInt(3, answer.getQuestionnaireId());
             prs.execute();
 
         } catch (SQLException e) {

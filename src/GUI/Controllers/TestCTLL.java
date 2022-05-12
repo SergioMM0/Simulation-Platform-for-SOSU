@@ -1,7 +1,7 @@
 package GUI.Controllers;
 
 import BE.StudentQuestion;
-import BE.StudentQuestionaireAnswer;
+import BE.StudentQuestionnaireAnswer;
 import GUI.Models.StudentQuestionMOD;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,11 +17,11 @@ import java.util.ResourceBundle;
 
 public class TestCTLL implements Initializable {
     @FXML
-    public Label categoryLable;
+    public Label categoryLabel;
     @FXML
     public Label titleLabel;
     @FXML
-    public ImageView iamge1;
+    public ImageView image1;
     @FXML
     public ImageView image2;
     @FXML
@@ -30,8 +30,6 @@ public class TestCTLL implements Initializable {
     public ImageView image4;
     @FXML
     public ImageView image5;
-    @FXML
-    public ImageView image6;
     @FXML
     public RadioButton state1radio;
     @FXML
@@ -45,50 +43,50 @@ public class TestCTLL implements Initializable {
     @FXML
     public RadioButton state6radio;
     @FXML
-    public Label quesitonIdLable;
+    public Label questionIdLabel;
     @FXML
     private TextArea textFieldQuestion;
 
     StudentQuestionMOD model = new StudentQuestionMOD();    //use model to operation and contact with bll
-    StudentQuestion currentQuesiton;
+    StudentQuestion currentQuestion;
 
     public void saveQuestionAndLoadNext(ActionEvent event) {
         //save question then load next question
         int state = getState();             //calculate the selected state
-        StudentQuestionaireAnswer answer = new StudentQuestionaireAnswer(0, Integer.parseInt(quesitonIdLable.getText()), state, 0); //create answer object
+        StudentQuestionnaireAnswer answer = new StudentQuestionnaireAnswer(0, Integer.parseInt(questionIdLabel.getText()), state, 0); //create answer object
 
         model.saveStudentQuestionAnswer(answer);            //save answer to database
-        currentQuesiton = model.getNextQuestion(currentQuesiton);       //load next question
-        if(currentQuesiton==null)return;        //questions finished
-        setQuestion(currentQuesiton);           //set current question to controls
+        currentQuestion = model.getNextQuestion(currentQuestion);       //load next question
+        if(currentQuestion ==null)return;        //questions finished
+        setQuestion(currentQuestion);           //set current question to controls
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        insertimage();
-        currentQuesiton=model.GetFirstQuestion();       //get first question
-        setQuestion(currentQuesiton);
+        insertImage();
+        currentQuestion =model.GetFirstQuestion();       //get first question
+        setQuestion(currentQuestion);
     }
     private void setQuestion(StudentQuestion question) {
-        categoryLable.setText(question.getCategory());
+        categoryLabel.setText(question.getCategory());
         titleLabel.setText(question.getTitle());
-        quesitonIdLable.setText(question.getId() + "");
+        questionIdLabel.setText(question.getId() + "");
         textFieldQuestion.setText(question.getQuestion());
 
     }
 
-    private void insertimage() {
-        Image imageone = new Image("res/one.png");
-        Image imagetwo = new Image("res/two.png");
-        Image imagethree = new Image("res/three.png");
-        Image imagefour = new Image("res/four.png");
-        Image imagefive = new Image("res/five.png");
+    private void insertImage() {
+        Image imageOne = new Image("res/one.png");
+        Image imageTwo = new Image("res/two.png");
+        Image imageThree = new Image("res/three.png");
+        Image imageFour = new Image("res/four.png");
+        Image imageFive = new Image("res/five.png");
 
-        iamge1.setImage(imageone);
-        image2.setImage(imagetwo);
-        image3.setImage(imagethree);
-        image4.setImage(imagefour);
-        image5.setImage(imagefive);
+        image1.setImage(imageOne);
+        image2.setImage(imageTwo);
+        image3.setImage(imageThree);
+        image4.setImage(imageFour);
+        image5.setImage(imageFive);
     }
 
     private int getState() {

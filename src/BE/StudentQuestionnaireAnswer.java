@@ -1,27 +1,27 @@
 package BE;
 
-public class StudentQuestionaireAnswer {
+public class StudentQuestionnaireAnswer {
     private int id;
     private int questionId;
     private int state;
-    private int questioanireId;
+    private int questionnaireId;
 
-    public StudentQuestionaireAnswer(int id, int questionId, int state, int questioanireId) {
+    public StudentQuestionnaireAnswer(int id, int questionId, int state, int questionnaireId) {
         this.id = id;
         this.questionId = questionId;
         this.state = state;
-        this.questioanireId = questioanireId;
+        this.questionnaireId = questionnaireId;
     }
 
-    public int getQuestioanireId() {
-        return questioanireId;
+    public int getQuestionnaireId() {
+        return questionnaireId;
     }
 
-    public void setQuestioanireId(int questioanireId) {
-        this.questioanireId = questioanireId;
+    public void setQuestionnaireId(int questionnaireId) {
+        this.questionnaireId = questionnaireId;
     }
 
-    public StudentQuestionaireAnswer() {
+    public StudentQuestionnaireAnswer() {
     }
 
     public int getId() {
