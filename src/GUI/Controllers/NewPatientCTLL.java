@@ -81,10 +81,13 @@ public class NewPatientCTLL implements Initializable {
     private void populateComboBoxes() {
         genderComboBox.getItems().addAll(model.getGenders());
         bloodTypeComboBox.getItems().addAll(model.getBloodTypes());
+        /*
         exerciseComboBox.getItems().addAll(model.getExerciseOptions());
         dietComboBox.getItems().addAll(model.getDietOptions());
         alcoholComboBox.getItems().addAll(model.getAlcoholOptions());
         tobaccoComboBox.getItems().addAll(model.getTobaccoOptions());
+
+         */
     }
 
     @FXML
@@ -106,11 +109,14 @@ public class NewPatientCTLL implements Initializable {
                         heightField.getText(),
                         cprField.getText(),
                         phoneNumberField.getText(),
+                        /*
                         bloodTypeComboBox.getValue(),
                         exerciseComboBox.getValue(),
                         dietComboBox.getValue(),
                         alcoholComboBox.getValue(),
                         tobaccoComboBox.getValue(),
+
+                         */
                         observationsField.getText(),
                         user.getSchoolID()
                 );
@@ -148,7 +154,9 @@ public class NewPatientCTLL implements Initializable {
         } else if (phoneNumberField.getText().isEmpty()) { //Phone number is optional
             phoneNumberField.setText("No phone number");
             return false;
-        } else if (bloodTypeComboBox.getSelectionModel().isEmpty()) {
+        }
+        /*
+        else if (bloodTypeComboBox.getSelectionModel().isEmpty()) {
             new SoftAlert("Please introduce the blood type of the patient");
             return false;
         } else if (exerciseComboBox.getSelectionModel().isEmpty()) {
@@ -163,7 +171,9 @@ public class NewPatientCTLL implements Initializable {
         } else if (tobaccoComboBox.getSelectionModel().isEmpty()) {
             new SoftAlert("Please introduce an statement for the tobacco consumption of the patient");
             return false;
-        } else if (observationsField.getText().isEmpty()) { //including an observation when creation a patient can be optional
+        }
+        */
+        else if (observationsField.getText().isEmpty()) { //including an observation when creation a patient can be optional
             observationsField.setText("Patient included in the system with no observations");
             return false;
         }

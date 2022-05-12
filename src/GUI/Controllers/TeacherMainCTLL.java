@@ -275,6 +275,7 @@ public class TeacherMainCTLL {
         heightField.setText(patientsListGV.getSelectionModel().getSelectedItem().getHeight());
         cprField.setText(patientsListGV.getSelectionModel().getSelectedItem().getCpr());
         phoneNumberField.setText(patientsListGV.getSelectionModel().getSelectedItem().getPhoneNumber());
+        /*
         bloodTypeComboBox.getItems().addAll(model.getBloodTypes()); //TODO Update
         bloodTypeComboBox.getSelectionModel().select(
                 bloodTypeComboBox.getItems().indexOf(patientsListGV.getSelectionModel().getSelectedItem().getBloodType()));
@@ -294,6 +295,8 @@ public class TeacherMainCTLL {
         tobaccoComboBox.getItems().addAll(model.getTobaccoOptions()); //TODO Update
         tobaccoComboBox.getSelectionModel().select(
                 tobaccoComboBox.getItems().indexOf(patientsListGV.getSelectionModel().getSelectedItem().getTobacco()));
+
+         */
     }
 
     @FXML

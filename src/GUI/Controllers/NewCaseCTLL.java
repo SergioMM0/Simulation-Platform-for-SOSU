@@ -55,9 +55,7 @@ public class NewCaseCTLL implements Initializable {
     }
 
     public void populateCategories(){
-
         categoryComboBox.getItems().addAll(catAndSubC.getCategories());
-
     }
 
     @FXML

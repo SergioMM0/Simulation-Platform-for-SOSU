@@ -13,18 +13,20 @@ public class Patient {
     private String height;
     private String cpr;
     private String phoneNumber;
+    /*
     private String bloodType;
     private String exercise;
     private String diet;
     private String alcohol;
     private String tobacco;
+
+     */
     private String observations;
     private List<String> observationsList;
     private int schoolid;
 
     public Patient(int id, String first_name, String last_name, LocalDate dateOfBirth, String gender, String weight,
-                   String height, String cpr, String phoneNumber, String bloodType, String exercise, String diet, String alcohol,
-                   String tobacco, String observations, int schoolid) {
+                   String height, String cpr, String phoneNumber,String observations, int schoolid) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -34,18 +36,20 @@ public class Patient {
         this.height = height;
         this.cpr = cpr;
         this.phoneNumber = phoneNumber;
+        /*
         this.bloodType = bloodType;
         this.exercise = exercise;
         this.diet = diet;
         this.alcohol = alcohol;
         this.tobacco = tobacco;
+
+         */
         this.observations = observations;
         this.schoolid = schoolid;
     }
 
     public Patient(int id, String first_name, String last_name, LocalDate dateOfBirth, String gender,
-                   String weight, String height, String cpr, String phoneNumber, String bloodType,
-                   String exercise, String diet, String alcohol, String tobacco,
+                   String weight, String height, String cpr, String phoneNumber,
                    List<String> observationsList, int schoolid) {
         this.id = id;
         this.first_name = first_name;
@@ -56,11 +60,14 @@ public class Patient {
         this.height = height;
         this.cpr = cpr;
         this.phoneNumber = phoneNumber;
+        /*
         this.bloodType = bloodType;
         this.exercise = exercise;
         this.diet = diet;
         this.alcohol = alcohol;
         this.tobacco = tobacco;
+
+         */
         this.observationsList = observationsList;
         this.schoolid = schoolid;
     }
@@ -137,6 +144,7 @@ public class Patient {
         this.phoneNumber = phoneNumber;
     }
 
+    /*
     public String getBloodType() {
         return bloodType;
     }
@@ -176,7 +184,7 @@ public class Patient {
     public void setTobacco(String tobacco) {
         this.tobacco = tobacco;
     }
-
+     */
     public String getObservations() {
         return observations;
     }
@@ -209,16 +217,12 @@ public class Patient {
                 ", last_name='" + last_name + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
                 ", gender='" + gender + '\'' +
-                ", weight=" + weight +
-                ", height=" + height +
+                ", weight='" + weight + '\'' +
+                ", height='" + height + '\'' +
                 ", cpr='" + cpr + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", bloodType='" + bloodType + '\'' +
-                ", exercise='" + exercise + '\'' +
-                ", diet='" + diet + '\'' +
-                ", alcohol='" + alcohol + '\'' +
-                ", tobacco='" + tobacco + '\'' +
                 ", observations='" + observations + '\'' +
+                ", observationsList=" + observationsList +
                 ", schoolid=" + schoolid +
                 '}';
     }
