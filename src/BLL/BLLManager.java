@@ -71,7 +71,6 @@ public class BLLManager implements BLLFacade{
     @Override
     public void deleteStudent(User student) throws DalException {
         dalFacade.deleteuser(student);
-        //TODO implement :D
     }
 
     @Override

@@ -4,6 +4,7 @@ import BE.Case;
 import DAL.util.DalException;
 import GUI.Alerts.SoftAlert;
 import GUI.Models.NewCaseMOD;
+import GUI.Util.CatAndSubC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -44,30 +45,26 @@ public class NewCaseCTLL implements Initializable {
 
     private NewCaseMOD model;
     private TeacherMainCTLL teacherMainCTLL;
+    private CatAndSubC catAndSubC;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         model = new NewCaseMOD();
         populateCategories();
+        catAndSubC = CatAndSubC.getInstance();
     }
 
     public void populateCategories(){
-        try{
-            categoryComboBox.getItems().addAll(model.getAllCategories());
-        }catch (DalException dalException){
-            new SoftAlert(dalException.getMessage());
-        }
+
+        categoryComboBox.getItems().addAll(catAndSubC.getCategories());
+
     }
 
     @FXML
     void catSelected(ActionEvent event) {
         if(!categoryComboBox.getValue().isEmpty()){
-            try {
                 subcategoryComboBox.getItems().clear();
-                subcategoryComboBox.getItems().addAll(model.getAllSubcategories(categoryComboBox.getValue()));
-            } catch (DalException dalException) {
-                new SoftAlert(dalException.getMessage());
-            }
+                subcategoryComboBox.getItems().addAll(catAndSubC.getSubcategoriesOf(categoryComboBox.getValue()));
         }
     }
 
