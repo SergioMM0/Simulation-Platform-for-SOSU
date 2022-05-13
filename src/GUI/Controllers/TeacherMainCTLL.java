@@ -382,6 +382,14 @@ public class TeacherMainCTLL {
         openView("GUI/Views/ManageStudent.fxml", generalCSS, "Add new Student", 400, 220, false, 1);
     }
 
+    @FXML
+    void editStudent(ActionEvent event) {
+        if(studentsTable.getSelectionModel().getSelectedItem() != null){
+            openView("GUI/Views/ManageStudent.fxml", generalCSS, "Edit student", 400, 220, false, 2);
+        }
+        else new SoftAlert("Please select a student");
+    }
+
     public void addStudentToTable(User user) {
         model.addObservableStudent(user);
         refreshStudentsTable();
@@ -415,6 +423,13 @@ public class TeacherMainCTLL {
     @FXML
     void createGroup(ActionEvent event) {
         openView("GUI/Views/ManageGroup.fxml", generalCSS, "Add new group", 400, 180, false, 1);
+    }
+
+    @FXML
+    void editGroup(ActionEvent event) {
+        if(groupsTable.getSelectionModel().getSelectedItem() != null){
+            openView("GUI/Views/ManageGroup.fxml", generalCSS, "Edit group", 400, 180, false, 2);
+        }else new SoftAlert("Please select a group");
     }
 
     public void addGroupToList(Group group) {
@@ -465,21 +480,6 @@ public class TeacherMainCTLL {
     @FXML
     void duplicatePatient(ActionEvent event) {
 
-    }
-
-    @FXML
-    void editGroup(ActionEvent event) {
-
-    }
-
-    @FXML
-    void editStudent(ActionEvent event) {
-        if(studentsTable.getSelectionModel().getSelectedItem() != null){
-            openView("GUI/Views/ManageStudent.fxml", generalCSS, "Edit student", 400, 220, false, 2);
-        }
-        else{
-            new SoftAlert("Please select a student");
-        }
     }
 
     @FXML
