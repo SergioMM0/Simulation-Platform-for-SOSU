@@ -287,28 +287,26 @@ public class TeacherMainCTLL {
 
     @FXML
     public void updatePatient(ActionEvent actionEvent) {
-        ConfirmationAlert confirmationAlert;
         if(patientFieldsAreFilled() && !fieldsAreTheSame()){
-            try{
-                Patient patient = patientsListGV.getSelectionModel().getSelectedItem();
-                patient.setFirst_name(nameField.getText());
-                patient.setLast_name(familyNameField.getText());
-                patient.setDateOfBirth(dateOfBirthPicker.getValue());
-                patient.setGender(genderComboBox.getValue());
-                patient.setWeight(weightField.getText());
-                patient.setHeight(heightField.getText());
-                patient.setCpr(cprField.getText());
-                patient.setPhoneNumber(phoneNumberField.getText());
-                model.updatePatient(patient);
-                refreshPatientsList();
-            }catch(DalException dalException){
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Are you sure?");
-                alert.setHeaderText("please confirm");
-                ButtonType okButton = new ButtonType("Confirm");
-                ButtonType cancelButton = new ButtonType("Cancel");
-                alert.getButtonTypes().setAll(okButton,cancelButton);
-                alert.showAndWait();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                    "Are you sure you want to update this patient?",ButtonType.YES,ButtonType.NO,ButtonType.CANCEL);
+            alert.showAndWait();
+            if(alert.getResult() == ButtonType.YES){
+                try{
+                    Patient patient = patientsListGV.getSelectionModel().getSelectedItem();
+                    patient.setFirst_name(nameField.getText());
+                    patient.setLast_name(familyNameField.getText());
+                    patient.setDateOfBirth(dateOfBirthPicker.getValue());
+                    patient.setGender(genderComboBox.getValue());
+                    patient.setWeight(weightField.getText());
+                    patient.setHeight(heightField.getText());
+                    patient.setCpr(cprField.getText());
+                    patient.setPhoneNumber(phoneNumberField.getText());
+                    model.updatePatient(patient);
+                    refreshPatientsList();
+                }catch(DalException dalException){
+                    new SoftAlert(dalException.getMessage());
+                }
             }
         }
     }
