@@ -31,6 +31,8 @@ public interface BLLFacade {
     void updateStudent(User student)throws DalException;
 
     void deleteStudent(User student) throws DalException;
+
+    List<User> getAllStudent(int schoolID) throws DalException;
 }
 
 

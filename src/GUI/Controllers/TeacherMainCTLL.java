@@ -1,6 +1,9 @@
 package GUI.Controllers;
 
-import BE.*;
+import BE.Case;
+import BE.Group;
+import BE.Patient;
+import BE.User;
 import DAL.util.DalException;
 import GUI.Alerts.SoftAlert;
 import GUI.Models.TeacherMainMOD;
@@ -8,7 +11,6 @@ import GUI.Util.CatAndSubC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -17,8 +19,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class TeacherMainCTLL {
 
@@ -38,7 +38,7 @@ public class TeacherMainCTLL {
     private TableView<Case> casesAssignedList;
 
     @FXML
-    private TableColumn<Case,String> nameColCases;
+    private TableColumn<Case, String> nameColCases;
 
     @FXML
     private Label casesGradedLBL;
@@ -47,31 +47,19 @@ public class TeacherMainCTLL {
     private TableView<Case> casesGradedList;
 
     @FXML
-    private TableColumn<Case,String> nameColCasesGraded;
+    private TableColumn<Case, String> nameColCasesGraded;
 
     @FXML
     private TableView<Case> casesListGV;
 
     @FXML
-    private TableColumn<Group,String>nameColCasesGV;
-
-    @FXML
-    private TextField causalConditionText;
-
-    @FXML
-    private TextField causalDiagnoseText;
-
-    @FXML
-    private TextField causeText;
-
-    @FXML
-    private TextField citizenGoalText;
+    private TableColumn<Group, String> nameColCasesGV;
 
     @FXML
     private TextField descriptionOfConditionText;
 
     @FXML
-    private TableColumn<?, ?> groupNameCol;
+    private TableColumn<Group, String> groupNameCol;
 
     @FXML
     private Label groupNameLBL;
@@ -86,39 +74,19 @@ public class TeacherMainCTLL {
     private TableView<Group> groupsTable;
 
     @FXML
-    private TableColumn<?, ?> hasGroupCol;
-
-    @FXML
     private Label medicalHistoryLBL;
 
     @FXML
     private TextArea medicalHistoryTextArea;
 
     @FXML
-    private TableColumn<Group, String> nameColGroupsGV;
-
-    @FXML
-    private TableColumn<?, ?> participantsCol;
-
-    @FXML
     private TableView<Patient> patientsListGV;
-    @FXML
-    private ComboBox<String> alcoholComboBox;
-
-    @FXML
-    private ComboBox<String> bloodTypeComboBox;
 
     @FXML
     private TextField cprField;
 
     @FXML
     private DatePicker dateOfBirthPicker;
-
-    @FXML
-    private ComboBox<String> dietComboBox;
-
-    @FXML
-    private ComboBox<String> exerciseComboBox;
 
     @FXML
     private TextField familyNameField;
@@ -139,16 +107,13 @@ public class TeacherMainCTLL {
     private TextField phoneNumberField;
 
     @FXML
-    private ComboBox<String> tobaccoComboBox;
-
-    @FXML
     private TextField weightField;
 
     @FXML
-    private TableColumn<Patient,String> nameColPatientsGV;
+    private TableColumn<Patient, String> nameColPatientsGV;
 
     @FXML
-    private TableColumn<Group,String> studentNameCol;
+    private TableColumn<Group, String> studentNameCol;
 
     @FXML
     private Label studentNamesLBL;
@@ -162,13 +127,13 @@ public class TeacherMainCTLL {
     private User logedUser;
     private final String generalCSS = "";
     private TeacherMainMOD model;
-    private CatAndSubC catAndSubC;
+    private final CatAndSubC catAndSubC;
 
-    public void setUser(User user){
+    public void setUser(User user) {
         logedUser = user;
     }
 
-    public TeacherMainCTLL(){
+    public TeacherMainCTLL() {
         model = new TeacherMainMOD();
         catAndSubC = CatAndSubC.getInstance();
     }
@@ -177,32 +142,43 @@ public class TeacherMainCTLL {
         populateGroupsTable();
         populateCasesTable();
         populatePatientsTable();
+        populateStudentsTable();
     }
 
     private void populateGroupsTable() {
-        try{
-            groupTableGV.getItems().addAll(model.getAllGroups(logedUser.getSchoolID()));
-            nameColGroupsGV.setCellValueFactory(new PropertyValueFactory<>("name")); //Might be with the first letter in capital
-        }catch (DalException dalException){
+        try {
+            groupsTable.getItems().addAll(model.getAllGroups(logedUser.getSchoolID()));
+            groupNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        } catch (DalException dalException) {
             dalException.printStackTrace();
             new SoftAlert(dalException.getMessage());
         }
     }
 
     private void populateCasesTable() {
-        try{
+        try {
             casesListGV.getItems().addAll(model.getAllCases(logedUser.getSchoolID()));
             nameColCasesGV.setCellValueFactory(new PropertyValueFactory<>("name"));
-        }catch (DalException dalException){
+        } catch (DalException dalException) {
             dalException.printStackTrace();
             new SoftAlert(dalException.getMessage());
         }
     }
 
-    private void populatePatientsTable(){
-        try{
+    private void populatePatientsTable() {
+        try {
             patientsListGV.getItems().addAll(model.getAllPatients(logedUser.getSchoolID()));
             nameColPatientsGV.setCellValueFactory(new PropertyValueFactory<>("first_name"));
+        } catch (DalException dalException) {
+            dalException.printStackTrace();
+            new SoftAlert(dalException.getMessage());
+        }
+    }
+
+    private void populateStudentsTable(){
+        try{
+            studentsTable.getItems().addAll(model.getAllStudents(logedUser.getSchoolID()));
+            studentNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         }catch (DalException dalException){
             dalException.printStackTrace();
             new SoftAlert(dalException.getMessage());
@@ -225,12 +201,12 @@ public class TeacherMainCTLL {
 
     @FXML
     void addNewCase(ActionEvent event) {
-        openView("GUI/Views/CreateCase.fxml",generalCSS,"Create new case",860,660,false,0);
+        openView("GUI/Views/CreateCase.fxml", generalCSS, "Create new case", 860, 660, false, 0);
     }
 
     @FXML
     void addNewPatient(ActionEvent event) {
-        openView("GUI/Views/CreatePatient.fxml",generalCSS,"Create new patient",500,650,false,0);
+        openView("GUI/Views/CreatePatient.fxml", generalCSS, "Create new patient", 500, 650, false, 0);
     }
 
     @FXML
@@ -240,24 +216,32 @@ public class TeacherMainCTLL {
 
     @FXML
     void caseIsSelected(MouseEvent event) {
+        caseCategoryComboBox.getItems().clear();
+        caseSubcategoryComboBox.getItems().clear();
 
-            caseNameField.setText(casesListGV.getSelectionModel().getSelectedItem().getName());
-            caseCategoryComboBox.getItems().addAll(catAndSubC.getCategories());
-            caseSubcategoryComboBox.getItems().addAll(catAndSubC.getSubcategoriesOf(
-                    casesListGV.getSelectionModel().getSelectedItem().getCategory()));
-            descriptionOfConditionText.setText(casesListGV.getSelectionModel().getSelectedItem().getConditionDescription());
-            causeText.setText(casesListGV.getSelectionModel().getSelectedItem().getCause());
-            //population of case in case info when selected in general view
+        String[] allCat = catAndSubC.getCategories();
+        String[] allSubCat = catAndSubC.getSubcategoriesOf(casesListGV.getSelectionModel().getSelectedItem().getCategory());
 
-            caseCategoryComboBox.getSelectionModel().select(
-                    caseCategoryComboBox.getItems().indexOf(
-                            casesListGV.getSelectionModel().getSelectedItem().getCategory()));
-            //selects the category specified for the case
+        caseNameField.setText(casesListGV.getSelectionModel().getSelectedItem().getName());
+        descriptionOfConditionText.setText(casesListGV.getSelectionModel().getSelectedItem().getConditionDescription());
 
-            caseSubcategoryComboBox.getSelectionModel().select(
-                    caseSubcategoryComboBox.getItems().indexOf(
-                            casesListGV.getSelectionModel().getSelectedItem().getSubCategory()));
-            //selects the subcategory specified for the case
+        for (String cat : allCat) {
+            caseCategoryComboBox.getItems().add(cat); //population of the categories
+        }
+        for(String subCat : allSubCat){
+            caseSubcategoryComboBox.getItems().add(subCat); // population of the subcategories of the category
+        }
+        //population of case in case info when selected in general view
+
+        caseCategoryComboBox.getSelectionModel().select(
+                caseCategoryComboBox.getItems().indexOf(
+                        casesListGV.getSelectionModel().getSelectedItem().getCategory()));
+        //selects the category specified for the case
+
+        caseSubcategoryComboBox.getSelectionModel().select(
+                caseSubcategoryComboBox.getItems().indexOf(
+                        casesListGV.getSelectionModel().getSelectedItem().getSubCategory()));
+        //selects the subcategory specified for the case
 
     }
 
@@ -306,7 +290,7 @@ public class TeacherMainCTLL {
 
     @FXML
     void addNewStudent(ActionEvent event) {
-        openView("GUI/Views/ManageStudent.fxml",generalCSS,"Add new Student",400,220,false,1);
+        openView("GUI/Views/ManageStudent.fxml", generalCSS, "Add new Student", 400, 220, false, 1);
     }
 
     public void addStudentToTable(User user) {
@@ -357,11 +341,11 @@ public class TeacherMainCTLL {
 
     @FXML
     void deleteStudent(ActionEvent event) {
-        try{
+        try {
             model.deleteStudent(studentsTable.getSelectionModel().getSelectedItem());
             studentsTable.getItems().clear();
             studentsTable.getItems().addAll(model.getObservableStudents());
-        }catch (DalException dalException) {
+        } catch (DalException dalException) {
             new SoftAlert(dalException.getMessage());
         }
     }
@@ -383,7 +367,7 @@ public class TeacherMainCTLL {
 
     @FXML
     void editStudent(ActionEvent event) {
-        openView("GUI/Views/ManageStudent.fxml",generalCSS,"Edit student",400,220,false,2);
+        openView("GUI/Views/ManageStudent.fxml", generalCSS, "Edit student", 400, 220, false, 2);
     }
 
     @FXML
@@ -436,28 +420,30 @@ public class TeacherMainCTLL {
 
     }
 
-    private void openView(String resource, String css, String title, int width,int height,boolean resizable, int operationType){
+    private void openView(String resource, String css, String title, int width, int height, boolean resizable, int operationType) {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getClassLoader().getResource(resource));
         Parent root = null;
-        try{root = loader.load();}
-        catch (IOException e){
+        try {
+            root = loader.load();
+        } catch (IOException e) {
             e.printStackTrace();
         }
         assert root != null;
-        if(resource.equals("GUI/Views/CreatePatient.fxml")){
+        if (resource.equals("GUI/Views/CreatePatient.fxml")) {
             loader.<NewPatientCTLL>getController().setUser(logedUser);
             loader.<NewPatientCTLL>getController().setController(this);
         }
-        if(resource.equals("GUI/Views/CreateCase.fxml")){
+        if (resource.equals("GUI/Views/CreateCase.fxml")) {
             loader.<NewCaseCTLL>getController().setController(this);
+            loader.<NewCaseCTLL>getController().setUser(logedUser);
         }
-        if(resource.equals("GUI/Views/ManageStudent.fxml") && operationType == 1){
+        if (resource.equals("GUI/Views/ManageStudent.fxml") && operationType == 1) {
             loader.<ManageStudentCTLL>getController().setUser(logedUser);
             loader.<ManageStudentCTLL>getController().setController(this);
             loader.<ManageStudentCTLL>getController().setOperationType(operationType);
         }
-        if(resource.equals("GUI/Views/ManageStudent.fxml") && operationType == 2){
+        if (resource.equals("GUI/Views/ManageStudent.fxml") && operationType == 2) {
             loader.<ManageStudentCTLL>getController().setUser(logedUser);
             loader.<ManageStudentCTLL>getController().setController(this);
             loader.<ManageStudentCTLL>getController().setOperationType(operationType);
@@ -466,12 +452,12 @@ public class TeacherMainCTLL {
         root.getStylesheets().add(css);
         Stage stage = new Stage();
         stage.setTitle(title);
-        stage.setScene(new Scene(root,width,height));
+        stage.setScene(new Scene(root, width, height));
         stage.setResizable(resizable);
         stage.show();
     }
 
-    private void closeWindow(){
+    private void closeWindow() {
         Stage st = (Stage) groupTableGV.getScene().getWindow();
         st.close();
     }

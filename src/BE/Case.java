@@ -5,25 +5,25 @@ public class Case {
     private int id ;
     private String name ;
     private String conditionDescription;
-    private String cause;
     private String category;
     private String subCategory;
+    private int schoolID;
 
-    public Case(int id, String name,String conditionDescription,String cause, String category, String subCategory) {
+    public Case(int id, String name,String conditionDescription, String category, String subCategory,int schoolID) {
         this.id = id;
         this.name = name;
         this.conditionDescription = conditionDescription;
-        this.cause = cause;
         this.category = category;
         this.subCategory = subCategory;
+        this.schoolID = schoolID;
     }
 
-    public Case(String name, String conditionDescription, String cause, String category, String subCategory) {
+    public Case(String name, String conditionDescription, String category, String subCategory, int schoolID) {
         this.name = name;
         this.conditionDescription = conditionDescription;
-        this.cause = cause;
         this.category = category;
         this.subCategory = subCategory;
+        this.schoolID = schoolID;
     }
 
     public int getId() {
@@ -50,14 +50,6 @@ public class Case {
         this.conditionDescription = conditionDescription;
     }
 
-    public String getCause() {
-        return cause;
-    }
-
-    public void setCause(String cause) {
-        this.cause = cause;
-    }
-
     public String getCategory() {
         return category;
     }
@@ -74,15 +66,23 @@ public class Case {
         this.subCategory = subCategory;
     }
 
+    public int getSchoolID() {
+        return schoolID;
+    }
+
+    public void setSchoolID(int schoolID) {
+        this.schoolID = schoolID;
+    }
+
     @Override
     public String toString() {
         return "Case{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", conditionDescription='" + conditionDescription + '\'' +
-                ", cause='" + cause + '\'' +
                 ", category='" + category + '\'' +
                 ", subCategory='" + subCategory + '\'' +
+                ", schoolID=" + schoolID +
                 '}';
     }
 }

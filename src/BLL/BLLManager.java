@@ -55,22 +55,23 @@ public class BLLManager implements BLLFacade{
     @Override
     public void addNewStudent(User user) throws DalException {
         dalFacade.addUser(user);
-        //TODO Implement this :D
     }
 
     @Override
     public void updateStudent(User student) throws DalException {
         dalFacade.updateuser(student);
-        //TODO implement this :D
-        // The password of the student will be the name of the student so: student.getName() xd ||
-        // Do not delete the following annotation, is for the exam:
-
-        //The password of the student will be the name
     }
 
     @Override
     public void deleteStudent(User student) throws DalException {
         dalFacade.deleteuser(student);
+    }
+
+    @Override
+    public List<User> getAllStudent(int schoolID) throws DalException {
+        return dalFacade.getallStudents(schoolID);
+
+        //TODO Implement get all students
     }
 
     @Override

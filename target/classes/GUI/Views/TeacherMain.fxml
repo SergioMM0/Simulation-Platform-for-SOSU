@@ -151,8 +151,7 @@
                   <Label fx:id="studentsLBL" layoutX="120.0" layoutY="40.0" text="Students" />
                   <TableView fx:id="studentsTable" layoutX="20.0" layoutY="70.0" prefHeight="505.0" prefWidth="250.0">
                     <columns>
-                      <TableColumn fx:id="studentNameCol" prefWidth="186.4000244140625" text="Name" />
-                      <TableColumn fx:id="hasGroupCol" prefWidth="63.20001220703125" text="In group" />
+                      <TableColumn fx:id="studentNameCol" prefWidth="249.60001220703126" text="Name" />
                     </columns>
                   </TableView>
                   <Button layoutX="305.0" layoutY="125.0" mnemonicParsing="false" onAction="#editStudent" prefHeight="35.0" prefWidth="120.0" text="Edit student" />
@@ -162,8 +161,7 @@
                   <Button layoutX="450.0" layoutY="180.0" mnemonicParsing="false" onAction="#deleteGroup" prefHeight="35.0" prefWidth="120.0" text="Delete group" />
                   <TableView fx:id="groupsTable" layoutX="605.0" layoutY="70.0" prefHeight="505.0" prefWidth="250.0">
                      <columns>
-                        <TableColumn fx:id="groupNameCol" prefWidth="171.99993896484375" text="Group name" />
-                        <TableColumn fx:id="participantsCol" prefWidth="79.2000732421875" text="Participants" />
+                        <TableColumn fx:id="groupNameCol" prefWidth="249.60001220703126" text="Group name" />
                      </columns>
                   </TableView>
                   <Label fx:id="groupsLBL" layoutX="711.0" layoutY="40.0" text="Groups" />

@@ -11,7 +11,7 @@
 
 <AnchorPane prefHeight="817.0" prefWidth="1191.0" stylesheets="/GUI/Views/CSS/styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.TestCTLL">
    <children>
-      <Label fx:id="categoryLable" layoutX="469.0" layoutY="152.0" text="Self-care">
+      <Label fx:id="categoryLabel" layoutX="469.0" layoutY="152.0" text="Self-care">
          <font>
             <Font size="36.0" />
          </font>
@@ -21,12 +21,11 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <ImageView fx:id="iamge1" fitHeight="150.0" fitWidth="130.0" layoutX="50.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="image2" fitHeight="150.0" fitWidth="130.0" layoutX="197.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="image3" fitHeight="150.0" fitWidth="130.0" layoutX="353.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="image4" fitHeight="150.0" fitWidth="130.0" layoutX="527.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="image5" fitHeight="150.0" fitWidth="130.0" layoutX="725.0" layoutY="372.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="image6" fitHeight="150.0" fitWidth="130.0" layoutX="953.0" layoutY="372.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="image1" fitHeight="150.0" fitWidth="130.0" layoutX="63.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="image2" fitHeight="150.0" fitWidth="130.0" layoutX="238.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="image3" fitHeight="150.0" fitWidth="130.0" layoutX="443.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="image4" fitHeight="150.0" fitWidth="130.0" layoutX="643.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="image5" fitHeight="150.0" fitWidth="130.0" layoutX="843.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true" />
       <RadioButton fx:id="state1radio" layoutX="100.0" layoutY="560.0" mnemonicParsing="false" text="1">
          <toggleGroup>
             <ToggleGroup fx:id="group" />
@@ -37,7 +36,7 @@
       <RadioButton fx:id="state5radio" layoutX="880.0" layoutY="560.0" mnemonicParsing="false" text="5" toggleGroup="$group" />
       <RadioButton fx:id="state6radio" layoutX="1050.0" layoutY="560.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="106.0" text="Not Relevant" toggleGroup="$group" />
       <Button layoutX="1053.0" layoutY="749.0" mnemonicParsing="false" onAction="#saveQuestionAndLoadNext" text="Save and Next" />
-      <Label fx:id="quesitonIdLable" layoutX="76.0" layoutY="225.0" prefHeight="17.0" prefWidth="0.0" visible="false" />
+      <Label fx:id="questionIdLabel" layoutX="76.0" layoutY="225.0" prefHeight="17.0" prefWidth="0.0" visible="false" />
       <TextArea fx:id="textFieldQuestion" layoutX="303.0" layoutY="262.0" prefHeight="42.0" prefWidth="566.0" text="Can he/she wash himself/herself?" />
    </children>
 </AnchorPane>

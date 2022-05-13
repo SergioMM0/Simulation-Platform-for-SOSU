@@ -21,7 +21,7 @@ public class DAOCase {
     public List<Case> getAllCases(int schoolid) throws DalException {
         ArrayList<Case> cases = new ArrayList<>();
         try(Connection connection = dataAccess.getConnection()){
-            String sql = "select  [Case].[id] ,  [Case].[name] ,  [Case].[Description_of_the_condition] , [Case].[Cause_text] ,CategoryName , SubCategoryName\n" +
+            String sql = "select  [Case].[id] ,  [Case].[name] ,  [Case].[Description_of_the_condition] , [Case].[Cause_text] ,CategoryName , SubCategoryName, schoolid\n" +
                     "from [Case] " +
                     "where schoolid  = ? ";
             PreparedStatement prs = connection.prepareStatement(sql);
@@ -35,8 +35,9 @@ public class DAOCase {
                 String cause_text = rs.getString("Cause_text");
                 String category = rs.getString("CategoryName");
                 String subcategory = rs.getString("SubCategoryName");
+                int schoolID = rs.getInt("schoolid");
 
-                Case c = new Case(id , name ,description_of_the_condition,cause_text, category , subcategory );
+                Case c = new Case(id , name ,description_of_the_condition,cause_text, category , subcategory, schoolID );
                 cases.add(c);
 
             }

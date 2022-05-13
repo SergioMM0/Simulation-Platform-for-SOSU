@@ -1,6 +1,7 @@
 package GUI.Controllers;
 
 import BE.Case;
+import BE.User;
 import DAL.util.DalException;
 import GUI.Alerts.SoftAlert;
 import GUI.Models.NewCaseMOD;
@@ -29,9 +30,6 @@ public class NewCaseCTLL implements Initializable {
     private ComboBox<String> categoryComboBox;
 
     @FXML
-    private TextField causeTextField;
-
-    @FXML
     private TextField descriptionOfCondition;
 
     @FXML
@@ -46,16 +44,20 @@ public class NewCaseCTLL implements Initializable {
     private NewCaseMOD model;
     private TeacherMainCTLL teacherMainCTLL;
     private CatAndSubC catAndSubC;
+    private User logedUser;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         model = new NewCaseMOD();
-        populateCategories();
         catAndSubC = CatAndSubC.getInstance();
+        populateCategories();
     }
 
     public void populateCategories(){
-        categoryComboBox.getItems().addAll(catAndSubC.getCategories());
+        String[] allCat = catAndSubC.getCategories();
+        for (int i = 0; i < allCat.length-1; i++) {
+            categoryComboBox.getItems().add(allCat[i]);
+        }
     }
 
     @FXML
@@ -77,9 +79,9 @@ public class NewCaseCTLL implements Initializable {
             try {
                 Case newCase = new Case(nameField.getText(),
                         descriptionOfCondition.getText(),
-                        causeTextField.getText(),
                         categoryComboBox.getValue(),
-                        subcategoryComboBox.getValue());
+                        subcategoryComboBox.getValue(),
+                        logedUser.getSchoolID());
                 model.createCase(newCase);
                 closeWindow();
                 teacherMainCTLL.addCaseToList(newCase);
@@ -103,11 +105,7 @@ public class NewCaseCTLL implements Initializable {
             return false;
         }
         else if(descriptionOfCondition.getText().isEmpty()){
-            new SoftAlert("Please introduce a valid description of the condition");
-            return false;
-        }
-        else if(causeTextField.getText().isEmpty()){
-            new SoftAlert("Please introduce a valid description of the cause");
+            new SoftAlert("Please introduce a valid description of the case");
             return false;
         }
         else return true;
@@ -120,6 +118,10 @@ public class NewCaseCTLL implements Initializable {
 
     public void setController(TeacherMainCTLL teacherMainCTLL) {
         this.teacherMainCTLL = teacherMainCTLL;
+    }
+
+    public void setUser(User user){
+        this.logedUser = user;
     }
 }
 

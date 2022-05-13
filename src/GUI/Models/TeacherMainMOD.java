@@ -85,6 +85,10 @@ public class TeacherMainMOD {
         bllFacade.deleteStudent(student);
     }
 
+    public ObservableList<User> getAllStudents(int schoolID) throws DalException {
+        allStudents.addAll(bllFacade.getAllStudent(schoolID));
+        return allStudents;
+    }
 
 
 
@@ -100,6 +104,8 @@ public class TeacherMainMOD {
         genders.add("Lockheed Martin F-16 Fighting Falcon lol");
         return genders;
     }
+
+    /*
 
     public ObservableList<String> getBloodTypes() {
         ObservableList<String> bloodTypes = FXCollections.observableArrayList();
@@ -145,4 +151,6 @@ public class TeacherMainMOD {
         tobacco.add("I got a ferrari bcs I don't smoke");
         return tobacco;
     }
+
+     */
 }

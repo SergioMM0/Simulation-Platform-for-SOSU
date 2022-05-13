@@ -25,6 +25,9 @@ public class ManageStudentCTLL {
     private ManageStudentMOD model;
     private User student;
 
+    public ManageStudentCTLL(){
+        model = new ManageStudentMOD();
+    }
 
     @FXML
     void cancel(ActionEvent event) {
@@ -44,6 +47,7 @@ public class ManageStudentCTLL {
                     );
                     model.addNewStudent(user);
                     teacherMainCTLL.addStudentToTable(user);
+                    closeWindow();
                 } catch (DalException dalException) {
                     new SoftAlert(dalException.getMessage());
                 }
@@ -55,8 +59,8 @@ public class ManageStudentCTLL {
                     student.setName(nameField.getText());
                     student.setEmail(emailField.getText());
                     model.updateStudent(student);
-                    closeWindow();
                     teacherMainCTLL.updateStudentInTable(student);
+                    closeWindow();
                 }catch (DalException dalException){
                     new SoftAlert(dalException.getMessage());
                 }
