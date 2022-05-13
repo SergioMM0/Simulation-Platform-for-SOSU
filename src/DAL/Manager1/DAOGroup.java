@@ -35,8 +35,6 @@ public class DAOGroup {
 
         } catch (SQLException e) {
            throw new DalException("couldn't retrieve the groups " , e );
-        } catch (  NullPointerException ignored){
-
         }
         return getAllGruops;
     }
@@ -88,10 +86,11 @@ public class DAOGroup {
 
         try(Connection con = dataAccess.getConnection()) {
             String sql = "SELECT userid , username , email , usertype , schoolid FROM GroupUsers" +
-                    "INNER JOIN users "+
+                    " INNER JOIN users "+
                     "ON GroupUsers.studentid = userid WHERE GroupUsers.Groupid = ? ";
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setInt(1, id);
+            prs.execute();
             ResultSet rs = prs.getResultSet();
             while(rs.next()){
                 int iD = rs.getInt("userid");

@@ -57,5 +57,15 @@ public class Group {
     public void setSchoolID(int schoolID) {
         SchoolID = schoolID;
     }
+
+    @Override
+    public String toString() {
+        return "Group{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", members=" + members +
+                ", SchoolID=" + SchoolID +
+                '}';
+    }
 }
 

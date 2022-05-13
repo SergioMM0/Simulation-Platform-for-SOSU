@@ -17,7 +17,7 @@ public class testedmain {
         DAOGroup d = new DAOGroup();
 
         for(Group c : d.getAllGroups(1)){
-            System.out.println(c);
+            System.out.println(c.getName());
         }
     }
 }
