@@ -35,6 +35,10 @@ public interface BLLFacade {
     List<User> getAllStudent(int schoolID) throws DalException;
 
     void updatePatient(Patient patient) throws DalException;
+
+    void createNewGroup(Group group) throws DalException;
+
+    void updateGroup(Group selectedGroup) throws DalException;
 }
 
 

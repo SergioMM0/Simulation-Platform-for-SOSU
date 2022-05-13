@@ -68,9 +68,6 @@ public class TeacherMainCTLL {
     private Label groupNameLBL;
 
     @FXML
-    private TableView<Group> groupTableGV;
-
-    @FXML
     private Label groupsLBL;
 
     @FXML
@@ -362,12 +359,12 @@ public class TeacherMainCTLL {
 
     @FXML
     void studentIsSelected(MouseEvent event){
-
+        //TODO Maybe not needed
     }
 
     @FXML
     void groupIsSelected(MouseEvent event){
-
+        //TODO Maybe not needed
     }
 
     @FXML
@@ -417,16 +414,31 @@ public class TeacherMainCTLL {
 
     @FXML
     void createGroup(ActionEvent event) {
+        openView("GUI/Views/ManageGroup.fxml", generalCSS, "Add new group", 400, 180, false, 1);
+    }
+
+    public void addGroupToList(Group group) {
+        model.addObservableGroup(group);
+        refreshGroupList();
+    }
+
+    public void updateGroupInList(Group group){
+        model.updateObservableGroup(group);
+        refreshGroupList();
+    }
+
+    public void refreshGroupList(){
+        groupsTable.getItems().clear();
+        groupsTable.getItems().addAll(model.getObservableGroups());
+    }
+
+    @FXML
+    void deleteGroup(ActionEvent event) {
 
     }
 
     @FXML
     void deleteCase(ActionEvent event) {
-
-    }
-
-    @FXML
-    void deleteGroup(ActionEvent event) {
 
     }
 
@@ -550,6 +562,18 @@ public class TeacherMainCTLL {
             loader.<ManageStudentCTLL>getController().setStudent(studentsTable.getSelectionModel().getSelectedItem());
             loader.<ManageStudentCTLL>getController().populateStudentFields();
         }
+        if(resource.equals("GUI/Views/ManageGroup.fxml") && operationType == 1){
+            loader.<ManageGroupCTLL>getController().setUser(logedUser);
+            loader.<ManageGroupCTLL>getController().setController(this);
+            loader.<ManageGroupCTLL>getController().setOperationType(operationType);
+        }
+        if(resource.equals("GUI/Views/ManageGroup.fxml") && operationType == 2){
+            loader.<ManageGroupCTLL>getController().setUser(logedUser);
+            loader.<ManageGroupCTLL>getController().setGroup(groupsTable.getSelectionModel().getSelectedItem());
+            loader.<ManageGroupCTLL>getController().setController(this);
+            loader.<ManageGroupCTLL>getController().setOperationType(operationType);
+            //loader.<ManageGroupCTLL>getController().
+        }
         root.getStylesheets().add(css);
         Stage stage = new Stage();
         stage.setTitle(title);
@@ -559,7 +583,7 @@ public class TeacherMainCTLL {
     }
 
     private void closeWindow() {
-        Stage st = (Stage) groupTableGV.getScene().getWindow();
+        Stage st = (Stage) casesListGV.getScene().getWindow();
         st.close();
     }
 }

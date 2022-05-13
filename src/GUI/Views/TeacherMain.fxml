@@ -58,7 +58,7 @@
                   <Button layoutX="305.0" layoutY="125.0" mnemonicParsing="false" onAction="#editStudent" prefHeight="35.0" prefWidth="120.0" text="Edit student" />
                   <Button layoutX="305.0" layoutY="180.0" mnemonicParsing="false" onAction="#deleteStudent" prefHeight="35.0" prefWidth="120.0" text="Delete student" />
                   <Button layoutX="450.0" layoutY="70.0" mnemonicParsing="false" onAction="#createGroup" prefHeight="35.0" prefWidth="120.0" text="Create group" />
-                  <Button layoutX="450.0" layoutY="125.0" mnemonicParsing="false" onAction="#editGroup" prefHeight="35.0" prefWidth="120.0" text="Edit group" />
+                  <Button layoutX="450.0" layoutY="125.0" mnemonicParsing="false" onAction="#editGroup" prefHeight="35.0" prefWidth="120.0" text="Edit group name" />
                   <Button layoutX="450.0" layoutY="180.0" mnemonicParsing="false" onAction="#deleteGroup" prefHeight="35.0" prefWidth="120.0" text="Delete group" />
                   <TableView fx:id="groupsTable" layoutX="605.0" layoutY="70.0" onMouseClicked="#groupIsSelected" prefHeight="505.0" prefWidth="250.0">
                      <columns>
