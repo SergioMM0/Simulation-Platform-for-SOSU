@@ -21,7 +21,7 @@ public class DAOGroup {
         ArrayList<Group> getAllGruops = new ArrayList<>();
         try(Connection con = dataAccess.getConnection()) {
             String sql = "SELECT * FROM Groups where Schoolid = ?";
-            PreparedStatement prs = con.prepareCall(sql);
+            PreparedStatement prs = con.prepareStatement(sql);
             prs.setInt(1 , schoolId);
             prs.execute();
             ResultSet rs = prs.getResultSet();
