@@ -50,7 +50,7 @@
                <children>
                   <Button layoutX="305.0" layoutY="70.0" mnemonicParsing="false" onAction="#addNewStudent" prefHeight="35.0" prefWidth="120.0" text="Add new student" />
                   <Label fx:id="studentsLBL" layoutX="120.0" layoutY="40.0" text="Students" />
-                  <TableView fx:id="studentsTable" layoutX="20.0" layoutY="70.0" prefHeight="505.0" prefWidth="250.0">
+                  <TableView fx:id="studentsTable" layoutX="20.0" layoutY="70.0" onMouseClicked="#studentIsSelected" prefHeight="505.0" prefWidth="250.0">
                     <columns>
                       <TableColumn fx:id="studentNameCol" prefWidth="249.60001220703126" text="Name" />
                     </columns>
@@ -60,7 +60,7 @@
                   <Button layoutX="450.0" layoutY="70.0" mnemonicParsing="false" onAction="#createGroup" prefHeight="35.0" prefWidth="120.0" text="Create group" />
                   <Button layoutX="450.0" layoutY="125.0" mnemonicParsing="false" onAction="#editGroup" prefHeight="35.0" prefWidth="120.0" text="Edit group" />
                   <Button layoutX="450.0" layoutY="180.0" mnemonicParsing="false" onAction="#deleteGroup" prefHeight="35.0" prefWidth="120.0" text="Delete group" />
-                  <TableView fx:id="groupsTable" layoutX="605.0" layoutY="70.0" prefHeight="505.0" prefWidth="250.0">
+                  <TableView fx:id="groupsTable" layoutX="605.0" layoutY="70.0" onMouseClicked="#groupIsSelected" prefHeight="505.0" prefWidth="250.0">
                      <columns>
                         <TableColumn fx:id="groupNameCol" prefWidth="249.60001220703126" text="Group name" />
                      </columns>
@@ -140,12 +140,12 @@
                   </AnchorPane>
                   <Button layoutX="270.0" layoutY="310.0" mnemonicParsing="false" onAction="#unassignSelectedCase" prefHeight="35.0" prefWidth="150.0" text="Unassign case" textOverrun="CLIP" />
                   <Button layoutX="460.0" layoutY="190.0" mnemonicParsing="false" onAction="#openGradedCase" prefHeight="35.0" prefWidth="150.0" text="See graded case" />
-                  <TableView fx:id="casesAssignedList" layoutX="40.0" layoutY="130.0" prefHeight="445.0" prefWidth="200.0">
+                  <TableView fx:id="casesAssignedList" layoutX="40.0" layoutY="130.0" onMouseClicked="#assignedCaseIsSelected" prefHeight="445.0" prefWidth="200.0">
                      <columns>
                         <TableColumn fx:id="nameColCases" prefWidth="199.20001220703125" text="Name" />
                      </columns>
                   </TableView>
-                  <TableView fx:id="casesGradedList" layoutX="640.0" layoutY="130.0" prefHeight="445.0" prefWidth="200.0">
+                  <TableView fx:id="casesGradedList" layoutX="640.0" layoutY="130.0" onMouseClicked="#gradedCaseIsSelected" prefHeight="445.0" prefWidth="200.0">
                      <columns>
                         <TableColumn fx:id="nameColCasesGraded" prefWidth="199.20001220703125" text="Name" />
                      </columns>

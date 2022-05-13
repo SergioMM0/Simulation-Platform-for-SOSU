@@ -75,6 +75,13 @@ public class BLLManager implements BLLFacade{
     }
 
     @Override
+    public void updatePatient(Patient patient) throws DalException {
+        dalFacade.updatePatient(patient);
+
+        //TODO implement updatePatient
+    }
+
+    @Override
     public void saveStudentQuestionAnswer(StudentQuestionnaireAnswer answer) throws DalException {
         dalFacade.addStudentQuestionAnswer(answer);
     }

@@ -5,6 +5,7 @@ import BE.Group;
 import BE.Patient;
 import BE.User;
 import DAL.util.DalException;
+import GUI.Alerts.ConfirmationAlert;
 import GUI.Alerts.SoftAlert;
 import GUI.Models.TeacherMainMOD;
 import GUI.Util.CatAndSubC;
@@ -19,6 +20,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Locale;
 
 public class TeacherMainCTLL {
 
@@ -188,6 +191,10 @@ public class TeacherMainCTLL {
 
     public void addPatientToList(Patient patient) {
         model.addPatientToList(patient);
+        refreshPatientsList();
+    }
+
+    public void refreshPatientsList(){
         patientsListGV.getItems().clear();
         patientsListGV.getItems().addAll(model.getObservablePatients());
     }
@@ -207,11 +214,6 @@ public class TeacherMainCTLL {
     @FXML
     void addNewPatient(ActionEvent event) {
         openView("GUI/Views/CreatePatient.fxml", generalCSS, "Create new patient", 500, 650, false, 0);
-    }
-
-    @FXML
-    void groupIsSelected(MouseEvent event) {
-
     }
 
     @FXML
@@ -285,6 +287,117 @@ public class TeacherMainCTLL {
 
     @FXML
     public void updatePatient(ActionEvent actionEvent) {
+        ConfirmationAlert confirmationAlert;
+        if(patientFieldsAreFilled() && !fieldsAreTheSame()){
+            try{
+                Patient patient = patientsListGV.getSelectionModel().getSelectedItem();
+                patient.setFirst_name(nameField.getText());
+                patient.setLast_name(familyNameField.getText());
+                patient.setDateOfBirth(dateOfBirthPicker.getValue());
+                patient.setGender(genderComboBox.getValue());
+                patient.setWeight(weightField.getText());
+                patient.setHeight(heightField.getText());
+                patient.setCpr(cprField.getText());
+                patient.setPhoneNumber(phoneNumberField.getText());
+                model.updatePatient(patient);
+                refreshPatientsList();
+            }catch(DalException dalException){
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Are you sure?");
+                alert.setHeaderText("please confirm");
+                ButtonType okButton = new ButtonType("Confirm");
+                ButtonType cancelButton = new ButtonType("Cancel");
+                alert.getButtonTypes().setAll(okButton,cancelButton);
+                alert.showAndWait();
+            }
+        }
+    }
+
+    private boolean patientFieldsAreFilled(){
+        if(nameField.getText().isEmpty()){
+            new SoftAlert("Please introduce a new name for the patient");
+            return false;
+        }
+        else if(familyNameField.getText().isEmpty()){
+            new SoftAlert("Please introduce a new family name for the patient");
+            return false;
+        }
+        else if(dateOfBirthPicker.getValue().isAfter(LocalDate.now()) || dateOfBirthPicker.getValue() == null){
+            new SoftAlert("Please introduce a new date of birth for the patient");
+            return false;
+        }
+        else if(genderComboBox.getSelectionModel().isEmpty() || genderComboBox.hasProperties()){
+            new SoftAlert("Please introduce a new gender combo box for the patient");
+            return false;
+        }
+        else if(weightField.getText().isEmpty()){
+            new SoftAlert("Please introduce a new valid weight for the patient");
+            return false;
+        }
+        else if(heightField.getText().isEmpty()){
+            new SoftAlert("Please introduce a new valid height for the patient");
+            return false;
+        }
+        else if(cprField.getText().isEmpty()){
+            new SoftAlert("Please introduce a valid CPR for the patient");
+            return false;
+        }
+        else if(phoneNumberField.getText().isEmpty()){
+            new SoftAlert("Please introduce a valid phone number for the patient");
+            return false;
+        }
+        else return true;
+    }
+
+    private boolean fieldsAreTheSame(){
+        int same = 0;
+        if(nameField.getText().toLowerCase(Locale.ROOT).equals(
+                patientsListGV.getSelectionModel().getSelectedItem().getFirst_name().toLowerCase(Locale.ROOT))){
+            same++;
+        }
+        else if(familyNameField.getText().toLowerCase(Locale.ROOT).equals(
+                patientsListGV.getSelectionModel().getSelectedItem().getLast_name().toLowerCase(Locale.ROOT))) {
+            same++;
+        }
+        else if(genderComboBox.getValue().equals(patientsListGV.getSelectionModel().getSelectedItem().getGender())){
+            same++;
+        }
+        else if(weightField.getText().toLowerCase(Locale.ROOT).equals(
+                patientsListGV.getSelectionModel().getSelectedItem().getWeight().toLowerCase(Locale.ROOT))){
+            same++;
+        }
+        else if(heightField.getText().toLowerCase(Locale.ROOT).equals(
+                patientsListGV.getSelectionModel().getSelectedItem().getHeight().toLowerCase(Locale.ROOT))){
+            same++;
+        }
+        else if(cprField.getText().toLowerCase(Locale.ROOT).equals(
+                patientsListGV.getSelectionModel().getSelectedItem().getCpr().toLowerCase(Locale.ROOT))){
+            same++;
+        }
+        else if(phoneNumberField.getText().toLowerCase(Locale.ROOT).equals(
+                patientsListGV.getSelectionModel().getSelectedItem().getPhoneNumber().toLowerCase(Locale.ROOT))){
+            same++;
+        }
+        return same<7;
+    }
+
+    @FXML
+    void studentIsSelected(MouseEvent event){
+
+    }
+
+    @FXML
+    void groupIsSelected(MouseEvent event){
+
+    }
+
+    @FXML
+    void assignedCaseIsSelected(MouseEvent event){
+
+    }
+
+    @FXML
+    void gradedCaseIsSelected(MouseEvent event){
 
     }
 
