@@ -44,7 +44,7 @@ public class DAOGroup {
     public void createGroup(Group group)throws DalException {
 
         try(Connection con = dataAccess.getConnection()) {
-            String sql = "INSERT INTO Groups (Title) VALUES (?)";
+            String sql = "INSERT INTO Groups (name) VALUES (?)";
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setString(1 , group.getName());
             prs.executeUpdate();
