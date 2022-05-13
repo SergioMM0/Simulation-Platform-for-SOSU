@@ -23,6 +23,7 @@ public class DAOGroup {
             String sql = "SELECT * FROM Groups where Schoolid = ?";
             PreparedStatement prs = con.prepareCall(sql);
             prs.setInt(1 , schoolId);
+            prs.execute();
             ResultSet rs = prs.getResultSet();
             while(rs.next()){
                 int id = rs.getInt("id");
