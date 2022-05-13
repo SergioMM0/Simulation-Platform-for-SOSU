@@ -50,13 +50,14 @@ public class DAOCase {
         //public Case(int id, String name,String conditionDescription, String category, String subCategory,int schoolID)
     public void createCase(Case c ) throws DalException {
         try(Connection con = dataAccess.getConnection()) {
-            String sql = "INSERT INTO [dbo].[Case] ( name ,Description_of_the_condition,CategoryName , SubCategoryName) " +
-                    "VALUES (?,?,?,?);" ;
+            String sql = "INSERT INTO [dbo].[Case] ( name ,Description_of_the_condition,CategoryName , SubCategoryName ,schoolid) " +
+                    "VALUES (?,?,?,? , ?);" ;
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setString(1 , c.getName());
             prs.setString(2 ,c.getConditionDescription());
             prs.setString(3,c.getCategory());
             prs.setString(4 , c.getSubCategory());
+            prs.setInt(5 ,c.getSchoolID());
             prs.executeUpdate();
         } catch (SQLException e) {
             throw new DalException("Connection Lost" , e);
