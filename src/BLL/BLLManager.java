@@ -77,7 +77,6 @@ public class BLLManager implements BLLFacade{
     @Override
     public void updatePatient(Patient patient) throws DalException {
         dalFacade.updatePatient(patient);
-
         //TODO implement updatePatient
     }
 
