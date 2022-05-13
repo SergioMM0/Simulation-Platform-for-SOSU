@@ -44,7 +44,7 @@ public class DAOUser {
     public List<User> getAllUsers(int schoolId) throws DalException {
         ArrayList<User> users = new ArrayList<>();
         try (Connection con = dataAccess.getConnection()) {
-            String sql = "SELECT * FROM users where schoolid = ? ";
+            String sql = "SELECT * FROM users where schoolid = ? And usertype = 'STUDENT' ";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setInt(1 , schoolId);
             statement.execute();
