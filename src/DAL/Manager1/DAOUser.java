@@ -47,6 +47,7 @@ public class DAOUser {
             String sql = "SELECT * FROM users where schoolid = ? ";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setInt(1 , schoolId);
+            statement.execute();
             ResultSet rs = statement.getResultSet();
             while (rs.next()) {
                 int id = rs.getInt("userid");
