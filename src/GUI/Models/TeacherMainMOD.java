@@ -18,8 +18,6 @@ public class TeacherMainMOD {
     private ObservableList<Group> allGroups;
     private ObservableList<Case> allCases;
     private ObservableList<Patient> allPatients;
-    private ObservableList<String> allCategories;
-    private ObservableList<String> subCategories;
     private ObservableList<User> allStudents;
 
     public TeacherMainMOD(){
@@ -27,8 +25,6 @@ public class TeacherMainMOD {
         allGroups = FXCollections.observableArrayList();
         allCases = FXCollections.observableArrayList();
         allPatients = FXCollections.observableArrayList();
-        allCategories = FXCollections.observableArrayList();
-        subCategories = FXCollections.observableArrayList();
         allStudents = FXCollections.observableArrayList();
     }
 
