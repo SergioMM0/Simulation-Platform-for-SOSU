@@ -90,6 +90,18 @@ public class TeacherMainMOD {
         return allStudents;
     }
 
+    public void updatePatient(Patient patient) throws DalException{
+        bllFacade.updatePatient(patient);
+        updatePatientInTable(patient);
+    }
+
+    public void updatePatientInTable(Patient patient){
+        for(Patient p : allPatients){
+            if(p.getId() == patient.getId()){
+                p = patient;
+            }
+        }
+    }
 
 
 
