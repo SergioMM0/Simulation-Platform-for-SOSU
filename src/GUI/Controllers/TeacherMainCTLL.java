@@ -267,7 +267,7 @@ public class TeacherMainCTLL {
 
     @FXML
     public void updatePatient(ActionEvent actionEvent) {
-        if(patientFieldsAreFilled() && !fieldsAreTheSame()){
+        if(patientFieldsAreFilled()){
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                     "Are you sure you want to update this patient?",ButtonType.YES,ButtonType.NO,ButtonType.CANCEL);
             alert.showAndWait();
@@ -285,6 +285,7 @@ public class TeacherMainCTLL {
                     model.updatePatient(patient);
                     refreshPatientsList();
                 }catch(DalException dalException){
+                    dalException.printStackTrace();
                     new SoftAlert(dalException.getMessage());
                 }
             }
