@@ -54,7 +54,7 @@ public class DAOUser {
                 String username = rs.getString("username");
                 String email = rs.getString("email");
                 String usertype = rs.getString("usertype");
-                int schoolid = rs.getInt("schooid");
+                int schoolid = rs.getInt("schoolId");
                 User user = new User(id,schoolid , username, email, usertype);
                 users.add(user);
             }
