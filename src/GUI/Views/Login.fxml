@@ -11,7 +11,7 @@
       <Label fx:id="emailLbl" layoutX="148.0" layoutY="142.0" text="Email" />
       <Label fx:id="passwordLBL" layoutX="148.0" layoutY="216.0" text="Password" />
       <TextField fx:id="emailField" layoutX="148.0" layoutY="160.0" prefHeight="30.0" prefWidth="204.0" />
-      <Button styleClass="stylesheet" fx:id="loginBtn" layoutX="148.0" layoutY="305.0" mnemonicParsing="false" onAction="#loginAct" prefHeight="30.0" prefWidth="204.0" text="Login" />
+      <Button styleClass="lightgreen" fx:id="loginBtn" layoutX="148.0" layoutY="305.0" mnemonicParsing="false" onAction="#loginAct" prefHeight="30.0" prefWidth="204.0" text="Login" />
       <PasswordField fx:id="passwordField" layoutX="148.0" layoutY="234.0" prefHeight="30.0" prefWidth="204.0" />
    </children>
 </AnchorPane>
