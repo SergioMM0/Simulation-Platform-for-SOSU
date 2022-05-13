@@ -5,11 +5,11 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="861.0" prefWidth="1188.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.EvaluateCaseCTLL">
+<AnchorPane stylesheets="/GUI/Views/CSS/styles.css" prefHeight="861.0" prefWidth="1188.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.EvaluateCaseCTLL">
    <children>
       <Label layoutX="75.0" layoutY="44.0" prefHeight="17.0" prefWidth="77.0" text="Category" />
-      <Button layoutX="1106.0" layoutY="810.0" mnemonicParsing="false" text="Back" />
-      <Button layoutX="995.0" layoutY="810.0" mnemonicParsing="false" text="Evaluate case" />
+      <Button styleClass="stylesheet" layoutX="1106.0" layoutY="810.0" mnemonicParsing="false" text="Back" />
+      <Button styleClass="stylesheet" layoutX="995.0" layoutY="810.0" mnemonicParsing="false" text="Evaluate case" />
       <Label layoutX="240.0" layoutY="44.0" text="Name" />
       <Label layoutX="75.0" layoutY="105.0" text="SubCategory" />
       <Label layoutX="240.0" layoutY="105.0" text="Issue" />

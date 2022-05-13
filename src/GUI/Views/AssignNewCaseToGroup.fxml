@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="530.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Views.AssignNewCaseToGroup">
+<AnchorPane stylesheets="/GUI/Views/CSS/styles.css" prefHeight="400.0" prefWidth="530.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Views.AssignNewCaseToGroup">
    <children>
       <Label layoutX="40.0" layoutY="40.0" text="Group:" />
       <Label layoutX="88.0" layoutY="40.0" prefWidth="300.0" text="&lt;Group name&gt;" />
@@ -14,7 +14,7 @@
       <Label layoutX="338.0" layoutY="80.0" text="Cases templates" />
       <ListView layoutX="40.0" layoutY="117.0" prefHeight="200.0" prefWidth="200.0" />
       <ListView layoutX="288.0" layoutY="117.0" prefHeight="200.0" prefWidth="200.0" />
-      <Button layoutX="388.0" layoutY="341.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="100.0" text="Assign" />
-      <Button layoutX="38.0" layoutY="341.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="100.0" text="Cancel" />
+      <Button styleClass="stylesheet" layoutX="388.0" layoutY="341.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="100.0" text="Assign" />
+      <Button styleClass="stylesheet" layoutX="38.0" layoutY="341.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="100.0" text="Cancel" />
    </children>
 </AnchorPane>

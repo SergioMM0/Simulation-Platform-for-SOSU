@@ -18,6 +18,8 @@
 .insertimages5{
      -fx-background-image: url("/res/five.png");
  }
-
+.stylesheet{
+    -fx-background-color:  #45ff9f;
+}
 
 
