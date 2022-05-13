@@ -31,7 +31,7 @@ public interface DALFacade {
 
     void createPatient(Patient patient ) throws DalException;
     //
-   // void updatepatient(Patient patient) throws DalException;
+    void updatePatient(Patient patient) throws DalException;
         //
     void deletePatient(Patient patient)throws DalException ;
 
