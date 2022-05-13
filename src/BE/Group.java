@@ -8,11 +8,18 @@ public class Group {
     private String name;
     private List<User> members;
     private int SchoolID ;
+
     public Group(int id, String name, List<User> members , int SchoolID) {
         this.id = id;
         this.name = name;
         this.members = members;
         this.SchoolID = SchoolID ;
+    }
+
+    public Group(String name, List<User> members, int schoolID) {
+        this.name = name;
+        this.members = members;
+        SchoolID = schoolID;
     }
 
     public int getId() {

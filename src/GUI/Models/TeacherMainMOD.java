@@ -98,15 +98,28 @@ public class TeacherMainMOD {
 
     public void updatePatientInTable(Patient patient){
         for(Patient p : allPatients){
-            if(p.getId() == patient.getId()){
-                p = patient;
+            if(p.getFirst_name().equals(patient.getFirst_name())){
+                p = patient; //TODO Implement method to make sure name is not repeated
             }
         }
     }
 
+    public void addObservableGroup(Group group){
+        allGroups.add(group);
+    }
+
+    public ObservableList<Group> getObservableGroups() {
+        return allGroups;
+    }
 
 
-
+    public void updateObservableGroup(Group group) {
+        for(Group g : allGroups){
+            if(g.getName().equals(group.getName())){
+                g = group; //TODO implement a method to make sure name is not repeated
+            }
+        }
+    }
 
     //TODO DELETE THE FOLLOWING WHEN IMPLEMENTED TO READ FROM FILE
 
@@ -117,53 +130,4 @@ public class TeacherMainMOD {
         genders.add("Lockheed Martin F-16 Fighting Falcon lol");
         return genders;
     }
-
-    /*
-
-    public ObservableList<String> getBloodTypes() {
-        ObservableList<String> bloodTypes = FXCollections.observableArrayList();
-        bloodTypes.add("A");
-        bloodTypes.add("B");
-        bloodTypes.add("AB");
-        bloodTypes.add("0");
-        return bloodTypes;
-    }
-
-    public ObservableList<String> getExerciseOptions() {
-        ObservableList<String> exercise = FXCollections.observableArrayList();
-        exercise.add("+5 days a week");
-        exercise.add("2-3 days a week");
-        exercise.add("1 day a week");
-        exercise.add("I'm a lazy a$$ ****");
-        return exercise;
-    }
-
-    public ObservableList<String> getDietOptions() {
-        ObservableList<String> diet = FXCollections.observableArrayList();
-        diet.add("Lose diet");
-        diet.add("Strict diet");
-        diet.add("Doesn't have a diet plan");
-        return diet;
-    }
-
-    public ObservableList<String> getAlcoholOptions() {
-        ObservableList<String> alcohol = FXCollections.observableArrayList();
-        alcohol.add("Daily");
-        alcohol.add("Weekends");
-        alcohol.add("Sporadic");
-        alcohol.add("Never");
-        return alcohol;
-    }
-
-    public ObservableList<String> getTobaccoOptions() {
-        ObservableList<String> tobacco = FXCollections.observableArrayList();
-        tobacco.add("SnoopDog style");
-        tobacco.add("10-20 cigarettes a day");
-        tobacco.add("0-10 cigarettes a day");
-        tobacco.add("Social smoker");
-        tobacco.add("I got a ferrari bcs I don't smoke");
-        return tobacco;
-    }
-
-     */
 }

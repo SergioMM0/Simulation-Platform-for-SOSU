@@ -81,6 +81,16 @@ public class BLLManager implements BLLFacade{
     }
 
     @Override
+    public void createNewGroup(Group group) throws DalException {
+        dalFacade.createGroup(group);
+    }
+
+    @Override
+    public void updateGroup(Group selectedGroup) throws DalException {
+        dalFacade.updateGroup(selectedGroup);
+    }
+
+    @Override
     public void saveStudentQuestionAnswer(StudentQuestionnaireAnswer answer) throws DalException {
         dalFacade.addStudentQuestionAnswer(answer);
     }
