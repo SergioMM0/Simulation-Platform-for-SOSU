@@ -80,14 +80,6 @@ public class NewPatientCTLL implements Initializable {
 
     private void populateComboBoxes() {
         genderComboBox.getItems().addAll(model.getGenders());
-        bloodTypeComboBox.getItems().addAll(model.getBloodTypes());
-        /*
-        exerciseComboBox.getItems().addAll(model.getExerciseOptions());
-        dietComboBox.getItems().addAll(model.getDietOptions());
-        alcoholComboBox.getItems().addAll(model.getAlcoholOptions());
-        tobaccoComboBox.getItems().addAll(model.getTobaccoOptions());
-
-         */
     }
 
     @FXML
@@ -109,14 +101,6 @@ public class NewPatientCTLL implements Initializable {
                         heightField.getText(),
                         cprField.getText(),
                         phoneNumberField.getText(),
-                        /*
-                        bloodTypeComboBox.getValue(),
-                        exerciseComboBox.getValue(),
-                        dietComboBox.getValue(),
-                        alcoholComboBox.getValue(),
-                        tobaccoComboBox.getValue(),
-
-                         */
                         observationsField.getText(),
                         user.getSchoolID()
                 );
@@ -155,24 +139,6 @@ public class NewPatientCTLL implements Initializable {
             phoneNumberField.setText("No phone number");
             return false;
         }
-        /*
-        else if (bloodTypeComboBox.getSelectionModel().isEmpty()) {
-            new SoftAlert("Please introduce the blood type of the patient");
-            return false;
-        } else if (exerciseComboBox.getSelectionModel().isEmpty()) {
-            new SoftAlert("Please introduce the amount of exercise the patient does");
-            return false;
-        } else if (dietComboBox.getSelectionModel().isEmpty()) {
-            new SoftAlert("Please introduce a statement for the diet of the patient");
-            return false;
-        } else if (alcoholComboBox.getSelectionModel().isEmpty()) {
-            new SoftAlert("Please introduce an statement for the alcohol consumption of the patient");
-            return false;
-        } else if (tobaccoComboBox.getSelectionModel().isEmpty()) {
-            new SoftAlert("Please introduce an statement for the tobacco consumption of the patient");
-            return false;
-        }
-        */
         else if (observationsField.getText().isEmpty()) { //including an observation when creation a patient can be optional
             observationsField.setText("Patient included in the system with no observations");
             return false;

@@ -68,9 +68,6 @@ public class TeacherMainCTLL {
     private Label groupNameLBL;
 
     @FXML
-    private TableView<Group> groupTableGV;
-
-    @FXML
     private Label groupsLBL;
 
     @FXML
@@ -267,7 +264,7 @@ public class TeacherMainCTLL {
 
     @FXML
     public void updatePatient(ActionEvent actionEvent) {
-        if(patientFieldsAreFilled() && !fieldsAreTheSame()){
+        if(patientFieldsAreFilled()){
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                     "Are you sure you want to update this patient?",ButtonType.YES,ButtonType.NO,ButtonType.CANCEL);
             alert.showAndWait();
@@ -285,6 +282,7 @@ public class TeacherMainCTLL {
                     model.updatePatient(patient);
                     refreshPatientsList();
                 }catch(DalException dalException){
+                    dalException.printStackTrace();
                     new SoftAlert(dalException.getMessage());
                 }
             }
@@ -361,12 +359,12 @@ public class TeacherMainCTLL {
 
     @FXML
     void studentIsSelected(MouseEvent event){
-
+        //TODO Maybe not needed
     }
 
     @FXML
     void groupIsSelected(MouseEvent event){
-
+        //TODO Maybe not needed
     }
 
     @FXML
@@ -382,6 +380,14 @@ public class TeacherMainCTLL {
     @FXML
     void addNewStudent(ActionEvent event) {
         openView("GUI/Views/ManageStudent.fxml", generalCSS, "Add new Student", 400, 220, false, 1);
+    }
+
+    @FXML
+    void editStudent(ActionEvent event) {
+        if(studentsTable.getSelectionModel().getSelectedItem() != null){
+            openView("GUI/Views/ManageStudent.fxml", generalCSS, "Edit student", 400, 220, false, 2);
+        }
+        else new SoftAlert("Please select a student");
     }
 
     public void addStudentToTable(User user) {
@@ -416,16 +422,38 @@ public class TeacherMainCTLL {
 
     @FXML
     void createGroup(ActionEvent event) {
+        openView("GUI/Views/ManageGroup.fxml", generalCSS, "Add new group", 400, 180, false, 1);
+    }
+
+    @FXML
+    void editGroup(ActionEvent event) {
+        if(groupsTable.getSelectionModel().getSelectedItem() != null){
+            openView("GUI/Views/ManageGroup.fxml", generalCSS, "Edit group", 400, 180, false, 2);
+        }else new SoftAlert("Please select a group");
+    }
+
+    public void addGroupToList(Group group) {
+        model.addObservableGroup(group);
+        refreshGroupList();
+    }
+
+    public void updateGroupInList(Group group){
+        model.updateObservableGroup(group);
+        refreshGroupList();
+    }
+
+    public void refreshGroupList(){
+        groupsTable.getItems().clear();
+        groupsTable.getItems().addAll(model.getObservableGroups());
+    }
+
+    @FXML
+    void deleteGroup(ActionEvent event) {
 
     }
 
     @FXML
     void deleteCase(ActionEvent event) {
-
-    }
-
-    @FXML
-    void deleteGroup(ActionEvent event) {
 
     }
 
@@ -452,21 +480,6 @@ public class TeacherMainCTLL {
     @FXML
     void duplicatePatient(ActionEvent event) {
 
-    }
-
-    @FXML
-    void editGroup(ActionEvent event) {
-
-    }
-
-    @FXML
-    void editStudent(ActionEvent event) {
-        if(studentsTable.getSelectionModel().getSelectedItem() != null){
-            openView("GUI/Views/ManageStudent.fxml", generalCSS, "Edit student", 400, 220, false, 2);
-        }
-        else{
-            new SoftAlert("Please select a student");
-        }
     }
 
     @FXML
@@ -549,6 +562,18 @@ public class TeacherMainCTLL {
             loader.<ManageStudentCTLL>getController().setStudent(studentsTable.getSelectionModel().getSelectedItem());
             loader.<ManageStudentCTLL>getController().populateStudentFields();
         }
+        if(resource.equals("GUI/Views/ManageGroup.fxml") && operationType == 1){
+            loader.<ManageGroupCTLL>getController().setUser(logedUser);
+            loader.<ManageGroupCTLL>getController().setController(this);
+            loader.<ManageGroupCTLL>getController().setOperationType(operationType);
+        }
+        if(resource.equals("GUI/Views/ManageGroup.fxml") && operationType == 2){
+            loader.<ManageGroupCTLL>getController().setUser(logedUser);
+            loader.<ManageGroupCTLL>getController().setGroup(groupsTable.getSelectionModel().getSelectedItem());
+            loader.<ManageGroupCTLL>getController().setController(this);
+            loader.<ManageGroupCTLL>getController().setOperationType(operationType);
+            //loader.<ManageGroupCTLL>getController().
+        }
         root.getStylesheets().add(css);
         Stage stage = new Stage();
         stage.setTitle(title);
@@ -558,7 +583,7 @@ public class TeacherMainCTLL {
     }
 
     private void closeWindow() {
-        Stage st = (Stage) groupTableGV.getScene().getWindow();
+        Stage st = (Stage) casesListGV.getScene().getWindow();
         st.close();
     }
 }

@@ -79,7 +79,7 @@ public class DAOPatient {
     public void updatepatient(Patient patient) throws DalException {
 
         try (Connection con = dataAccess.getConnection()){
-            String sql = "Update Patient set first_name = ? , last_name = ? , dateoBirth = ? , gender = ? " +
+            String sql = "Update Patient set first_name = ? , last_name = ? , dateofBirth = ? , gender = ? " +
                     ", weight = ? , height = ? , cpr = ? , phone_number = ? , observations = ? where id = ? ";
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setString(1 , patient.getFirst_name());

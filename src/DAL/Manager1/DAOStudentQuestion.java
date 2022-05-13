@@ -26,7 +26,7 @@ public class DAOStudentQuestion {
             prs.execute();
 
         } catch (SQLException e) {
-            throw new DalException("Couldnot create a school ", e);
+            throw new DalException("Couldn't pass this Answer please try again later   ", e);
         }
     }
 
@@ -40,7 +40,7 @@ public class DAOStudentQuestion {
             return rs.getInt(1);
 
         } catch (SQLException e) {
-            throw new DalException("Couldnot create a school ", e);
+            throw new DalException("Couldn't add Questionaire ", e);
         }
     }
 

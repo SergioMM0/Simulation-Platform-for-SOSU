@@ -21,8 +21,9 @@ public class DAOGroup {
         ArrayList<Group> getAllGruops = new ArrayList<>();
         try(Connection con = dataAccess.getConnection()) {
             String sql = "SELECT * FROM Groups where Schoolid = ?";
-            PreparedStatement prs = con.prepareCall(sql);
+            PreparedStatement prs = con.prepareStatement(sql);
             prs.setInt(1 , schoolId);
+            prs.execute();
             ResultSet rs = prs.getResultSet();
             while(rs.next()){
                 int id = rs.getInt("id");
@@ -34,8 +35,6 @@ public class DAOGroup {
 
         } catch (SQLException e) {
            throw new DalException("couldn't retrieve the groups " , e );
-        } catch (  NullPointerException ignored){
-
         }
         return getAllGruops;
     }
@@ -44,9 +43,10 @@ public class DAOGroup {
     public void createGroup(Group group)throws DalException {
 
         try(Connection con = dataAccess.getConnection()) {
-            String sql = "INSERT INTO Groups (Title) VALUES (?)";
+            String sql = "INSERT INTO Groups (name , Schoolid  ) VALUES (? , ?)";
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setString(1 , group.getName());
+            prs.setInt(2 , group.getSchoolID());
             prs.executeUpdate();
         } catch (SQLException e) {
             throw new DalException("couldn't create new group " , e );
@@ -86,10 +86,11 @@ public class DAOGroup {
 
         try(Connection con = dataAccess.getConnection()) {
             String sql = "SELECT userid , username , email , usertype , schoolid FROM GroupUsers" +
-                    "INNER JOIN users "+
+                    " INNER JOIN users "+
                     "ON GroupUsers.studentid = userid WHERE GroupUsers.Groupid = ? ";
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setInt(1, id);
+            prs.execute();
             ResultSet rs = prs.getResultSet();
             while(rs.next()){
                 int iD = rs.getInt("userid");
