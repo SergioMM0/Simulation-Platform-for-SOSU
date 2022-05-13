@@ -4,6 +4,7 @@ import BE.StudentQuestion;
 import BE.StudentQuestionnaireAnswer;
 import BLL.BLLFacade;
 import BLL.BLLManager;
+import BLL.Exceptions.BLLException;
 import DAL.util.DalException;
 
 public class StudentQuestionMOD {
@@ -36,8 +37,8 @@ public class StudentQuestionMOD {
 
     public StudentQuestion getNextQuestion(StudentQuestion question) {
         try {
-            return bll.getNextQuestion(question);       //getting next question
-        } catch (DalException e) {
+                return bll.getNextQuestion(question);       //getting next question
+        } catch (DalException | BLLException e ) {
             e.printStackTrace();
         }
         return null;

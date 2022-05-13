@@ -18,7 +18,7 @@ public interface BLLFacade {
 
     StudentQuestion getFirstQuestion() throws DalException;
 
-    StudentQuestion getNextQuestion(StudentQuestion question) throws DalException;
+    StudentQuestion getNextQuestion(StudentQuestion question) throws DalException ,BLLException;
 
     List<Group> getAllGroups(int schoolID) throws DalException;
 
