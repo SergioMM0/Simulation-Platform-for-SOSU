@@ -55,8 +55,8 @@ public class Manager implements DALFacade {
     }
 
     @Override
-    public List<User> getAllUsers() throws DalException {
-        return daoUser.getAllUsers();
+    public List<User> getAllUsers(int schoolid) throws DalException {
+        return daoUser.getAllUsers(schoolid);
     }
 
     @Override

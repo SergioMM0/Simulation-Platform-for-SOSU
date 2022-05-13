@@ -17,7 +17,7 @@ public interface DALFacade {
 
     User verifyUsers(String useremail, String password) throws DalException;
 
-    List<User> getAllUsers() throws DalException;
+    List<User> getAllUsers(int schoolid) throws DalException;
 
     void updateuser(User user) throws DalException;  //
 

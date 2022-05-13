@@ -69,7 +69,7 @@ public class BLLManager implements BLLFacade{
 
     @Override
     public List<User> getAllStudent(int schoolID) throws DalException {
-        return dalFacade.getallStudents(schoolID);
+        return dalFacade.getAllUsers(schoolID);
 
         //TODO Implement get all students
     }
