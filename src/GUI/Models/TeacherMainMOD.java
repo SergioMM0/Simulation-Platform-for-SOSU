@@ -83,6 +83,7 @@ public class TeacherMainMOD {
 
     public void deleteStudent(User student) throws DalException {
         bllFacade.deleteStudent(student);
+        allStudents.remove(student);
     }
 
     public ObservableList<User> getAllStudents(int schoolID) throws DalException {

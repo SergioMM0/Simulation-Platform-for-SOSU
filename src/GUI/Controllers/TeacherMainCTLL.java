@@ -208,43 +208,45 @@ public class TeacherMainCTLL {
 
     @FXML
     void addNewCase(ActionEvent event) {
-        openView("GUI/Views/CreateCase.fxml", generalCSS, "Create new case", 860, 660, false, 0);
+        openView("GUI/Views/CreateCase.fxml", generalCSS, "Create new case", 860, 770, false, 0);
     }
 
     @FXML
     void addNewPatient(ActionEvent event) {
-        openView("GUI/Views/CreatePatient.fxml", generalCSS, "Create new patient", 500, 650, false, 0);
+        openView("GUI/Views/CreatePatient.fxml", generalCSS, "Create new patient", 485, 510, false, 0);
     }
 
     @FXML
     void caseIsSelected(MouseEvent event) {
-        caseCategoryComboBox.getItems().clear();
-        caseSubcategoryComboBox.getItems().clear();
+        if(casesListGV.getSelectionModel().getSelectedItem() != null){
+            caseCategoryComboBox.getItems().clear();
+            caseSubcategoryComboBox.getItems().clear();
 
-        String[] allCat = catAndSubC.getCategories();
-        String[] allSubCat = catAndSubC.getSubcategoriesOf(casesListGV.getSelectionModel().getSelectedItem().getCategory());
+            String[] allCat = catAndSubC.getCategories();
+            String[] allSubCat = catAndSubC.getSubcategoriesOf(casesListGV.getSelectionModel().getSelectedItem().getCategory());
 
-        caseNameField.setText(casesListGV.getSelectionModel().getSelectedItem().getName());
-        descriptionOfConditionText.setText(casesListGV.getSelectionModel().getSelectedItem().getConditionDescription());
+            caseNameField.setText(casesListGV.getSelectionModel().getSelectedItem().getName());
+            descriptionOfConditionText.setText(casesListGV.getSelectionModel().getSelectedItem().getConditionDescription());
 
-        for (String cat : allCat) {
-            caseCategoryComboBox.getItems().add(cat); //population of the categories
+            for (String cat : allCat) {
+                caseCategoryComboBox.getItems().add(cat); //population of the categories
+            }
+            for(String subCat : allSubCat){
+                caseSubcategoryComboBox.getItems().add(subCat); // population of the subcategories of the category
+            }
+            //population of case in case info when selected in general view
+
+            caseCategoryComboBox.getSelectionModel().select(
+                    caseCategoryComboBox.getItems().indexOf(
+                            casesListGV.getSelectionModel().getSelectedItem().getCategory()));
+            //selects the category specified for the case
+
+            caseSubcategoryComboBox.getSelectionModel().select(
+                    caseSubcategoryComboBox.getItems().indexOf(
+                            casesListGV.getSelectionModel().getSelectedItem().getSubCategory()));
+            //selects the subcategory specified for the case
+
         }
-        for(String subCat : allSubCat){
-            caseSubcategoryComboBox.getItems().add(subCat); // population of the subcategories of the category
-        }
-        //population of case in case info when selected in general view
-
-        caseCategoryComboBox.getSelectionModel().select(
-                caseCategoryComboBox.getItems().indexOf(
-                        casesListGV.getSelectionModel().getSelectedItem().getCategory()));
-        //selects the category specified for the case
-
-        caseSubcategoryComboBox.getSelectionModel().select(
-                caseSubcategoryComboBox.getItems().indexOf(
-                        casesListGV.getSelectionModel().getSelectedItem().getSubCategory()));
-        //selects the subcategory specified for the case
-
     }
 
     @FXML
@@ -261,28 +263,6 @@ public class TeacherMainCTLL {
         heightField.setText(patientsListGV.getSelectionModel().getSelectedItem().getHeight());
         cprField.setText(patientsListGV.getSelectionModel().getSelectedItem().getCpr());
         phoneNumberField.setText(patientsListGV.getSelectionModel().getSelectedItem().getPhoneNumber());
-        /*
-        bloodTypeComboBox.getItems().addAll(model.getBloodTypes()); //TODO Update
-        bloodTypeComboBox.getSelectionModel().select(
-                bloodTypeComboBox.getItems().indexOf(patientsListGV.getSelectionModel().getSelectedItem().getBloodType()));
-        //Selects in the bloodType combo box the gender that matches the bloodType of the patient
-        exerciseComboBox.getItems().addAll(model.getExerciseOptions()); //TODO Update
-        exerciseComboBox.getSelectionModel().select(
-                exerciseComboBox.getItems().indexOf(patientsListGV.getSelectionModel().getSelectedItem().getExercise()));
-        //Same as exercise combo box
-        dietComboBox.getItems().addAll(model.getDietOptions()); //TODO Update
-        dietComboBox.getSelectionModel().select(
-                dietComboBox.getItems().indexOf(patientsListGV.getSelectionModel().getSelectedItem().getDiet()));
-        //same as exercise combo box
-        alcoholComboBox.getItems().addAll(model.getAlcoholOptions()); //TODO Update
-        alcoholComboBox.getSelectionModel().select(
-                alcoholComboBox.getItems().indexOf(patientsListGV.getSelectionModel().getSelectedItem().getAlcohol()));
-        //same as alcohol combo box
-        tobaccoComboBox.getItems().addAll(model.getTobaccoOptions()); //TODO Update
-        tobaccoComboBox.getSelectionModel().select(
-                tobaccoComboBox.getItems().indexOf(patientsListGV.getSelectionModel().getSelectedItem().getTobacco()));
-
-         */
     }
 
     @FXML
@@ -406,11 +386,15 @@ public class TeacherMainCTLL {
 
     public void addStudentToTable(User user) {
         model.addObservableStudent(user);
+        refreshStudentsTable();
     }
-
 
     public void updateStudentInTable(User student) {
         model.updateStudentInTable(student);
+        refreshStudentsTable();
+    }
+
+    private void refreshStudentsTable(){
         studentsTable.getItems().clear();
         studentsTable.getItems().addAll(model.getObservableStudents());
     }
@@ -454,8 +438,7 @@ public class TeacherMainCTLL {
     void deleteStudent(ActionEvent event) {
         try {
             model.deleteStudent(studentsTable.getSelectionModel().getSelectedItem());
-            studentsTable.getItems().clear();
-            studentsTable.getItems().addAll(model.getObservableStudents());
+            refreshStudentsTable();
         } catch (DalException dalException) {
             new SoftAlert(dalException.getMessage());
         }
@@ -478,7 +461,12 @@ public class TeacherMainCTLL {
 
     @FXML
     void editStudent(ActionEvent event) {
-        openView("GUI/Views/ManageStudent.fxml", generalCSS, "Edit student", 400, 220, false, 2);
+        if(studentsTable.getSelectionModel().getSelectedItem() != null){
+            openView("GUI/Views/ManageStudent.fxml", generalCSS, "Edit student", 400, 220, false, 2);
+        }
+        else{
+            new SoftAlert("Please select a student");
+        }
     }
 
     @FXML
@@ -559,6 +547,7 @@ public class TeacherMainCTLL {
             loader.<ManageStudentCTLL>getController().setController(this);
             loader.<ManageStudentCTLL>getController().setOperationType(operationType);
             loader.<ManageStudentCTLL>getController().setStudent(studentsTable.getSelectionModel().getSelectedItem());
+            loader.<ManageStudentCTLL>getController().populateStudentFields();
         }
         root.getStylesheets().add(css);
         Stage stage = new Stage();

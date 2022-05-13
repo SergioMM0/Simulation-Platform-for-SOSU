@@ -106,4 +106,9 @@ public class ManageStudentCTLL {
     public void setStudent(User student) {
         this.student = student;
     }
+
+    public void populateStudentFields() {
+        nameField.setText(student.getName());
+        emailField.setText(student.getEmail());
+    }
 }
