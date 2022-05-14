@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane  prefHeight="817.0" prefWidth="1191.0" stylesheets="/GUI/Views/CSS/styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.TestCTLL">
+<AnchorPane prefHeight="817.0" prefWidth="1191.0" stylesheets="/GUI/Views/CSS/styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.TestCTLL">
    <children>
       <Label fx:id="categoryLabel" layoutX="469.0" layoutY="152.0" text="Self-care">
          <font>
@@ -35,7 +35,7 @@
       <RadioButton fx:id="state4radio" layoutX="680.0" layoutY="560.0" mnemonicParsing="false" text="4" toggleGroup="$group" />
       <RadioButton fx:id="state5radio" layoutX="880.0" layoutY="560.0" mnemonicParsing="false" text="5" toggleGroup="$group" />
       <RadioButton fx:id="state6radio" layoutX="1050.0" layoutY="560.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="106.0" text="Not Relevant" toggleGroup="$group" />
-      <Button styleClass="stylesheet" layoutX="1053.0" layoutY="749.0" mnemonicParsing="false" onAction="#saveQuestionAndLoadNext" text="Save and Next" />
+      <Button layoutX="1053.0" layoutY="749.0" mnemonicParsing="false" onAction="#saveQuestionAndLoadNext" text="Save and Next" />
       <Label fx:id="questionIdLabel" layoutX="76.0" layoutY="225.0" prefHeight="17.0" prefWidth="0.0" visible="false" />
       <TextArea fx:id="textFieldQuestion" layoutX="303.0" layoutY="262.0" prefHeight="42.0" prefWidth="566.0" text="Can he/she wash himself/herself?" />
    </children>
