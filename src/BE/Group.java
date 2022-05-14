@@ -63,6 +63,10 @@ public class Group {
         return this;
     }
 
+    public boolean containsMember(User user){
+        return this.members.contains(user);
+    }
+
     public void removeMember(User user){
         this.members.remove(user);
     }

@@ -43,7 +43,7 @@ public class LoginCTLL implements Initializable {
 
     private User logedUser;
     private BLLFacade bllFacade;
-    private final String generalCSS = "GUI/Views/CSS/styles.css";
+    private final String generalCSS = "";
     private LoginMOD loginMOD;
 
     @FXML

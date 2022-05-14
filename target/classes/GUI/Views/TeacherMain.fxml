@@ -50,7 +50,7 @@
                <children>
                   <Button layoutX="305.0" layoutY="70.0" mnemonicParsing="false" onAction="#addNewStudent" prefHeight="35.0" prefWidth="120.0" text="Add new student" />
                   <Label fx:id="studentsLBL" layoutX="120.0" layoutY="40.0" text="Students" />
-                  <TableView fx:id="studentsTable" layoutX="20.0" layoutY="70.0" onMouseClicked="#studentIsSelected" prefHeight="505.0" prefWidth="250.0">
+                  <TableView fx:id="studentsTable" layoutX="20.0" layoutY="70.0" prefHeight="505.0" prefWidth="250.0">
                     <columns>
                       <TableColumn fx:id="studentNameCol" prefWidth="249.60001220703126" text="Name" />
                     </columns>
@@ -69,7 +69,7 @@
                   <Button layoutX="320.0" layoutY="235.0" mnemonicParsing="false" onAction="#addStudentToGroup" prefHeight="35.0" prefWidth="240.0" text="Add student to group..." />
                   <Button layoutX="320.0" layoutY="285.0" mnemonicParsing="false" onAction="#removeStudentFromGroup" prefHeight="35.0" prefWidth="240.0" text="Remove student from group" />
                   <Label fx:id="groupsLBL1" layoutX="699.0" layoutY="402.0" text="Participants" />
-                  <TableView fx:id="participantsTable" layoutX="605.0" layoutY="434.0" onMouseClicked="#groupIsSelected" prefHeight="142.0" prefWidth="250.0">
+                  <TableView fx:id="participantsTable" layoutX="605.0" layoutY="434.0" prefHeight="142.0" prefWidth="250.0">
                      <columns>
                         <TableColumn fx:id="participantsNameCol" prefWidth="249.60001220703126" text="Name" />
                      </columns>

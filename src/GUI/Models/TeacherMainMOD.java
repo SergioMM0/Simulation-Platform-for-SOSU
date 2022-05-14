@@ -81,6 +81,9 @@ public class TeacherMainMOD {
 
     public void deleteStudent(User student) throws DalException {
         bllFacade.deleteStudent(student);
+    }
+
+    public void deleteObservableStudent(User student){
         allStudents.remove(student);
     }
 
@@ -110,7 +113,6 @@ public class TeacherMainMOD {
         return allGroups;
     }
 
-
     public void updateObservableGroup(Group group) {
         for(Group g : allGroups){
             if(g.getName().equals(group.getName())){
@@ -119,17 +121,34 @@ public class TeacherMainMOD {
         }
     }
 
-    public ObservableList<User> groupIsSelected(Group group) {
+    public ObservableList<User> getObservableParticipants(Group group) {
         groupParticipants.clear();
         groupParticipants.addAll(group.getMembers());
         return groupParticipants;
     }
 
-
     public void addStudentToGroup(Group group, User student) throws DalException{
         bllFacade.addStudentToGroup(group,student);
     }
 
+
+    public void removeParticipant(User user) {
+        groupParticipants.remove(user);
+    }
+
+    public void deleteGroup(Group group) throws DalException{
+        bllFacade.deleteGroup(group);
+    }
+
+    public void removeObservableGroup(Group group) {
+        allGroups.remove(group);
+    }
+
+    public void deleteStudentFromGroups(User student){
+        for(Group group : allGroups){
+            group.removeMember(student);
+        }
+    }
     //TODO DELETE THE FOLLOWING WHEN IMPLEMENTED TO READ FROM FILE
 
     public ObservableList<String> getGenders() {

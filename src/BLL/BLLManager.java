@@ -88,9 +88,18 @@ public class BLLManager implements BLLFacade{
 
     @Override
     public void addStudentToGroup(Group group, User student) throws DalException {
-        //dalFacade.addStudentToGroup(group,student);
+        dalFacade.addUsertoGroup(group,student);
+    }
 
-        //TODO Implement this
+    @Override
+    public void deleteGroup(Group group) throws DalException {
+        dalFacade.deleteGroup(group);
+    }
+
+    @Override
+    public void removeStudentFromGroup(Group group, User student) {
+        //dalFacade.removeUserFromGroup(group,student);
+        //TODO implement
     }
 
     @Override
