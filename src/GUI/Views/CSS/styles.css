@@ -19,5 +19,13 @@
      -fx-background-image: url("/res/five.png");
  }
 
+.button{
+    -fx-background-color: red;
+}
+
+#loginBtn{
+    -fx-background-color: white;
+}
+
 
 

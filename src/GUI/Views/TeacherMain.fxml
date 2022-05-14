@@ -60,7 +60,7 @@
                   <Button layoutX="450.0" layoutY="70.0" mnemonicParsing="false" onAction="#createGroup" prefHeight="35.0" prefWidth="120.0" text="Create group" />
                   <Button layoutX="450.0" layoutY="125.0" mnemonicParsing="false" onAction="#editGroup" prefHeight="35.0" prefWidth="120.0" text="Edit group" />
                   <Button layoutX="450.0" layoutY="180.0" mnemonicParsing="false" onAction="#deleteGroup" prefHeight="35.0" prefWidth="120.0" text="Delete group" />
-                  <TableView fx:id="groupsTable" layoutX="605.0" layoutY="70.0" onMouseClicked="#groupIsSelected" prefHeight="505.0" prefWidth="250.0">
+                  <TableView fx:id="groupsTable" layoutX="605.0" layoutY="70.0" onMouseClicked="#groupIsSelected" prefHeight="320.0" prefWidth="250.0">
                      <columns>
                         <TableColumn fx:id="groupNameCol" prefWidth="249.60001220703126" text="Group name" />
                      </columns>
@@ -68,6 +68,12 @@
                   <Label fx:id="groupsLBL" layoutX="711.0" layoutY="40.0" text="Groups" />
                   <Button layoutX="320.0" layoutY="235.0" mnemonicParsing="false" onAction="#addStudentToGroup" prefHeight="35.0" prefWidth="240.0" text="Add student to group..." />
                   <Button layoutX="320.0" layoutY="285.0" mnemonicParsing="false" onAction="#removeStudentFromGroup" prefHeight="35.0" prefWidth="240.0" text="Remove student from group" />
+                  <Label fx:id="groupsLBL1" layoutX="699.0" layoutY="402.0" text="Participants" />
+                  <TableView fx:id="participantsTable" layoutX="605.0" layoutY="434.0" onMouseClicked="#groupIsSelected" prefHeight="142.0" prefWidth="250.0">
+                     <columns>
+                        <TableColumn fx:id="participantsNameCol" prefWidth="249.60001220703126" text="Name" />
+                     </columns>
+                  </TableView>
                </children>
             </AnchorPane>
          </content>

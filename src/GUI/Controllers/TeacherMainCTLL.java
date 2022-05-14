@@ -65,6 +65,12 @@ public class TeacherMainCTLL {
     private TableColumn<Group, String> groupNameCol;
 
     @FXML
+    private TableView<User> participantsTable;
+
+    @FXML
+    private TableColumn<User, String> participantsNameCol;
+
+    @FXML
     private Label groupNameLBL;
 
     @FXML
@@ -363,8 +369,32 @@ public class TeacherMainCTLL {
     }
 
     @FXML
+    void addStudentToGroup(ActionEvent event) {
+        if(studentsTable.getSelectionModel().getSelectedItem() != null && groupsTable.getSelectionModel().getSelectedItem() != null){
+            try{
+                model.addStudentToGroup(groupsTable.getSelectionModel().getSelectedItem(), studentsTable.getSelectionModel().getSelectedItem());
+            }catch (DalException dalException){
+                new SoftAlert(dalException.getMessage());
+            }
+            System.out.println("Is reflecting"); //TODO Check when DB is sorted
+            model.updateObservableGroup(groupsTable.getSelectionModel().getSelectedItem().addMember(studentsTable.getSelectionModel().getSelectedItem()));
+        } else{
+            if(studentsTable.getSelectionModel().getSelectedItem() == null){
+                new SoftAlert("Please select a student");
+            }else new SoftAlert("Please select a group");
+        }
+    }
+
+    @FXML
     void groupIsSelected(MouseEvent event){
-        //TODO Maybe not needed
+        populateParticipantsTable();
+    }
+
+    private void populateParticipantsTable(){ //this method might be implemented straight in the MouseEvent
+        if(groupsTable.getSelectionModel().getSelectedItem().getMembers()!= null){
+            participantsTable.getItems().clear();
+            participantsTable.getItems().addAll(model.groupIsSelected(groupsTable.getSelectionModel().getSelectedItem()));
+        }
     }
 
     @FXML
@@ -403,11 +433,6 @@ public class TeacherMainCTLL {
     private void refreshStudentsTable(){
         studentsTable.getItems().clear();
         studentsTable.getItems().addAll(model.getObservableStudents());
-    }
-
-    @FXML
-    void addStudentToGroup(ActionEvent event) {
-
     }
 
     @FXML

@@ -58,6 +58,15 @@ public class Group {
         SchoolID = schoolID;
     }
 
+    public Group addMember(User user){
+        this.members.add(user);
+        return this;
+    }
+
+    public void removeMember(User user){
+        this.members.remove(user);
+    }
+
     @Override
     public String toString() {
         return "Group{" +

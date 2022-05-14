@@ -39,6 +39,8 @@ public interface BLLFacade {
     void createNewGroup(Group group) throws DalException;
 
     void updateGroup(Group selectedGroup) throws DalException;
+
+    void addStudentToGroup(Group group, User student) throws DalException;
 }
 
 

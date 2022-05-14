@@ -19,6 +19,7 @@ public class TeacherMainMOD {
     private ObservableList<Case> allCases;
     private ObservableList<Patient> allPatients;
     private ObservableList<User> allStudents;
+    private ObservableList<User> groupParticipants;
 
     public TeacherMainMOD(){
         bllFacade = new BLLManager();
@@ -26,6 +27,7 @@ public class TeacherMainMOD {
         allCases = FXCollections.observableArrayList();
         allPatients = FXCollections.observableArrayList();
         allStudents = FXCollections.observableArrayList();
+        groupParticipants = FXCollections.observableArrayList();
     }
 
 
@@ -115,6 +117,17 @@ public class TeacherMainMOD {
                 g = group; //TODO implement a method to make sure name is not repeated
             }
         }
+    }
+
+    public ObservableList<User> groupIsSelected(Group group) {
+        groupParticipants.clear();
+        groupParticipants.addAll(group.getMembers());
+        return groupParticipants;
+    }
+
+
+    public void addStudentToGroup(Group group, User student) throws DalException{
+        bllFacade.addStudentToGroup(group,student);
     }
 
     //TODO DELETE THE FOLLOWING WHEN IMPLEMENTED TO READ FROM FILE

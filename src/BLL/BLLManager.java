@@ -29,7 +29,6 @@ public class BLLManager implements BLLFacade{
     @Override
     public void createCase(Case newCase) throws DalException {
         dalFacade.createCase(newCase);
-        //TODO collision with Category and Subcategory reformat
     }
 
     @Override
@@ -70,14 +69,11 @@ public class BLLManager implements BLLFacade{
     @Override
     public List<User> getAllStudent(int schoolID) throws DalException {
         return dalFacade.getAllUsers(schoolID);
-
-        //TODO Implement get all students
     }
 
     @Override
     public void updatePatient(Patient patient) throws DalException {
         dalFacade.updatePatient(patient);
-        //TODO implement updatePatient
     }
 
     @Override
@@ -88,6 +84,13 @@ public class BLLManager implements BLLFacade{
     @Override
     public void updateGroup(Group selectedGroup) throws DalException {
         dalFacade.updateGroup(selectedGroup);
+    }
+
+    @Override
+    public void addStudentToGroup(Group group, User student) throws DalException {
+        //dalFacade.addStudentToGroup(group,student);
+
+        //TODO Implement this
     }
 
     @Override
