@@ -96,4 +96,8 @@ public class ManageGroupCTLL {
     public void setOperationType(int operationType) {
         this.operationType = operationType;
     }
+
+    public void populateGroupField() {
+        nameField.setText(selectedGroup.getName());
+    }
 }

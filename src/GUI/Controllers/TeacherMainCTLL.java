@@ -572,7 +572,7 @@ public class TeacherMainCTLL {
             loader.<ManageGroupCTLL>getController().setGroup(groupsTable.getSelectionModel().getSelectedItem());
             loader.<ManageGroupCTLL>getController().setController(this);
             loader.<ManageGroupCTLL>getController().setOperationType(operationType);
-            //loader.<ManageGroupCTLL>getController().
+            loader.<ManageGroupCTLL>getController().populateGroupField();
         }
         root.getStylesheets().add(css);
         Stage stage = new Stage();
