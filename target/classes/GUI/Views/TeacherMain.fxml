@@ -116,7 +116,7 @@
                   <Label layoutX="490.0" layoutY="40.0" text="Category" />
                   <ComboBox fx:id="caseSubcategoryComboBox" layoutX="575.0" layoutY="75.0" prefHeight="26.0" prefWidth="220.0" />
                   <Label layoutX="490.0" layoutY="80.0" text="Subcategory" />
-                  <ComboBox fx:id="caseCategoryComboBox" layoutX="575.0" layoutY="35.0" prefHeight="26.0" prefWidth="220.0" />
+                  <ComboBox fx:id="caseCategoryComboBox" layoutX="575.0" layoutY="35.0" onAction="#categorySelected" prefHeight="26.0" prefWidth="220.0" />
                   <Label layoutX="40.0" layoutY="100.0" prefHeight="18.0" prefWidth="170.0" text="Description of the case:" />
                   <TextField fx:id="descriptionOfConditionText" layoutX="40.0" layoutY="130.0" prefHeight="386.0" prefWidth="780.0" />
                   <Button layoutX="689.0" layoutY="540.0" mnemonicParsing="false" onAction="#saveChangesOnCase" prefHeight="40.0" prefWidth="130.0" text="Save changes" />

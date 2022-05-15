@@ -217,7 +217,7 @@ public class TeacherMainCTLL {
 
     @FXML
     void addNewCase(ActionEvent event) {
-        openView("GUI/Views/CreateCase.fxml", generalCSS, "Create new case", 860, 770, false, 0);
+        openView("GUI/Views/CreateCase.fxml", generalCSS, "Create new case", 860, 700, false, 0);
     }
 
     @FXML
@@ -397,6 +397,7 @@ public class TeacherMainCTLL {
     @FXML
     void groupIsSelected(MouseEvent event){
         repopulateParticipantsTable();
+
     }
 
     private void repopulateParticipantsTable(){ //this method might be implemented straight in the MouseEvent
@@ -623,6 +624,18 @@ public class TeacherMainCTLL {
         }
     }
      */
+
+    @FXML
+    void categorySelected(ActionEvent event) {
+        if(caseCategoryComboBox.getValue() != null){
+            if(!caseCategoryComboBox.getValue().isEmpty() &&
+                    !caseCategoryComboBox.getValue().equals(casesListGV.getSelectionModel().getSelectedItem().getCategory())){
+                caseSubcategoryComboBox.getSelectionModel().clearSelection();
+                caseSubcategoryComboBox.getItems().clear();
+                caseSubcategoryComboBox.getItems().addAll(catAndSubC.getSubcategoriesOf(caseCategoryComboBox.getValue()));
+            }
+        }
+    }
 
     @FXML
     void saveChangesOnCase(ActionEvent event) {
