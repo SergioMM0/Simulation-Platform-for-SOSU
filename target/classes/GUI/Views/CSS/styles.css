@@ -18,8 +18,14 @@
 .insertimages5{
      -fx-background-image: url("/res/five.png");
  }
-.lightgreen{
-    -fx-background-color:  #45ff9f;
+
+.button{
+    -fx-background-color: red;
 }
+
+#loginBtn{
+    -fx-background-color: white;
+}
+
 
 

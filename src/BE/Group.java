@@ -58,6 +58,24 @@ public class Group {
         SchoolID = schoolID;
     }
 
+    public Group addMember(User user){
+        this.members.add(user);
+        return this;
+    }
+
+    public boolean containsMember(User user){
+        for(User student : this.members){
+            if(student.getId() == user.getId()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void removeMember(User user){
+        this.members.remove(user);
+    }
+
     @Override
     public String toString() {
         return "Group{" +
