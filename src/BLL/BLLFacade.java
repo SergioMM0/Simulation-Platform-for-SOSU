@@ -39,6 +39,10 @@ public interface BLLFacade {
     void createNewGroup(Group group) throws DalException;
 
     void updateGroup(Group selectedGroup) throws DalException;
+
+    StudentQuestion getPreviousQuestion(int currentQuestionId) throws BLLException, DalException;
+
+    StudentQuestionnaireAnswer getQuestionaireAnswer(int questionId, int questionaireId) throws DalException;
 }
 
 

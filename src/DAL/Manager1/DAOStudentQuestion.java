@@ -33,7 +33,7 @@ public class DAOStudentQuestion {
     public int addQuestionaire() throws DalException {
         try (Connection con = dataAccess.getConnection()) {
             String sql = "insert  into [dbo].[Questionaire] (date )values  (getdate())";
-            PreparedStatement prs = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement prs = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             prs.execute();
             ResultSet rs = prs.getGeneratedKeys();
             rs.next();
@@ -65,6 +65,28 @@ public class DAOStudentQuestion {
                 ));
             }
             return studentQuestions;
+        } catch (SQLException e) {
+            throw new DalException("Couldn't retrieve a list of Questions ", e);
+        }
+    }
+
+    public StudentQuestionnaireAnswer getQuestionaireAnswer(int questionId, int questionaireId) throws DalException {
+
+        try (Connection con = dataAccess.getConnection()) {
+            String sql = " Select * from StudentQuestionAnswer  where questionId="+questionId+" and QuestionaireId="+questionaireId+" ";
+            PreparedStatement prs = con.prepareStatement(sql);
+            StudentQuestionnaireAnswer answer = new StudentQuestionnaireAnswer();
+            ResultSet rs = prs.executeQuery();
+            while (rs.next()) {         //because there is only one row we can return after first row fetched
+                //return new StudentQuestionnaireAnswer(
+                answer.setId(rs.getInt("id"));
+
+                answer.setQuestionId(rs.getInt("questionId"));
+                answer.setState(rs.getInt("state"));
+                answer.setQuestionnaireId(rs.getInt("QuestionaireId"));
+
+            }
+            return answer;
         } catch (SQLException e) {
             throw new DalException("Couldn't retrieve a list of Questions ", e);
         }

@@ -15,7 +15,7 @@ import javafx.scene.image.ImageView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class TestCTLL implements Initializable {
+public class StudentQuestionCTL implements Initializable {
     @FXML
     public Label categoryLabel;
     @FXML
@@ -48,30 +48,61 @@ public class TestCTLL implements Initializable {
     private TextArea textFieldQuestion;
 
     StudentQuestionMOD model = new StudentQuestionMOD();    //use model to operation and contact with bll
-    StudentQuestion currentQuestion;
+    BE.StudentQuestion currentQuestion;
 
     public void saveQuestionAndLoadNext(ActionEvent event) {
         //save question then load next question
-        int state = getState();             //calculate the selected state
-        StudentQuestionnaireAnswer answer = new StudentQuestionnaireAnswer(0, Integer.parseInt(questionIdLabel.getText()), state, 0); //create answer object
+        int state = getState();//calculate the selected state
+        if (questionIdLabel.getText() == "null") return; //end of loading next questions
+        int questionId = Integer.parseInt(questionIdLabel.getText());
+        StudentQuestionnaireAnswer answer = new StudentQuestionnaireAnswer(0, questionId, state, 0); //create answer object
 
         model.saveStudentQuestionAnswer(answer);            //save answer to database
         currentQuestion = model.getNextQuestion(currentQuestion);       //load next question
-        if(currentQuestion ==null)return;        //questions finished
+        if (currentQuestion == null) return;        //questions finished
         setQuestion(currentQuestion);           //set current question to controls
+        setAnswer(model.getAnswer(currentQuestion.getId()));
+    }
+
+    @FXML
+    void loadPreviousQuestion(ActionEvent event) {
+        int currentQuestionId = 0;
+        if (questionIdLabel.getText() == "null")       //if we are at end of questions
+            currentQuestionId = Integer.MAX_VALUE;        //set currentQuestion with biggest integer value
+        else if (questionIdLabel.getText() != "")
+            currentQuestionId = Integer.parseInt(questionIdLabel.getText());
+        StudentQuestion previousQuestion = getPreviousQuestionId(currentQuestionId);
+        if (previousQuestion==null)
+            return;
+        currentQuestion = previousQuestion;
+        setQuestion(currentQuestion);
+        StudentQuestionnaireAnswer answer = model.getAnswer(currentQuestion.getId());
+        setAnswer(answer);
+    }
+
+
+
+    private StudentQuestion getPreviousQuestionId(int currentQuestionId) {
+        return model.getPreviousQuestion(currentQuestionId);
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         insertImage();
-        currentQuestion =model.GetFirstQuestion();       //get first question
+        currentQuestion = model.GetFirstQuestion();       //get first question
         setQuestion(currentQuestion);
     }
-    private void setQuestion(StudentQuestion question) {
+
+    private void setQuestion(BE.StudentQuestion question) {
+        if (question == null) {
+            questionIdLabel.setText("null");
+            return;
+        }
         categoryLabel.setText(question.getCategory());
         titleLabel.setText(question.getTitle());
         questionIdLabel.setText(question.getId() + "");
         textFieldQuestion.setText(question.getQuestion());
+        state1radio.setSelected(true);
 
     }
 
@@ -99,9 +130,33 @@ public class TestCTLL implements Initializable {
             state = 4;
         if (state4radio.isSelected())
             state = 5;
-        if(state5radio.isSelected())
-            state = 6 ;
+        if (state5radio.isSelected())
+            state = 6;
 
         return state;
+    }
+    private void setAnswer(StudentQuestionnaireAnswer answer) {
+        if (answer==null)
+            return;
+        switch (answer.getState()) {
+            case 1:
+                state6radio.setSelected(true);
+                break;
+            case 2:
+                state1radio.setSelected(true);
+                break;
+            case 3:
+                state2radio.setSelected(true);
+                break;
+            case 4:
+                state3radio.setSelected(true);
+                break;
+            case 5:
+                state4radio.setSelected(true);
+                break;
+            case 6:
+                state5radio.setSelected(true);
+                break;
+        }
     }
 }

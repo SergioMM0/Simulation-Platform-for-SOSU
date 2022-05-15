@@ -180,4 +180,18 @@ public class Manager implements DALFacade {
         if (nextQuestion.isPresent()) return nextQuestion.get();
         return null;
     }
+
+    @Override
+    public StudentQuestion getPreviousQuestion(int currentQuestionId) throws DalException {
+        List<StudentQuestion> questions = daoStudentQuestion.getAllQuestions();
+        Optional<StudentQuestion> previousQuestion =
+                questions.stream().filter(question -> question.getId() < currentQuestionId).max(Comparator.comparingInt(StudentQuestion::getId));
+        if (previousQuestion.isPresent()) return previousQuestion.get();
+        return null;
+    }
+
+    @Override
+    public StudentQuestionnaireAnswer getQuestionaireAnswer(int questionId, int questionaireId) throws DalException {
+        return daoStudentQuestion.getQuestionaireAnswer(questionId,questionaireId);
+    }
 }

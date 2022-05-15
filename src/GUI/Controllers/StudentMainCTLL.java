@@ -22,7 +22,7 @@ public class StudentMainCTLL implements Initializable {
     @FXML
     void openQuestionnaire(ActionEvent event) {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getClassLoader().getResource("GUI/Views/test.fxml"));
+        loader.setLocation(getClass().getClassLoader().getResource("GUI/Views/StudentQuestion.fxml"));
         Parent root = null;
         try{root = loader.load();}
         catch (IOException e){

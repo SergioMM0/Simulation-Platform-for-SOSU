@@ -65,4 +65,8 @@ public interface DALFacade {
     StudentQuestion getFirstStudentQuestion() throws DalException;
 
     StudentQuestion getNextStudentQuestion(int id) throws DalException;
+
+    StudentQuestion getPreviousQuestion(int currentQuestionId) throws DalException;
+
+    StudentQuestionnaireAnswer getQuestionaireAnswer(int questionId, int questionaireId) throws DalException;
 }

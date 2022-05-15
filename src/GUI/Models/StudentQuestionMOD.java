@@ -43,4 +43,24 @@ public class StudentQuestionMOD {
         }
         return null;
     }
+
+    public StudentQuestion getPreviousQuestion(int currentQuestionId) {
+        try {
+            return bll.getPreviousQuestion(currentQuestionId);
+        } catch (BLLException e) {
+            e.printStackTrace();
+        } catch (DalException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public StudentQuestionnaireAnswer getAnswer(int questionId) {
+        try {
+            return bll.getQuestionaireAnswer(questionId,questionaireId);
+        } catch (DalException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

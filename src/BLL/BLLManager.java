@@ -90,6 +90,7 @@ public class BLLManager implements BLLFacade{
         dalFacade.updateGroup(selectedGroup);
     }
 
+
     @Override
     public void saveStudentQuestionAnswer(StudentQuestionnaireAnswer answer) throws DalException {
         dalFacade.addStudentQuestionAnswer(answer);
@@ -109,6 +110,19 @@ public class BLLManager implements BLLFacade{
         return s ;
     }
 
+    @Override
+    public StudentQuestion getPreviousQuestion(int currentQuestionId) throws BLLException, DalException {
+        StudentQuestion s=dalFacade.getPreviousQuestion(currentQuestionId);
+        if(s ==  null){
+            throw new BLLException("No more questions Please close this window", new InvalidParameterException());
+        }
+        return s;
+    }
+
+    @Override
+    public StudentQuestionnaireAnswer getQuestionaireAnswer(int questionId, int questionaireId) throws DalException {
+        return dalFacade.getQuestionaireAnswer(questionId,questionaireId);
+    }
 
 
 }

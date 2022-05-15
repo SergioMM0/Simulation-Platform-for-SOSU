@@ -21,5 +21,10 @@
 .lightgreen{
     -fx-background-color:  #45ff9f;
 }
+.lightgreen:hover{
+    -fx-background-color: #35ef8f;
+    -fx-font-weight: Bold;
+}
+
 
 
