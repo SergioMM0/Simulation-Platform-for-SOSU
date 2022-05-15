@@ -78,7 +78,7 @@
             </AnchorPane>
          </content>
       </Tab>
-      <Tab text="Patient overview">
+      <Tab fx:id="patientOverviewTab" text="Patient overview">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -108,7 +108,7 @@
             </AnchorPane>
          </content>
       </Tab>
-      <Tab text="Case info">
+      <Tab fx:id="caseTab" text="Case info">
          <content>
             <AnchorPane prefHeight="470.0" prefWidth="860.0">
                <children>
@@ -125,7 +125,7 @@
             </AnchorPane>
          </content>
       </Tab>
-      <Tab text="Group info">
+      <Tab fx:id="groupTab" text="Group info">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>

@@ -131,6 +131,15 @@ public class TeacherMainCTLL {
     @FXML
     private TableView<User> studentsTable;
 
+    @FXML
+    private Tab patientOverviewTab;
+
+    @FXML
+    private Tab caseTab;
+
+    @FXML
+    private Tab groupTab;
+
     private User logedUser;
     private final String generalCSS = "";
     private TeacherMainMOD model;
@@ -151,6 +160,13 @@ public class TeacherMainCTLL {
         populatePatientsTable();
         populateStudentsTable();
         setUPContextMenus();
+        setUpTabs();
+    }
+
+    private void setUpTabs(){
+        patientOverviewTab.setDisable(true);
+        caseTab.setDisable(true);
+        groupTab.setDisable(true);
     }
 
     private void populateGroupsTable() {
@@ -228,6 +244,10 @@ public class TeacherMainCTLL {
     @FXML
     void caseIsSelected(MouseEvent event) {
         if(casesListGV.getSelectionModel().getSelectedItem() != null){
+            if(caseTab.isDisabled()){
+                caseTab.setDisable(false);
+            }
+            caseTab.setText(casesListGV.getSelectionModel().getSelectedItem().getName());
             caseCategoryComboBox.getItems().clear();
             caseSubcategoryComboBox.getItems().clear();
 
@@ -260,6 +280,10 @@ public class TeacherMainCTLL {
 
     @FXML
     void patientIsSelected(MouseEvent event) {
+        if(patientOverviewTab.isDisabled()){
+            patientOverviewTab.setDisable(false);
+        }
+        patientOverviewTab.setText(patientsListGV.getSelectionModel().getSelectedItem().getFirst_name());
         nameField.setText(patientsListGV.getSelectionModel().getSelectedItem().getFirst_name());
         familyNameField.setText(patientsListGV.getSelectionModel().getSelectedItem().getLast_name());
         dateOfBirthPicker.setValue(patientsListGV.getSelectionModel().getSelectedItem().getDateOfBirth());
@@ -339,6 +363,7 @@ public class TeacherMainCTLL {
         else return true;
     }
 
+    /*
     private boolean fieldsAreTheSame(){
         int same = 0;
         if(nameField.getText().toLowerCase(Locale.ROOT).equals(
@@ -370,6 +395,8 @@ public class TeacherMainCTLL {
         }
         return same<7;
     }
+
+     */
 
     @FXML
     void addStudentToGroup(ActionEvent event) {
@@ -568,7 +595,7 @@ public class TeacherMainCTLL {
 
     @FXML
     void logOut(ActionEvent event) {
-
+        
     }
 
     @FXML
