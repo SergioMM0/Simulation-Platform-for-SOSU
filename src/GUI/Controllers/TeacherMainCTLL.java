@@ -4,11 +4,15 @@ import BE.Case;
 import BE.Group;
 import BE.Patient;
 import BE.User;
+import BLL.BLLFacade;
 import DAL.util.DalException;
 import GUI.Alerts.SoftAlert;
 import GUI.Models.TeacherMainMOD;
 import GUI.Util.CatAndSubC;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +23,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -595,7 +600,8 @@ public class TeacherMainCTLL {
 
     @FXML
     void logOut(ActionEvent event) {
-        
+        closeWindows();
+        openView("GUI/Views/Login.fxml",generalCSS,"Log in",500,450,false,0);
     }
 
     @FXML
@@ -757,10 +763,10 @@ public class TeacherMainCTLL {
         stage.setTitle(title);
         stage.setScene(new Scene(root, width, height));
         stage.setResizable(resizable);
-        stage.show();
+        stage.showAndWait();
     }
 
-    private void closeWindow() {
+    private void closeWindows() {
         Stage st = (Stage) casesListGV.getScene().getWindow();
         st.close();
     }

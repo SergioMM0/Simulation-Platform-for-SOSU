@@ -88,12 +88,7 @@ public class LoginCTLL implements Initializable {
         //  loader.<TeacherMainCTLL>getController().setController(this);
         Stage stage = new Stage();
         stage.setTitle(title);
-        Scene scene = new Scene(root, width, height);
-
-
-        stage.setScene(scene);
-       // String file = getClass().getResource("../Views/CSS/style.css").toExternalForm();
-     //   scene.getStylesheets().add(file);
+        stage.setScene(new Scene(root,width,height));
         stage.setResizable(resizable);
         stage.show();
         closeWindow();

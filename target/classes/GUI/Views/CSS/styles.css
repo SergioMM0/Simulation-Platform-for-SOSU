@@ -26,6 +26,11 @@
 #loginBtn{
     -fx-background-color: white;
 }
+.lightgreen:hover{
+    -fx-background-color: #35ef8f;
+    -fx-font-weight: Bold;
+}
+
 
 
 
