@@ -62,6 +62,21 @@ public class TeacherMainMOD {
         return allCases;
     }
 
+    public void updateCase(Case newCase) throws DalException {
+        bllFacade.updateCase(newCase);
+    }
+
+    public void updateCaseInTable(Case oldCase) {
+        for(Case c : allCases){
+            if(c.getName().equals(oldCase.getName())){
+                c.setName(oldCase.getName());
+                c.setConditionDescription(oldCase.getConditionDescription());
+                c.setCategory(oldCase.getCategory());
+                c.setSubCategory(oldCase.getSubCategory());
+            }
+        }
+    }
+
     public void addObservableStudent(User user){
         allStudents.add(user);
     }
@@ -94,7 +109,6 @@ public class TeacherMainMOD {
 
     public void updatePatient(Patient patient) throws DalException{
         bllFacade.updatePatient(patient);
-        updatePatientInTable(patient);
     }
 
     public void updatePatientInTable(Patient patient){

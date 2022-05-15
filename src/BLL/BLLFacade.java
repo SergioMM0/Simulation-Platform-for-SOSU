@@ -3,6 +3,7 @@ package BLL;
 import BE.*;
 import BLL.Exceptions.BLLException;
 import DAL.util.DalException;
+import com.sun.security.auth.module.LdapLoginModule;
 
 import java.util.List;
 
@@ -45,6 +46,8 @@ public interface BLLFacade {
     void deleteGroup(Group group) throws DalException;
 
     void removeParticipant(Group group, User user) throws DalException;
+
+    void updateCase(Case newCase) throws DalException;
 }
 
 

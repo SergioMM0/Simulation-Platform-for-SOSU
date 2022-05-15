@@ -207,6 +207,10 @@ public class TeacherMainCTLL {
 
     public void addCaseToList(Case newCase) {
         model.addCaseToList(newCase);
+        refreshCasesList();
+    }
+
+    private void refreshCasesList(){
         casesListGV.getItems().clear();
         casesListGV.getItems().addAll(model.getObservableCases());
     }
@@ -289,6 +293,7 @@ public class TeacherMainCTLL {
                     patient.setCpr(cprField.getText());
                     patient.setPhoneNumber(phoneNumberField.getText());
                     model.updatePatient(patient);
+                    model.updatePatientInTable(patient);
                     refreshPatientsList();
                 }catch(DalException dalException){
                     dalException.printStackTrace();
@@ -589,10 +594,70 @@ public class TeacherMainCTLL {
     void openManageGroup(ActionEvent event) {
 
     }
+    /*
+    @FXML
+    public void updatePatient(ActionEvent actionEvent) {
+        if(patientFieldsAreFilled()){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                    "Are you sure you want to update this patient?",ButtonType.YES,ButtonType.NO,ButtonType.CANCEL);
+            alert.showAndWait();
+            if(alert.getResult() == ButtonType.YES){
+                try{
+                    Patient patient = patientsListGV.getSelectionModel().getSelectedItem();
+                    patient.setFirst_name(nameField.getText());
+                    patient.setLast_name(familyNameField.getText());
+                    patient.setDateOfBirth(dateOfBirthPicker.getValue());
+                    patient.setGender(genderComboBox.getValue());
+                    patient.setWeight(weightField.getText());
+                    patient.setHeight(heightField.getText());
+                    patient.setCpr(cprField.getText());
+                    patient.setPhoneNumber(phoneNumberField.getText());
+                    model.updatePatient(patient);
+                    model.updatePatientInTable(patient);
+                    refreshPatientsList();
+                }catch(DalException dalException){
+                    dalException.printStackTrace();
+                    new SoftAlert(dalException.getMessage());
+                }
+            }
+        }
+    }
+     */
 
     @FXML
     void saveChangesOnCase(ActionEvent event) {
+        if(caseFieldsAreFilled()){
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                    "Are you sure you want to update this case?",ButtonType.YES,ButtonType.NO,ButtonType.CANCEL);
+            alert.showAndWait();
+            if(alert.getResult() == ButtonType.YES){
+                try{
+                    Case oldCase = casesListGV.getSelectionModel().getSelectedItem();
+                    oldCase.setName(caseNameField.getText());
+                    oldCase.setConditionDescription(descriptionOfConditionText.getText());
+                    oldCase.setCategory(caseCategoryComboBox.getValue());
+                    oldCase.setSubCategory(caseSubcategoryComboBox.getValue());
+                    model.updateCase(oldCase);
+                    model.updateCaseInTable(oldCase);
+                    refreshCasesList();
+                }catch(DalException dalException){
+                    dalException.printStackTrace();
+                    new SoftAlert(dalException.getMessage());
+                }
+            }
+        }
+    }
 
+    private boolean caseFieldsAreFilled() {
+        if(caseNameField.getText().isEmpty()){
+            new SoftAlert("Please introduce a valid name for the case");
+            return false;
+        }
+        else if(descriptionOfConditionText.getText().isEmpty()){
+            new SoftAlert("Please introduce a valid description for the case");
+            return false;
+        }
+        else return true;
     }
 
     @FXML

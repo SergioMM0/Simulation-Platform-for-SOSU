@@ -103,6 +103,12 @@ public class BLLManager implements BLLFacade{
     }
 
     @Override
+    public void updateCase(Case newCase) throws DalException {
+        //dalFacade.updateCase(newCase);
+        //TODO implement
+    }
+
+    @Override
     public void saveStudentQuestionAnswer(StudentQuestionnaireAnswer answer) throws DalException {
         dalFacade.addStudentQuestionAnswer(answer);
     }
