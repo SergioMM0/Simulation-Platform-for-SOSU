@@ -132,8 +132,12 @@ public class TeacherMainMOD {
     }
 
 
-    public void removeParticipant(User user) {
+    public void removeObservableParticipant(User user) {
         groupParticipants.remove(user);
+    }
+
+    public void removeParticipant(Group group, User user) throws DalException{
+        bllFacade.removeParticipant(group, user);
     }
 
     public void deleteGroup(Group group) throws DalException{

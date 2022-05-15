@@ -44,7 +44,7 @@ public interface BLLFacade {
 
     void deleteGroup(Group group) throws DalException;
 
-    void removeStudentFromGroup(Group group, User student);
+    void removeParticipant(Group group, User user) throws DalException;
 }
 
 

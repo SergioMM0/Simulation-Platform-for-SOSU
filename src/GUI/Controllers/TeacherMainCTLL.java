@@ -8,15 +8,14 @@ import DAL.util.DalException;
 import GUI.Alerts.SoftAlert;
 import GUI.Models.TeacherMainMOD;
 import GUI.Util.CatAndSubC;
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -261,6 +260,7 @@ public class TeacherMainCTLL {
         familyNameField.setText(patientsListGV.getSelectionModel().getSelectedItem().getLast_name());
         dateOfBirthPicker.setValue(patientsListGV.getSelectionModel().getSelectedItem().getDateOfBirth());
 
+        genderComboBox.getItems().clear();
         genderComboBox.getItems().addAll(model.getGenders()); //TODO Update
         genderComboBox.getSelectionModel().select(
                 genderComboBox.getItems().indexOf(patientsListGV.getSelectionModel().getSelectedItem().getGender()));
@@ -380,7 +380,7 @@ public class TeacherMainCTLL {
                 System.out.println("Is reflecting");
                 model.updateObservableGroup(groupsTable.getSelectionModel().getSelectedItem().addMember(
                         studentsTable.getSelectionModel().getSelectedItem()));
-                populateParticipantsTable();
+                repopulateParticipantsTable();
             }else new SoftAlert("This student is already in the group");
         } else{
             if(studentsTable.getSelectionModel().getSelectedItem() == null){
@@ -391,10 +391,10 @@ public class TeacherMainCTLL {
 
     @FXML
     void groupIsSelected(MouseEvent event){
-        populateParticipantsTable();
+        repopulateParticipantsTable();
     }
 
-    private void populateParticipantsTable(){ //this method might be implemented straight in the MouseEvent
+    private void repopulateParticipantsTable(){ //this method might be implemented straight in the MouseEvent
         if(groupsTable.getSelectionModel().getSelectedItem().getMembers()!= null){
             participantsTable.getItems().clear();
             participantsTable.getItems().addAll(model.getObservableParticipants(groupsTable.getSelectionModel().getSelectedItem()));
@@ -414,7 +414,7 @@ public class TeacherMainCTLL {
         mi1.setOnAction(t -> {
             removeParticipant();
             contm.hide();
-            populateParticipantsTable();
+            repopulateParticipantsTable();
         });
         contm.getItems().add(mi1);
     }
@@ -422,13 +422,20 @@ public class TeacherMainCTLL {
     @FXML
     void removeStudentFromGroup(ActionEvent event) {
         removeParticipant();
-        populateParticipantsTable();
+        repopulateParticipantsTable();
     }
 
     private void removeParticipant(){
+        try{
+            model.removeParticipant(groupsTable.getSelectionModel().getSelectedItem(),
+                    participantsTable.getSelectionModel().getSelectedItem());
+        }catch (DalException dalException){
+            new SoftAlert(dalException.getMessage());
+        }
         groupsTable.getSelectionModel().getSelectedItem().removeMember(
                 participantsTable.getSelectionModel().getSelectedItem());
-        model.removeParticipant(participantsTable.getSelectionModel().getSelectedItem());
+        model.removeObservableParticipant(participantsTable.getSelectionModel().getSelectedItem());
+
     }
 
     @FXML

@@ -64,7 +64,12 @@ public class Group {
     }
 
     public boolean containsMember(User user){
-        return this.members.contains(user);
+        for(User student : this.members){
+            if(student.getId() == user.getId()){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void removeMember(User user){
