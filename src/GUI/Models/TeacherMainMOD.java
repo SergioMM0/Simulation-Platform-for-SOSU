@@ -30,6 +30,16 @@ public class TeacherMainMOD {
         groupParticipants = FXCollections.observableArrayList();
     }
 
+    //TODO DELETE THE FOLLOWING WHEN IMPLEMENTED TO READ FROM FILE
+
+    public ObservableList<String> getGenders() {
+        ObservableList<String> genders = FXCollections.observableArrayList();
+        genders.add("Male");
+        genders.add("Female");
+        genders.add("Lockheed Martin F-16 Fighting Falcon lol");
+        return genders;
+    }
+
 
     public ObservableList<Group> getAllGroups(int schoolID) throws DalException {
         allGroups.addAll(bllFacade.getAllGroups(schoolID));
@@ -167,13 +177,20 @@ public class TeacherMainMOD {
             group.removeMember(student);
         }
     }
-    //TODO DELETE THE FOLLOWING WHEN IMPLEMENTED TO READ FROM FILE
 
-    public ObservableList<String> getGenders() {
-        ObservableList<String> genders = FXCollections.observableArrayList();
-        genders.add("Male");
-        genders.add("Female");
-        genders.add("Lockheed Martin F-16 Fighting Falcon lol");
-        return genders;
+    public void deleteCase(Case selectedCase) throws DalException{
+        bllFacade.deleteCase(selectedCase);
+    }
+
+    public void deleteObservableCase(Case selectedItem) {
+        allCases.remove(selectedItem);
+    }
+
+    public void deletePatient(Patient selectedPatient) throws DalException {
+        bllFacade.deletePatient(selectedPatient);
+    }
+
+    public void deleteObservablePatient(Patient selectedItem) {
+        allPatients.remove(selectedItem);
     }
 }

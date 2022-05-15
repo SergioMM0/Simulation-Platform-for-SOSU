@@ -27,6 +27,7 @@ import javafx.stage.Window;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Locale;
 
 public class TeacherMainCTLL {
@@ -473,7 +474,6 @@ public class TeacherMainCTLL {
         groupsTable.getSelectionModel().getSelectedItem().removeMember(
                 participantsTable.getSelectionModel().getSelectedItem());
         model.removeObservableParticipant(participantsTable.getSelectionModel().getSelectedItem());
-
     }
 
     @FXML
@@ -566,12 +566,48 @@ public class TeacherMainCTLL {
 
     @FXML
     void deleteCase(ActionEvent event) {
+        handleDeleteCase();
+    }
 
+    private void handleDeleteCase(){
+        if(casesListGV.getSelectionModel().getSelectedItem()!= null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                    "Are you sure you want to delete this case?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.YES) {
+                try {
+                    model.deleteCase(casesListGV.getSelectionModel().getSelectedItem());
+                    model.deleteObservableCase(casesListGV.getSelectionModel().getSelectedItem());
+                    refreshCasesList();
+                } catch (DalException dalException) {
+                    dalException.printStackTrace();
+                    new SoftAlert(dalException.getMessage());
+                }
+            }
+        }
     }
 
     @FXML
     void deletePatient(ActionEvent event) {
+        handleDeletePatient();
+    }
 
+    private void handleDeletePatient(){
+        if(patientsListGV.getSelectionModel().getSelectedItem()!= null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                    "Are you sure you want to delete this patient?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.YES) {
+                try {
+                    model.deletePatient(patientsListGV.getSelectionModel().getSelectedItem());
+                    model.deleteObservablePatient(patientsListGV.getSelectionModel().getSelectedItem());
+                    refreshPatientsList();
+                } catch (DalException dalException) {
+                    dalException.printStackTrace();
+                    new SoftAlert(dalException.getMessage());
+                }
+            }
+        }
     }
 
     @FXML
@@ -600,8 +636,8 @@ public class TeacherMainCTLL {
 
     @FXML
     void logOut(ActionEvent event) {
-        closeWindows();
         openView("GUI/Views/Login.fxml",generalCSS,"Log in",500,450,false,0);
+        closeWindows();
     }
 
     @FXML
@@ -628,35 +664,6 @@ public class TeacherMainCTLL {
     void openManageGroup(ActionEvent event) {
 
     }
-    /*
-    @FXML
-    public void updatePatient(ActionEvent actionEvent) {
-        if(patientFieldsAreFilled()){
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-                    "Are you sure you want to update this patient?",ButtonType.YES,ButtonType.NO,ButtonType.CANCEL);
-            alert.showAndWait();
-            if(alert.getResult() == ButtonType.YES){
-                try{
-                    Patient patient = patientsListGV.getSelectionModel().getSelectedItem();
-                    patient.setFirst_name(nameField.getText());
-                    patient.setLast_name(familyNameField.getText());
-                    patient.setDateOfBirth(dateOfBirthPicker.getValue());
-                    patient.setGender(genderComboBox.getValue());
-                    patient.setWeight(weightField.getText());
-                    patient.setHeight(heightField.getText());
-                    patient.setCpr(cprField.getText());
-                    patient.setPhoneNumber(phoneNumberField.getText());
-                    model.updatePatient(patient);
-                    model.updatePatientInTable(patient);
-                    refreshPatientsList();
-                }catch(DalException dalException){
-                    dalException.printStackTrace();
-                    new SoftAlert(dalException.getMessage());
-                }
-            }
-        }
-    }
-     */
 
     @FXML
     void categorySelected(ActionEvent event) {
@@ -767,7 +774,11 @@ public class TeacherMainCTLL {
     }
 
     private void closeWindows() {
-        Stage st = (Stage) casesListGV.getScene().getWindow();
-        st.close();
+        List<Window> w = Stage.getWindows();
+        for (Window window : w) {
+            if(window.isFocused()){
+                w.remove(window);
+            }else window.hide();
+        }
     }
 }

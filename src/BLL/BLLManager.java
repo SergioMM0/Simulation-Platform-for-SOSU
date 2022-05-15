@@ -110,6 +110,16 @@ public class BLLManager implements BLLFacade{
     }
 
     @Override
+    public void deleteCase(Case selectedCase) throws DalException {
+        dalFacade.deleteCase(selectedCase);
+    }
+
+    @Override
+    public void deletePatient(Patient selectedPatient) throws DalException {
+        dalFacade.deletePatient(selectedPatient);
+    }
+
+    @Override
     public void saveStudentQuestionAnswer(StudentQuestionnaireAnswer answer) throws DalException {
         dalFacade.addStudentQuestionAnswer(answer);
     }

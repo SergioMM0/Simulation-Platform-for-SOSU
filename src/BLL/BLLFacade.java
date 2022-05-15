@@ -52,6 +52,10 @@ public interface BLLFacade {
     void removeParticipant(Group group, User user) throws DalException;
 
     void updateCase(Case newCase) throws DalException;
+
+    void deleteCase(Case selectedCase)throws DalException;
+
+    void deletePatient(Patient selectedPatient)throws DalException;
 }
 
 
