@@ -105,7 +105,7 @@ public class BLLManager implements BLLFacade{
 
     @Override
     public void updateCase(Case newCase) throws DalException {
-        //dalFacade.updateCase(newCase);
+        dalFacade.updateCase(newCase);
         //TODO implement
     }
 

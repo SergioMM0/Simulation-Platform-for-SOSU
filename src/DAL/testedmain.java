@@ -12,12 +12,8 @@ public class testedmain {
 
         for(Case d : daoCase.getAllCases(1)){
 
-            System.out.println(d.getName());
+            System.out.println(d);
         }
-        DAOGroup d = new DAOGroup();
 
-        for(Group c : d.getAllGroups(1)){
-            System.out.println(c.getName());
-        }
     }
 }

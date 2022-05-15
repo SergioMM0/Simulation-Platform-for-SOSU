@@ -21,16 +21,14 @@ public class DAOCase {
     public List<Case> getAllCases(int schoolid) throws DalException {
         ArrayList<Case> cases = new ArrayList<>();
         try(Connection connection = dataAccess.getConnection()){
-            String sql = "select  [Case].[id] ,  [Case].[name] ,  [Case].[Description_of_the_condition] ,CategoryName , SubCategoryName, schoolid\n" +
-                    "from [Case] " +
-                    "where schoolid  = ? ";
+            String sql = "select * from [Case] where schoolid  = ? ";
             PreparedStatement prs = connection.prepareStatement(sql);
             prs.setInt(1 , schoolid);
             prs.execute();
             ResultSet rs = prs.getResultSet();
             while(rs.next()){
                 int id = rs.getInt("id");
-                String name = ("name");
+                String name = rs.getString("name");
                 String description_of_the_condition = rs.getString("Description_of_the_condition");
                 String category = rs.getString("CategoryName");
                 String subcategory = rs.getString("SubCategoryName");
@@ -47,7 +45,7 @@ public class DAOCase {
         }
     }
 
-        //public Case(int id, String name,String conditionDescription, String category, String subCategory,int schoolID)
+
     public void createCase(Case c ) throws DalException {
         try(Connection con = dataAccess.getConnection()) {
             String sql = "INSERT INTO [dbo].[Case] ( name ,Description_of_the_condition,CategoryName , SubCategoryName ,schoolid) " +
@@ -68,12 +66,14 @@ public class DAOCase {
 
     public void updateCase(Case c) throws DalException {
         try(Connection con = dataAccess.getConnection()){
-            String sql = "Update Case set name = ? , description_of_the_condition = ?  " +
+            String sql = "Update [Case] set name = ? , description_of_the_condition = ? , CategoryName = ? , SubCategoryName = ? " +
                     " where id = ? ";
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setString(1 , c.getName());
             prs.setString(2 ,c.getConditionDescription());
-            prs.setInt(3,c.getId());
+            prs.setString(3 , c.getCategory());
+            prs.setString(4 , c.getSubCategory());
+            prs.setInt(5,c.getId());
             prs.executeUpdate();
 
         } catch (SQLException e) {
@@ -84,7 +84,7 @@ public class DAOCase {
 
     public void deleteCase(Case c) throws DalException {
         try(Connection con = dataAccess.getConnection()){
-            String sql = "DELETE FROM Case WHERE id = ?";
+            String sql = " DELETE FROM [Case] WHERE id = ?";
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setInt(1 , c.getId());
             prs.executeUpdate();
