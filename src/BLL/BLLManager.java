@@ -140,6 +140,18 @@ public class BLLManager implements BLLFacade{
     }
 
     @Override
+    public void assignCaseToGroup(Case selectedCase, Group group, Patient patient) throws DalException {
+        dalFacade.assignCaseToPatientToGroup(patient,selectedCase,group);
+    }
+
+    @Override
+    public List<Case> getCasesAssignedTo(Group group) throws DalException {
+        //return dalFacade.getCasesAssignedTo(group);
+        //TODO IMPLEMENT
+        return null;
+    }
+
+    @Override
     public void saveStudentQuestionAnswer(StudentQuestionnaireAnswer answer) throws DalException {
         dalFacade.addStudentQuestionAnswer(answer);
     }

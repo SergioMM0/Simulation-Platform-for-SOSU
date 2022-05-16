@@ -158,11 +158,11 @@ public class TeacherMainCTLL {
     }
 
     public TeacherMainCTLL() {
-        model = new TeacherMainMOD();
+        model = TeacherMainMOD.getInstance();
         catAndSubC = CatAndSubC.getInstance();
     }
 
-    public void initializeView() {
+    protected void initializeView() {
         populateGroupsTable();
         populateCasesTable();
         populatePatientsTable();
@@ -218,12 +218,12 @@ public class TeacherMainCTLL {
     }
 
 
-    public void addPatientToList(Patient patient) {
+    protected void addPatientToList(Patient patient) {
         model.addPatientToList(patient);
         refreshPatientsList();
     }
 
-    public void refreshPatientsList() {
+    protected void refreshPatientsList() {
         patientsListGV.getItems().clear();
         patientsListGV.getItems().addAll(model.getObservablePatients());
     }
@@ -234,7 +234,7 @@ public class TeacherMainCTLL {
         refreshCasesList();
     }
 
-    private void refreshCasesList() {
+    public void refreshCasesList() {
         casesListGV.getItems().clear();
         casesListGV.getItems().addAll(model.getObservableCases());
     }
@@ -363,41 +363,6 @@ public class TeacherMainCTLL {
         } else return true;
     }
 
-    /*
-    private boolean fieldsAreTheSame(){
-        int same = 0;
-        if(nameField.getText().toLowerCase(Locale.ROOT).equals(
-                patientsListGV.getSelectionModel().getSelectedItem().getFirst_name().toLowerCase(Locale.ROOT))){
-            same++;
-        }
-        else if(familyNameField.getText().toLowerCase(Locale.ROOT).equals(
-                patientsListGV.getSelectionModel().getSelectedItem().getLast_name().toLowerCase(Locale.ROOT))) {
-            same++;
-        }
-        else if(genderComboBox.getValue().equals(patientsListGV.getSelectionModel().getSelectedItem().getGender())){
-            same++;
-        }
-        else if(weightField.getText().toLowerCase(Locale.ROOT).equals(
-                patientsListGV.getSelectionModel().getSelectedItem().getWeight().toLowerCase(Locale.ROOT))){
-            same++;
-        }
-        else if(heightField.getText().toLowerCase(Locale.ROOT).equals(
-                patientsListGV.getSelectionModel().getSelectedItem().getHeight().toLowerCase(Locale.ROOT))){
-            same++;
-        }
-        else if(cprField.getText().toLowerCase(Locale.ROOT).equals(
-                patientsListGV.getSelectionModel().getSelectedItem().getCpr().toLowerCase(Locale.ROOT))){
-            same++;
-        }
-        else if(phoneNumberField.getText().toLowerCase(Locale.ROOT).equals(
-                patientsListGV.getSelectionModel().getSelectedItem().getPhoneNumber().toLowerCase(Locale.ROOT))){
-            same++;
-        }
-        return same<7;
-    }
-
-     */
-
     @FXML
     void addStudentToGroup(ActionEvent event) {
         if (studentsTable.getSelectionModel().getSelectedItem() != null
@@ -442,6 +407,16 @@ public class TeacherMainCTLL {
         groupTab.setText(groupsTable.getSelectionModel().getSelectedItem().getName());
         groupNameLBL.setText(groupsTable.getSelectionModel().getSelectedItem().getName());
         setUpStudentsLBL();
+        populateCasesAssigned();
+    }
+
+    public void populateCasesAssigned() {
+        try{
+            casesAssignedList.getItems().addAll(model.getCasesAssignedToGroup(groupsTable.getSelectionModel().getSelectedItem()));
+        }catch (DalException dalException){
+            dalException.printStackTrace();
+            new SoftAlert(dalException.getMessage());
+        }
     }
 
     private void setUpStudentsLBL() {
@@ -529,11 +504,18 @@ public class TeacherMainCTLL {
 
     @FXML
     void assignCaseToGroup(ActionEvent event) {
-        handleAssignCaseToGroup();
+        if(casesListGV.getSelectionModel().getSelectedItem() != null){
+            handleAssignCaseToGroup();
+        }else new SoftAlert("Please select a case");
     }
 
     private void handleAssignCaseToGroup() {
         openView("GUI/Views/AssignNewCaseToGroup.fxml",generalCSS,"Assign case to group",530,400,false,0);
+    }
+
+    public void refreshCasesAssigned() {
+        casesAssignedList.getItems().clear();
+        casesAssignedList.getItems().addAll(model.getObservableCasesAssigned());
     }
 
     @FXML
@@ -790,9 +772,9 @@ public class TeacherMainCTLL {
             loader.<ManageGroupCTLL>getController().populateGroupField();
         }
         if(resource.equals("GUI/Views/AssignNewCaseToGroup.fxml")){
-            loader.<AssignCaseCTLL>getController().initializeView();
             loader.<AssignCaseCTLL>getController().setCase(casesListGV.getSelectionModel().getSelectedItem());
             loader.<AssignCaseCTLL>getController().setController(this);
+            loader.<AssignCaseCTLL>getController().initializeView();
         }
         root.getStylesheets().add(css);
         Stage stage = new Stage();

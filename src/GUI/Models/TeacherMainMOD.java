@@ -10,21 +10,28 @@ import DAL.util.DalException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.Locale;
-
 public class TeacherMainMOD {
 
     private BLLFacade bllFacade;
     private ObservableList<Group> allGroups;
     private ObservableList<Case> allCases;
+    private ObservableList<Case> casesAssigned;
     private ObservableList<Patient> allPatients;
     private ObservableList<User> allStudents;
     private ObservableList<User> groupParticipants;
+    private static TeacherMainMOD instance;
 
-    public TeacherMainMOD(){
+    public static TeacherMainMOD getInstance(){
+        if(instance == null)
+            instance = new TeacherMainMOD();
+        return instance;
+    }
+
+    private TeacherMainMOD(){
         bllFacade = new BLLManager();
         allGroups = FXCollections.observableArrayList();
         allCases = FXCollections.observableArrayList();
+        casesAssigned = FXCollections.observableArrayList();
         allPatients = FXCollections.observableArrayList();
         allStudents = FXCollections.observableArrayList();
         groupParticipants = FXCollections.observableArrayList();
@@ -192,5 +199,18 @@ public class TeacherMainMOD {
 
     public void deleteObservablePatient(Patient selectedItem) {
         allPatients.remove(selectedItem);
+    }
+
+    public void assignCaseToGroup(Case selectedCase, Group group, Patient patient) throws DalException{
+        bllFacade.assignCaseToGroup(selectedCase,group,patient);
+    }
+
+    public ObservableList<Case> getCasesAssignedToGroup(Group group) throws DalException {
+        casesAssigned.addAll(bllFacade.getCasesAssignedTo(group));
+        return casesAssigned;
+    }
+
+    public ObservableList<Case> getObservableCasesAssigned() {
+        return casesAssigned;
     }
 }

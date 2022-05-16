@@ -65,6 +65,9 @@ public interface BLLFacade {
 
     void deleteSchool(School school) throws DalException ;
 
+    void assignCaseToGroup(Case selectedCase, Group group, Patient patient) throws DalException;
+
+    List<Case> getCasesAssignedTo(Group group) throws DalException;
 }
 
 
