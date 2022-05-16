@@ -229,28 +229,28 @@ public class TeacherMainCTLL {
     }
 
 
-    public void addCaseToList(Case newCase) {
+    protected void addCaseToList(Case newCase) {
         model.addCaseToList(newCase);
         refreshCasesList();
     }
 
-    public void refreshCasesList() {
+    protected void refreshCasesList() {
         casesListGV.getItems().clear();
         casesListGV.getItems().addAll(model.getObservableCases());
     }
 
     @FXML
-    void addNewCase(ActionEvent event) {
+    private void addNewCase(ActionEvent event) {
         openView("GUI/Views/CreateCase.fxml", generalCSS, "Create new case", 860, 700, false, 0);
     }
 
     @FXML
-    void addNewPatient(ActionEvent event) {
+    private void addNewPatient(ActionEvent event) {
         openView("GUI/Views/CreatePatient.fxml", generalCSS, "Create new patient", 485, 510, false, 0);
     }
 
     @FXML
-    void caseIsSelected(MouseEvent event) {
+    private void caseIsSelected(MouseEvent event) {
         if (casesListGV.getSelectionModel().getSelectedItem() != null) {
             if (caseTab.isDisabled()) {
                 caseTab.setDisable(false);
@@ -287,7 +287,7 @@ public class TeacherMainCTLL {
     }
 
     @FXML
-    void patientIsSelected(MouseEvent event) {
+    private void patientIsSelected(MouseEvent event) {
         if (patientOverviewTab.isDisabled()) {
             patientOverviewTab.setDisable(false);
         }
@@ -308,7 +308,7 @@ public class TeacherMainCTLL {
     }
 
     @FXML
-    public void updatePatient(ActionEvent actionEvent) {
+    private void updatePatient(ActionEvent actionEvent) {
         if (patientFieldsAreFilled()) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                     "Are you sure you want to update this patient?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
@@ -364,7 +364,7 @@ public class TeacherMainCTLL {
     }
 
     @FXML
-    void addStudentToGroup(ActionEvent event) {
+    private void addStudentToGroup(ActionEvent event) {
         if (studentsTable.getSelectionModel().getSelectedItem() != null
                 && groupsTable.getSelectionModel().getSelectedItem() != null) {
             if (!groupsTable.getSelectionModel().getSelectedItem().containsMember(studentsTable.getSelectionModel().getSelectedItem())) {
@@ -387,7 +387,7 @@ public class TeacherMainCTLL {
     }
 
     @FXML
-    void groupIsSelected(MouseEvent event) {
+    private void groupIsSelected(MouseEvent event) {
         populateParticipantsTable();
         populateGroupsTab();
     }
@@ -410,7 +410,7 @@ public class TeacherMainCTLL {
         populateCasesAssigned();
     }
 
-    public void populateCasesAssigned() {
+    protected void populateCasesAssigned() {
         try{
             casesAssignedList.getItems().addAll(model.getCasesAssignedToGroup(groupsTable.getSelectionModel().getSelectedItem()));
         }catch (DalException dalException){
@@ -448,7 +448,7 @@ public class TeacherMainCTLL {
     }
 
     @FXML
-    void removeStudentFromGroup(ActionEvent event) {
+    private void removeStudentFromGroup(ActionEvent event) {
         removeParticipant();
         populateParticipantsTable();
     }
@@ -466,33 +466,33 @@ public class TeacherMainCTLL {
     }
 
     @FXML
-    void assignedCaseIsSelected(MouseEvent event) {
+    private void assignedCaseIsSelected(MouseEvent event) {
 
     }
 
     @FXML
-    void gradedCaseIsSelected(MouseEvent event) {
+    private void gradedCaseIsSelected(MouseEvent event) {
 
     }
 
     @FXML
-    void addNewStudent(ActionEvent event) {
+    private void addNewStudent(ActionEvent event) {
         openView("GUI/Views/ManageStudent.fxml", generalCSS, "Add new Student", 400, 220, false, 1);
     }
 
     @FXML
-    void editStudent(ActionEvent event) {
+    private void editStudent(ActionEvent event) {
         if (studentsTable.getSelectionModel().getSelectedItem() != null) {
             openView("GUI/Views/ManageStudent.fxml", generalCSS, "Edit student", 400, 220, false, 2);
         } else new SoftAlert("Please select a student");
     }
 
-    public void addStudentToTable(User user) {
+    protected void addStudentToTable(User user) {
         model.addObservableStudent(user);
         refreshStudentsTable();
     }
 
-    public void updateStudentInTable(User student) {
+    protected void updateStudentInTable(User student) {
         model.updateStudentInTable(student);
         refreshStudentsTable();
     }
@@ -503,7 +503,7 @@ public class TeacherMainCTLL {
     }
 
     @FXML
-    void assignCaseToGroup(ActionEvent event) {
+    private void assignCaseToGroup(ActionEvent event) {
         if(casesListGV.getSelectionModel().getSelectedItem() != null){
             handleAssignCaseToGroup();
         }else new SoftAlert("Please select a case");
@@ -513,45 +513,40 @@ public class TeacherMainCTLL {
         openView("GUI/Views/AssignNewCaseToGroup.fxml",generalCSS,"Assign case to group",530,400,false,0);
     }
 
-    public void refreshCasesAssigned() {
-        casesAssignedList.getItems().clear();
-        casesAssignedList.getItems().addAll(model.getObservableCasesAssigned());
-    }
-
     @FXML
-    void assignNewCaseToGroup(ActionEvent event) {
+    private void assignNewCaseToGroup(ActionEvent event) {
 
     }
 
     @FXML
-    void createGroup(ActionEvent event) {
+    private void createGroup(ActionEvent event) {
         openView("GUI/Views/ManageGroup.fxml", generalCSS, "Add new group", 400, 180, false, 1);
     }
 
     @FXML
-    void editGroup(ActionEvent event) {
+    private void editGroup(ActionEvent event) {
         if (groupsTable.getSelectionModel().getSelectedItem() != null) {
             openView("GUI/Views/ManageGroup.fxml", generalCSS, "Edit group", 400, 180, false, 2);
         } else new SoftAlert("Please select a group");
     }
 
-    public void addGroupToList(Group group) {
+    protected void addGroupToList(Group group) {
         model.addObservableGroup(group);
         refreshGroupList();
     }
 
-    public void updateGroupInList(Group group) {
+    protected void updateGroupInList(Group group) {
         model.updateObservableGroup(group);
         refreshGroupList();
     }
 
-    public void refreshGroupList() {
+    protected void refreshGroupList() {
         groupsTable.getItems().clear();
         groupsTable.getItems().addAll(model.getObservableGroups());
     }
 
     @FXML
-    void deleteGroup(ActionEvent event) {
+    private void deleteGroup(ActionEvent event) {
         if (groupsTable.getSelectionModel().getSelectedItem() != null) {
             try {
                 model.deleteGroup(groupsTable.getSelectionModel().getSelectedItem());
@@ -564,7 +559,7 @@ public class TeacherMainCTLL {
     }
 
     @FXML
-    void deleteCase(ActionEvent event) {
+    private void deleteCase(ActionEvent event) {
         handleDeleteCase();
     }
 
@@ -587,7 +582,7 @@ public class TeacherMainCTLL {
     }
 
     @FXML
-    void deletePatient(ActionEvent event) {
+    private void deletePatient(ActionEvent event) {
         handleDeletePatient();
     }
 
@@ -610,7 +605,7 @@ public class TeacherMainCTLL {
     }
 
     @FXML
-    void deleteStudent(ActionEvent event) {
+    private void deleteStudent(ActionEvent event) {
         User student = studentsTable.getSelectionModel().getSelectedItem();
         try {
             model.deleteStudent(student);
@@ -624,17 +619,17 @@ public class TeacherMainCTLL {
     }
 
     @FXML
-    void duplicateCase(ActionEvent event) {
+    private void duplicateCase(ActionEvent event) {
 
     }
 
     @FXML
-    void duplicatePatient(ActionEvent event) {
+    private void duplicatePatient(ActionEvent event) {
 
     }
 
     @FXML
-    void logOut(ActionEvent event) {
+    private void logOut(ActionEvent event) {
         closeWindows();
         Parent root1;
         Stage stage = (Stage) studentsTable.getScene().getWindow();
@@ -649,32 +644,32 @@ public class TeacherMainCTLL {
     }
 
     @FXML
-    void markCaseAsGraded(ActionEvent event) {
+    private void markCaseAsGraded(ActionEvent event) {
 
     }
 
     @FXML
-    void newObservation(ActionEvent event) {
+    private void newObservation(ActionEvent event) {
 
     }
 
     @FXML
-    void openGradeCase(ActionEvent event) {
+    private void openGradeCase(ActionEvent event) {
 
     }
 
     @FXML
-    void openGradedCase(ActionEvent event) {
+    private void openGradedCase(ActionEvent event) {
 
     }
 
     @FXML
-    void openManageGroup(ActionEvent event) {
+    private void openManageGroup(ActionEvent event) {
         tabPane.getSelectionModel().select(studentsGroupsTab);
     }
 
     @FXML
-    void categorySelected(ActionEvent event) {
+    private void categorySelected(ActionEvent event) {
         if (caseCategoryComboBox.getValue() != null) {
             if (!caseCategoryComboBox.getValue().isEmpty() &&
                     !caseCategoryComboBox.getValue().equals(casesListGV.getSelectionModel().getSelectedItem().getCategory())) {
@@ -686,7 +681,7 @@ public class TeacherMainCTLL {
     }
 
     @FXML
-    void saveChangesOnCase(ActionEvent event) {
+    private void saveChangesOnCase(ActionEvent event) {
         if (caseFieldsAreFilled()) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                     "Are you sure you want to update this case?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
@@ -720,12 +715,12 @@ public class TeacherMainCTLL {
     }
 
     @FXML
-    void unassignSelectedCase(ActionEvent event) {
+    private void unassignSelectedCase(ActionEvent event) {
 
     }
 
     @FXML
-    void unmarkCaseAsGraded(ActionEvent event) {
+    private void unmarkCaseAsGraded(ActionEvent event) {
 
     }
 
