@@ -194,4 +194,9 @@ public class Manager implements DALFacade {
     public StudentQuestionnaireAnswer getQuestionaireAnswer(int questionId, int questionaireId) throws DalException {
         return daoStudentQuestion.getQuestionaireAnswer(questionId,questionaireId);
     }
+
+    @Override
+    public void removeUserAndGroup(User user, Group group) throws DalException {
+        daoGroup.removeUserAndGroup(user , group);
+    }
 }
