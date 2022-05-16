@@ -1,8 +1,12 @@
 package DAL.Manager1;
 
 import BE.Case;
+import BE.Group;
+import BE.Patient;
 import DAL.DataAccess.DataAccess;
 import DAL.util.DalException;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -42,6 +46,57 @@ public class DAOCase {
             return cases;
         } catch (SQLException e) {
             throw new DalException("Connection Lost" , e);
+        }
+    }
+
+    public List<Case> getCasesAssignedTo(Group group)throws DalException{
+        ArrayList<Case> cases = new ArrayList<>();
+        try(Connection con = dataAccess.getConnection()) {
+            String sql = "select [Case].id , [Case].Description_of_the_condition , [Case].[name] , [Case].CategoryName , [Case].SubCategoryName , [Case].[schoolid] from [Case] join [SickPatient] on [Case].id = [SickPatient].caseid" +
+                    "where [SickPatient].Groupid = ?";
+            PreparedStatement prs = con.prepareStatement(sql);
+            prs.setInt(1 , group.getId());
+            prs.execute();
+            ResultSet rs = prs.getResultSet();
+            while (rs.next()){
+                int id = rs.getInt("[Case].id");
+                String name = rs.getString("[Case].[name]");
+                String condition = rs.getString("[Case].Description_of_the_condition");
+                String cat = rs.getString("[Case].CategoryName");
+                String subcat = rs.getString("[Case].SubCategoryName");
+                int schoolid = rs.getInt("[Case].[schoolid]");
+                Case c = new Case(id ,name ,condition , cat ,subcat , schoolid );
+                cases.add(c);
+            }
+            return cases;
+        } catch (SQLException e) {
+           throw new DalException("Couldnot retrive list of cases from the database " , e);
+        }
+    }
+
+    public void assignCasetoPatient(Patient patient, Case c) throws DalException {
+        try(Connection con = dataAccess.getConnection()){
+            String sql = "insert into SickPatient (patientid , caseid) values  (?,?)";
+            PreparedStatement prs = con.prepareStatement(sql);
+            prs.setInt(1 ,patient.getId());
+            prs.setInt(2 , c.getId());
+            prs.executeUpdate();
+        } catch (SQLException e){
+            throw new DalException("Connection Lost" , e );
+        }
+    }
+
+
+    public void assignCaseToPatientToGroup(Patient p, Case c, Group g) throws DalException {
+        try(Connection con = dataAccess.getConnection()) {
+            String sql = "insert into SickPatient (patientid , caseid , Groupid) values  (?,?,?)";
+            PreparedStatement prs = con.prepareStatement(sql);
+            prs.setInt(1 , p.getId());
+            prs.setInt(2 ,c.getId());
+            prs.setInt(3 ,g.getId());
+            prs.executeUpdate();
+        } catch (SQLException e) {
+            throw new DalException("Cant preform this task at this moment " , e);
         }
     }
 

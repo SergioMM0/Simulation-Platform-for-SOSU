@@ -70,5 +70,9 @@ public interface DALFacade {
 
     StudentQuestionnaireAnswer getQuestionaireAnswer(int questionId, int questionaireId) throws DalException;
 
-    public void removeUserAndGroup(User user , Group group)throws DalException;
+     void removeUserAndGroup(User user , Group group)throws DalException;
+
+     List<Case> getCasesAssignedTo(Group group)throws DalException;
+
+     List<User> getALLUsers(int schoolid , String utype) throws DalException;
 }

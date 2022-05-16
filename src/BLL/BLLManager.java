@@ -146,9 +146,14 @@ public class BLLManager implements BLLFacade{
 
     @Override
     public List<Case> getCasesAssignedTo(Group group) throws DalException {
-        //return dalFacade.getCasesAssignedTo(group);
+        return dalFacade.getCasesAssignedTo(group);
         //TODO IMPLEMENT
-        return null;
+
+    }
+
+    @Override
+    public List<User> getALLUsers(int schoolid, String utype) throws DalException {
+        return dalFacade.getALLUsers(schoolid , utype);
     }
 
     @Override

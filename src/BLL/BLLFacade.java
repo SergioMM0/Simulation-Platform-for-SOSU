@@ -68,6 +68,8 @@ public interface BLLFacade {
     void assignCaseToGroup(Case selectedCase, Group group, Patient patient) throws DalException;
 
     List<Case> getCasesAssignedTo(Group group) throws DalException;
+
+    List<User> getALLUsers(int schoolid , String utype) throws DalException;
 }
 
 

@@ -61,23 +61,47 @@ public class AdminCTLL implements Initializable {
     private Label AdminNameLbl;
 
     private AdminMOD adminMOD ;
-
+    private User logedUser ;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Image image = new Image("/res/felterimage.png");
         filterImageid.setImage(image);
         adminMOD = AdminMOD.getInstance();
-        diplaySchools();
+        displaySchools();
+        displayusers();
     }
 
-    public void diplaySchools(){
+    public void displaySchools(){
         try {
             SchoolTalbeView.setItems(adminMOD.getAllSchools());
             schoolID.setCellValueFactory(new PropertyValueFactory<>("id"));
             SchoolName.setCellValueFactory(new PropertyValueFactory<>("name"));
+            TeacherID.setCellValueFactory(new PropertyValueFactory<>("id"));
+            TeacherName.setCellValueFactory(new PropertyValueFactory<>("name"));
+            TeacherEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+            StudnetID.setCellValueFactory(new PropertyValueFactory<>("id"));
+            StudnetName.setCellValueFactory(new PropertyValueFactory<>("name"));
+            StudnetEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+
         } catch (DalException e) {
             e.printStackTrace();
         }
+    }
+        //TODO BUGGED METHOD
+    public void displayusers(){
+        System.out.println("dd");
+
+                if(SchoolTalbeView.getSelectionModel().getSelectedIndex() != -1){
+                    System.out.println("test");
+                    try {
+                        TeacherTableView.setItems(adminMOD.getAllTeachers(SchoolTalbeView.getSelectionModel().getSelectedItem().getId()));
+                        StudentTableView.setItems(adminMOD.getAllSudents(SchoolTalbeView.getSelectionModel().getSelectedItem().getId()));
+                    } catch (DalException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
     }
 
     public void filterField(KeyEvent keyEvent) {
@@ -104,4 +128,7 @@ public class AdminCTLL implements Initializable {
     public void ClloseBtn(ActionEvent event) {
     }
 
+    public void setUser(User logedUser) {
+        this.logedUser = logedUser;
+    }
 }
