@@ -27,6 +27,7 @@ import javafx.stage.Window;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -150,6 +151,8 @@ public class TeacherMainCTLL {
     private final String generalCSS = "";
     private TeacherMainMOD model;
     private final CatAndSubC catAndSubC;
+
+    private ArrayList<Stage> listOfStages = new ArrayList<>();
 
     public void setUser(User user) {
         logedUser = user;
@@ -636,8 +639,17 @@ public class TeacherMainCTLL {
 
     @FXML
     void logOut(ActionEvent event) {
-        openView("GUI/Views/Login.fxml",generalCSS,"Log in",500,450,false,0);
         closeWindows();
+        Parent root1;
+        Stage stage = (Stage) studentsTable.getScene().getWindow();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Views/Login.fxml"));
+            root1 = (Parent) fxmlLoader.load();
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -769,16 +781,15 @@ public class TeacherMainCTLL {
         Stage stage = new Stage();
         stage.setTitle(title);
         stage.setScene(new Scene(root, width, height));
+        listOfStages.add(stage);
         stage.setResizable(resizable);
         stage.showAndWait();
     }
 
     private void closeWindows() {
-        List<Window> w = Stage.getWindows();
-        for (Window window : w) {
-            if(window.isFocused()){
-                w.remove(window);
-            }else window.hide();
+        for (int i = 0; i < listOfStages.size() ; i++) {
+            listOfStages.get(i).close();
         }
+        listOfStages.clear();
     }
 }
