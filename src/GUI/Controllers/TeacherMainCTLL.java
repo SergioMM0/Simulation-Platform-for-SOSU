@@ -529,7 +529,11 @@ public class TeacherMainCTLL {
 
     @FXML
     void assignCaseToGroup(ActionEvent event) {
+        handleAssignCaseToGroup();
+    }
 
+    private void handleAssignCaseToGroup() {
+        openView("GUI/Views/AssignNewCaseToGroup.fxml",generalCSS,"Assign case to group",530,400,false,0);
     }
 
     @FXML
@@ -784,6 +788,11 @@ public class TeacherMainCTLL {
             loader.<ManageGroupCTLL>getController().setController(this);
             loader.<ManageGroupCTLL>getController().setOperationType(operationType);
             loader.<ManageGroupCTLL>getController().populateGroupField();
+        }
+        if(resource.equals("GUI/Views/AssignNewCaseToGroup.fxml")){
+            loader.<AssignCaseCTLL>getController().initializeView();
+            loader.<AssignCaseCTLL>getController().setCase(casesListGV.getSelectionModel().getSelectedItem());
+            loader.<AssignCaseCTLL>getController().setController(this);
         }
         root.getStylesheets().add(css);
         Stage stage = new Stage();
