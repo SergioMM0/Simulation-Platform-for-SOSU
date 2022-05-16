@@ -4,15 +4,10 @@ import BE.Case;
 import BE.Group;
 import BE.Patient;
 import BE.User;
-import BLL.BLLFacade;
 import DAL.util.DalException;
 import GUI.Alerts.SoftAlert;
 import GUI.Models.TeacherMainMOD;
 import GUI.Util.CatAndSubC;
-import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,12 +18,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class TeacherMainCTLL {
 
@@ -141,15 +135,23 @@ public class TeacherMainCTLL {
     private Tab patientOverviewTab;
 
     @FXML
+    private TabPane tabPane;
+
+    @FXML
     private Tab caseTab;
 
     @FXML
     private Tab groupTab;
 
+    @FXML
+    private Tab studentsGroupsTab;
+
     private User logedUser;
     private final String generalCSS = "";
     private TeacherMainMOD model;
     private final CatAndSubC catAndSubC;
+
+    private ArrayList<Stage> listOfStages = new ArrayList<>();
 
     public void setUser(User user) {
         logedUser = user;
@@ -169,7 +171,7 @@ public class TeacherMainCTLL {
         setUpTabs();
     }
 
-    private void setUpTabs(){
+    private void setUpTabs() {
         patientOverviewTab.setDisable(true);
         caseTab.setDisable(true);
         groupTab.setDisable(true);
@@ -205,11 +207,11 @@ public class TeacherMainCTLL {
         }
     }
 
-    private void populateStudentsTable(){
-        try{
+    private void populateStudentsTable() {
+        try {
             studentsTable.getItems().addAll(model.getAllStudents(logedUser.getSchoolID()));
             studentNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        }catch (DalException dalException){
+        } catch (DalException dalException) {
             dalException.printStackTrace();
             new SoftAlert(dalException.getMessage());
         }
@@ -221,7 +223,7 @@ public class TeacherMainCTLL {
         refreshPatientsList();
     }
 
-    public void refreshPatientsList(){
+    public void refreshPatientsList() {
         patientsListGV.getItems().clear();
         patientsListGV.getItems().addAll(model.getObservablePatients());
     }
@@ -232,7 +234,7 @@ public class TeacherMainCTLL {
         refreshCasesList();
     }
 
-    private void refreshCasesList(){
+    private void refreshCasesList() {
         casesListGV.getItems().clear();
         casesListGV.getItems().addAll(model.getObservableCases());
     }
@@ -249,8 +251,8 @@ public class TeacherMainCTLL {
 
     @FXML
     void caseIsSelected(MouseEvent event) {
-        if(casesListGV.getSelectionModel().getSelectedItem() != null){
-            if(caseTab.isDisabled()){
+        if (casesListGV.getSelectionModel().getSelectedItem() != null) {
+            if (caseTab.isDisabled()) {
                 caseTab.setDisable(false);
             }
             caseTab.setText(casesListGV.getSelectionModel().getSelectedItem().getName());
@@ -266,7 +268,7 @@ public class TeacherMainCTLL {
             for (String cat : allCat) {
                 caseCategoryComboBox.getItems().add(cat); //population of the categories
             }
-            for(String subCat : allSubCat){
+            for (String subCat : allSubCat) {
                 caseSubcategoryComboBox.getItems().add(subCat); // population of the subcategories of the category
             }
             //population of case in case info when selected in general view
@@ -286,7 +288,7 @@ public class TeacherMainCTLL {
 
     @FXML
     void patientIsSelected(MouseEvent event) {
-        if(patientOverviewTab.isDisabled()){
+        if (patientOverviewTab.isDisabled()) {
             patientOverviewTab.setDisable(false);
         }
         patientOverviewTab.setText(patientsListGV.getSelectionModel().getSelectedItem().getFirst_name());
@@ -307,12 +309,12 @@ public class TeacherMainCTLL {
 
     @FXML
     public void updatePatient(ActionEvent actionEvent) {
-        if(patientFieldsAreFilled()){
+        if (patientFieldsAreFilled()) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-                    "Are you sure you want to update this patient?",ButtonType.YES,ButtonType.NO,ButtonType.CANCEL);
+                    "Are you sure you want to update this patient?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
             alert.showAndWait();
-            if(alert.getResult() == ButtonType.YES){
-                try{
+            if (alert.getResult() == ButtonType.YES) {
+                try {
                     Patient patient = patientsListGV.getSelectionModel().getSelectedItem();
                     patient.setFirst_name(nameField.getText());
                     patient.setLast_name(familyNameField.getText());
@@ -325,7 +327,7 @@ public class TeacherMainCTLL {
                     model.updatePatient(patient);
                     model.updatePatientInTable(patient);
                     refreshPatientsList();
-                }catch(DalException dalException){
+                } catch (DalException dalException) {
                     dalException.printStackTrace();
                     new SoftAlert(dalException.getMessage());
                 }
@@ -333,40 +335,32 @@ public class TeacherMainCTLL {
         }
     }
 
-    private boolean patientFieldsAreFilled(){
-        if(nameField.getText().isEmpty()){
+    private boolean patientFieldsAreFilled() {
+        if (nameField.getText().isEmpty()) {
             new SoftAlert("Please introduce a new name for the patient");
             return false;
-        }
-        else if(familyNameField.getText().isEmpty()){
+        } else if (familyNameField.getText().isEmpty()) {
             new SoftAlert("Please introduce a new family name for the patient");
             return false;
-        }
-        else if(dateOfBirthPicker.getValue().isAfter(LocalDate.now()) || dateOfBirthPicker.getValue() == null){
+        } else if (dateOfBirthPicker.getValue().isAfter(LocalDate.now()) || dateOfBirthPicker.getValue() == null) {
             new SoftAlert("Please introduce a new date of birth for the patient");
             return false;
-        }
-        else if(genderComboBox.getSelectionModel().isEmpty() || genderComboBox.hasProperties()){
+        } else if (genderComboBox.getSelectionModel().isEmpty() || genderComboBox.hasProperties()) {
             new SoftAlert("Please introduce a new gender combo box for the patient");
             return false;
-        }
-        else if(weightField.getText().isEmpty()){
+        } else if (weightField.getText().isEmpty()) {
             new SoftAlert("Please introduce a new valid weight for the patient");
             return false;
-        }
-        else if(heightField.getText().isEmpty()){
+        } else if (heightField.getText().isEmpty()) {
             new SoftAlert("Please introduce a new valid height for the patient");
             return false;
-        }
-        else if(cprField.getText().isEmpty()){
+        } else if (cprField.getText().isEmpty()) {
             new SoftAlert("Please introduce a valid CPR for the patient");
             return false;
-        }
-        else if(phoneNumberField.getText().isEmpty()){
+        } else if (phoneNumberField.getText().isEmpty()) {
             new SoftAlert("Please introduce a valid phone number for the patient");
             return false;
-        }
-        else return true;
+        } else return true;
     }
 
     /*
@@ -406,54 +400,74 @@ public class TeacherMainCTLL {
 
     @FXML
     void addStudentToGroup(ActionEvent event) {
-        if(studentsTable.getSelectionModel().getSelectedItem() != null
-                && groupsTable.getSelectionModel().getSelectedItem() != null){
-            if(!groupsTable.getSelectionModel().getSelectedItem().containsMember(studentsTable.getSelectionModel().getSelectedItem())){
-                try{
+        if (studentsTable.getSelectionModel().getSelectedItem() != null
+                && groupsTable.getSelectionModel().getSelectedItem() != null) {
+            if (!groupsTable.getSelectionModel().getSelectedItem().containsMember(studentsTable.getSelectionModel().getSelectedItem())) {
+                try {
                     model.addStudentToGroup(groupsTable.getSelectionModel().getSelectedItem(),
                             studentsTable.getSelectionModel().getSelectedItem());
-                }catch (DalException dalException){
+                } catch (DalException dalException) {
                     new SoftAlert(dalException.getMessage());
                 }
                 System.out.println("Is reflecting");
                 model.updateObservableGroup(groupsTable.getSelectionModel().getSelectedItem().addMember(
                         studentsTable.getSelectionModel().getSelectedItem()));
-                repopulateParticipantsTable();
-            }else new SoftAlert("This student is already in the group");
-        } else{
-            if(studentsTable.getSelectionModel().getSelectedItem() == null){
+                populateParticipantsTable();
+            } else new SoftAlert("This student is already in the group");
+        } else {
+            if (studentsTable.getSelectionModel().getSelectedItem() == null) {
                 new SoftAlert("Please select a student");
-            }else new SoftAlert("Please select a group");
+            } else new SoftAlert("Please select a group");
         }
     }
 
     @FXML
-    void groupIsSelected(MouseEvent event){
-        repopulateParticipantsTable();
-
+    void groupIsSelected(MouseEvent event) {
+        populateParticipantsTable();
+        populateGroupsTab();
     }
 
-    private void repopulateParticipantsTable(){ //this method might be implemented straight in the MouseEvent
-        if(groupsTable.getSelectionModel().getSelectedItem().getMembers()!= null){
+    private void populateParticipantsTable() { //this method might be implemented straight in the MouseEvent
+        if (groupsTable.getSelectionModel().getSelectedItem().getMembers() != null) {
             participantsTable.getItems().clear();
             participantsTable.getItems().addAll(model.getObservableParticipants(groupsTable.getSelectionModel().getSelectedItem()));
             participantsNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         }
     }
 
+    private void populateGroupsTab() {
+        if (groupTab.isDisabled()) {
+            groupTab.setDisable(false);
+        }
+        groupTab.setText(groupsTable.getSelectionModel().getSelectedItem().getName());
+        groupNameLBL.setText(groupsTable.getSelectionModel().getSelectedItem().getName());
+        setUpStudentsLBL();
+    }
 
-    private void setUPContextMenus(){
+    private void setUpStudentsLBL() {
+        StringBuilder sb = new StringBuilder();
+        List<User> participants = model.getObservableParticipants(groupsTable.getSelectionModel().getSelectedItem());
+        for (int i = 0; i < participants.size(); i++) {
+            if (i == participants.size() - 1) {
+                sb.append(participants.get(i).getName());
+            } else sb.append(participants.get(i).getName()).append(", ");
+
+        }
+        studentNamesLBL.setText(sb.toString());
+    }
+
+    private void setUPContextMenus() {
         ContextMenu contm = new ContextMenu();
         participantsTable.addEventHandler(MouseEvent.MOUSE_CLICKED, t -> {
-            if(t.getButton() == MouseButton.SECONDARY) {
+            if (t.getButton() == MouseButton.SECONDARY) {
                 contm.show(participantsTable, t.getScreenX(), t.getScreenY());
-            }else contm.hide();
+            } else contm.hide();
         });
         MenuItem mi1 = new MenuItem("Remove participant");
         mi1.setOnAction(t -> {
             removeParticipant();
             contm.hide();
-            repopulateParticipantsTable();
+            populateParticipantsTable();
         });
         contm.getItems().add(mi1);
     }
@@ -461,14 +475,14 @@ public class TeacherMainCTLL {
     @FXML
     void removeStudentFromGroup(ActionEvent event) {
         removeParticipant();
-        repopulateParticipantsTable();
+        populateParticipantsTable();
     }
 
-    private void removeParticipant(){
-        try{
+    private void removeParticipant() {
+        try {
             model.removeParticipant(groupsTable.getSelectionModel().getSelectedItem(),
                     participantsTable.getSelectionModel().getSelectedItem());
-        }catch (DalException dalException){
+        } catch (DalException dalException) {
             new SoftAlert(dalException.getMessage());
         }
         groupsTable.getSelectionModel().getSelectedItem().removeMember(
@@ -477,12 +491,12 @@ public class TeacherMainCTLL {
     }
 
     @FXML
-    void assignedCaseIsSelected(MouseEvent event){
+    void assignedCaseIsSelected(MouseEvent event) {
 
     }
 
     @FXML
-    void gradedCaseIsSelected(MouseEvent event){
+    void gradedCaseIsSelected(MouseEvent event) {
 
     }
 
@@ -493,10 +507,9 @@ public class TeacherMainCTLL {
 
     @FXML
     void editStudent(ActionEvent event) {
-        if(studentsTable.getSelectionModel().getSelectedItem() != null){
+        if (studentsTable.getSelectionModel().getSelectedItem() != null) {
             openView("GUI/Views/ManageStudent.fxml", generalCSS, "Edit student", 400, 220, false, 2);
-        }
-        else new SoftAlert("Please select a student");
+        } else new SoftAlert("Please select a student");
     }
 
     public void addStudentToTable(User user) {
@@ -509,7 +522,7 @@ public class TeacherMainCTLL {
         refreshStudentsTable();
     }
 
-    private void refreshStudentsTable(){
+    private void refreshStudentsTable() {
         studentsTable.getItems().clear();
         studentsTable.getItems().addAll(model.getObservableStudents());
     }
@@ -531,9 +544,9 @@ public class TeacherMainCTLL {
 
     @FXML
     void editGroup(ActionEvent event) {
-        if(groupsTable.getSelectionModel().getSelectedItem() != null){
+        if (groupsTable.getSelectionModel().getSelectedItem() != null) {
             openView("GUI/Views/ManageGroup.fxml", generalCSS, "Edit group", 400, 180, false, 2);
-        }else new SoftAlert("Please select a group");
+        } else new SoftAlert("Please select a group");
     }
 
     public void addGroupToList(Group group) {
@@ -541,22 +554,22 @@ public class TeacherMainCTLL {
         refreshGroupList();
     }
 
-    public void updateGroupInList(Group group){
+    public void updateGroupInList(Group group) {
         model.updateObservableGroup(group);
         refreshGroupList();
     }
 
-    public void refreshGroupList(){
+    public void refreshGroupList() {
         groupsTable.getItems().clear();
         groupsTable.getItems().addAll(model.getObservableGroups());
     }
 
     @FXML
     void deleteGroup(ActionEvent event) {
-        if(groupsTable.getSelectionModel().getSelectedItem() != null){
-            try{
+        if (groupsTable.getSelectionModel().getSelectedItem() != null) {
+            try {
                 model.deleteGroup(groupsTable.getSelectionModel().getSelectedItem());
-            }catch (DalException dalException){
+            } catch (DalException dalException) {
                 new SoftAlert(dalException.getMessage());
             }
             model.removeObservableGroup(groupsTable.getSelectionModel().getSelectedItem());
@@ -569,8 +582,8 @@ public class TeacherMainCTLL {
         handleDeleteCase();
     }
 
-    private void handleDeleteCase(){
-        if(casesListGV.getSelectionModel().getSelectedItem()!= null) {
+    private void handleDeleteCase() {
+        if (casesListGV.getSelectionModel().getSelectedItem() != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                     "Are you sure you want to delete this case?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
             alert.showAndWait();
@@ -592,8 +605,8 @@ public class TeacherMainCTLL {
         handleDeletePatient();
     }
 
-    private void handleDeletePatient(){
-        if(patientsListGV.getSelectionModel().getSelectedItem()!= null) {
+    private void handleDeletePatient() {
+        if (patientsListGV.getSelectionModel().getSelectedItem() != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                     "Are you sure you want to delete this patient?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
             alert.showAndWait();
@@ -636,8 +649,17 @@ public class TeacherMainCTLL {
 
     @FXML
     void logOut(ActionEvent event) {
-        openView("GUI/Views/Login.fxml",generalCSS,"Log in",500,450,false,0);
         closeWindows();
+        Parent root1;
+        Stage stage = (Stage) studentsTable.getScene().getWindow();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../Views/Login.fxml"));
+            root1 = (Parent) fxmlLoader.load();
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -662,14 +684,14 @@ public class TeacherMainCTLL {
 
     @FXML
     void openManageGroup(ActionEvent event) {
-
+        tabPane.getSelectionModel().select(studentsGroupsTab);
     }
 
     @FXML
     void categorySelected(ActionEvent event) {
-        if(caseCategoryComboBox.getValue() != null){
-            if(!caseCategoryComboBox.getValue().isEmpty() &&
-                    !caseCategoryComboBox.getValue().equals(casesListGV.getSelectionModel().getSelectedItem().getCategory())){
+        if (caseCategoryComboBox.getValue() != null) {
+            if (!caseCategoryComboBox.getValue().isEmpty() &&
+                    !caseCategoryComboBox.getValue().equals(casesListGV.getSelectionModel().getSelectedItem().getCategory())) {
                 caseSubcategoryComboBox.getSelectionModel().clearSelection();
                 caseSubcategoryComboBox.getItems().clear();
                 caseSubcategoryComboBox.getItems().addAll(catAndSubC.getSubcategoriesOf(caseCategoryComboBox.getValue()));
@@ -679,12 +701,12 @@ public class TeacherMainCTLL {
 
     @FXML
     void saveChangesOnCase(ActionEvent event) {
-        if(caseFieldsAreFilled()){
+        if (caseFieldsAreFilled()) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-                    "Are you sure you want to update this case?",ButtonType.YES,ButtonType.NO,ButtonType.CANCEL);
+                    "Are you sure you want to update this case?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
             alert.showAndWait();
-            if(alert.getResult() == ButtonType.YES){
-                try{
+            if (alert.getResult() == ButtonType.YES) {
+                try {
                     Case oldCase = casesListGV.getSelectionModel().getSelectedItem();
                     oldCase.setName(caseNameField.getText());
                     oldCase.setConditionDescription(descriptionOfConditionText.getText());
@@ -693,7 +715,7 @@ public class TeacherMainCTLL {
                     model.updateCase(oldCase);
                     model.updateCaseInTable(oldCase);
                     refreshCasesList();
-                }catch(DalException dalException){
+                } catch (DalException dalException) {
                     dalException.printStackTrace();
                     new SoftAlert(dalException.getMessage());
                 }
@@ -702,15 +724,13 @@ public class TeacherMainCTLL {
     }
 
     private boolean caseFieldsAreFilled() {
-        if(caseNameField.getText().isEmpty()){
+        if (caseNameField.getText().isEmpty()) {
             new SoftAlert("Please introduce a valid name for the case");
             return false;
-        }
-        else if(descriptionOfConditionText.getText().isEmpty()){
+        } else if (descriptionOfConditionText.getText().isEmpty()) {
             new SoftAlert("Please introduce a valid description for the case");
             return false;
-        }
-        else return true;
+        } else return true;
     }
 
     @FXML
@@ -753,12 +773,12 @@ public class TeacherMainCTLL {
             loader.<ManageStudentCTLL>getController().setStudent(studentsTable.getSelectionModel().getSelectedItem());
             loader.<ManageStudentCTLL>getController().populateStudentFields();
         }
-        if(resource.equals("GUI/Views/ManageGroup.fxml") && operationType == 1){
+        if (resource.equals("GUI/Views/ManageGroup.fxml") && operationType == 1) {
             loader.<ManageGroupCTLL>getController().setUser(logedUser);
             loader.<ManageGroupCTLL>getController().setController(this);
             loader.<ManageGroupCTLL>getController().setOperationType(operationType);
         }
-        if(resource.equals("GUI/Views/ManageGroup.fxml") && operationType == 2){
+        if (resource.equals("GUI/Views/ManageGroup.fxml") && operationType == 2) {
             loader.<ManageGroupCTLL>getController().setUser(logedUser);
             loader.<ManageGroupCTLL>getController().setGroup(groupsTable.getSelectionModel().getSelectedItem());
             loader.<ManageGroupCTLL>getController().setController(this);
@@ -769,16 +789,15 @@ public class TeacherMainCTLL {
         Stage stage = new Stage();
         stage.setTitle(title);
         stage.setScene(new Scene(root, width, height));
+        listOfStages.add(stage);
         stage.setResizable(resizable);
         stage.showAndWait();
     }
 
     private void closeWindows() {
-        List<Window> w = Stage.getWindows();
-        for (Window window : w) {
-            if(window.isFocused()){
-                w.remove(window);
-            }else window.hide();
+        for (int i = 0; i < listOfStages.size(); i++) {
+            listOfStages.get(i).close();
         }
+        listOfStages.clear();
     }
 }
