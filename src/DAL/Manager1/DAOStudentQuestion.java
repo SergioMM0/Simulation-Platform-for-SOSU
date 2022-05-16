@@ -56,13 +56,7 @@ public class DAOStudentQuestion {
                         rs.getString("category"),
                         rs.getString("title"),
                         rs.getString("question"),
-                        rs.getString("state1"),
-                        rs.getString("state2"),
-                        rs.getString("state3"),
-                        rs.getString("state4"),
-                        rs.getString("state5"),
-                        rs.getString("state6")
-                ));
+                        rs.getString("color")));
             }
             return studentQuestions;
         } catch (SQLException e) {

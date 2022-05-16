@@ -15,16 +15,6 @@
    <Tab text="Student Question">
       <AnchorPane prefHeight="613.0" prefWidth="856.0">
          <children>
-            <Label fx:id="categoryLabel" alignment="CENTER" layoutX="217.0" layoutY="14.0" prefHeight="53.0" prefWidth="437.0" text="Self-care" textAlignment="CENTER">
-               <font>
-                  <Font size="36.0" />
-               </font>
-            </Label>
-            <Label fx:id="titleLabel" alignment="CENTER" layoutX="249.0" layoutY="89.0" prefHeight="27.0" prefWidth="354.0" text="Wash" textAlignment="CENTER">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
             <ImageView fx:id="image1" fitHeight="150.0" fitWidth="130.0" layoutX="60.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="image2" fitHeight="150.0" fitWidth="130.0" layoutX="195.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="image3" fitHeight="150.0" fitWidth="130.0" layoutX="329.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true" />
@@ -49,6 +39,20 @@
             <Label alignment="CENTER" layoutX="464.0" layoutY="391.0" maxWidth="132.0" minWidth="90.0" prefHeight="81.0" prefWidth="132.0" style="-fx-background-color: white;" text="Hard limitations" textAlignment="CENTER" wrapText="true" />
             <Label alignment="CENTER" layoutX="599.0" layoutY="391.0" maxWidth="132.0" minWidth="90.0" prefHeight="81.0" prefWidth="132.0" style="-fx-background-color: white;" text="Total limitations" textAlignment="CENTER" wrapText="true" />
             <Label alignment="CENTER" layoutX="735.0" layoutY="391.0" maxWidth="132.0" minWidth="90.0" prefHeight="81.0" prefWidth="132.0" style="-fx-background-color: white;" text="Not applicable" textAlignment="CENTER" wrapText="true" />
+            <AnchorPane fx:id="titleContainer" layoutX="139.0" layoutY="8.0" prefHeight="118.0" prefWidth="569.0">
+               <children>
+                  <Label fx:id="categoryLabel" alignment="CENTER" layoutX="74.0" layoutY="6.0" prefHeight="53.0" prefWidth="437.0" text="Self-care" textAlignment="CENTER">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="titleLabel" alignment="CENTER" layoutX="115.0" layoutY="69.0" prefHeight="27.0" prefWidth="354.0" text="Wash" textAlignment="CENTER">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </Tab>

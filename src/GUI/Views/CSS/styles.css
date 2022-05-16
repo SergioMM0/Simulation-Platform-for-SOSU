@@ -20,14 +20,14 @@
  }
 
 .button{
-    -fx-background-color: red;
+    -fx-background-color: #9afcc9;
 }
 
 #loginBtn{
     -fx-background-color: white;
 }
 .lightgreen:hover{
-    -fx-background-color: #35ef8f;
+    -fx-background-color: #9afcc9;
     -fx-font-weight: Bold;
 }
 

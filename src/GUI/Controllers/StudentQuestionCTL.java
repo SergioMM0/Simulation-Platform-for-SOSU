@@ -11,6 +11,9 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.paint.Color;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -46,6 +49,8 @@ public class StudentQuestionCTL implements Initializable {
     public Label questionIdLabel;
     @FXML
     private TextArea textFieldQuestion;
+    @FXML
+    private AnchorPane titleContainer;
 
     StudentQuestionMOD model = new StudentQuestionMOD();    //use model to operation and contact with bll
     BE.StudentQuestion currentQuestion;
@@ -98,7 +103,9 @@ public class StudentQuestionCTL implements Initializable {
             questionIdLabel.setText("null");
             return;
         }
+
         categoryLabel.setText(question.getCategory());
+        titleContainer.setStyle("-fx-background-color: "+question.getColor()+";");
         titleLabel.setText(question.getTitle());
         questionIdLabel.setText(question.getId() + "");
         textFieldQuestion.setText(question.getQuestion());
