@@ -56,6 +56,15 @@ public interface BLLFacade {
     void deleteCase(Case selectedCase)throws DalException;
 
     void deletePatient(Patient selectedPatient)throws DalException;
+
+    List<School> getAllSchools() throws DalException;
+
+    void createSchool(School school) throws DalException;
+
+    void updateSchool(School school) throws DalException;
+
+    void deleteSchool(School school) throws DalException ;
+
 }
 
 
