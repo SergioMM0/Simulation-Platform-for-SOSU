@@ -24,8 +24,8 @@ public class DAOSchool {
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
             while(rs.next()){
-                int id = rs.getInt("");
-                String name = rs.getString("");
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
                 School school = new School(id , name );
                 getAllSchools.add(school);
             }

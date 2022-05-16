@@ -120,6 +120,26 @@ public class BLLManager implements BLLFacade{
     }
 
     @Override
+    public List<School> getAllSchools() throws DalException {
+        return dalFacade.getAllSchhol();
+    }
+
+    @Override
+    public void createSchool(School school) throws DalException {
+            dalFacade.createSchool(school);
+    }
+
+    @Override
+    public void updateSchool(School school) throws DalException {
+        dalFacade.updateSchool(school);
+    }
+
+    @Override
+    public void deleteSchool(School school) throws DalException {
+            dalFacade.deleteSchool(school);
+    }
+
+    @Override
     public void saveStudentQuestionAnswer(StudentQuestionnaireAnswer answer) throws DalException {
         dalFacade.addStudentQuestionAnswer(answer);
     }

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="660.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.AdminCTLL">
+   <children>
+      <TableView fx:id="SchoolTalbeView" layoutX="24.0" layoutY="51.0" prefHeight="479.0" prefWidth="164.0">
+        <columns>
+          <TableColumn fx:id="schoolID" prefWidth="33.0" text="ID" />
+          <TableColumn fx:id="SchoolName" prefWidth="130.0" text="NAME" />
+        </columns>
+      </TableView>
+      <TableView fx:id="TeacherTableView" layoutX="196.0" layoutY="51.0" prefHeight="479.0" prefWidth="306.0">
+        <columns>
+          <TableColumn fx:id="TeacherID" prefWidth="24.0" text="ID" />
+          <TableColumn fx:id="TeacherName" prefWidth="114.0" text="NAME" />
+            <TableColumn fx:id="TeacherEmail" prefWidth="167.0" text="Email" />
+        </columns>
+      </TableView>
+      <TableView fx:id="StudentTableView" layoutX="514.0" layoutY="51.0" prefHeight="479.0" prefWidth="355.0">
+        <columns>
+          <TableColumn fx:id="StudnetID" prefWidth="26.0" text="ID" />
+          <TableColumn fx:id="StudnetName" prefWidth="157.0" text="NAME" />
+            <TableColumn fx:id="StudnetEmail" prefWidth="171.0" text="Email" />
+        </columns>
+      </TableView>
+      <Label layoutX="24.0" layoutY="34.0" prefHeight="17.0" prefWidth="123.0" text="Schools" />
+      <Label layoutX="196.0" layoutY="34.0" prefHeight="17.0" prefWidth="146.0" text="Teachers" />
+      <Label layoutX="514.0" layoutY="34.0" prefHeight="17.0" prefWidth="123.0" text="Students" />
+      <TextField fx:id="filterid" layoutX="702.0" layoutY="22.0" onKeyPressed="#filterField" prefHeight="25.0" prefWidth="164.0" />
+      <ImageView fx:id="filterImageid" fitHeight="24.0" fitWidth="24.0" layoutX="668.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="CreateSchoolID" layoutX="24.0" layoutY="540.0" mnemonicParsing="false" onAction="#CreateSchoolbtn" prefHeight="25.0" prefWidth="146.0" text="Create School" />
+      <Button fx:id="CreateTeacherid" layoutX="196.0" layoutY="540.0" mnemonicParsing="false" onAction="#CreateTeacherBtn" prefHeight="25.0" prefWidth="146.0" text="CreateTeacher" />
+      <Button fx:id="CreateStudnetid" layoutX="514.0" layoutY="540.0" mnemonicParsing="false" onAction="#CreateStudentBTN" prefHeight="25.0" prefWidth="164.0" text="Create Studnet" />
+      <Button fx:id="DeleteSchoolID" layoutX="24.0" layoutY="565.0" mnemonicParsing="false" onAction="#DeleteSchoolbtn" prefHeight="25.0" prefWidth="146.0" text="DeleteSchool" />
+      <Button fx:id="DeleteTeacherid" layoutX="196.0" layoutY="565.0" mnemonicParsing="false" onAction="#DeleteTeacherBtn" prefHeight="25.0" prefWidth="146.0" text="DeleteTeacher" />
+      <Button fx:id="DeleteStudentid" layoutX="514.0" layoutY="565.0" mnemonicParsing="false" onAction="#DeleteStudentbtn" prefHeight="25.0" prefWidth="164.0" text="DeleteStudent" />
+      <Button fx:id="Closeid" layoutX="769.0" layoutY="621.0" mnemonicParsing="false" onAction="#ClloseBtn" prefHeight="25.0" prefWidth="89.0" style="-fx-background-radius: 45;" text="Close" />
+      <Label fx:id="AdminNameLbl" layoutX="24.0" layoutY="634.0" />
+   </children>
+</AnchorPane>
