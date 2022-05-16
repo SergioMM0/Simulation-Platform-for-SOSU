@@ -4,6 +4,8 @@ import BE.Group;
 import BE.User;
 import DAL.DataAccess.DataAccess;
 import DAL.util.DalException;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -130,6 +132,18 @@ public class DAOGroup {
             prs.executeUpdate();
         } catch (SQLException e) {
             throw new DalException("couldn't remove user from this groups " , e);
+        }
+    }
+
+    public void removeUserAndGroup(User user , Group group)throws DalException{
+        try(Connection con = dataAccess.getConnection()) {
+            String sql = "DELETE  from GroupUsers where studentid = ? AND Groupid = ?";
+            PreparedStatement prs = con.prepareStatement(sql);
+            prs.setInt(1,user.getId());
+            prs.setInt(2 , group.getId());
+            prs.execute();
+        } catch (SQLException e) {
+           throw new DalException("Couldn't preform this task " , e);
         }
     }
 

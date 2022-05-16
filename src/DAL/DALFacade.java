@@ -69,4 +69,6 @@ public interface DALFacade {
     StudentQuestion getPreviousQuestion(int currentQuestionId) throws DalException;
 
     StudentQuestionnaireAnswer getQuestionaireAnswer(int questionId, int questionaireId) throws DalException;
+
+    public void removeUserAndGroup(User user , Group group)throws DalException;
 }

@@ -99,7 +99,7 @@ public class BLLManager implements BLLFacade{
 
     @Override
     public void removeParticipant(Group group, User user) throws DalException {
-        //dalFacade.removeUserFromGroup(group, user);
+        dalFacade.removeUserAndGroup(user, group);
         //TODO Implement
     }
 
