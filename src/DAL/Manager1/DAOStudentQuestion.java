@@ -73,12 +73,13 @@ public class DAOStudentQuestion {
     public StudentQuestionnaireAnswer getQuestionaireAnswer(int questionId, int questionaireId) throws DalException {
 
         try (Connection con = dataAccess.getConnection()) {
-            String sql = " Select * from StudentQuestionAnswer  where questionId="+questionId+" and QuestionaireId="+questionaireId+" ";
+            String sql = " Select * from StudentQuestionAnswer  where questionId=? and QuestionaireId=? ";
             PreparedStatement prs = con.prepareStatement(sql);
+            prs.setInt(1,questionId);
+            prs.setInt(2,questionaireId);
             StudentQuestionnaireAnswer answer = new StudentQuestionnaireAnswer();
             ResultSet rs = prs.executeQuery();
             while (rs.next()) {         //because there is only one row we can return after first row fetched
-                //return new StudentQuestionnaireAnswer(
                 answer.setId(rs.getInt("id"));
 
                 answer.setQuestionId(rs.getInt("questionId"));

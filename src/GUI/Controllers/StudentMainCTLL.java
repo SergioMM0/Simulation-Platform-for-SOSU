@@ -30,7 +30,8 @@ public class StudentMainCTLL implements Initializable {
         }
         Stage stage = new Stage();
         stage.setTitle("Student Question");
-        stage.setScene(new Scene(root));
+        stage.setScene(new Scene(root,880,660));
+
 //        stage.setResizable(resizable);
         stage.show();
     }

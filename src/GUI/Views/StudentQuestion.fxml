@@ -11,38 +11,44 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane prefHeight="817.0" prefWidth="1191.0" stylesheets="/GUI/Views/CSS/styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.StudentQuestionCTL">
+<TabPane prefHeight="660.0" prefWidth="880.0" stylesheets="/GUI/Views/CSS/styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.StudentQuestionCTL">
    <Tab text="Student Question">
-      <AnchorPane>
+      <AnchorPane prefHeight="613.0" prefWidth="856.0">
          <children>
-            <Label fx:id="categoryLabel" layoutX="469.0" layoutY="152.0" text="Self-care">
+            <Label fx:id="categoryLabel" alignment="CENTER" layoutX="217.0" layoutY="14.0" prefHeight="53.0" prefWidth="437.0" text="Self-care" textAlignment="CENTER">
                <font>
                   <Font size="36.0" />
                </font>
             </Label>
-            <Label fx:id="titleLabel" layoutX="482.0" layoutY="220.0" prefHeight="27.0" prefWidth="113.0" text="Wash">
+            <Label fx:id="titleLabel" alignment="CENTER" layoutX="249.0" layoutY="89.0" prefHeight="27.0" prefWidth="354.0" text="Wash" textAlignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <ImageView fx:id="image1" fitHeight="150.0" fitWidth="130.0" layoutX="63.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="image2" fitHeight="150.0" fitWidth="130.0" layoutX="238.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="image3" fitHeight="150.0" fitWidth="130.0" layoutX="443.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="image4" fitHeight="150.0" fitWidth="130.0" layoutX="643.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="image5" fitHeight="150.0" fitWidth="130.0" layoutX="843.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true" />
-            <RadioButton fx:id="state1radio" layoutX="100.0" layoutY="560.0" mnemonicParsing="false" text="1">
+            <ImageView fx:id="image1" fitHeight="150.0" fitWidth="130.0" layoutX="60.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="image2" fitHeight="150.0" fitWidth="130.0" layoutX="195.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="image3" fitHeight="150.0" fitWidth="130.0" layoutX="329.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="image4" fitHeight="150.0" fitWidth="130.0" layoutX="462.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="image5" fitHeight="150.0" fitWidth="130.0" layoutX="600.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true" />
+            <RadioButton fx:id="state1radio" layoutX="111.0" layoutY="507.0" mnemonicParsing="false" text="1">
                <toggleGroup>
                   <ToggleGroup fx:id="group" />
                </toggleGroup></RadioButton>
-            <RadioButton fx:id="state2radio" layoutX="280.0" layoutY="560.0" mnemonicParsing="false" text="2" toggleGroup="$group" />
-            <RadioButton fx:id="state3radio" layoutX="480.0" layoutY="560.0" mnemonicParsing="false" text="3" toggleGroup="$group" />
-            <RadioButton fx:id="state4radio" layoutX="680.0" layoutY="560.0" mnemonicParsing="false" text="4" toggleGroup="$group" />
-            <RadioButton fx:id="state5radio" layoutX="880.0" layoutY="560.0" mnemonicParsing="false" text="5" toggleGroup="$group" />
-            <RadioButton fx:id="state6radio" layoutX="1050.0" layoutY="560.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="106.0" text="Not Relevant" toggleGroup="$group" />
-            <Button layoutX="1053.0" layoutY="749.0" mnemonicParsing="false" onAction="#saveQuestionAndLoadNext" styleClass="stylesheet" text="Save and Next" />
+            <RadioButton fx:id="state2radio" layoutX="258.0" layoutY="507.0" mnemonicParsing="false" text="2" toggleGroup="$group" />
+            <RadioButton fx:id="state3radio" layoutX="393.0" layoutY="507.0" mnemonicParsing="false" text="3" toggleGroup="$group" />
+            <RadioButton fx:id="state4radio" layoutX="524.0" layoutY="507.0" mnemonicParsing="false" text="4" toggleGroup="$group" />
+            <RadioButton fx:id="state5radio" layoutX="658.0" layoutY="507.0" mnemonicParsing="false" text="5" toggleGroup="$group" />
+            <RadioButton fx:id="state6radio" layoutX="768.0" layoutY="507.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="106.0" text="Not Relevant" toggleGroup="$group" />
+            <Button layoutX="774.0" layoutY="584.0" mnemonicParsing="false" onAction="#saveQuestionAndLoadNext" styleClass="stylesheet" text="Save and Next" />
             <Label fx:id="questionIdLabel" layoutX="76.0" layoutY="225.0" prefHeight="17.0" prefWidth="0.0" visible="false" />
-            <TextArea fx:id="textFieldQuestion" layoutX="303.0" layoutY="262.0" prefHeight="42.0" prefWidth="566.0" text="Can he/she wash himself/herself?" />
-            <Button layoutX="50.0" layoutY="749.0" mnemonicParsing="false" onAction="#loadPreviousQuestion" text="Previous" />
+            <TextArea fx:id="textFieldQuestion" layoutX="143.0" layoutY="164.0" prefHeight="42.0" prefWidth="566.0" text="Can he/she wash himself/herself?" />
+            <Button layoutX="20.0" layoutY="584.0" mnemonicParsing="false" onAction="#loadPreviousQuestion" text="Previous" />
+            <Label alignment="CENTER" layoutX="59.0" layoutY="391.0" maxWidth="132.0" minWidth="90.0" prefHeight="81.0" prefWidth="132.0" style="-fx-background-color: white;" text="None orinsignificantlimitations" textAlignment="CENTER" wrapText="true" />
+            <Label alignment="CENTER" layoutX="194.0" layoutY="391.0" maxWidth="132.0" minWidth="90.0" prefHeight="81.0" prefWidth="132.0" style="-fx-background-color: white;" text="Lette limitations" textAlignment="CENTER" wrapText="true" />
+            <Label alignment="CENTER" layoutX="328.0" layoutY="391.0" maxWidth="132.0" minWidth="90.0" prefHeight="81.0" prefWidth="132.0" style="-fx-background-color: white;" text="Moderate limitations" textAlignment="CENTER" wrapText="true" />
+            <Label alignment="CENTER" layoutX="464.0" layoutY="391.0" maxWidth="132.0" minWidth="90.0" prefHeight="81.0" prefWidth="132.0" style="-fx-background-color: white;" text="Hard limitations" textAlignment="CENTER" wrapText="true" />
+            <Label alignment="CENTER" layoutX="599.0" layoutY="391.0" maxWidth="132.0" minWidth="90.0" prefHeight="81.0" prefWidth="132.0" style="-fx-background-color: white;" text="Total limitations" textAlignment="CENTER" wrapText="true" />
+            <Label alignment="CENTER" layoutX="735.0" layoutY="391.0" maxWidth="132.0" minWidth="90.0" prefHeight="81.0" prefWidth="132.0" style="-fx-background-color: white;" text="Not applicable" textAlignment="CENTER" wrapText="true" />
          </children>
       </AnchorPane>
    </Tab>
