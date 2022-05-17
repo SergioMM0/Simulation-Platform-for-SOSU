@@ -5,6 +5,7 @@ import BLL.Exceptions.BLLException;
 import DAL.DALFacade;
 import DAL.Manager;
 import DAL.util.DalException;
+import javafx.collections.ObservableList;
 
 import java.security.InvalidParameterException;
 import java.util.List;
@@ -153,12 +154,23 @@ public class BLLManager implements BLLFacade{
 
     @Override
     public List<User> getALLUsers(int schoolid, String utype) throws DalException {
-        return dalFacade.getALLUsers(schoolid , utype);
+        return dalFacade.getAllUSERS(schoolid , utype);
     }
+
+    public ObservableList<User> searchUser(ObservableList<User> users, String text) {
+        return users.filtered((t) -> t.getName().toLowerCase().startsWith(text.toLowerCase()) ||  t.getEmail().toLowerCase().startsWith(text.toLowerCase()));
+
+    }
+
 
     @Override
     public List<User> searchForUser(String query) throws DalException {
         return dalFacade.searchForUser(query);
+    }
+
+    @Override
+    public List<User> getAllUSERS(int schoolId , String utype) throws DalException {
+        return dalFacade.getAllUSERS(schoolId , utype);
     }
 
     @Override

@@ -8,10 +8,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="660.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.AdminCTLL">
    <children>
-      <TableView fx:id="SchoolTalbeView" layoutX="24.0" layoutY="51.0" prefHeight="479.0" prefWidth="164.0">
+      <TableView fx:id="SchoolTalbeView" layoutX="24.0" layoutY="51.0" onMousePressed="#displayusersinschool" prefHeight="479.0" prefWidth="164.0">
         <columns>
           <TableColumn fx:id="schoolID" prefWidth="33.0" text="ID" />
           <TableColumn fx:id="SchoolName" prefWidth="130.0" text="NAME" />

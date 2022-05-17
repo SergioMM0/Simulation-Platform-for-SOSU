@@ -72,6 +72,8 @@ public interface BLLFacade {
     List<User> getALLUsers(int schoolid , String utype) throws DalException;
 
     List<User> searchForUser(String query) throws DalException;
+
+    List<User> getAllUSERS(int schoolId , String utype) throws DalException;
 }
 
 

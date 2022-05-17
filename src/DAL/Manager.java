@@ -204,7 +204,8 @@ public class Manager implements DALFacade {
     }
 
     @Override
-    public List<User> getALLUsers(int schoolid, String utype) throws DalException {
-        return daoUser.getAllUSERS(schoolid , utype);
+    public List<User> getAllUSERS(int schoolId ,String utype) throws DalException {
+        return daoUser.getAllUSERS(schoolId , utype);
     }
+
 }
