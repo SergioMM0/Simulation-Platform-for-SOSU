@@ -651,7 +651,7 @@ public class TeacherMainCTLL {
 
     @FXML
     private void markCaseAsGraded(ActionEvent event) {
-
+        
     }
 
     @FXML
