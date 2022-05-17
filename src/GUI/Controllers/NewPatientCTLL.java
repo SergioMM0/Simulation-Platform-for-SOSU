@@ -16,6 +16,8 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class NewPatientCTLL implements Initializable {
@@ -90,7 +92,9 @@ public class NewPatientCTLL implements Initializable {
     @FXML
     void createPatient(ActionEvent event) {
         if(fieldsAreFiled()){
+            ArrayList<String> observations = new ArrayList<>();
             try{
+                observations.add(observationsField.getText());
                 Patient patient = new Patient(
                         0,
                         nameField.getText(),
@@ -101,7 +105,7 @@ public class NewPatientCTLL implements Initializable {
                         heightField.getText(),
                         cprField.getText(),
                         phoneNumberField.getText(),
-                        observationsField.getText(),
+                        observations,
                         user.getSchoolID()
                 );
                 model.createPatient(patient);

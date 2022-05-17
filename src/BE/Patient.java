@@ -1,6 +1,7 @@
 package BE;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Patient {
@@ -14,9 +15,10 @@ public class Patient {
     private String cpr;
     private String phoneNumber;
     private String observations;
-    private List<String> observationsList;
+    private ArrayList<String> observationsList;
     private int schoolId;
 
+    /*
     public Patient(int id, String first_name, String last_name, LocalDate dateOfBirth, String gender, String weight,
                    String height, String cpr, String phoneNumber,String observations, int schoolId) {
         this.id = id;
@@ -32,9 +34,25 @@ public class Patient {
         this.schoolId = schoolId;
     }
 
+     */
+
+    public Patient(String first_name, String last_name, LocalDate dateOfBirth, String gender, String weight,
+                   String height, String cpr, String phoneNumber, ArrayList<String> observationsList, int schoolId) {
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.dateOfBirth = dateOfBirth;
+        this.gender = gender;
+        this.weight = weight;
+        this.height = height;
+        this.cpr = cpr;
+        this.phoneNumber = phoneNumber;
+        this.observationsList = observationsList;
+        this.schoolId = schoolId;
+    }
+
     public Patient(int id, String first_name, String last_name, LocalDate dateOfBirth, String gender,
                    String weight, String height, String cpr, String phoneNumber,
-                   List<String> observationsList, int schoolId) {
+                   ArrayList<String> observationsList, int schoolId) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -135,11 +153,11 @@ public class Patient {
         this.schoolId = schoolId;
     }
 
-    public List<String> getObservationsList() {
+    public ArrayList<String> getObservationsList() {
         return observationsList;
     }
 
-    public void setObservationsList(List<String> observationsList) {
+    public void setObservationsList(ArrayList<String> observationsList) {
         this.observationsList = observationsList;
     }
 
