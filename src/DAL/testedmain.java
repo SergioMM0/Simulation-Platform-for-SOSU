@@ -1,19 +1,31 @@
 package DAL;
 
-import BE.Case;
-import BE.Group;
-import DAL.Manager1.DAOCase;
-import DAL.Manager1.DAOGroup;
-import DAL.util.DalException;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-public class testedmain {
-    public static void main(String[] args) throws DalException {
-        DAOCase daoCase = new DAOCase();
+import java.io.IOException;
 
-        for(Case d : daoCase.getAllCases(1)){
-
-            System.out.println(d);
-        }
-
+public class testedmain extends Application {
+    @Override
+    public void start(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../GUI/Views/Admin.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        scene.getStylesheets().add("GUI/Views/CSS/styles.css");
+        stage.setResizable(false);
+        stage.setTitle("Simulation platform - Log in");
+        stage.setScene(scene);
+        stage.show();
     }
+
+    public static void main(String[] args) {
+        launch();
+    }
+
+    //TODO Test addNewCase and "case info" in teacherView
+
+
+
 }
+

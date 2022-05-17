@@ -94,7 +94,7 @@ public class DAOCase {
             prs.setInt(1 , p.getId());
             prs.setInt(2 ,c.getId());
             prs.setInt(3 ,g.getId());
-            prs.executeUpdate();
+            prs.execute();
         } catch (SQLException e) {
             throw new DalException("Cant preform this task at this moment " , e);
         }

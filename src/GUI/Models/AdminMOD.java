@@ -70,5 +70,13 @@ public class AdminMOD {
         schools.setAll(manager.getAllSchools());
     }
 
+    public void createUser(User user) throws DalException {
+        manager.addNewStudent(user);
+        updatethelist();
+    }
 
+    public void removeUser(User user ) throws DalException {
+        manager.deleteStudent(user);
+        updatethelist();
+    }
 }
