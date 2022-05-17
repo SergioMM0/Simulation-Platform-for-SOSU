@@ -14,7 +14,6 @@ public class Patient {
     private String height;
     private String cpr;
     private String phoneNumber;
-    private String observations;
     private ArrayList<String> observationsList;
     private int schoolId;
 
@@ -137,13 +136,6 @@ public class Patient {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-    public String getObservations() {
-        return observations;
-    }
-
-    public void setObservations(String observations) {
-        this.observations = observations;
-    }
 
     public int getSchoolId() {
         return schoolId;
@@ -159,23 +151,5 @@ public class Patient {
 
     public void setObservationsList(ArrayList<String> observationsList) {
         this.observationsList = observationsList;
-    }
-
-    @Override
-    public String toString() {
-        return "Patient{" +
-                "id=" + id +
-                ", first_name='" + first_name + '\'' +
-                ", last_name='" + last_name + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
-                ", gender='" + gender + '\'' +
-                ", weight='" + weight + '\'' +
-                ", height='" + height + '\'' +
-                ", cpr='" + cpr + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", observations='" + observations + '\'' +
-                ", observationsList=" + observationsList +
-                ", schoolid=" + schoolId +
-                '}';
     }
 }

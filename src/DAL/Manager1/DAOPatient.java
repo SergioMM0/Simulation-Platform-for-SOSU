@@ -33,11 +33,9 @@ public class DAOPatient {
                 String  height = rs.getString("height");
                 String cpr = rs.getString("cpr");
                 String phonenumber = rs.getString("phone_number");
-                String observation = rs.getString("observations");
-
-
+                ArrayList<String> observations = getObservationsOf(id);
                 Patient patient = new Patient(id,first_name,lastname,convertToLocalDateViaSqlDate(dateofbirth),gender,weight,height,
-                        cpr,phonenumber, new ArrayList<>(), schoolid );
+                        cpr,phonenumber, observations, schoolid );
                 patients.add(patient);
             }
             return patients;
@@ -66,7 +64,6 @@ public class DAOPatient {
             prs.setString(6,patient.getHeight());
             prs.setString(7 ,patient.getCpr());
             prs.setString(8 , patient.getPhoneNumber());
-            prs.setString(9,patient.getObservations());
             prs.setInt(10,patient.getSchoolId());
             prs.executeUpdate();
         } catch (SQLException e) {
@@ -89,7 +86,6 @@ public class DAOPatient {
             prs.setString(6,patient.getHeight());
             prs.setString(7 ,patient.getCpr());
             prs.setString(8 , patient.getPhoneNumber());
-            prs.setString(9,patient.getObservations());
             prs.setInt(10, patient.getId());
             prs.executeUpdate();
         } catch (SQLException e) {
@@ -106,6 +102,23 @@ public class DAOPatient {
             prs.executeUpdate();
         } catch (SQLException e) {
             throw new DalException("Connection Lost" , e);
+        }
+    }
+
+    private ArrayList<String> getObservationsOf(int id) throws DalException{
+        ArrayList<String> observations = new ArrayList<>();
+        try(Connection connection = dataAccess.getConnection()){
+            String sql = "SELECT [content] WHERE [patientid] = ?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1,id);
+            st.execute();
+            ResultSet rs = st.getResultSet();
+            while(rs.next()){
+                observations.add(rs.getString("content"));
+            }
+            return observations;
+        }catch(SQLException sqlException){
+            throw new DalException("Not able to retrieve the Observations",sqlException);
         }
     }
 
