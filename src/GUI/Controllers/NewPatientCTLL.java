@@ -108,10 +108,10 @@ public class NewPatientCTLL implements Initializable {
                         observations,
                         user.getSchoolID()
                 );
-                model.createPatient(patient);
+                teacherMainCTLL.addPatientToList(model.createPatient(patient));
                 closeWindow();
-                teacherMainCTLL.addPatientToList(patient);
             } catch(DalException dalException){
+                dalException.printStackTrace();
                 new SoftAlert(dalException.getMessage());
             }
         }

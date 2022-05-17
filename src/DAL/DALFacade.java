@@ -29,7 +29,7 @@ public interface DALFacade {
 
     List<Patient> getAllPatients(int schoolid) throws DalException;
 
-    void createPatient(Patient patient ) throws DalException;
+    Patient createPatient(Patient patient ) throws DalException;
     //
     void updatePatient(Patient patient) throws DalException;
         //

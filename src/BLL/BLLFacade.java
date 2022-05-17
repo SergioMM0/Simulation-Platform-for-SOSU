@@ -13,7 +13,7 @@ public interface BLLFacade {
 
     Case createCase(Case newCase) throws DalException;
 
-    void createPatient(Patient patient) throws DalException;
+    Patient createPatient(Patient patient) throws DalException;
 
     void saveStudentQuestionAnswer(StudentQuestionnaireAnswer answer) throws DalException;
 

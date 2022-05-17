@@ -83,8 +83,8 @@ public class Manager implements DALFacade {
     }
 
     @Override
-    public void createPatient(Patient patient) throws DalException {
-        daoPatient.createPatient(patient);
+    public Patient createPatient(Patient patient) throws DalException {
+        return daoPatient.createPatient(patient);
     }
 
     @Override

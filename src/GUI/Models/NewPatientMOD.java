@@ -15,8 +15,8 @@ public class NewPatientMOD {
         bllFacade = new BLLManager();
     }
 
-    public void createPatient(Patient patient)throws DalException {
-        bllFacade.createPatient(patient);
+    public Patient createPatient(Patient patient)throws DalException {
+        return bllFacade.createPatient(patient);
     }
 
     //Combo boxes Hardcoded until we implement danish and english lang, so we will read from a file instead
