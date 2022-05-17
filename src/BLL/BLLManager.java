@@ -146,9 +146,14 @@ public class BLLManager implements BLLFacade{
 
     @Override
     public List<Case> getCasesAssignedTo(Group group) throws DalException {
-        //return dalFacade.getCasesAssignedTo(group);
+        return dalFacade.getCasesAssignedTo(group);
         //TODO IMPLEMENT
-        return null;
+
+    }
+
+    @Override
+    public List<User> getALLUsers(int schoolid, String utype) throws DalException {
+        return dalFacade.getALLUsers(schoolid , utype);
     }
 
     @Override
@@ -164,18 +169,14 @@ public class BLLManager implements BLLFacade{
     @Override
     public StudentQuestion getNextQuestion(StudentQuestion question) throws DalException , BLLException {
         StudentQuestion  s =  dalFacade.getNextStudentQuestion(question.getId());
-        if(s ==  null){
-            throw new BLLException("No more questions Please colse this window", new InvalidParameterException());
-        }
+
         return s ;
     }
 
     @Override
     public StudentQuestion getPreviousQuestion(int currentQuestionId) throws BLLException, DalException {
         StudentQuestion s=dalFacade.getPreviousQuestion(currentQuestionId);
-        if(s ==  null){
-            throw new BLLException("No more questions Please close this window", new InvalidParameterException());
-        }
+
         return s;
     }
 

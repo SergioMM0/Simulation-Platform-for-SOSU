@@ -1,6 +1,7 @@
 package GUI.Models;
 
 import BE.School;
+import BE.User;
 import BLL.BLLManager;
 import DAL.util.DalException;
 import javafx.collections.FXCollections;
@@ -11,6 +12,8 @@ public class AdminMOD {
     private static final AdminMOD AdminSingleton = new AdminMOD();
     private final BLLManager manager;
     private ObservableList<School> schools;
+    private ObservableList<User> teachers ;
+    private ObservableList<User> students ;
 
 
     public AdminMOD(){
@@ -32,6 +35,22 @@ public class AdminMOD {
         return schools;
     }
 
+    public ObservableList<User> getAllSudents(int schoolid) throws DalException{
+        students = FXCollections.observableArrayList();
+
+       students.addAll(manager.getALLUsers(schoolid , "STUDENT"));
+
+       return students;
+    }
+
+    public ObservableList<User> getAllTeachers(int schoolid) throws DalException{
+        teachers = FXCollections.observableArrayList();
+
+        teachers.addAll(manager.getALLUsers(schoolid , "TEACHER"));
+
+        return teachers;
+    }
+
     public void createSchools(String name) throws DalException {
          manager.createSchool(new School(1 , name));
          updatethelist();
@@ -50,4 +69,6 @@ public class AdminMOD {
     public void updatethelist() throws DalException {
         schools.setAll(manager.getAllSchools());
     }
+
+
 }
