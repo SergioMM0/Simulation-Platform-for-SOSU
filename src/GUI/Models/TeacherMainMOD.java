@@ -21,13 +21,13 @@ public class TeacherMainMOD {
     private ObservableList<User> groupParticipants;
     private static TeacherMainMOD instance;
 
-    public static TeacherMainMOD getInstance(){
-        if(instance == null)
+    public static TeacherMainMOD getInstance() {
+        if (instance == null)
             instance = new TeacherMainMOD();
         return instance;
     }
 
-    private TeacherMainMOD(){
+    private TeacherMainMOD() {
         bllFacade = new BLLManager();
         allGroups = FXCollections.observableArrayList();
         allCases = FXCollections.observableArrayList();
@@ -53,7 +53,7 @@ public class TeacherMainMOD {
         return allGroups;
     }
 
-    public ObservableList<Case> getAllCases(int schoolID) throws DalException{
+    public ObservableList<Case> getAllCases(int schoolID) throws DalException {
         allCases.addAll(bllFacade.getAllCases(schoolID));
         return allCases;
     }
@@ -75,7 +75,7 @@ public class TeacherMainMOD {
         allCases.add(newCase);
     }
 
-    public ObservableList<Case> getObservableCases(){
+    public ObservableList<Case> getObservableCases() {
         return allCases;
     }
 
@@ -84,8 +84,8 @@ public class TeacherMainMOD {
     }
 
     public void updateCaseInTable(Case oldCase) {
-        for(Case c : allCases){
-            if(c.getName().equals(oldCase.getName())){
+        for (Case c : allCases) {
+            if (c.getName().equals(oldCase.getName())) {
                 c.setName(oldCase.getName());
                 c.setConditionDescription(oldCase.getConditionDescription());
                 c.setCategory(oldCase.getCategory());
@@ -94,17 +94,17 @@ public class TeacherMainMOD {
         }
     }
 
-    public void addObservableStudent(User user){
+    public void addObservableStudent(User user) {
         allStudents.add(user);
     }
 
-    public ObservableList<User> getObservableStudents(){
+    public ObservableList<User> getObservableStudents() {
         return allStudents;
     }
 
     public void updateStudentInTable(User student) {
-        for(User user : allStudents){
-            if(user.getName().equals(student.getName())){
+        for (User user : allStudents) {
+            if (user.getName().equals(student.getName())) {
                 user.setName(student.getName());
                 user.setEmail(student.getEmail());
             }
@@ -115,7 +115,7 @@ public class TeacherMainMOD {
         bllFacade.deleteStudent(student);
     }
 
-    public void deleteObservableStudent(User student){
+    public void deleteObservableStudent(User student) {
         allStudents.remove(student);
     }
 
@@ -124,19 +124,19 @@ public class TeacherMainMOD {
         return allStudents;
     }
 
-    public void updatePatient(Patient patient) throws DalException{
+    public void updatePatient(Patient patient) throws DalException {
         bllFacade.updatePatient(patient);
     }
 
-    public void updatePatientInTable(Patient patient){
-        for(Patient p : allPatients){
-            if(p.getFirst_name().equals(patient.getFirst_name())){
+    public void updatePatientInTable(Patient patient) {
+        for (Patient p : allPatients) {
+            if (p.getFirst_name().equals(patient.getFirst_name())) {
                 p = patient; //TODO Implement method to make sure name is not repeated
             }
         }
     }
 
-    public void addObservableGroup(Group group){
+    public void addObservableGroup(Group group) {
         allGroups.add(group);
     }
 
@@ -145,8 +145,8 @@ public class TeacherMainMOD {
     }
 
     public void updateObservableGroup(Group group) {
-        for(Group g : allGroups){
-            if(g.getName().equals(group.getName())){
+        for (Group g : allGroups) {
+            if (g.getId() == group.getId()) {
                 g = group; //TODO implement a method to make sure name is not repeated
             }
         }
@@ -158,20 +158,21 @@ public class TeacherMainMOD {
         return groupParticipants;
     }
 
-    public void addStudentToGroup(Group group, User student) throws DalException{
-        bllFacade.addStudentToGroup(group,student);
+    public void addStudentToGroup(Group group, User student) throws DalException {
+        bllFacade.addStudentToGroup(group, student);
     }
 
 
-    public void removeObservableParticipant(User user) {
-        groupParticipants.remove(user);
+    public void removeObservableParticipant(Group group, User user) {
+        group.removeMember(user);
+        updateObservableGroup(group);
     }
 
-    public void removeParticipant(Group group, User user) throws DalException{
+    public void removeParticipant(Group group, User user) throws DalException {
         bllFacade.removeParticipant(group, user);
     }
 
-    public void deleteGroup(Group group) throws DalException{
+    public void deleteGroup(Group group) throws DalException {
         bllFacade.deleteGroup(group);
     }
 
@@ -179,13 +180,13 @@ public class TeacherMainMOD {
         allGroups.remove(group);
     }
 
-    public void deleteStudentFromGroups(User student){
-        for(Group group : allGroups){
+    public void deleteStudentFromGroups(User student) {
+        for (Group group : allGroups) {
             group.removeMember(student);
         }
     }
 
-    public void deleteCase(Case selectedCase) throws DalException{
+    public void deleteCase(Case selectedCase) throws DalException {
         bllFacade.deleteCase(selectedCase);
     }
 
@@ -201,8 +202,8 @@ public class TeacherMainMOD {
         allPatients.remove(selectedItem);
     }
 
-    public void assignCaseToGroup(Case selectedCase, Group group, Patient patient) throws DalException{
-        bllFacade.assignCaseToGroup(selectedCase,group,patient);
+    public void assignCaseToGroup(Case selectedCase, Group group, Patient patient) throws DalException {
+        bllFacade.assignCaseToGroup(selectedCase, group, patient);
     }
 
     public ObservableList<Case> getCasesAssignedToGroup(Group group) throws DalException {

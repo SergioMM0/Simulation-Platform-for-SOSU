@@ -78,7 +78,8 @@ public class NewCaseCTLL implements Initializable {
                         descriptionOfConditionText.getText(),
                         categoryComboBox.getValue(),
                         subcategoryComboBox.getValue(),
-                        logedUser.getSchoolID());
+                        logedUser.getSchoolID(),
+                        false);
                 closeWindow();
                 teacherMainCTLL.addCaseToList(model.createCase(newCase));
             } catch (DalException dalException) {

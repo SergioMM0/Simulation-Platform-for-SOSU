@@ -56,6 +56,7 @@ public class ManageGroupCTLL {
                     selectedGroup.setName(nameField.getText());
                     model.updateGroup(selectedGroup);
                     teacherMainCTLL.updateGroupInList(selectedGroup);
+                    teacherMainCTLL.setUpGroup(selectedGroup);
                     closeWindow();
                 }catch (DalException dalException){
                     new SoftAlert(dalException.getMessage());

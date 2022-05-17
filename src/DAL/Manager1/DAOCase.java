@@ -103,8 +103,8 @@ public class DAOCase {
 
     public Case createCase(Case newCase) throws DalException {
         try(Connection con = dataAccess.getConnection()) {
-            String sql = "INSERT INTO [dbo].[Case] ( name ,Description_of_the_condition,CategoryName , SubCategoryName ,schoolid) " +
-                    "VALUES (?,?,?,? , ?);" ;
+            String sql = "INSERT INTO [dbo].[Case] ( name ,Description_of_the_condition,CategoryName , SubCategoryName ,schoolid, isCopy) " +
+                    "VALUES (?,?,?,?,?,?);" ;
             String sql2 = "SELECT [id] FROM [dbo].[Case] WHERE [name] = ? AND [Description_of_the_condition] = ? AND [CategoryName] = ? AND [SubCategoryName] = ? AND [schoolid] = ?";
             PreparedStatement prs = con.prepareStatement(sql);
             PreparedStatement prs2 = con.prepareStatement(sql2);
@@ -113,6 +113,7 @@ public class DAOCase {
             prs.setString(3,newCase.getCategory());
             prs.setString(4 , newCase.getSubCategory());
             prs.setInt(5 ,newCase.getSchoolID());
+            prs.setInt(6,newCase.getIsCopyDB());
             prs.executeUpdate();
             prs2.setString(1,newCase.getName());
             prs2.setString(2,newCase.getConditionDescription());

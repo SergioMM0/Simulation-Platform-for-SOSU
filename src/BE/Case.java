@@ -8,7 +8,7 @@ public class Case {
     private String category;
     private String subCategory;
     private int schoolID;
-    private boolean isGraded;
+    private boolean isCopy;
 
     public Case(int id, String name,String conditionDescription, String category, String subCategory,int schoolID) {
         this.id = id;
@@ -27,14 +27,23 @@ public class Case {
         this.schoolID = schoolID;
     }
 
-    public Case(int id, String name, String conditionDescription, String category, String subCategory, int schoolID, boolean isGraded) {
+    public Case(String name, String conditionDescription, String category, String subCategory, int schoolID, boolean isCopy) {
+        this.name = name;
+        this.conditionDescription = conditionDescription;
+        this.category = category;
+        this.subCategory = subCategory;
+        this.schoolID = schoolID;
+        this.isCopy = isCopy;
+    }
+
+    public Case(int id, String name, String conditionDescription, String category, String subCategory, int schoolID, boolean isCopy) {
         this.id = id;
         this.name = name;
         this.conditionDescription = conditionDescription;
         this.category = category;
         this.subCategory = subCategory;
         this.schoolID = schoolID;
-        this.isGraded = isGraded;
+        this.isCopy = isCopy;
     }
 
     public int getId() {
@@ -85,13 +94,19 @@ public class Case {
         this.schoolID = schoolID;
     }
 
-    public boolean isGraded() {
-        return isGraded;
+    public boolean getIsCopy() {
+        return isCopy;
+    }
+    public int getIsCopyDB(){
+        if(!this.isCopy){
+            return 0;
+        }else return 1;
     }
 
-    public void setGraded(boolean graded) {
-        isGraded = graded;
+    public void setIsCopy(int bol) {
+        this.isCopy = bol != 0;
     }
+
 
     @Override
     public String toString() {
