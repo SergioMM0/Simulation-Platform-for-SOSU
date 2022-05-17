@@ -3,15 +3,20 @@ package GUI.Controllers;
 import BE.School;
 import BE.User;
 import DAL.util.DalException;
+import GUI.Alerts.ConfirmationAlert;
 import GUI.Models.AdminMOD;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -68,7 +73,7 @@ public class AdminCTLL implements Initializable {
         filterImageid.setImage(image);
         adminMOD = AdminMOD.getInstance();
         displaySchools();
-        displayusers();
+
     }
 
     public void displaySchools(){
@@ -76,9 +81,11 @@ public class AdminCTLL implements Initializable {
             SchoolTalbeView.setItems(adminMOD.getAllSchools());
             schoolID.setCellValueFactory(new PropertyValueFactory<>("id"));
             SchoolName.setCellValueFactory(new PropertyValueFactory<>("name"));
+            TeacherTableView.setItems(adminMOD.getAllTeachers(1));
             TeacherID.setCellValueFactory(new PropertyValueFactory<>("id"));
             TeacherName.setCellValueFactory(new PropertyValueFactory<>("name"));
             TeacherEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+            StudentTableView.setItems(adminMOD.getAllSudents(1));
             StudnetID.setCellValueFactory(new PropertyValueFactory<>("id"));
             StudnetName.setCellValueFactory(new PropertyValueFactory<>("name"));
             StudnetEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
@@ -87,45 +94,142 @@ public class AdminCTLL implements Initializable {
             e.printStackTrace();
         }
     }
-        //TODO BUGGED METHOD
-    public void displayusers(){
-        System.out.println("dd");
-
-                if(SchoolTalbeView.getSelectionModel().getSelectedIndex() != -1){
-                    System.out.println("test");
-                    try {
-                        TeacherTableView.setItems(adminMOD.getAllTeachers(SchoolTalbeView.getSelectionModel().getSelectedItem().getId()));
-                        StudentTableView.setItems(adminMOD.getAllSudents(SchoolTalbeView.getSelectionModel().getSelectedItem().getId()));
-                    } catch (DalException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-
-    }
 
     public void filterField(KeyEvent keyEvent) {
     }
 
     public void CreateSchoolbtn(ActionEvent event) {
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(0, 10, 0, 10));
+        final javafx.scene.control.TextField name = new TextField();
+        name.setPromptText("Username");
+        Button button = new Button();
+        button.setText("Create");
+        grid.add(new Label("name:"), 0, 0);
+        grid.add(name, 1, 0);
+        grid.add(button, 1, 2);
+        Stage stage = new Stage();
+        Scene scene = new Scene(grid);
+        stage.setScene(scene);
+        stage.show();
+        button.setOnAction(event1 -> {
+            try {
+                adminMOD.createSchools(name.getText());
+            } catch (DalException e) {
+              new ConfirmationAlert("please insert valid name");
+            }
+        });
     }
 
     public void CreateTeacherBtn(ActionEvent event) {
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(0, 10, 0, 10));
+        final javafx.scene.control.TextField username = new TextField();
+        username.setPromptText("Username");
+        final javafx.scene.control.TextField email = new TextField();
+        username.setPromptText("email");
+        final javafx.scene.control.TextField school = new TextField();
+        username.setPromptText("enter username");
+        email.setPromptText("enter email");
+        username.setPromptText("enter schoolID");
+        Button button = new Button();
+        button.setText("Create");
+        grid.add(new Label("Username:"), 0, 0);
+        grid.add(username, 1, 0);
+        grid.add(new Label("email:"), 0, 1);
+        grid.add(email , 1 , 1);
+        grid.add(new Label("school") ,0 ,2);
+        grid.add(school,1,2);
+        grid.add(button, 2, 2);
+        Stage stage = new Stage();
+        Scene scene = new Scene(grid);
+        stage.setScene(scene);
+        stage.show();
+        button.setOnAction(event1 -> {
+            int i = Integer.parseInt(String.valueOf(school.getText()));
+
+            try {
+                adminMOD.createUser(new User(1,i ,username.getText(),email.getText(),"TEACHER"));
+            } catch (DalException e) {
+               new ConfirmationAlert("please enter valid data ");
+            }
+        });
     }
 
     public void CreateStudentBTN(ActionEvent event) {
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(0, 10, 0, 10));
+        final javafx.scene.control.TextField username = new TextField();
+        username.setPromptText("Username");
+        final javafx.scene.control.TextField email = new TextField();
+        username.setPromptText("email");
+        final javafx.scene.control.TextField school = new TextField();
+        username.setPromptText("enter username");
+        email.setPromptText("enter email");
+        username.setPromptText("enter schoolID");
+        Button button = new Button();
+        button.setText("Create");
+        grid.add(new Label("Username:"), 0, 0);
+        grid.add(username, 1, 0);
+        grid.add(new Label("email:"), 0, 1);
+        grid.add(email , 1 , 1);
+        grid.add(new Label("school") ,0 ,2);
+        grid.add(school,1,2);
+        grid.add(button, 2, 2);
+        Stage stage = new Stage();
+        Scene scene = new Scene(grid);
+        stage.setScene(scene);
+        stage.show();
+        button.setOnAction(event1 -> {
+            int i=Integer.parseInt(String.valueOf(school.getText()));
+            try {
+                adminMOD.createUser(new User(1,i ,username.getText(),email.getText(),"STUDENT"));
+            } catch (DalException e) {
+                new ConfirmationAlert("please enter valid data ");
+            }
+        });
     }
 
     public void DeleteSchoolbtn(ActionEvent event) {
+        try {
+            if(SchoolTalbeView.getSelectionModel().getSelectedIndex() != -1)
+            adminMOD.deleteSchool(SchoolTalbeView.getSelectionModel().getSelectedItem());
+        } catch (DalException e) {
+            new ConfirmationAlert("please select school ");
+        }
     }
 
     public void DeleteTeacherBtn(ActionEvent event) {
+            try {
+                if(TeacherTableView.getSelectionModel().getSelectedIndex() != -1 ) {
+                    adminMOD.removeUser(TeacherTableView.getSelectionModel().getSelectedItem());
+                }
+            } catch (DalException e) {
+               new ConfirmationAlert("please select a Teacher ");
+            }
+
     }
 
     public void DeleteStudentbtn(ActionEvent event) {
+        try {
+            if(StudentTableView.getSelectionModel().getSelectedIndex() != -1 ) {
+                adminMOD.removeUser(StudentTableView.getSelectionModel().getSelectedItem());
+            }
+        } catch (DalException e) {
+            new ConfirmationAlert("please select a Student ");
+        }
     }
 
     public void ClloseBtn(ActionEvent event) {
+        Stage st = (Stage) Closeid.getScene().getWindow();
+        st.close();
     }
 
     public void setUser(User logedUser) {
