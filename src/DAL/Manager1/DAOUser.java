@@ -64,6 +64,30 @@ public class DAOUser {
         return users;
     }
 
+    public List<User> getAllUSERS(int schoolId , String utype) throws DalException {
+        ArrayList<User> users = new ArrayList<>();
+        try (Connection con = dataAccess.getConnection()) {
+            String sql = "SELECT * FROM users where schoolid = ? And usertype = ? ";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setInt(1 , schoolId);
+            statement.setString(2 , utype);
+            statement.execute();
+            ResultSet rs = statement.getResultSet();
+            while (rs.next()) {
+                int id = rs.getInt("userid");
+                String username = rs.getString("username");
+                String email = rs.getString("email");
+                String usertype = rs.getString("usertype");
+                int schoolid = rs.getInt("schoolId");
+                User user = new User(id,schoolid , username, email, usertype);
+                users.add(user);
+            }
+        } catch (SQLException e) {
+            throw new DalException("Connection Lost " , e);
+        }
+        return users;
+    }
+
 
     public void updateuser(User user ) throws DalException {
         try (Connection con = dataAccess.getConnection()) {

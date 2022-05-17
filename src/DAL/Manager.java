@@ -15,7 +15,6 @@ public class Manager implements DALFacade {
     private final DAOPatient daoPatient;
     private final DAOSchool daoSchool;
     private final DAOGroup daoGroup;
-    private final DAOCasCatPat daoCasCatPat;
     private final DAOStudentQuestion daoStudentQuestion;
 
     public Manager() {
@@ -24,7 +23,6 @@ public class Manager implements DALFacade {
         daoPatient = new DAOPatient();
         daoSchool = new DAOSchool();
         daoGroup = new DAOGroup();
-        daoCasCatPat = new DAOCasCatPat();
         daoStudentQuestion = new DAOStudentQuestion();
     }
 
@@ -156,7 +154,7 @@ public class Manager implements DALFacade {
 
     @Override
     public void assignCaseToPatientToGroup(Patient p, Case c, Group g) throws DalException {
-        daoCasCatPat.assignCaseToPatientToGroup(p, c, g);
+        daoCase.assignCaseToPatientToGroup(p, c, g);
     }
 
     @Override
@@ -198,5 +196,15 @@ public class Manager implements DALFacade {
     @Override
     public void removeUserAndGroup(User user, Group group) throws DalException {
         daoGroup.removeUserAndGroup(user , group);
+    }
+
+    @Override
+    public List<Case> getCasesAssignedTo(Group group) throws DalException {
+        return daoCase.getCasesAssignedTo(group);
+    }
+
+    @Override
+    public List<User> getALLUsers(int schoolid, String utype) throws DalException {
+        return daoUser.getAllUSERS(schoolid , utype);
     }
 }

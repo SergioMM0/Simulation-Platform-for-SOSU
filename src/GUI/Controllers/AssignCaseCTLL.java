@@ -4,6 +4,8 @@ import BE.Case;
 import BE.Group;
 import BE.Patient;
 import BE.User;
+import DAL.util.DalException;
+import GUI.Alerts.SoftAlert;
 import GUI.Models.AssignCaseMOD;
 import GUI.Models.TeacherMainMOD;
 import javafx.collections.ObservableList;
@@ -34,10 +36,10 @@ public class AssignCaseCTLL {
 
     private Case selectedCase;
     private TeacherMainCTLL teacherMainCTLL;
-    private TeacherMainMOD teacherMainMOD;
+    private static TeacherMainMOD teacherMainMOD;
 
     public AssignCaseCTLL(){
-        teacherMainMOD = new TeacherMainMOD();
+        teacherMainMOD = TeacherMainMOD.getInstance();
     }
 
     public void initializeView(){
@@ -45,11 +47,21 @@ public class AssignCaseCTLL {
         nameGroupsCOL.setCellValueFactory(new PropertyValueFactory<>("name"));
         allPatients.getItems().addAll(teacherMainMOD.getObservablePatients());
         namePatientsCOL.setCellValueFactory(new PropertyValueFactory<>("first_name"));
+        caseLBL.setText(selectedCase.getName());
     }
 
     @FXML
     void assignCase(ActionEvent event) {
-
+        if(allGroups.getSelectionModel().getSelectedItem() != null && allPatients.getSelectionModel().getSelectedItem() != null){
+            try {
+                teacherMainMOD.assignCaseToGroup(selectedCase,
+                        allGroups.getSelectionModel().getSelectedItem(), allPatients.getSelectionModel().getSelectedItem());
+            }catch (DalException dalException){
+                dalException.printStackTrace();
+                new SoftAlert(dalException.getMessage());
+            }
+            teacherMainCTLL.populateCasesAssigned();
+        }
     }
 
     @FXML
