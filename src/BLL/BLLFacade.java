@@ -37,7 +37,7 @@ public interface BLLFacade {
 
     void updatePatient(Patient patient) throws DalException;
 
-    void createNewGroup(Group group) throws DalException;
+    Group createNewGroup(Group group) throws DalException;
 
     void updateGroup(Group selectedGroup) throws DalException;
 

@@ -77,8 +77,8 @@ public class BLLManager implements BLLFacade{
     }
 
     @Override
-    public void createNewGroup(Group group) throws DalException {
-        dalFacade.createGroup(group);
+    public Group createNewGroup(Group group) throws DalException {
+        return dalFacade.createGroup(group);
     }
 
     @Override

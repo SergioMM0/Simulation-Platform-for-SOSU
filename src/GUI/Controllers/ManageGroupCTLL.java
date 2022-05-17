@@ -42,8 +42,7 @@ public class ManageGroupCTLL {
                             null,
                             logedUser.getSchoolID()
                     );
-                    model.createNewGroup(group);
-                    teacherMainCTLL.addGroupToList(group);
+                    teacherMainCTLL.addGroupToList(model.createNewGroup(group));
                     closeWindow();
                 }catch (DalException dalException){
                     dalException.printStackTrace();

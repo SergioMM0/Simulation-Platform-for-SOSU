@@ -108,7 +108,7 @@ public class DAOPatient {
     private ArrayList<String> getObservationsOf(int id) throws DalException{
         ArrayList<String> observations = new ArrayList<>();
         try(Connection connection = dataAccess.getConnection()){
-            String sql = "SELECT [content] WHERE [patientid] = ?";
+            String sql = "SELECT [content] FROM observationstable WHERE [patientid] = ?";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1,id);
             st.execute();

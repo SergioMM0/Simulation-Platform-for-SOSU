@@ -42,14 +42,19 @@ public class DAOGroup {
     }
 
 
-    public void createGroup(Group group)throws DalException {
-
+    public Group createGroup(Group group)throws DalException {
         try(Connection con = dataAccess.getConnection()) {
-            String sql = "INSERT INTO Groups (name , Schoolid  ) VALUES (? , ?)";
+            String sql = "INSERT INTO Groups (name , Schoolid  ) VALUES (? , ?); SELECT [id] WHERE NAME = ?";
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setString(1 , group.getName());
             prs.setInt(2 , group.getSchoolID());
-            prs.executeUpdate();
+            prs.setString(3,group.getName());
+            prs.execute();
+            ResultSet rs = prs.getResultSet();
+            while(rs.next()){
+                group.setId(rs.getInt("id"));
+            }
+            return group;
         } catch (SQLException e) {
             throw new DalException("couldn't create new group " , e );
         }
