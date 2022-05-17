@@ -23,7 +23,6 @@
                   <Button layoutX="660.0" layoutY="155.0" mnemonicParsing="false" onAction="#addNewCase" prefHeight="40.0" prefWidth="180.0" text="Add new case" />
                   <Button layoutX="660.0" layoutY="45.0" mnemonicParsing="false" onAction="#assignCaseToGroup" prefHeight="40.0" prefWidth="180.0" text="Assign case to group" />
                   <Button layoutX="660.0" layoutY="555.0" mnemonicParsing="false" onAction="#logOut" prefHeight="40.0" prefWidth="180.0" text="Close session" />
-                  <Button layoutX="660.0" layoutY="210.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" />
                   <Button layoutX="660.0" layoutY="265.0" mnemonicParsing="false" onAction="#duplicatePatient" prefHeight="40.0" prefWidth="180.0" text="Duplicate patient" />
                   <Button layoutX="660.0" layoutY="320.0" mnemonicParsing="false" onAction="#duplicateCase" prefHeight="40.0" prefWidth="180.0" text="Duplicate case" />
                   <Button layoutX="660.0" layoutY="375.0" mnemonicParsing="false" onAction="#deletePatient" prefHeight="40.0" prefWidth="180.0" text="Delete patient" />
