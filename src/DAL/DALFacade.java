@@ -75,4 +75,8 @@ public interface DALFacade {
      List<Case> getCasesAssignedTo(Group group)throws DalException;
 
      List<User> getALLUsers(int schoolid , String utype) throws DalException;
+
+    Group getGroupOf(User student) throws DalException;
+
+    StudentQuestionnaire getQuestionnaireOf(Group group) throws DalException;
 }

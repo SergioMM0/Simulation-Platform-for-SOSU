@@ -207,4 +207,14 @@ public class Manager implements DALFacade {
     public List<User> getALLUsers(int schoolid, String utype) throws DalException {
         return daoUser.getAllUSERS(schoolid , utype);
     }
+
+    @Override
+    public Group getGroupOf(User student) throws DalException {
+        return daoUser.getGroupOf(student);
+    }
+
+    @Override
+    public StudentQuestionnaire getQuestionnaireOf(Group group) throws DalException {
+        return daoStudentQuestion.getQuestionnaireOf(group);
+    }
 }

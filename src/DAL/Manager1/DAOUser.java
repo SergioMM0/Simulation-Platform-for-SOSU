@@ -1,5 +1,6 @@
 package DAL.Manager1;
 
+import BE.Group;
 import BE.User;
 import DAL.DataAccess.DataAccess;
 import DAL.util.DalException;
@@ -186,5 +187,29 @@ public class DAOUser {
         }
 
         return users;
+    }
+
+    public Group getGroupOf(User student) throws DalException {
+        Group result=new Group();
+        try (Connection con = dataAccess.getConnection()) {
+            String command = "select * from GroupUsers gu\n" +              //get group users and group according to student id
+                    "join Groups g on gu.Groupid=g.id\n" +                  //we joined group users and group table to get group row
+                    "where studentid=? ";
+            PreparedStatement prs = con.prepareStatement(command);
+            prs.setInt(1, student.getId());
+            prs.execute();
+            ResultSet rs = prs.getResultSet();
+            while (rs.next()) {
+
+                result.setId(rs.getInt("id"));
+                result.setName(rs.getString( "name"));
+                result.setSchoolID(rs.getInt( "Schoolid"));
+            }
+
+        } catch (SQLException e) {
+            throw new DalException("Connection Lost " , e);
+        }
+
+        return result;
     }
 }

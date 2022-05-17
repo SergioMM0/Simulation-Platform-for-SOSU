@@ -157,6 +157,16 @@ public class BLLManager implements BLLFacade{
     }
 
     @Override
+    public Group getGroupOf(User student) throws DalException {
+        return dalFacade.getGroupOf(student);
+    }
+
+    @Override
+    public StudentQuestionnaire getQuestionnaireOf(Group group) throws DalException {
+        return dalFacade.getQuestionnaireOf(group);
+    }
+
+    @Override
     public void saveStudentQuestionAnswer(StudentQuestionnaireAnswer answer) throws DalException {
         dalFacade.addStudentQuestionAnswer(answer);
     }

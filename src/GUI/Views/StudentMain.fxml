@@ -26,7 +26,7 @@
                         <Label layoutX="66.0" layoutY="8.0" text="Group name:" />
                         <Label layoutX="66.0" layoutY="38.0" text="Students:" />
                         <Label layoutX="166.0" layoutY="38.0" prefWidth="350.0" text="&lt;Student names&gt;" />
-                        <Label layoutX="166.0" layoutY="8.0" prefWidth="350.0" text="&lt;Group name&gt;" />
+                        <Label fx:id="groupNameLable" layoutX="166.0" layoutY="8.0" prefWidth="350.0" text="&lt;Group name&gt;" />
                      </children>
                   </AnchorPane>
                   <Button layoutX="340.0" layoutY="284.0" mnemonicParsing="false" onAction="#openQuestionnaire" prefHeight="50.0" prefWidth="200.0" text="Open Questionaire" />
