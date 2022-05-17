@@ -157,6 +157,11 @@ public class BLLManager implements BLLFacade{
     }
 
     @Override
+    public List<User> searchForUser(String query) throws DalException {
+        return dalFacade.searchForUser(query);
+    }
+
+    @Override
     public void saveStudentQuestionAnswer(StudentQuestionnaireAnswer answer) throws DalException {
         dalFacade.addStudentQuestionAnswer(answer);
     }

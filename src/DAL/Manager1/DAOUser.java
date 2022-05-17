@@ -16,7 +16,7 @@ public class DAOUser {
     }
 
 
-    public User verifyUsers(String useremail, String password)throws DalException {
+    public User verifyUsers(String useremail, String password) throws DalException {
         User user = null;
 
         try (Connection con = dataAccess.getConnection()) {
@@ -30,13 +30,13 @@ public class DAOUser {
                 String name = rs.getString("username");
                 int schoolid = rs.getInt("schoolid");
                 String usertype = rs.getString("usertype");
-                user = new User(id , schoolid,name , useremail , usertype );
+                user = new User(id, schoolid, name, useremail, usertype);
             }
             return user;
 
 
         } catch (SQLException e) {
-            throw new DalException("Connection Lost " , e);
+            throw new DalException("Connection Lost ", e);
         }
     }
 
@@ -46,7 +46,7 @@ public class DAOUser {
         try (Connection con = dataAccess.getConnection()) {
             String sql = "SELECT * FROM users where schoolid = ? And usertype = 'STUDENT' ";
             PreparedStatement statement = con.prepareStatement(sql);
-            statement.setInt(1 , schoolId);
+            statement.setInt(1, schoolId);
             statement.execute();
             ResultSet rs = statement.getResultSet();
             while (rs.next()) {
@@ -55,22 +55,22 @@ public class DAOUser {
                 String email = rs.getString("email");
                 String usertype = rs.getString("usertype");
                 int schoolid = rs.getInt("schoolId");
-                User user = new User(id,schoolid , username, email, usertype);
+                User user = new User(id, schoolid, username, email, usertype);
                 users.add(user);
             }
         } catch (SQLException e) {
-            throw new DalException("Connection Lost " , e);
+            throw new DalException("Connection Lost ", e);
         }
         return users;
     }
 
-    public List<User> getAllUSERS(int schoolId , String utype) throws DalException {
+    public List<User> getAllUSERS(int schoolId, String utype) throws DalException {
         ArrayList<User> users = new ArrayList<>();
         try (Connection con = dataAccess.getConnection()) {
             String sql = "SELECT * FROM users where schoolid = ? And usertype = ? ";
             PreparedStatement statement = con.prepareStatement(sql);
-            statement.setInt(1 , schoolId);
-            statement.setString(2 , utype);
+            statement.setInt(1, schoolId);
+            statement.setString(2, utype);
             statement.execute();
             ResultSet rs = statement.getResultSet();
             while (rs.next()) {
@@ -79,17 +79,17 @@ public class DAOUser {
                 String email = rs.getString("email");
                 String usertype = rs.getString("usertype");
                 int schoolid = rs.getInt("schoolId");
-                User user = new User(id,schoolid , username, email, usertype);
+                User user = new User(id, schoolid, username, email, usertype);
                 users.add(user);
             }
         } catch (SQLException e) {
-            throw new DalException("Connection Lost " , e);
+            throw new DalException("Connection Lost ", e);
         }
         return users;
     }
 
 
-    public void updateuser(User user ) throws DalException {
+    public void updateuser(User user) throws DalException {
         try (Connection con = dataAccess.getConnection()) {
             String sql = "UPDATE users SET username = ?  , email = ?  , usertype = ?  WHERE userid = ? ";
 
@@ -97,12 +97,12 @@ public class DAOUser {
             prs.setString(1, user.getName());
             prs.setString(2, user.getEmail());
             prs.setString(3, user.getUserType());
-            prs.setInt(4 , user.getId());
+            prs.setInt(4, user.getId());
 
             prs.executeUpdate();
 
         } catch (SQLException e) {
-            throw new DalException("Connection Lost " , e);
+            throw new DalException("Connection Lost ", e);
         }
     }
 
@@ -132,10 +132,10 @@ public class DAOUser {
             prs.setString(2, user.getName());
             prs.setString(3, user.getEmail());
             prs.setString(4, user.getUserType());
-            prs.setInt(5 , user.getSchoolID());
+            prs.setInt(5, user.getSchoolID());
             prs.executeUpdate();
         } catch (SQLException e) {
-            throw new DalException("Connection Lost " , e);
+            throw new DalException("Connection Lost ", e);
         }
 
     }
@@ -151,7 +151,7 @@ public class DAOUser {
                 newid = rs.getInt("id");
             }
         } catch (SQLException e) {
-            throw new DalException("Connection Lost " , e);
+            throw new DalException("Connection Lost ", e);
         }
         return newid;
     }
@@ -160,14 +160,12 @@ public class DAOUser {
     public List<User> searchForUser(String query) throws DalException {
         List<User> users = new ArrayList<>();
 
-        String stringquery = "%" + query + "%";
-
         try (Connection con = dataAccess.getConnection()) {
-            String command = "Select * from users where  username like ? or usertype like ? or email like ? ";
+            String command = " IF (Select COUNT(users.userid) from users where users.username = ? ) = 0 BEGIN Select * from users where users.username = ? END ELSE BEGIN Select * from School where School.name = ? END;";
             PreparedStatement prs = con.prepareStatement(command);
-            prs.setString(1, stringquery);
-            prs.setString(2, stringquery);
-            prs.setString(3, stringquery);
+            prs.setString(1, query);
+            prs.setString(2, query);
+            prs.setString(3, query);
             prs.execute();
             ResultSet rs = prs.getResultSet();
             while (rs.next()) {
@@ -177,14 +175,17 @@ public class DAOUser {
                 String email = rs.getString("email");
                 String usertype = rs.getString("usertype");
 
-                User user = new User(id,1 ,username, email, usertype);
+                User user = new User(id, 1, username, email, usertype);
                 users.add(user);
             }
 
         } catch (SQLException e) {
-            throw new DalException("Connection Lost " , e);
+            throw new DalException("Connection Lost ", e);
         }
 
         return users;
     }
+
+
 }
+

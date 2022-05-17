@@ -79,4 +79,11 @@ public class AdminMOD {
         manager.deleteStudent(user);
         updatethelist();
     }
+
+    public ObservableList<User> filter(ObservableList<User> allusers ,String q )throws DalException{
+        allusers  = FXCollections.observableArrayList();
+        allusers.addAll(manager.searchForUser(q));
+
+       return allusers;
+    }
 }

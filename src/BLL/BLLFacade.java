@@ -70,6 +70,8 @@ public interface BLLFacade {
     List<Case> getCasesAssignedTo(Group group) throws DalException;
 
     List<User> getALLUsers(int schoolid , String utype) throws DalException;
+
+    List<User> searchForUser(String query) throws DalException;
 }
 
 
