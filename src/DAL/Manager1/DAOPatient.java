@@ -35,8 +35,9 @@ public class DAOPatient {
                 String phonenumber = rs.getString("phone_number");
                 String observation = rs.getString("observations");
 
+
                 Patient patient = new Patient(id,first_name,lastname,convertToLocalDateViaSqlDate(dateofbirth),gender,weight,height,
-                        cpr,phonenumber, observation, schoolid );
+                        cpr,phonenumber, new ArrayList<>(), schoolid );
                 patients.add(patient);
             }
             return patients;
