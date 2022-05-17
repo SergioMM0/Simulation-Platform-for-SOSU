@@ -71,6 +71,8 @@ public class DAOPatient {
             prs.setInt(9,patient.getSchoolId());
             prs.executeUpdate();
 
+            addObservation(patient.getObservationsList().get(0),patient.getId());
+
             prs2.setString(1 , patient.getFirst_name());
             prs2.setString(2 , patient.getLast_name());
             prs2.setDate(3, Date.valueOf(patient.getDateOfBirth()));
@@ -91,6 +93,17 @@ public class DAOPatient {
         }
     }
 
+    public void addObservation(String observation, int patientID) throws DalException{
+        try(Connection con = dataAccess.getConnection()){
+            String sql = "INSERT INTO [dbo].[observationstable] ([patientid] [content]) VALUES (?,?)";
+            PreparedStatement st = con.prepareStatement(sql);
+            st.setInt(1,patientID);
+            st.setString(2,observation);
+            st.executeUpdate();
+        }catch (SQLException sqlException){
+            new DalException("Not able to add the observation",sqlException);
+        }
+    }
 
     public void updatepatient(Patient patient) throws DalException {
 
