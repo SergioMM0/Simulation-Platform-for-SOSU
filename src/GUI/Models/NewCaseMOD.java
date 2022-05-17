@@ -19,7 +19,7 @@ public class NewCaseMOD {
         allSubcategories = FXCollections.observableArrayList();
     }
 
-    public void createCase(Case newCase) throws DalException {
-        bllFacade.createCase(newCase);
+    public Case createCase(Case newCase) throws DalException {
+        return bllFacade.createCase(newCase);
     }
 }

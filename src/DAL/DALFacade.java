@@ -9,7 +9,7 @@ public interface DALFacade {
 
     List<Case> getAllCases(int schoolid) throws DalException;
 
-    void createCase(Case c)throws DalException;
+    Case createCase(Case c)throws DalException;
 
     void updateCase(Case c)throws  DalException ;
 
@@ -45,7 +45,7 @@ public interface DALFacade {
 
     List<Group> getAllGroups(int schoolID)throws DalException;
 
-    void createGroup(Group group)throws DalException;
+    Group createGroup(Group group)throws DalException;
         //
     void updateGroup(Group group)throws DalException;
         //

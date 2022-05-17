@@ -11,7 +11,7 @@ public interface BLLFacade {
 
     User checkCredentials(String email, String password) throws DalException, BLLException;
 
-    void createCase(Case newCase) throws DalException;
+    Case createCase(Case newCase) throws DalException;
 
     void createPatient(Patient patient) throws DalException;
 
@@ -37,7 +37,7 @@ public interface BLLFacade {
 
     void updatePatient(Patient patient) throws DalException;
 
-    void createNewGroup(Group group) throws DalException;
+    Group createNewGroup(Group group) throws DalException;
 
     void updateGroup(Group selectedGroup) throws DalException;
 

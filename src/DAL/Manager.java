@@ -33,8 +33,8 @@ public class Manager implements DALFacade {
     }
 
     @Override
-    public void createCase(Case c) throws DalException {
-        daoCase.createCase(c);
+    public Case createCase(Case c) throws DalException {
+        return daoCase.createCase(c);
     }
 
     @Override
@@ -123,8 +123,8 @@ public class Manager implements DALFacade {
     }
 
     @Override
-    public void createGroup(Group group) throws DalException {
-        daoGroup.createGroup(group);
+    public Group createGroup(Group group) throws DalException {
+        return daoGroup.createGroup(group);
     }
 
     @Override
