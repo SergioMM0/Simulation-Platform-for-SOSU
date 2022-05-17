@@ -396,7 +396,7 @@ public class TeacherMainCTLL {
         populateGroupsTab();
     }
 
-    private void populateParticipantsTable() { //this method might be implemented straight in the MouseEvent
+    private void populateParticipantsTable() {
         if (groupsTable.getSelectionModel().getSelectedItem().getMembers() != null) {
             participantsTable.getItems().clear();
             participantsTable.getItems().addAll(model.getObservableParticipants(groupsTable.getSelectionModel().getSelectedItem()));
@@ -416,7 +416,9 @@ public class TeacherMainCTLL {
 
     protected void populateCasesAssigned() {
         try{
+            casesAssignedList.getItems().clear();
             casesAssignedList.getItems().addAll(model.getCasesAssignedToGroup(groupsTable.getSelectionModel().getSelectedItem()));
+            nameColCases.setCellValueFactory(new PropertyValueFactory<>("name"));
         }catch (DalException dalException){
             dalException.printStackTrace();
             new SoftAlert(dalException.getMessage());
