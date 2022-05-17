@@ -7,6 +7,7 @@ import DAL.DataAccess.DataAccess;
 import DAL.util.DalException;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
+import javax.xml.transform.Result;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,9 +26,10 @@ public class DAOCase {
     public List<Case> getAllCases(int schoolid) throws DalException {
         ArrayList<Case> cases = new ArrayList<>();
         try(Connection connection = dataAccess.getConnection()){
-            String sql = "select * from [Case] where schoolid  = ? ";
+            String sql = "SELECT * FROM [Case] WHERE [schoolid]  = ? AND [isCopy] = ?";
             PreparedStatement prs = connection.prepareStatement(sql);
             prs.setInt(1 , schoolid);
+            prs.setInt(2,0);
             prs.execute();
             ResultSet rs = prs.getResultSet();
             while(rs.next()){
@@ -53,9 +55,10 @@ public class DAOCase {
         ArrayList<Case> cases = new ArrayList<>();
         try(Connection con = dataAccess.getConnection()) {
             String sql = "select a.id, a.Description_of_the_condition, a.CategoryName, a.SubCategoryName, a.name, a.schoolid , b.graded " +
-                    "FROM [Case] as a inner join SickPatient as b on a.id = b.caseid where b.Groupid = ?";
+                    "FROM [Case] as a inner join SickPatient as b on a.id = b.caseid where b.Groupid = ? AND [isCopy] = ?";
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setInt(1 , group.getId());
+            prs.setInt(2, 1);
             prs.execute();
             ResultSet rs = prs.getResultSet();
             while (rs.next()){
@@ -74,27 +77,36 @@ public class DAOCase {
         }
     }
 
-    public void assignCasetoPatient(Patient patient, Case c) throws DalException {
-        try(Connection con = dataAccess.getConnection()){
-            String sql = "insert into SickPatient (patientid , caseid) values  (?,?)";
-            PreparedStatement prs = con.prepareStatement(sql);
-            prs.setInt(1 ,patient.getId());
-            prs.setInt(2 , c.getId());
-            prs.executeUpdate();
-        } catch (SQLException e){
-            throw new DalException("Connection Lost" , e );
-        }
-    }
-
-
-    public void assignCaseToPatientToGroup(Patient p, Case c, Group g) throws DalException {
+    public void assignCaseToGroup(Patient patient, Case assignedCase, Group group) throws DalException {
         try(Connection con = dataAccess.getConnection()) {
-            String sql = "insert into SickPatient (patientid , caseid , Groupid) values  (?,?,?)";
+            String sql = "INSERT INTO [Case] (Description_of_the_condition,CategoryName,SubCategoryName,[name],schoolid,isCopy) VALUES (?,?,?,?,?,?)";
+            String sql2 = "SELECT [id] FROM [Case] WHERE [name] = ? AND [isCopy] = ?";
+            String sql3 = "INSERT INTO SickPatient (patientid , caseid , Groupid, graded) VALUES (?,?,?,?)";
             PreparedStatement prs = con.prepareStatement(sql);
-            prs.setInt(1 , p.getId());
-            prs.setInt(2 ,c.getId());
-            prs.setInt(3 ,g.getId());
+            PreparedStatement prs2 = con.prepareStatement(sql2);
+            PreparedStatement prs3 = con.prepareStatement(sql3);
+            prs.setString(1,assignedCase.getConditionDescription());
+            prs.setString(2,assignedCase.getCategory());
+            prs.setString(3,assignedCase.getSubCategory());
+            prs.setString(4,assignedCase.getName());
+            prs.setInt(5, assignedCase.getSchoolID());
+            prs.setInt(6, assignedCase.getIsCopyDB());
             prs.execute();
+
+            prs2.setString(1,assignedCase.getName());
+            prs2.setInt(2,assignedCase.getIsCopyDB());
+            prs2.execute();
+            ResultSet rs = prs2.getResultSet();
+            while(rs.next()){
+                assignedCase.setId(rs.getInt("id"));
+            }
+
+            prs3.setInt(1, patient.getId());
+            prs3.setInt(2, assignedCase.getId());
+            prs3.setInt(3, group.getId());
+            prs3.setInt(4, 0);
+            prs3.execute();
+
         } catch (SQLException e) {
             throw new DalException("Cant preform this task at this moment " , e);
         }

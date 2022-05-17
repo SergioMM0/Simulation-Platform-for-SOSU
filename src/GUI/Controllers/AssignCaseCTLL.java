@@ -52,15 +52,17 @@ public class AssignCaseCTLL {
 
     @FXML
     void assignCase(ActionEvent event) {
-        if(allGroups.getSelectionModel().getSelectedItem() != null && allPatients.getSelectionModel().getSelectedItem() != null){
+        Group group = allGroups.getSelectionModel().getSelectedItem();
+        Patient patient = allPatients.getSelectionModel().getSelectedItem();
+        if(group != null && patient != null){
             try {
                 teacherMainMOD.assignCaseToGroup(selectedCase,
-                        allGroups.getSelectionModel().getSelectedItem(), allPatients.getSelectionModel().getSelectedItem());
+                        group, patient);
             }catch (DalException dalException){
                 dalException.printStackTrace();
                 new SoftAlert(dalException.getMessage());
             }
-            teacherMainCTLL.populateCasesAssigned();
+            teacherMainCTLL.populateCasesAssigned(group);
             closeView();
         }
     }

@@ -103,10 +103,13 @@ public class Case {
         }else return 1;
     }
 
-    public void setIsCopy(int bol) {
+    public void setIsCopyDB(int bol) {
         this.isCopy = bol != 0;
     }
 
+    public void setCopy(boolean copy) {
+        isCopy = copy;
+    }
 
     @Override
     public String toString() {

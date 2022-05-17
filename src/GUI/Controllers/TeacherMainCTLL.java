@@ -357,16 +357,15 @@ public class TeacherMainCTLL {
 
     @FXML
     private void addStudentToGroup(ActionEvent event) {
-        if (studentsTable.getSelectionModel().getSelectedItem() != null
-                && groupsTable.getSelectionModel().getSelectedItem() != null) {
-            if (!groupsTable.getSelectionModel().getSelectedItem().containsMember(studentsTable.getSelectionModel().getSelectedItem())) {
+        User student = studentsTable.getSelectionModel().getSelectedItem();
+        Group group = groupsTable.getSelectionModel().getSelectedItem();
+        if (student != null && group != null) {
+            if (!group.containsMember(student)) {
                 try {
-                    model.addStudentToGroup(groupsTable.getSelectionModel().getSelectedItem(),
-                            studentsTable.getSelectionModel().getSelectedItem());
-                    model.updateObservableGroup(groupsTable.getSelectionModel().getSelectedItem().addMember(
-                            studentsTable.getSelectionModel().getSelectedItem()));
-                    populateParticipantsTable();
-                    setUpGroup(groupsTable.getSelectionModel().getSelectedItem());
+                    model.addStudentToGroup(group,student);
+                    model.updateObservableGroup(group.addMember(student));
+                    populateParticipantsTable(group);
+                    setUpGroup(group);
                 } catch (DalException dalException) {
                     new SoftAlert(dalException.getMessage());
                 }
@@ -380,16 +379,17 @@ public class TeacherMainCTLL {
 
     @FXML
     private void groupIsSelected(MouseEvent event) {
-        if(groupsTable.getSelectionModel().getSelectedItem() != null){
-            populateParticipantsTable();
-            populateGroupsTab();
+        Group selectedGroup = groupsTable.getSelectionModel().getSelectedItem();
+        if(selectedGroup != null){
+            populateParticipantsTable(selectedGroup);
+            populateGroupsTab(selectedGroup);
         }
     }
 
-    private void populateParticipantsTable() {
-        if (!groupsTable.getSelectionModel().getSelectedItem().getMembers().isEmpty()) {
+    private void populateParticipantsTable(Group group) {
+        if (!group.getMembers().isEmpty()) {
             participantsTable.getItems().clear();
-            participantsTable.getItems().addAll(model.getObservableParticipants(groupsTable.getSelectionModel().getSelectedItem()));
+            participantsTable.getItems().addAll(model.getObservableParticipants(group));
             participantsNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         }
     }
@@ -400,18 +400,18 @@ public class TeacherMainCTLL {
         setUpStudentsLBL(group);
     }
 
-    private void populateGroupsTab() {
+    private void populateGroupsTab(Group group) {
         if (groupTab.isDisabled()) {
             groupTab.setDisable(false);
         }
-        setUpGroup(groupsTable.getSelectionModel().getSelectedItem());
-        populateCasesAssigned();
+        setUpGroup(group);
+        populateCasesAssigned(group);
     }
 
-    protected void populateCasesAssigned() {
+    protected void populateCasesAssigned(Group group) {
         try{
             casesAssignedList.getItems().clear();
-            casesAssignedList.getItems().addAll(model.getCasesAssignedToGroup(groupsTable.getSelectionModel().getSelectedItem()));
+            casesAssignedList.getItems().addAll(model.getCasesAssignedToGroup(group));
             nameColCases.setCellValueFactory(new PropertyValueFactory<>("name"));
         }catch (DalException dalException){
             dalException.printStackTrace();
@@ -440,9 +440,8 @@ public class TeacherMainCTLL {
         });
         MenuItem mi1 = new MenuItem("Remove participant");
         mi1.setOnAction(t -> {
-            removeParticipant();
             contm.hide();
-            populateParticipantsTable();
+            populateParticipantsTable(removeParticipant());
         });
         contm.getItems().add(mi1);
     }
@@ -454,17 +453,18 @@ public class TeacherMainCTLL {
         }
     }
 
-    private void removeParticipant() {
+    private Group removeParticipant() {
+        Group group = groupsTable.getSelectionModel().getSelectedItem();
+        User participant = participantsTable.getSelectionModel().getSelectedItem();
         try {
-            model.removeParticipant(groupsTable.getSelectionModel().getSelectedItem(),
-                    participantsTable.getSelectionModel().getSelectedItem());
-            model.removeObservableParticipant(groupsTable.getSelectionModel().getSelectedItem(),
-                    participantsTable.getSelectionModel().getSelectedItem());
-            populateParticipantsTable();
-            setUpGroup(groupsTable.getSelectionModel().getSelectedItem());
+            model.removeParticipant(group,participant);
+            model.removeObservableParticipant(group,participant);
+            populateParticipantsTable(group);
+            setUpGroup(group);
         } catch (DalException dalException) {
             new SoftAlert(dalException.getMessage());
         }
+        return group;
     }
 
     @FXML
@@ -495,8 +495,10 @@ public class TeacherMainCTLL {
     }
 
     protected void updateStudentInTable(User student) {
-        model.updateStudentInTable(student);
+        model.updateStudentInLists(student);
         refreshStudentsTable();
+        refreshGroupList();
+        participantsTable.getItems().clear();
     }
 
     private void refreshStudentsTable() {

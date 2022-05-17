@@ -13,8 +13,8 @@ public class ManageStudentMOD {
         bllFacade = new BLLManager();
     }
 
-    public void addNewStudent(User user) throws DalException {
-        bllFacade.addNewStudent(user);
+    public User addNewStudent(User user) throws DalException {
+        return bllFacade.addNewStudent(user);
     }
 
     public void updateStudent(User student) throws DalException {

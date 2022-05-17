@@ -27,7 +27,7 @@ public interface BLLFacade {
 
     List<Patient> getAllPatients(int schoolID) throws DalException;
 
-    void addNewStudent(User user) throws DalException;
+    User addNewStudent(User user) throws DalException;
 
     void updateStudent(User student) throws DalException;
 

@@ -102,11 +102,19 @@ public class TeacherMainMOD {
         return allStudents;
     }
 
-    public void updateStudentInTable(User student) {
+    public void updateStudentInLists(User student) {
         for (User user : allStudents) {
-            if (user.getName().equals(student.getName())) {
+            if (user.getId() == student.getId()) {
                 user.setName(student.getName());
                 user.setEmail(student.getEmail());
+            }
+        }
+        for(Group g : allGroups){
+            for(User user : g.getMembers()){
+                if(user.getId() == student.getId()){
+                    user.setName(student.getName());
+                    user.setEmail(student.getEmail());
+                }
             }
         }
     }

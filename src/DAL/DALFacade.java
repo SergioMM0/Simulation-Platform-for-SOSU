@@ -23,7 +23,7 @@ public interface DALFacade {
 
     void deleteuser(User user) throws DalException;
 
-    void addUser(User user ) throws DalException; //
+    User addUser(User user ) throws DalException; //
 
     List<User> searchForUser (String query) throws DalException;
 
@@ -57,7 +57,7 @@ public interface DALFacade {
 
     void removeUserFromGroup(User user)throws DalException;
 
-    void assignCaseToPatientToGroup(Patient p , Case c , Group g) throws DalException;
+    void assignCaseToGroup(Patient p , Case c , Group g) throws DalException;
 
 
     void addStudentQuestionAnswer(StudentQuestionnaireAnswer answer) throws DalException;

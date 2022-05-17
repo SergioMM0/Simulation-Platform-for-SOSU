@@ -52,8 +52,8 @@ public class BLLManager implements BLLFacade {
     }
 
     @Override
-    public void addNewStudent(User user) throws DalException {
-        dalFacade.addUser(user);
+    public User addNewStudent(User user) throws DalException {
+        return dalFacade.addUser(user);
     }
 
     @Override
@@ -141,7 +141,8 @@ public class BLLManager implements BLLFacade {
 
     @Override
     public void assignCaseToGroup(Case selectedCase, Group group, Patient patient) throws DalException {
-        dalFacade.assignCaseToPatientToGroup(patient, selectedCase, group);
+        selectedCase.setCopy(true);
+        dalFacade.assignCaseToGroup(patient, selectedCase, group);
     }
 
     @Override
