@@ -1,5 +1,6 @@
 package DAL.Manager1;
 
+import BE.Group;
 import BE.User;
 import DAL.DataAccess.DataAccess;
 import DAL.util.DalException;
@@ -122,22 +123,34 @@ public class DAOUser {
     }
 
 
-    public void addUser(User user) throws DalException {
-
+    public User addUser(User user) throws DalException {
         try (Connection con = dataAccess.getConnection()) {
             String sql = "INSERT INTO users(username , password, email , usertype , schoolid)" +
                     "VALUES  (?,?,?,?,?)";
+            String sql2 = "SELECT [userid] FROM [users] WHERE [username] = ? AND [password] = ? AND [email] = ? AND [usertype] = ? AND [schoolid] = ?";
             PreparedStatement prs = con.prepareStatement(sql);
+            PreparedStatement prs2 = con.prepareStatement(sql2);
             prs.setString(1, user.getName());
             prs.setString(2, user.getName());
             prs.setString(3, user.getEmail());
             prs.setString(4, user.getUserType());
             prs.setInt(5, user.getSchoolID());
             prs.executeUpdate();
+
+            prs2.setString(1, user.getName());
+            prs2.setString(2, user.getName());
+            prs2.setString(3, user.getEmail());
+            prs2.setString(4, user.getUserType());
+            prs2.setInt(5, user.getSchoolID());
+            prs2.execute();
+            ResultSet rs = prs2.getResultSet();
+            while(rs.next()){
+                user.setId(rs.getInt("userid"));
+            }
+            return user;
         } catch (SQLException e) {
             throw new DalException("Connection Lost ", e);
         }
-
     }
 
     private int newestidforuser() throws DalException {
@@ -186,6 +199,29 @@ public class DAOUser {
         return users;
     }
 
+    public Group getGroupOf(User student) throws DalException {
+        Group result=new Group();
+        try (Connection con = dataAccess.getConnection()) {
+            String command = "select * from GroupUsers gu\n" +              //get group users and group according to student id
+                    "join Groups g on gu.Groupid=g.id\n" +                  //we joined group users and group table to get group row
+                    "where studentid=? ";
+            PreparedStatement prs = con.prepareStatement(command);
+            prs.setInt(1, student.getId());
+            prs.execute();
+            ResultSet rs = prs.getResultSet();
+            while (rs.next()) {
+
+                result.setId(rs.getInt("id"));
+                result.setName(rs.getString( "name"));
+                result.setSchoolID(rs.getInt( "Schoolid"));
+            }
+
+        } catch (SQLException e) {
+            throw new DalException("Connection Lost " , e);
+        }
+
+        return result;
+    }
 
 }
 

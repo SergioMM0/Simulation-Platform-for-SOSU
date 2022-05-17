@@ -45,8 +45,7 @@ public class ManageStudentCTLL {
                             emailField.getText(),
                             "STUDENT"
                     );
-                    model.addNewStudent(user);
-                    teacherMainCTLL.addStudentToTable(user);
+                    teacherMainCTLL.addStudentToTable(model.addNewStudent(user));
                     closeWindow();
                 } catch (DalException dalException) {
                     new SoftAlert(dalException.getMessage());

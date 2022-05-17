@@ -1,6 +1,8 @@
 package DAL.Manager1;
 
+import BE.Group;
 import BE.StudentQuestion;
+import BE.StudentQuestionnaire;
 import BE.StudentQuestionnaireAnswer;
 import DAL.DataAccess.DataAccess;
 import DAL.util.DalException;
@@ -82,6 +84,31 @@ public class DAOStudentQuestion {
 
             }
             return answer;
+        } catch (SQLException e) {
+            throw new DalException("Couldn't retrieve a list of Questions ", e);
+        }
+    }
+
+    public StudentQuestionnaire getQuestionnaireOf(Group group) throws DalException {
+        String query="\n" +
+                "select q.* from Groups g \n" +
+                "join GroupUsers gu on g.id=gu.Groupid\n" +
+                "join SickPatient sp on sp.Groupid=gu.id\n" +
+                "join Questionaire q on q.SickPatientId=sp.SickPatientid"+
+                " where g.id=?";
+
+        try (Connection con = dataAccess.getConnection()) {
+            PreparedStatement prs = con.prepareStatement(query);
+            prs.setInt(1,group.getId());
+            StudentQuestionnaire questionnaire = new StudentQuestionnaire();
+            ResultSet rs = prs.executeQuery();
+            while (rs.next()) {         //because there is only one row we can return after first row fetched
+               questionnaire.setId(rs.getInt("id"));
+               questionnaire.setDate(rs.getDate("Date"));
+               questionnaire.setSickPatientId(rs.getInt("SickPatientId"));
+
+            }
+            return questionnaire;
         } catch (SQLException e) {
             throw new DalException("Couldn't retrieve a list of Questions ", e);
         }

@@ -19,7 +19,7 @@ public interface BLLFacade {
 
     StudentQuestion getFirstQuestion() throws DalException;
 
-    StudentQuestion getNextQuestion(StudentQuestion question) throws DalException ,BLLException;
+    StudentQuestion getNextQuestion(StudentQuestion question) throws DalException, BLLException;
 
     List<Group> getAllGroups(int schoolID) throws DalException;
 
@@ -27,9 +27,9 @@ public interface BLLFacade {
 
     List<Patient> getAllPatients(int schoolID) throws DalException;
 
-    void addNewStudent(User user) throws DalException;
+    User addNewStudent(User user) throws DalException;
 
-    void updateStudent(User student)throws DalException;
+    void updateStudent(User student) throws DalException;
 
     void deleteStudent(User student) throws DalException;
 
@@ -45,6 +45,7 @@ public interface BLLFacade {
     StudentQuestion getPreviousQuestion(int currentQuestionId) throws BLLException, DalException;
 
     StudentQuestionnaireAnswer getQuestionaireAnswer(int questionId, int questionaireId) throws DalException;
+
     void addStudentToGroup(Group group, User student) throws DalException;
 
     void deleteGroup(Group group) throws DalException;
@@ -53,9 +54,9 @@ public interface BLLFacade {
 
     void updateCase(Case newCase) throws DalException;
 
-    void deleteCase(Case selectedCase)throws DalException;
+    void deleteCase(Case selectedCase) throws DalException;
 
-    void deletePatient(Patient selectedPatient)throws DalException;
+    void deletePatient(Patient selectedPatient) throws DalException;
 
     List<School> getAllSchools() throws DalException;
 
@@ -63,13 +64,18 @@ public interface BLLFacade {
 
     void updateSchool(School school) throws DalException;
 
-    void deleteSchool(School school) throws DalException ;
+    void deleteSchool(School school) throws DalException;
 
     void assignCaseToGroup(Case selectedCase, Group group, Patient patient) throws DalException;
 
     List<Case> getCasesAssignedTo(Group group) throws DalException;
 
-    List<User> getALLUsers(int schoolid , String utype) throws DalException;
+    List<User> getALLUsers(int schoolid, String utype) throws DalException;
+
+    Group getGroupOf(User student) throws DalException;
+
+    StudentQuestionnaire getQuestionnaireOf(Group group) throws DalException;
+
 
     List<User> searchForUser(String query) throws DalException;
 

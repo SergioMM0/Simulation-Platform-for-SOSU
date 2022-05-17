@@ -68,8 +68,8 @@ public class Manager implements DALFacade {
     }
 
     @Override
-    public void addUser(User user) throws DalException {
-        daoUser.addUser(user);
+    public User addUser(User user) throws DalException {
+        return daoUser.addUser(user);
     }
 
     @Override
@@ -153,8 +153,8 @@ public class Manager implements DALFacade {
     }
 
     @Override
-    public void assignCaseToPatientToGroup(Patient p, Case c, Group g) throws DalException {
-        daoCase.assignCaseToPatientToGroup(p, c, g);
+    public void assignCaseToGroup(Patient patient, Case assignedCase, Group group) throws DalException {
+        daoCase.assignCaseToGroup(patient,assignedCase,group);
     }
 
     @Override
@@ -206,6 +206,22 @@ public class Manager implements DALFacade {
     @Override
     public List<User> getAllUSERS(int schoolId ,String utype) throws DalException {
         return daoUser.getAllUSERS(schoolId , utype);
+    }
+
+    @Override
+    public List<User> getALLUsers(int schoolid, String utype) throws DalException {
+        return null;
+    }
+
+
+    @Override
+    public Group getGroupOf(User student) throws DalException {
+        return daoUser.getGroupOf(student);
+    }
+
+    @Override
+    public StudentQuestionnaire getQuestionnaireOf(Group group) throws DalException {
+        return daoStudentQuestion.getQuestionnaireOf(group);
     }
 
 }

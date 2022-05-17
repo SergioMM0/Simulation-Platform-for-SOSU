@@ -10,18 +10,18 @@ import javafx.collections.ObservableList;
 import java.security.InvalidParameterException;
 import java.util.List;
 
-public class BLLManager implements BLLFacade{
+public class BLLManager implements BLLFacade {
 
     private DALFacade dalFacade;
 
-    public BLLManager(){
+    public BLLManager() {
         dalFacade = new Manager();
     }
 
     @Override
     public User checkCredentials(String email, String password) throws DalException, BLLException {
-        User logedUser = dalFacade.verifyUsers(email,password);
-        if(logedUser == null) {
+        User logedUser = dalFacade.verifyUsers(email, password);
+        if (logedUser == null) {
             throw new BLLException("Wrong email or password, please try again", new InvalidParameterException());
         }
         return logedUser;
@@ -53,8 +53,8 @@ public class BLLManager implements BLLFacade{
     }
 
     @Override
-    public void addNewStudent(User user) throws DalException {
-        dalFacade.addUser(user);
+    public User addNewStudent(User user) throws DalException {
+        return dalFacade.addUser(user);
     }
 
     @Override
@@ -90,7 +90,7 @@ public class BLLManager implements BLLFacade{
 
     @Override
     public void addStudentToGroup(Group group, User student) throws DalException {
-        dalFacade.addUsertoGroup(group,student);
+        dalFacade.addUsertoGroup(group, student);
     }
 
     @Override
@@ -127,7 +127,7 @@ public class BLLManager implements BLLFacade{
 
     @Override
     public void createSchool(School school) throws DalException {
-            dalFacade.createSchool(school);
+        dalFacade.createSchool(school);
     }
 
     @Override
@@ -137,12 +137,13 @@ public class BLLManager implements BLLFacade{
 
     @Override
     public void deleteSchool(School school) throws DalException {
-            dalFacade.deleteSchool(school);
+        dalFacade.deleteSchool(school);
     }
 
     @Override
     public void assignCaseToGroup(Case selectedCase, Group group, Patient patient) throws DalException {
-        dalFacade.assignCaseToPatientToGroup(patient,selectedCase,group);
+        selectedCase.setCopy(true);
+        dalFacade.assignCaseToGroup(patient, selectedCase, group);
     }
 
     @Override
@@ -154,7 +155,9 @@ public class BLLManager implements BLLFacade{
 
     @Override
     public List<User> getALLUsers(int schoolid, String utype) throws DalException {
+
         return dalFacade.getAllUSERS(schoolid , utype);
+
     }
 
     public ObservableList<User> searchUser(ObservableList<User> users, String text) {
@@ -164,6 +167,15 @@ public class BLLManager implements BLLFacade{
 
 
     @Override
+    public Group getGroupOf(User student) throws DalException {
+        return dalFacade.getGroupOf(student);
+    }
+
+    @Override
+    public StudentQuestionnaire getQuestionnaireOf(Group group) throws DalException {
+        return dalFacade.getQuestionnaireOf(group);
+    }
+
     public List<User> searchForUser(String query) throws DalException {
         return dalFacade.searchForUser(query);
     }
@@ -184,22 +196,22 @@ public class BLLManager implements BLLFacade{
     }
 
     @Override
-    public StudentQuestion getNextQuestion(StudentQuestion question) throws DalException , BLLException {
-        StudentQuestion  s =  dalFacade.getNextStudentQuestion(question.getId());
+    public StudentQuestion getNextQuestion(StudentQuestion question) throws DalException, BLLException {
+        StudentQuestion s = dalFacade.getNextStudentQuestion(question.getId());
 
-        return s ;
+        return s;
     }
 
     @Override
     public StudentQuestion getPreviousQuestion(int currentQuestionId) throws BLLException, DalException {
-        StudentQuestion s=dalFacade.getPreviousQuestion(currentQuestionId);
+        StudentQuestion s = dalFacade.getPreviousQuestion(currentQuestionId);
 
         return s;
     }
 
     @Override
     public StudentQuestionnaireAnswer getQuestionaireAnswer(int questionId, int questionaireId) throws DalException {
-        return dalFacade.getQuestionaireAnswer(questionId,questionaireId);
+        return dalFacade.getQuestionaireAnswer(questionId, questionaireId);
     }
 
 
