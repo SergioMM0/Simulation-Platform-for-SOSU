@@ -13,20 +13,12 @@ public class Patient {
     private String height;
     private String cpr;
     private String phoneNumber;
-    /*
-    private String bloodType;
-    private String exercise;
-    private String diet;
-    private String alcohol;
-    private String tobacco;
-
-     */
     private String observations;
     private List<String> observationsList;
-    private int schoolid;
+    private int schoolId;
 
     public Patient(int id, String first_name, String last_name, LocalDate dateOfBirth, String gender, String weight,
-                   String height, String cpr, String phoneNumber,String observations, int schoolid) {
+                   String height, String cpr, String phoneNumber,String observations, int schoolId) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -36,21 +28,13 @@ public class Patient {
         this.height = height;
         this.cpr = cpr;
         this.phoneNumber = phoneNumber;
-        /*
-        this.bloodType = bloodType;
-        this.exercise = exercise;
-        this.diet = diet;
-        this.alcohol = alcohol;
-        this.tobacco = tobacco;
-
-         */
         this.observations = observations;
-        this.schoolid = schoolid;
+        this.schoolId = schoolId;
     }
 
     public Patient(int id, String first_name, String last_name, LocalDate dateOfBirth, String gender,
                    String weight, String height, String cpr, String phoneNumber,
-                   List<String> observationsList, int schoolid) {
+                   List<String> observationsList, int schoolId) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -60,16 +44,8 @@ public class Patient {
         this.height = height;
         this.cpr = cpr;
         this.phoneNumber = phoneNumber;
-        /*
-        this.bloodType = bloodType;
-        this.exercise = exercise;
-        this.diet = diet;
-        this.alcohol = alcohol;
-        this.tobacco = tobacco;
-
-         */
         this.observationsList = observationsList;
-        this.schoolid = schoolid;
+        this.schoolId = schoolId;
     }
 
     public int getId() {
@@ -143,48 +119,6 @@ public class Patient {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
-    /*
-    public String getBloodType() {
-        return bloodType;
-    }
-
-    public void setBloodType(String bloodType) {
-        this.bloodType = bloodType;
-    }
-
-    public String getExercise() {
-        return exercise;
-    }
-
-    public void setExercise(String exercise) {
-        this.exercise = exercise;
-    }
-
-    public String getDiet() {
-        return diet;
-    }
-
-    public void setDiet(String diet) {
-        this.diet = diet;
-    }
-
-    public String getAlcohol() {
-        return alcohol;
-    }
-
-    public void setAlcohol(String alcohol) {
-        this.alcohol = alcohol;
-    }
-
-    public String getTobacco() {
-        return tobacco;
-    }
-
-    public void setTobacco(String tobacco) {
-        this.tobacco = tobacco;
-    }
-     */
     public String getObservations() {
         return observations;
     }
@@ -193,12 +127,12 @@ public class Patient {
         this.observations = observations;
     }
 
-    public int getSchoolid() {
-        return schoolid;
+    public int getSchoolId() {
+        return schoolId;
     }
 
-    public void setSchoolid(int schoolid) {
-        this.schoolid = schoolid;
+    public void setSchoolId(int schoolId) {
+        this.schoolId = schoolId;
     }
 
     public List<String> getObservationsList() {
@@ -223,7 +157,7 @@ public class Patient {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", observations='" + observations + '\'' +
                 ", observationsList=" + observationsList +
-                ", schoolid=" + schoolid +
+                ", schoolid=" + schoolId +
                 '}';
     }
 }

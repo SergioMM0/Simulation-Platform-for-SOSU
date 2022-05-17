@@ -1,8 +1,6 @@
 package DAL.Manager1;
 
 import BE.Patient;
-import BE.School;
-import BE.User;
 import DAL.DataAccess.DataAccess;
 import DAL.util.DalException;
 import java.sql.*;
@@ -68,7 +66,7 @@ public class DAOPatient {
             prs.setString(7 ,patient.getCpr());
             prs.setString(8 , patient.getPhoneNumber());
             prs.setString(9,patient.getObservations());
-            prs.setInt(10,patient.getSchoolid());
+            prs.setInt(10,patient.getSchoolId());
             prs.executeUpdate();
         } catch (SQLException e) {
             throw new DalException("Connection Lost " , e);

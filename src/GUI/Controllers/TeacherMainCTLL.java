@@ -60,7 +60,10 @@ public class TeacherMainCTLL {
     private TableColumn<Group, String> nameColCasesGV;
 
     @FXML
-    private TextField descriptionOfConditionText;
+    private TextArea descriptionOfConditionText;
+
+    @FXML
+    private TextArea newObservationTextArea;
 
     @FXML
     private TableColumn<Group, String> groupNameCol;
@@ -175,6 +178,7 @@ public class TeacherMainCTLL {
         patientOverviewTab.setDisable(true);
         caseTab.setDisable(true);
         groupTab.setDisable(true);
+        medicalHistoryTextArea.setEditable(false);
     }
 
     private void populateGroupsTable() {

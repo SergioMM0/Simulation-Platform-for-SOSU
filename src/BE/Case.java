@@ -8,6 +8,7 @@ public class Case {
     private String category;
     private String subCategory;
     private int schoolID;
+    private boolean isGraded;
 
     public Case(int id, String name,String conditionDescription, String category, String subCategory,int schoolID) {
         this.id = id;
@@ -24,6 +25,25 @@ public class Case {
         this.category = category;
         this.subCategory = subCategory;
         this.schoolID = schoolID;
+    }
+
+    public Case(int id, String name, String conditionDescription, String category, String subCategory, int schoolID, boolean isGraded) {
+        this.id = id;
+        this.name = name;
+        this.conditionDescription = conditionDescription;
+        this.category = category;
+        this.subCategory = subCategory;
+        this.schoolID = schoolID;
+        this.isGraded = isGraded;
+    }
+
+    public Case(String name, String conditionDescription, String category, String subCategory, int schoolID, boolean isGraded) {
+        this.name = name;
+        this.conditionDescription = conditionDescription;
+        this.category = category;
+        this.subCategory = subCategory;
+        this.schoolID = schoolID;
+        this.isGraded = isGraded;
     }
 
     public int getId() {
@@ -72,6 +92,14 @@ public class Case {
 
     public void setSchoolID(int schoolID) {
         this.schoolID = schoolID;
+    }
+
+    public boolean isGraded() {
+        return isGraded;
+    }
+
+    public void setGraded(boolean graded) {
+        isGraded = graded;
     }
 
     @Override
