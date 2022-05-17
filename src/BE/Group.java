@@ -22,6 +22,9 @@ public class Group {
         SchoolID = schoolID;
     }
 
+    public Group() {
+    }
+
     public int getId() {
         return id;
     }
