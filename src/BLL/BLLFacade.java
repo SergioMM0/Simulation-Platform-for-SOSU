@@ -75,6 +75,9 @@ public interface BLLFacade {
     Group getGroupOf(User student) throws DalException;
 
     StudentQuestionnaire getQuestionnaireOf(Group group) throws DalException;
+
+
+    List<User> searchForUser(String query) throws DalException;
 }
 
 

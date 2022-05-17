@@ -5,6 +5,7 @@ import BE.User;
 import DAL.util.DalException;
 import GUI.Alerts.ConfirmationAlert;
 import GUI.Models.AdminMOD;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -95,7 +96,28 @@ public class AdminCTLL implements Initializable {
         }
     }
 
+
     public void filterField(KeyEvent keyEvent) {
+        if(filterid.getText() == null || filterid.getText().length() <= 0){
+
+            try {
+                TeacherTableView.setItems(adminMOD.getAllTeachers(1));
+                StudentTableView.setItems(adminMOD.getAllSudents(1));
+            } catch (DalException e) {
+                e.printStackTrace();
+            }
+        }else {
+            ObservableList<User> Teacherfound ;
+            try {
+                Teacherfound = adminMOD.filter(adminMOD.getAllTeachers(1), filterid.getText());
+                if (Teacherfound != null) {
+                    TeacherTableView.setItems(Teacherfound);
+
+                }
+            } catch (DalException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void CreateSchoolbtn(ActionEvent event) {
