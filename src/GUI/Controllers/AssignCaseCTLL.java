@@ -61,6 +61,7 @@ public class AssignCaseCTLL {
                 new SoftAlert(dalException.getMessage());
             }
             teacherMainCTLL.populateCasesAssigned();
+            closeView();
         }
     }
 

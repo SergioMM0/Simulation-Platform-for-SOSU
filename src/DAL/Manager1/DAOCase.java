@@ -59,12 +59,12 @@ public class DAOCase {
             prs.execute();
             ResultSet rs = prs.getResultSet();
             while (rs.next()){
-                int id = rs.getInt("[Case].id");
-                String name = rs.getString("[Case].[name]");
-                String condition = rs.getString("[Case].Description_of_the_condition");
-                String cat = rs.getString("[Case].CategoryName");
-                String subcat = rs.getString("[Case].SubCategoryName");
-                int schoolid = rs.getInt("[Case].[schoolid]");
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String condition = rs.getString("Description_of_the_condition");
+                String cat = rs.getString("CategoryName");
+                String subcat = rs.getString("SubCategoryName");
+                int schoolid = rs.getInt("schoolid");
                 Case c = new Case(id ,name ,condition , cat ,subcat , schoolid );
                 cases.add(c);
             }

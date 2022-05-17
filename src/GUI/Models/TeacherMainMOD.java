@@ -206,6 +206,7 @@ public class TeacherMainMOD {
     }
 
     public ObservableList<Case> getCasesAssignedToGroup(Group group) throws DalException {
+        casesAssigned.clear();
         casesAssigned.addAll(bllFacade.getCasesAssignedTo(group));
         return casesAssigned;
     }

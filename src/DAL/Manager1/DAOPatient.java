@@ -49,13 +49,17 @@ public class DAOPatient {
         return new java.sql.Date(dateToConvert.getTime()).toLocalDate();
     }
 
-    public void createPatient(Patient patient ) throws DalException {
-
+    public Patient createPatient(Patient patient) throws DalException {
         try (Connection con = dataAccess.getConnection()){
             String sql = "INSERT INTO Patient (first_name, last_name, dateofBirth, gender,weight ,height ,cpr ," +
-                    " phone_number ,observations,schoolid) " +
-                    "VALUES (?,?,?,?,?,?,?,?,?,?);";
+                    " phone_number,schoolid) " +
+                    "VALUES (?,?,?,?,?,?,?,?,?);";
+
+            String sql2 = "SELECT [id] FROM Patient WHERE [first_name] = ? AND [last_name] = ? AND [dateofBirth] = ? AND [gender] = ? AND [weight] = ? AND [height] = ? AND [cpr] = ? AND [phone_number] = ? AND [schoolid] = ?";
+
             PreparedStatement prs = con.prepareStatement(sql);
+            PreparedStatement prs2 = con.prepareStatement(sql2);
+
             prs.setString(1 , patient.getFirst_name());
             prs.setString(2 , patient.getLast_name());
             prs.setDate(3, Date.valueOf(patient.getDateOfBirth()));
@@ -64,19 +68,48 @@ public class DAOPatient {
             prs.setString(6,patient.getHeight());
             prs.setString(7 ,patient.getCpr());
             prs.setString(8 , patient.getPhoneNumber());
-            prs.setInt(10,patient.getSchoolId());
+            prs.setInt(9,patient.getSchoolId());
             prs.executeUpdate();
+
+            addObservation(patient.getObservationsList().get(0),patient.getId());
+
+            prs2.setString(1 , patient.getFirst_name());
+            prs2.setString(2 , patient.getLast_name());
+            prs2.setDate(3, Date.valueOf(patient.getDateOfBirth()));
+            prs2.setString(4 , patient.getGender());
+            prs2.setString(5 ,patient.getWeight());
+            prs2.setString(6,patient.getHeight());
+            prs2.setString(7 ,patient.getCpr());
+            prs2.setString(8 , patient.getPhoneNumber());
+            prs2.setInt(9,patient.getSchoolId());
+            prs2.execute();
+            ResultSet rs = prs2.getResultSet();
+            while(rs.next()){
+                patient.setId(rs.getInt("id"));
+            }
+            return patient;
         } catch (SQLException e) {
             throw new DalException("Connection Lost " , e);
         }
     }
 
+    public void addObservation(String observation, int patientID) throws DalException{
+        try(Connection con = dataAccess.getConnection()){
+            String sql = "INSERT INTO [dbo].[observationstable] ([patientid] [content]) VALUES (?,?)";
+            PreparedStatement st = con.prepareStatement(sql);
+            st.setInt(1,patientID);
+            st.setString(2,observation);
+            st.executeUpdate();
+        }catch (SQLException sqlException){
+            new DalException("Not able to add the observation",sqlException);
+        }
+    }
 
     public void updatepatient(Patient patient) throws DalException {
 
         try (Connection con = dataAccess.getConnection()){
             String sql = "Update Patient set first_name = ? , last_name = ? , dateofBirth = ? , gender = ? " +
-                    ", weight = ? , height = ? , cpr = ? , phone_number = ? , observations = ? where id = ? ";
+                    ", weight = ? , height = ? , cpr = ? , phone_number = ? where id = ? ";
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setString(1 , patient.getFirst_name());
             prs.setString(2 , patient.getLast_name());
@@ -86,7 +119,7 @@ public class DAOPatient {
             prs.setString(6,patient.getHeight());
             prs.setString(7 ,patient.getCpr());
             prs.setString(8 , patient.getPhoneNumber());
-            prs.setInt(10, patient.getId());
+            prs.setInt(9, patient.getId());
             prs.executeUpdate();
         } catch (SQLException e) {
             throw new DalException("Connection Lost" , e);

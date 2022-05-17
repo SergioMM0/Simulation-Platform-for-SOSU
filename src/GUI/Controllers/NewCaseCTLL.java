@@ -9,10 +9,7 @@ import GUI.Util.CatAndSubC;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -30,7 +27,7 @@ public class NewCaseCTLL implements Initializable {
     private ComboBox<String> categoryComboBox;
 
     @FXML
-    private TextField descriptionOfCondition;
+    private TextArea descriptionOfConditionText;
 
     @FXML
     private TextField nameField;
@@ -78,7 +75,7 @@ public class NewCaseCTLL implements Initializable {
         if(fieldsAreFiled()){
             try {
                 Case newCase = new Case(nameField.getText(),
-                        descriptionOfCondition.getText(),
+                        descriptionOfConditionText.getText(),
                         categoryComboBox.getValue(),
                         subcategoryComboBox.getValue(),
                         logedUser.getSchoolID());
@@ -103,7 +100,7 @@ public class NewCaseCTLL implements Initializable {
             new SoftAlert("Please select a subcategory for the Case");
             return false;
         }
-        else if(descriptionOfCondition.getText().isEmpty()){
+        else if(descriptionOfConditionText.getText().isEmpty()){
             new SoftAlert("Please introduce a valid description of the case");
             return false;
         }

@@ -37,15 +37,6 @@ public class Case {
         this.isGraded = isGraded;
     }
 
-    public Case(String name, String conditionDescription, String category, String subCategory, int schoolID, boolean isGraded) {
-        this.name = name;
-        this.conditionDescription = conditionDescription;
-        this.category = category;
-        this.subCategory = subCategory;
-        this.schoolID = schoolID;
-        this.isGraded = isGraded;
-    }
-
     public int getId() {
         return id;
     }
