@@ -654,7 +654,7 @@ public class TeacherMainCTLL {
 
     @FXML
     private void newObservation(ActionEvent event) {
-
+        
     }
 
     @FXML
