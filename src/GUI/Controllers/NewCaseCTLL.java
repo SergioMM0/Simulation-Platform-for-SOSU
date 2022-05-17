@@ -82,9 +82,8 @@ public class NewCaseCTLL implements Initializable {
                         categoryComboBox.getValue(),
                         subcategoryComboBox.getValue(),
                         logedUser.getSchoolID());
-                model.createCase(newCase);
                 closeWindow();
-                teacherMainCTLL.addCaseToList(newCase);
+                teacherMainCTLL.addCaseToList(model.createCase(newCase));
             } catch (DalException dalException) {
                 new SoftAlert(dalException.getMessage());
             }

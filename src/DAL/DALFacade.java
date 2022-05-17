@@ -9,7 +9,7 @@ public interface DALFacade {
 
     List<Case> getAllCases(int schoolid) throws DalException;
 
-    void createCase(Case c)throws DalException;
+    Case createCase(Case c)throws DalException;
 
     void updateCase(Case c)throws  DalException ;
 

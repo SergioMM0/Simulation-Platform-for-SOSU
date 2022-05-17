@@ -33,8 +33,8 @@ public class Manager implements DALFacade {
     }
 
     @Override
-    public void createCase(Case c) throws DalException {
-        daoCase.createCase(c);
+    public Case createCase(Case c) throws DalException {
+        return daoCase.createCase(c);
     }
 
     @Override

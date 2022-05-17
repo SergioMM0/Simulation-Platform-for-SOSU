@@ -44,13 +44,16 @@ public class DAOGroup {
 
     public Group createGroup(Group group)throws DalException {
         try(Connection con = dataAccess.getConnection()) {
-            String sql = "INSERT INTO Groups (name , Schoolid  ) VALUES (? , ?); SELECT [id] WHERE NAME = ?";
+            String sql = "INSERT INTO Groups (name , Schoolid  ) VALUES (? , ?)";
+            String sql2 = "SELECT [id] FROM Groups WHERE NAME = ?";
             PreparedStatement prs = con.prepareStatement(sql);
+            PreparedStatement prs2 = con.prepareStatement(sql2);
             prs.setString(1 , group.getName());
             prs.setInt(2 , group.getSchoolID());
-            prs.setString(3,group.getName());
-            prs.execute();
-            ResultSet rs = prs.getResultSet();
+            prs.executeUpdate();
+            prs2.setString(1,group.getName());
+            prs2.execute();
+            ResultSet rs = prs2.getResultSet();
             while(rs.next()){
                 group.setId(rs.getInt("id"));
             }

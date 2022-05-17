@@ -101,17 +101,30 @@ public class DAOCase {
     }
 
 
-    public void createCase(Case c ) throws DalException {
+    public Case createCase(Case newCase) throws DalException {
         try(Connection con = dataAccess.getConnection()) {
             String sql = "INSERT INTO [dbo].[Case] ( name ,Description_of_the_condition,CategoryName , SubCategoryName ,schoolid) " +
                     "VALUES (?,?,?,? , ?);" ;
+            String sql2 = "SELECT [id] FROM [dbo].[Case] WHERE [name] = ? AND [Description_of_the_condition] = ? AND [CategoryName] = ? AND [SubCategoryName] = ? AND [schoolid] = ?";
             PreparedStatement prs = con.prepareStatement(sql);
-            prs.setString(1 , c.getName());
-            prs.setString(2 ,c.getConditionDescription());
-            prs.setString(3,c.getCategory());
-            prs.setString(4 , c.getSubCategory());
-            prs.setInt(5 ,c.getSchoolID());
+            PreparedStatement prs2 = con.prepareStatement(sql2);
+            prs.setString(1 , newCase.getName());
+            prs.setString(2 ,newCase.getConditionDescription());
+            prs.setString(3,newCase.getCategory());
+            prs.setString(4 , newCase.getSubCategory());
+            prs.setInt(5 ,newCase.getSchoolID());
             prs.executeUpdate();
+            prs2.setString(1,newCase.getName());
+            prs2.setString(2,newCase.getConditionDescription());
+            prs2.setString(3,newCase.getCategory());
+            prs2.setString(4,newCase.getSubCategory());
+            prs2.setInt(5,newCase.getSchoolID());
+            prs2.execute();
+            ResultSet rs = prs2.getResultSet();
+            while(rs.next()){
+                newCase.setId(rs.getInt("id"));
+            }
+            return newCase;
         } catch (SQLException e) {
             throw new DalException("Connection Lost" , e);
         }
