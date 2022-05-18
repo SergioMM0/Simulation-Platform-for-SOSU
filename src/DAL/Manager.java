@@ -229,4 +229,9 @@ public class Manager implements DALFacade {
         return daoPatient.getPatientOfCase(selectedCase, group);
     }
 
+    @Override
+    public void unassignCase(Case selectedItem) throws DalException {
+        daoCase.unassignCase(selectedItem);
+    }
+
 }

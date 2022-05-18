@@ -57,7 +57,7 @@ public class DAOCase {
                     "FROM [Case] AS a INNER JOIN SickPatient AS b ON a.id = b.caseid WHERE b.Groupid = ? AND a.[isCopy] = ?";
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setInt(1 , group.getId());
-            prs.setInt(2, 0);
+            prs.setInt(2, 1);
             prs.execute();
             ResultSet rs = prs.getResultSet();
             while (rs.next()){
@@ -198,4 +198,14 @@ public class DAOCase {
         }
     }
 
+    public void unassignCase(Case selectedItem) throws DalException{
+        try(Connection connection = dataAccess.getConnection()){
+            String sql = "DELETE FROM [SickPatient] WHERE [caseid] = ?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1,selectedItem.getId());
+            st.execute();
+        }catch (SQLException sqlException){
+            throw new DalException("Not able to unassign the case", sqlException);
+        }
+    }
 }
