@@ -223,4 +223,8 @@ public class TeacherMainMOD {
     public ObservableList<Case> getObservableCasesAssigned() {
         return casesAssigned;
     }
+
+    public Patient getPatientOfCase(Case selectedCase, Group group) throws DalException {
+        return bllFacade.getPatientOfCase(selectedCase, group);
+    }
 }
