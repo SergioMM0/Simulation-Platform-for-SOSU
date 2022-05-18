@@ -204,6 +204,11 @@ public class BLLManager implements BLLFacade {
     }
 
     @Override
+    public void markCaseAsGraded(Case selectedItem) throws DalException {
+        dalFacade.markCaseAsGraded(selectedItem);
+    }
+
+    @Override
     public void saveStudentQuestionAnswer(StudentQuestionnaireAnswer answer) throws DalException {
         dalFacade.addStudentQuestionAnswer(answer);
     }

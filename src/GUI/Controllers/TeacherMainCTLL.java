@@ -681,7 +681,17 @@ public class TeacherMainCTLL {
 
     @FXML
     private void markCaseAsGraded(ActionEvent event) {
-        
+        if(casesAssignedList.getSelectionModel().getSelectedItem() != null){
+            try{
+                handleMarkCaseAsGraded(casesAssignedList.getSelectionModel().getSelectedItem());
+            } catch (DalException dalException){
+                new SoftAlert(dalException.getMessage());
+            }
+        }
+    }
+
+    private void handleMarkCaseAsGraded(Case selectedItem) throws DalException {
+        model.markCaseAsGraded(selectedItem);
     }
 
     @FXML

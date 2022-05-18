@@ -236,4 +236,9 @@ public class Manager implements DALFacade {
         daoCase.unassignCase(selectedItem);
     }
 
+    @Override
+    public void markCaseAsGraded(Case selectedItem) throws DalException {
+        daoCase.markCaseAsGraded(selectedItem);
+    }
+
 }

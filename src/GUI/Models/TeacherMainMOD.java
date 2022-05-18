@@ -240,4 +240,8 @@ public class TeacherMainMOD {
     public void deleteAssignedCaseInList(Case caseAssigned) {
         casesAssigned.remove(caseAssigned);
     }
+
+    public void markCaseAsGraded(Case selectedItem) throws DalException {
+        bllFacade.markCaseAsGraded(selectedItem);
+    }
 }

@@ -211,4 +211,16 @@ public class DAOCase {
             throw new DalException("Not able to unassign the case", sqlException);
         }
     }
+
+    public void markCaseAsGraded(Case selectedItem) throws DalException {
+        try(Connection connection = dataAccess.getConnection()){
+            String sql = "UPDATE [SickPatient] SET [isGraded] = ? WHERE [caseid] = ?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1,isTrue);
+            st.setInt(2,selectedItem.getId());
+            st.execute();
+        }catch (SQLException sqlException){
+            throw new DalException("Not able to mark the case as graded", sqlException);
+        }
+    }
 }

@@ -87,4 +87,6 @@ public interface DALFacade {
     Patient getPatientOfCase(Case selectedCase, Group group) throws DalException;
 
     void unassignCase(Case selectedItem) throws DalException;
+
+    void markCaseAsGraded(Case selectedItem) throws DalException;
 }
