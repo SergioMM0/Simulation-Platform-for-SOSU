@@ -16,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -75,6 +76,7 @@ public class AdminCTLL implements Initializable {
         adminMOD = AdminMOD.getInstance();
         displaySchools();
 
+
     }
 
     public void displaySchools(){
@@ -96,28 +98,24 @@ public class AdminCTLL implements Initializable {
         }
     }
 
-
-    public void filterField(KeyEvent keyEvent) {
-        if(filterid.getText() == null || filterid.getText().length() <= 0){
-
+    public void filterField(KeyEvent keyEvent)  {
             try {
-                TeacherTableView.setItems(adminMOD.getAllTeachers(1));
-                StudentTableView.setItems(adminMOD.getAllSudents(1));
-            } catch (DalException e) {
-                e.printStackTrace();
-            }
-        }else {
-            ObservableList<User> Teacherfound ;
-            try {
-                Teacherfound = adminMOD.filter(adminMOD.getAllTeachers(1), filterid.getText());
-                if (Teacherfound != null) {
-                    TeacherTableView.setItems(Teacherfound);
+                if (filterid.getText() == null || filterid.getText().length() <= 0) {
+                TeacherTableView.setItems(adminMOD.getallusers(SchoolTalbeView.getSelectionModel().getSelectedItem().getId() ,"TEACHER"));
+                StudentTableView.setItems(adminMOD.getallusers(SchoolTalbeView.getSelectionModel().getSelectedItem().getId() ,"STUDENT"));
+                } else {
+                    ObservableList<User> foundStudents;
+                    foundStudents = adminMOD.searchforUser(adminMOD.getallusers(SchoolTalbeView.getSelectionModel().getSelectedItem().getId() ,"STUDENT"), filterid.getText());
+                    ObservableList<User> foundTeachers;
+                    foundTeachers = adminMOD.searchforUser(adminMOD.getallusers(SchoolTalbeView.getSelectionModel().getSelectedItem().getId() ,"TEACHER"), filterid.getText());
+
+                    TeacherTableView.setItems(foundTeachers);
+                    StudentTableView.setItems(foundStudents);
 
                 }
-            } catch (DalException e) {
-                e.printStackTrace();
+            } catch (DalException |NullPointerException e) {
+                new ConfirmationAlert("please select school");
             }
-        }
     }
 
     public void CreateSchoolbtn(ActionEvent event) {
@@ -256,5 +254,17 @@ public class AdminCTLL implements Initializable {
 
     public void setUser(User logedUser) {
         this.logedUser = logedUser;
+    }
+
+    public void displayusersinschool(MouseEvent mouseEvent) {
+        if(SchoolTalbeView.getSelectionModel().getSelectedIndex() != -1){
+            System.out.println("test");
+            try {
+                TeacherTableView.setItems(adminMOD.getAllTeachers(SchoolTalbeView.getSelectionModel().getSelectedItem().getId()));
+                StudentTableView.setItems(adminMOD.getAllSudents(SchoolTalbeView.getSelectionModel().getSelectedItem().getId()));
+            } catch (DalException e) {
+                new ConfirmationAlert("displayusers");
+            }
+        }
     }
 }

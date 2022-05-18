@@ -14,7 +14,7 @@ public class AdminMOD {
     private ObservableList<School> schools;
     private ObservableList<User> teachers ;
     private ObservableList<User> students ;
-
+    private ObservableList<User> users;
 
     public AdminMOD(){
         manager = new BLLManager();
@@ -86,4 +86,18 @@ public class AdminMOD {
 
        return allusers;
     }
+    public ObservableList<User> getallusers(int schoolid , String utype) throws DalException {
+      users = FXCollections.observableArrayList();
+      //users.addAll(manager.getAllUSERS(schoolid , utype));
+      if(utype.equals("TEACHER")){
+          return teachers;
+      }else {
+          return students;
+      }
+    }
+
+    public ObservableList<User> searchforUser(ObservableList<User> user, String search) {
+        return manager.searchUser(user , search);
+    }
+
 }

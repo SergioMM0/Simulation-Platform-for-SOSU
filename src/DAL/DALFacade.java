@@ -2,6 +2,7 @@ package DAL;
 
 import BE.*;
 import DAL.util.DalException;
+import javafx.collections.ObservableList;
 
 import java.util.List;
 
@@ -74,9 +75,13 @@ public interface DALFacade {
 
      List<Case> getCasesAssignedTo(Group group)throws DalException;
 
+
+    List<User> getAllUSERS(int schoolId  ,String utype) throws DalException;
+
      List<User> getALLUsers(int schoolid , String utype) throws DalException;
 
     Group getGroupOf(User student) throws DalException;
 
     StudentQuestionnaire getQuestionnaireOf(Group group) throws DalException;
+
 }
