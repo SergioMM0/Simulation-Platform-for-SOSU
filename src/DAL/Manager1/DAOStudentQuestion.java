@@ -113,4 +113,36 @@ public class DAOStudentQuestion {
             throw new DalException("Couldn't retrieve a list of Questions ", e);
         }
     }
+
+    public List<StudentQuestion> getQuestionnaireQuestions(int questionnaireId) throws DalException {
+        List<StudentQuestion> studentQuestions=new ArrayList<>();
+        String query="\n" +
+                "  select q.category,q.title,q.question,q.color,qa.id,qa.questionId,qa.state,qa.QuestionaireId from StudentQuestion q\n" +
+                "  join StudentQuestionAnswer qa on q.id=qa.questionId\n" +
+                "  where qa.QuestionaireId=?";
+        try (Connection con = dataAccess.getConnection()) {
+            PreparedStatement prs = con.prepareStatement(query);
+            prs.setInt(1,questionnaireId);
+            ResultSet rs = prs.executeQuery();
+
+            while (rs.next()) {
+                StudentQuestion question=new StudentQuestion();
+                question.setId(rs.getInt("questionId"));
+                question.setCategory(rs.getString("category"));
+                question.setTitle(rs.getString("title"));
+                question.setQuestion(rs.getString("question"));
+                question.setColor(rs.getString("color"));
+                StudentQuestionnaireAnswer answer=new StudentQuestionnaireAnswer();
+                answer.setId(rs.getInt("id"));
+                answer.setQuestionnaireId(rs.getInt("QuestionaireId"));
+                answer.setState(rs.getInt("state"));
+                question.setAnswer(answer);
+                studentQuestions.add(question);
+
+            }
+            return studentQuestions;
+        } catch (SQLException e) {
+            throw new DalException("Couldn't retrieve a list of Questions ", e);
+        }
+    }
 }

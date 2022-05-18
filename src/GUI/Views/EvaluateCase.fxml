@@ -9,7 +9,7 @@
    <children>
       <Label layoutX="75.0" layoutY="44.0" prefHeight="17.0" prefWidth="77.0" text="Category" />
       <Button layoutX="1106.0" layoutY="810.0" mnemonicParsing="false" text="Back" />
-      <Button layoutX="995.0" layoutY="810.0" mnemonicParsing="false" text="Evaluate case" />
+      <Button layoutX="995.0" layoutY="810.0" mnemonicParsing="false" onAction="#openQuestionnaire" text="Evaluate case" />
       <Label layoutX="240.0" layoutY="44.0" text="Name" />
       <Label layoutX="75.0" layoutY="105.0" text="SubCategory" />
       <Label layoutX="240.0" layoutY="105.0" text="Issue" />

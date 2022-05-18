@@ -8,6 +8,8 @@ public class StudentQuestion {
 
     private int questionaireId;
     private String color;
+    private StudentQuestionnaireAnswer answer;
+
 
     public StudentQuestion(int id, String category, String title, String question, String color) {
         this.id = id;
@@ -19,6 +21,14 @@ public class StudentQuestion {
     }
 
     public StudentQuestion() {
+    }
+
+    public StudentQuestionnaireAnswer getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(StudentQuestionnaireAnswer answer) {
+        this.answer = answer;
     }
 
     public int getQuestionaireId() {

@@ -191,6 +191,11 @@ public class BLLManager implements BLLFacade {
     }
 
     @Override
+    public List<StudentQuestion> getQuestionnaireQuestions(int questionnaireId) throws DalException {
+        return dalFacade.getQuestionnaireQuestions(questionnaireId);
+    }
+
+    @Override
     public void saveStudentQuestionAnswer(StudentQuestionnaireAnswer answer) throws DalException {
         dalFacade.addStudentQuestionAnswer(answer);
     }

@@ -7,6 +7,9 @@ import BLL.BLLManager;
 import BLL.Exceptions.BLLException;
 import DAL.util.DalException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StudentQuestionMOD {
     private BLLFacade bll;
     private int questionaireId;     //to store current questionaire Id to use in answers
@@ -62,5 +65,13 @@ public class StudentQuestionMOD {
             e.printStackTrace();
         }
         return null;
+    }
+    public List<StudentQuestion> getQuestionnaireQuestions(){
+        try {
+            return bll.getQuestionnaireQuestions(80);
+        } catch (DalException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
     }
 }

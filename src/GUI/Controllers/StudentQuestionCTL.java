@@ -3,17 +3,16 @@ package GUI.Controllers;
 import BE.StudentQuestion;
 import BE.StudentQuestionnaireAnswer;
 import GUI.Models.StudentQuestionMOD;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.paint.Color;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -51,6 +50,8 @@ public class StudentQuestionCTL implements Initializable {
     private TextArea textFieldQuestion;
     @FXML
     private AnchorPane titleContainer;
+    @FXML
+    private TableView<StudentQuestion> questionTable;
 
     StudentQuestionMOD model = new StudentQuestionMOD();    //use model to operation and contact with bll
     BE.StudentQuestion currentQuestion;
@@ -64,10 +65,40 @@ public class StudentQuestionCTL implements Initializable {
 
         model.saveStudentQuestionAnswer(answer);            //save answer to database
         currentQuestion = model.getNextQuestion(currentQuestion);       //load next question
-        if (currentQuestion == null) return;        //questions finished
+        if (currentQuestion == null) {
+            fillOverviewList();
+            openOverViewTab();
+            return;        //questions finished
+        }
+
         setQuestion(currentQuestion);           //set current question to controls
         setAnswer(model.getAnswer(currentQuestion.getId()));
     }
+
+    private void openOverViewTab() {
+
+    }
+
+    private void fillOverviewList() {
+        TableColumn<StudentQuestion, String> categoryColumn = new TableColumn<>("Category");
+        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
+        TableColumn<StudentQuestion, String> titleColumn = new TableColumn<>("Title");
+        titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        TableColumn<StudentQuestion, String> questionColumn = new TableColumn<>("Question");
+        questionColumn.setCellValueFactory(new PropertyValueFactory<>("question"));
+        TableColumn<StudentQuestion, String> answerColumn = new TableColumn<>("Answer");
+        answerColumn.setCellValueFactory(param -> getStateDescription(param.getValue().getAnswer().getState()));        //answer column will show the answer
+        // text and because it is stored as int number we should convert
+        //   it into state description so I used getStateDescription method to do this conversion
+        questionTable.getColumns().clear();
+        questionTable.getColumns().add(categoryColumn);
+        questionTable.getColumns().add(titleColumn);
+        questionTable.getColumns().add(questionColumn);
+        questionTable.getColumns().add(answerColumn);
+        questionTable.getItems().clear();
+        questionTable.getItems().setAll(model.getQuestionnaireQuestions());
+    }
+
 
     @FXML
     void loadPreviousQuestion(ActionEvent event) {
@@ -77,14 +108,13 @@ public class StudentQuestionCTL implements Initializable {
         else if (questionIdLabel.getText() != "")
             currentQuestionId = Integer.parseInt(questionIdLabel.getText());
         StudentQuestion previousQuestion = getPreviousQuestionId(currentQuestionId);
-        if (previousQuestion==null)
+        if (previousQuestion == null)
             return;
         currentQuestion = previousQuestion;
         setQuestion(currentQuestion);
         StudentQuestionnaireAnswer answer = model.getAnswer(currentQuestion.getId());
         setAnswer(answer);
     }
-
 
 
     private StudentQuestion getPreviousQuestionId(int currentQuestionId) {
@@ -96,6 +126,8 @@ public class StudentQuestionCTL implements Initializable {
         insertImage();
         currentQuestion = model.GetFirstQuestion();       //get first question
         setQuestion(currentQuestion);
+        openOverViewTab();
+        fillOverviewList();
     }
 
     private void setQuestion(BE.StudentQuestion question) {
@@ -105,7 +137,7 @@ public class StudentQuestionCTL implements Initializable {
         }
 
         categoryLabel.setText(question.getCategory());
-        titleContainer.setStyle("-fx-background-color: "+question.getColor()+";");
+        titleContainer.setStyle("-fx-background-color: " + question.getColor() + ";");
         titleLabel.setText(question.getTitle());
         questionIdLabel.setText(question.getId() + "");
         textFieldQuestion.setText(question.getQuestion());
@@ -142,8 +174,9 @@ public class StudentQuestionCTL implements Initializable {
 
         return state;
     }
+
     private void setAnswer(StudentQuestionnaireAnswer answer) {
-        if (answer==null)
+        if (answer == null)
             return;
         switch (answer.getState()) {
             case 1:
@@ -166,4 +199,10 @@ public class StudentQuestionCTL implements Initializable {
                 break;
         }
     }
+
+    private ObservableValue<String> getStateDescription(int state) {  //get state and return state description
+        String[] descriptions = new String[]{"Not applicable", "None orinsignificantlimitations", "Lette limitations", "Moderate limitations", "Hard limitations", "Total limitations"};
+        return new ReadOnlyObjectWrapper<>(descriptions[state - 1]);
+    }
+
 }

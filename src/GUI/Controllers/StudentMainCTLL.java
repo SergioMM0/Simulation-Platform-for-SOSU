@@ -29,22 +29,7 @@ public class StudentMainCTLL implements Initializable {
         model=new StudentMOD();
     }
 
-    @FXML
-    void openQuestionnaire(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getClassLoader().getResource("GUI/Views/StudentQuestion.fxml"));
-        Parent root = null;
-        try{root = loader.load();}
-        catch (IOException e){
-            e.printStackTrace();
-        }
-        Stage stage = new Stage();
-        stage.setTitle("Student Question");
-        stage.setScene(new Scene(root,880,660));
 
-//        stage.setResizable(resizable);
-        stage.show();
-    }
     @FXML
     void openEvaluate(ActionEvent event) {
         FXMLLoader loader = new FXMLLoader();
