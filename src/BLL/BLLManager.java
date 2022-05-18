@@ -142,7 +142,12 @@ public class BLLManager implements BLLFacade {
 
     @Override
     public void assignCaseToGroup(Case selectedCase, Group group, Patient patient) throws DalException {
+        String groupDistinctiveCase = selectedCase.getName() + " - " + group.getName();
+        selectedCase.setName(groupDistinctiveCase);
         selectedCase.setCopy(true);
+        String groupDistinctivePatient = patient.getFirst_name() + " - " + group.getName();
+        patient.setFirst_name(groupDistinctivePatient);
+        patient.setCopy(true);
         dalFacade.assignCaseToGroup(patient, selectedCase, group);
     }
 

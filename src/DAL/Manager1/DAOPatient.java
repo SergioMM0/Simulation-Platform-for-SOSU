@@ -2,6 +2,7 @@ package DAL.Manager1;
 
 import BE.Patient;
 import DAL.DataAccess.DataAccess;
+import DAL.util.CopyChecker;
 import DAL.util.DalException;
 import java.sql.*;
 import java.time.LocalDate;
@@ -10,17 +11,21 @@ import java.util.List;
 
 public class DAOPatient {
     private final DataAccess dataAccess;
+    private CopyChecker copyChecker;
+
 
     public DAOPatient() {
         dataAccess = new DataAccess();
+        copyChecker = CopyChecker.getInstance();
     }
 
     public List<Patient> getAllPatients(int schoolid) throws DalException {
         ArrayList<Patient> patients = new ArrayList<>();
         try(Connection con = dataAccess.getConnection()) {
-            String sql = "SELECT * from Patient where schoolid = ? ";
+            String sql = "SELECT * FROM Patient WHERE schoolid = ? AND isCopy = ?";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setInt(1, schoolid);
+            statement.setInt(2,0);
             statement.execute();
             ResultSet rs = statement.getResultSet();
             while (rs.next()){
@@ -33,9 +38,10 @@ public class DAOPatient {
                 String  height = rs.getString("height");
                 String cpr = rs.getString("cpr");
                 String phonenumber = rs.getString("phone_number");
+                boolean isCopy = copyChecker.checkIfCopy(rs.getInt("isCopy"));
                 ArrayList<String> observations = getObservationsOf(id);
                 Patient patient = new Patient(id,first_name,lastname,convertToLocalDateViaSqlDate(dateofbirth),gender,weight,height,
-                        cpr,phonenumber, observations, schoolid );
+                        cpr,phonenumber, observations, schoolid, isCopy);
                 patients.add(patient);
             }
             return patients;
@@ -52,8 +58,8 @@ public class DAOPatient {
     public Patient createPatient(Patient patient) throws DalException {
         try (Connection con = dataAccess.getConnection()){
             String sql = "INSERT INTO Patient (first_name, last_name, dateofBirth, gender,weight ,height ,cpr ," +
-                    " phone_number,schoolid) " +
-                    "VALUES (?,?,?,?,?,?,?,?,?);";
+                    " phone_number,schoolid, isCopy) " +
+                    "VALUES (?,?,?,?,?,?,?,?,?,?);";
 
             String sql2 = "SELECT [id] FROM Patient WHERE [first_name] = ? AND [last_name] = ? AND [dateofBirth] = ? AND [gender] = ? AND [weight] = ? AND [height] = ? AND [cpr] = ? AND [phone_number] = ? AND [schoolid] = ?";
 
@@ -69,6 +75,7 @@ public class DAOPatient {
             prs.setString(7 ,patient.getCpr());
             prs.setString(8 , patient.getPhoneNumber());
             prs.setInt(9,patient.getSchoolId());
+            prs.setInt(10,patient.getIsCopyDB());
             prs.executeUpdate();
 
             addObservation(patient.getObservationsList().get(0),patient.getId());
@@ -155,19 +162,5 @@ public class DAOPatient {
         }
     }
 
-    private int newestidforPatient() throws DalException {
-        int newid = -1;
 
-        try (Connection con = dataAccess.getConnection()) {
-            String sql = "SELECT TOP(1) * FROM Patient ORDER by id desc";
-            PreparedStatement prs = con.prepareStatement(sql);
-            ResultSet rs = prs.executeQuery();
-            while (rs.next()) {
-                newid = rs.getInt("id");
-            }
-        } catch (SQLException e) {
-            throw new DalException("Connection Lost " , e);
-        }
-        return newid;
-    }
 }

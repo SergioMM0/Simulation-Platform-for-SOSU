@@ -243,39 +243,43 @@ public class TeacherMainCTLL {
 
     @FXML
     private void caseIsSelected(MouseEvent event) {
-        if (casesListGV.getSelectionModel().getSelectedItem() != null) {
-            if (caseTab.isDisabled()) {
-                caseTab.setDisable(false);
-            }
-            caseTab.setText(casesListGV.getSelectionModel().getSelectedItem().getName());
-            caseCategoryComboBox.getItems().clear();
-            caseSubcategoryComboBox.getItems().clear();
-
-            String[] allCat = catAndSubC.getCategories();
-            String[] allSubCat = catAndSubC.getSubcategoriesOf(casesListGV.getSelectionModel().getSelectedItem().getCategory());
-
-            caseNameField.setText(casesListGV.getSelectionModel().getSelectedItem().getName());
-            descriptionOfConditionText.setText(casesListGV.getSelectionModel().getSelectedItem().getConditionDescription());
-
-            for (String cat : allCat) {
-                caseCategoryComboBox.getItems().add(cat); //population of the categories
-            }
-            for (String subCat : allSubCat) {
-                caseSubcategoryComboBox.getItems().add(subCat); // population of the subcategories of the category
-            }
-            //population of case in case info when selected in general view
-
-            caseCategoryComboBox.getSelectionModel().select(
-                    caseCategoryComboBox.getItems().indexOf(
-                            casesListGV.getSelectionModel().getSelectedItem().getCategory()));
-            //selects the category specified for the case
-
-            caseSubcategoryComboBox.getSelectionModel().select(
-                    caseSubcategoryComboBox.getItems().indexOf(
-                            casesListGV.getSelectionModel().getSelectedItem().getSubCategory()));
-            //selects the subcategory specified for the case
-
+        Case selectedCase = casesListGV.getSelectionModel().getSelectedItem();
+        if (selectedCase != null) {
+            displayCaseInfo(selectedCase);
         }
+    }
+
+    private void displayCaseInfo(Case selectedCase){
+        if (caseTab.isDisabled()) {
+            caseTab.setDisable(false);
+        }
+        caseTab.setText(selectedCase.getName());
+        caseCategoryComboBox.getItems().clear();
+        caseSubcategoryComboBox.getItems().clear();
+
+        String[] allCat = catAndSubC.getCategories();
+        String[] allSubCat = catAndSubC.getSubcategoriesOf(selectedCase.getCategory());
+
+        caseNameField.setText(selectedCase.getName());
+        descriptionOfConditionText.setText(selectedCase.getConditionDescription());
+
+        for (String cat : allCat) {
+            caseCategoryComboBox.getItems().add(cat); //population of the categories
+        }
+        for (String subCat : allSubCat) {
+            caseSubcategoryComboBox.getItems().add(subCat); // population of the subcategories of the category
+        }
+        //population of case in case info when selected in general view
+
+        caseCategoryComboBox.getSelectionModel().select(
+                caseCategoryComboBox.getItems().indexOf(
+                        casesListGV.getSelectionModel().getSelectedItem().getCategory()));
+        //selects the category specified for the case
+
+        caseSubcategoryComboBox.getSelectionModel().select(
+                caseSubcategoryComboBox.getItems().indexOf(
+                        casesListGV.getSelectionModel().getSelectedItem().getSubCategory()));
+        //selects the subcategory specified for the case
     }
 
     @FXML
@@ -469,7 +473,10 @@ public class TeacherMainCTLL {
 
     @FXML
     private void assignedCaseIsSelected(MouseEvent event) {
-
+        Case selectedCase = casesAssignedList.getSelectionModel().getSelectedItem();
+        if(selectedCase != null){
+            displayCaseInfo(selectedCase);
+        }
     }
 
     @FXML

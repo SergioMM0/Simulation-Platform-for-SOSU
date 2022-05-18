@@ -4,23 +4,23 @@ import BE.Case;
 import BE.Group;
 import BE.Patient;
 import DAL.DataAccess.DataAccess;
+import DAL.util.CopyChecker;
 import DAL.util.DalException;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import javax.xml.transform.Result;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DAOCase {
 
     private final DataAccess dataAccess;
+    private CopyChecker copyChecker;
 
     public DAOCase() {
         dataAccess = new DataAccess();
+        copyChecker = CopyChecker.getInstance();
     }
 
     public List<Case> getAllCases(int schoolid) throws DalException {
@@ -39,11 +39,10 @@ public class DAOCase {
                 String category = rs.getString("CategoryName");
                 String subcategory = rs.getString("SubCategoryName");
                 int schoolID = rs.getInt("schoolid");
+                boolean isCopy = copyChecker.checkIfCopy(rs.getInt("isCopy"));
 
-                Case c = new Case(id,name,description_of_the_condition,category,subcategory,schoolID);
-
+                Case c = new Case(id,name,description_of_the_condition,category,subcategory,schoolID,isCopy);
                 cases.add(c);
-
             }
             return cases;
         } catch (SQLException e) {
@@ -55,7 +54,7 @@ public class DAOCase {
         ArrayList<Case> cases = new ArrayList<>();
         try(Connection con = dataAccess.getConnection()) {
             String sql = "select a.id, a.Description_of_the_condition, a.CategoryName, a.SubCategoryName, a.name, a.schoolid , b.graded " +
-                    "FROM [Case] as a inner join SickPatient as b on a.id = b.caseid where b.Groupid = ? AND [isCopy] = ?";
+                    "FROM [Case] as a inner join SickPatient as b on a.id = b.caseid where b.Groupid = ? AND a.[isCopy] = ?";
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setInt(1 , group.getId());
             prs.setInt(2, 1);
@@ -81,10 +80,14 @@ public class DAOCase {
         try(Connection con = dataAccess.getConnection()) {
             String sql = "INSERT INTO [Case] (Description_of_the_condition,CategoryName,SubCategoryName,[name],schoolid,isCopy) VALUES (?,?,?,?,?,?)";
             String sql2 = "SELECT [id] FROM [Case] WHERE [name] = ? AND [isCopy] = ?";
-            String sql3 = "INSERT INTO SickPatient (patientid , caseid , Groupid, graded) VALUES (?,?,?,?)";
+            String sql3 = "INSERT INTO [Patient] (first_name, last_name, dateofBirth, gender,weight ,height ,cpr , phone_number, schoolid, isCopy) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            String sql4 = "SELECT [id] FROM [Patient] WHERE [first_name] = ? AND [isCopy] = ?";
+            String sql5 = "INSERT INTO SickPatient (patientid , caseid , Groupid, graded) VALUES (?,?,?,?)";
             PreparedStatement prs = con.prepareStatement(sql);
             PreparedStatement prs2 = con.prepareStatement(sql2);
             PreparedStatement prs3 = con.prepareStatement(sql3);
+            PreparedStatement prs4 = con.prepareStatement(sql4);
+            PreparedStatement prs5 = con.prepareStatement(sql5);
             prs.setString(1,assignedCase.getConditionDescription());
             prs.setString(2,assignedCase.getCategory());
             prs.setString(3,assignedCase.getSubCategory());
@@ -100,12 +103,32 @@ public class DAOCase {
             while(rs.next()){
                 assignedCase.setId(rs.getInt("id"));
             }
-
-            prs3.setInt(1, patient.getId());
-            prs3.setInt(2, assignedCase.getId());
-            prs3.setInt(3, group.getId());
-            prs3.setInt(4, 0);
+            //first_name, last_name, dateofBirth, gender,weight ,height ,cpr , phone_number, schoolid, isCopy
+            prs3.setString(1,patient.getFirst_name());
+            prs3.setString(2,patient.getLast_name());
+            prs3.setDate(3, Date.valueOf(patient.getDateOfBirth()));
+            prs3.setString(4 , patient.getGender());
+            prs3.setString(5 ,patient.getWeight());
+            prs3.setString(6,patient.getHeight());
+            prs3.setString(7 ,patient.getCpr());
+            prs3.setString(8 , patient.getPhoneNumber());
+            prs3.setInt(9,patient.getSchoolId());
+            prs3.setInt(10,patient.getIsCopyDB());
             prs3.execute();
+
+            prs4.setString(1, patient.getFirst_name());
+            prs4.setInt(2,patient.getIsCopyDB());
+            prs4.execute();
+            ResultSet rs2 = prs4.getResultSet();
+            while(rs2.next()){
+                patient.setId(rs2.getInt("id"));
+            }
+
+            prs5.setInt(1, patient.getId());
+            prs5.setInt(2, assignedCase.getId());
+            prs5.setInt(3, group.getId());
+            prs5.setInt(4, 0);
+            prs5.execute();
 
         } catch (SQLException e) {
             throw new DalException("Cant preform this task at this moment " , e);

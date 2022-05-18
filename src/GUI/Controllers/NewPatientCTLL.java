@@ -106,7 +106,8 @@ public class NewPatientCTLL implements Initializable {
                         cprField.getText(),
                         phoneNumberField.getText(),
                         observations,
-                        user.getSchoolID()
+                        user.getSchoolID(),
+                        false
                 );
                 teacherMainCTLL.addPatientToList(model.createPatient(patient));
                 closeWindow();
