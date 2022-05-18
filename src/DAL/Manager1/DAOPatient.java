@@ -14,7 +14,8 @@ import java.util.List;
 public class DAOPatient {
     private final DataAccess dataAccess;
     private CopyChecker copyChecker;
-
+    private final int isTrue = 1;
+    private final int isFalse = 0;
 
     public DAOPatient() {
         dataAccess = new DataAccess();
@@ -27,7 +28,7 @@ public class DAOPatient {
             String sql = "SELECT * FROM Patient WHERE schoolid = ? AND isCopy = ?";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setInt(1, schoolid);
-            statement.setInt(2,0);
+            statement.setInt(2,isFalse);
             statement.execute();
             ResultSet rs = statement.getResultSet();
             while (rs.next()){
@@ -173,7 +174,7 @@ public class DAOPatient {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1,group.getId());
             st.setInt(2,selectedCase.getId());
-            st.setInt(3, 1);
+            st.setInt(3, isTrue);
             st.execute();
             ResultSet rs = st.getResultSet();
             while(rs.next()){

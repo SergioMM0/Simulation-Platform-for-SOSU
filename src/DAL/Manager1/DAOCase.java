@@ -17,6 +17,8 @@ public class DAOCase {
 
     private final DataAccess dataAccess;
     private CopyChecker copyChecker;
+    private final int isFalse = 0;
+    private final int isTrue = 1;
 
     public DAOCase() {
         dataAccess = new DataAccess();
@@ -29,7 +31,7 @@ public class DAOCase {
             String sql = "SELECT * FROM [Case] WHERE [schoolid]  = ? AND [isCopy] = ?";
             PreparedStatement prs = connection.prepareStatement(sql);
             prs.setInt(1 , schoolid);
-            prs.setInt(2,0);
+            prs.setInt(2,isFalse);
             prs.execute();
             ResultSet rs = prs.getResultSet();
             while(rs.next()){
@@ -54,10 +56,11 @@ public class DAOCase {
         ArrayList<Case> cases = new ArrayList<>();
         try(Connection con = dataAccess.getConnection()) {
             String sql = "SELECT a.id, a.Description_of_the_condition, a.CategoryName, a.SubCategoryName, a.name, a.schoolid , b.graded " +
-                    "FROM [Case] AS a INNER JOIN SickPatient AS b ON a.id = b.caseid WHERE b.Groupid = ? AND a.[isCopy] = ?";
+                    "FROM [Case] AS a INNER JOIN SickPatient AS b ON a.id = b.caseid WHERE b.Groupid = ? AND a.[isCopy] = ? AND b.[isGraded] = ?";
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setInt(1 , group.getId());
-            prs.setInt(2, 1);
+            prs.setInt(2, isTrue);
+            prs.setInt(3, isFalse);
             prs.execute();
             ResultSet rs = prs.getResultSet();
             while (rs.next()){
@@ -67,7 +70,7 @@ public class DAOCase {
                 String cat = rs.getString("CategoryName");
                 String subcat = rs.getString("SubCategoryName");
                 int schoolid = rs.getInt("schoolid");
-                Case c = new Case(id ,name ,condition , cat ,subcat , schoolid );
+                Case c = new Case(id ,name ,condition , cat ,subcat , schoolid);
                 cases.add(c);
             }
             return cases;
@@ -127,7 +130,7 @@ public class DAOCase {
             prs5.setInt(1, patient.getId());
             prs5.setInt(2, assignedCase.getId());
             prs5.setInt(3, group.getId());
-            prs5.setInt(4, 0);
+            prs5.setInt(4, isFalse);
             prs5.execute();
 
         } catch (SQLException sqlException) {
