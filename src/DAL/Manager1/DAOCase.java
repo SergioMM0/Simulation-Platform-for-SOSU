@@ -56,11 +56,11 @@ public class DAOCase {
         ArrayList<Case> cases = new ArrayList<>();
         try(Connection con = dataAccess.getConnection()) {
             String sql = "SELECT a.id, a.Description_of_the_condition, a.CategoryName, a.SubCategoryName, a.name, a.schoolid , b.graded " +
-                    "FROM [Case] AS a INNER JOIN SickPatient AS b ON a.id = b.caseid WHERE b.Groupid = ? AND a.[isCopy] = ? AND b.[isGraded] = ?";
+                    "FROM [Case] AS a INNER JOIN SickPatient AS b ON a.id = b.caseid WHERE b.Groupid = ? AND a.[isCopy] = ? AND b.[graded] = ?";
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setInt(1 , group.getId());
             prs.setInt(2, isTrue);
-            prs.setInt(3, isFalse);
+            prs.setInt(3,isFalse);
             prs.execute();
             ResultSet rs = prs.getResultSet();
             while (rs.next()){
@@ -214,13 +214,52 @@ public class DAOCase {
 
     public void markCaseAsGraded(Case selectedItem) throws DalException {
         try(Connection connection = dataAccess.getConnection()){
-            String sql = "UPDATE [SickPatient] SET [isGraded] = ? WHERE [caseid] = ?";
+            String sql = "UPDATE [SickPatient] SET [graded] = ? WHERE [caseid] = ?";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1,isTrue);
             st.setInt(2,selectedItem.getId());
             st.execute();
         }catch (SQLException sqlException){
             throw new DalException("Not able to mark the case as graded", sqlException);
+        }
+    }
+
+    public void unmarkCaseAsGraded(Case selectedItem) throws DalException{
+        try(Connection connection = dataAccess.getConnection()){
+            String sql = "UPDATE [SickPatient] SET [graded] = ? WHERE [caseid] = ?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, isFalse);
+            st.setInt(2,selectedItem.getId());
+            st.execute();
+        }catch (SQLException sqlException){
+            throw new DalException("Not able to unmark as graded the case", sqlException);
+        }
+    }
+
+    public List<Case> getCasesGradedOf(Group group) throws DalException{
+        ArrayList<Case> cases = new ArrayList<>();
+        try(Connection con = dataAccess.getConnection()) {
+            String sql = "SELECT a.id, a.Description_of_the_condition, a.CategoryName, a.SubCategoryName, a.name, a.schoolid , b.graded " +
+                    "FROM [Case] AS a INNER JOIN SickPatient AS b ON a.id = b.caseid WHERE b.Groupid = ? AND a.[isCopy] = ? AND b.[graded] = ?";
+            PreparedStatement prs = con.prepareStatement(sql);
+            prs.setInt(1 , group.getId());
+            prs.setInt(2, isTrue);
+            prs.setInt(3, isTrue);
+            prs.execute();
+            ResultSet rs = prs.getResultSet();
+            while (rs.next()){
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String condition = rs.getString("Description_of_the_condition");
+                String cat = rs.getString("CategoryName");
+                String subcat = rs.getString("SubCategoryName");
+                int schoolid = rs.getInt("schoolid");
+                Case c = new Case(id ,name ,condition , cat ,subcat , schoolid);
+                cases.add(c);
+            }
+            return cases;
+        } catch (SQLException e) {
+            throw new DalException("Not able to get the cases graded for the group" , e);
         }
     }
 }

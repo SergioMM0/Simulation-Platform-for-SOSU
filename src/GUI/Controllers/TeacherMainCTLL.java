@@ -431,6 +431,17 @@ public class TeacherMainCTLL {
         }
         setUpGroup(group);
         populateCasesAssigned(group);
+        populateCasesGraded(group);
+    }
+
+    private void populateCasesGraded(Group group) {
+        try{
+            casesGradedList.getItems().clear();
+            casesGradedList.getItems().addAll(model.getCasesGradedOfGroup(group));
+            nameColCasesGraded.setCellValueFactory(new PropertyValueFactory<>("name"));
+        }catch (DalException dalException){
+            new SoftAlert(dalException.getMessage());
+        }
     }
 
     protected void populateCasesAssigned(Group group) {
@@ -685,9 +696,18 @@ public class TeacherMainCTLL {
             try{
                 handleMarkCaseAsGraded(casesAssignedList.getSelectionModel().getSelectedItem());
             } catch (DalException dalException){
+                dalException.printStackTrace();
                 new SoftAlert(dalException.getMessage());
             }
+            model.moveCaseToGradedList(casesAssignedList.getSelectionModel().getSelectedItem());
+            refreshCasesAssigned();
+            refreshCasesGraded();
         }
+    }
+
+    private void refreshCasesGraded() {
+        casesGradedList.getItems().clear();
+        casesGradedList.getItems().addAll(model.getObservableCasesGraded());
     }
 
     private void handleMarkCaseAsGraded(Case selectedItem) throws DalException {
@@ -715,14 +735,11 @@ public class TeacherMainCTLL {
     }
 
     @FXML
-    private void categorySelected(ActionEvent event) {
+    private void categorySelected(MouseEvent event) { //TODO Bugged but okay xd click twice to make it work
         if (caseCategoryComboBox.getValue() != null) {
-            if (!caseCategoryComboBox.getValue().isEmpty() &&
-                    !caseCategoryComboBox.getValue().equals(casesListGV.getSelectionModel().getSelectedItem().getCategory())) {
-                caseSubcategoryComboBox.getSelectionModel().clearSelection();
-                caseSubcategoryComboBox.getItems().clear();
-                caseSubcategoryComboBox.getItems().addAll(catAndSubC.getSubcategoriesOf(caseCategoryComboBox.getValue()));
-            }
+            caseSubcategoryComboBox.getItems().clear();
+            caseSubcategoryComboBox.getItems().addAll(
+                    CatAndSubC.getInstance().getSubcategoriesOf(caseCategoryComboBox.getValue()));
         }
     }
 
@@ -769,13 +786,15 @@ public class TeacherMainCTLL {
                 new SoftAlert(dalException.getMessage());
             }
             model.deleteAssignedCaseInList(casesAssignedList.getSelectionModel().getSelectedItem());
-            casesAssignedList.getItems().clear();
-            casesAssignedList.getItems().addAll(model.getObservableCasesAssigned());
+            refreshCasesAssigned();
             blockPatientTab();
             blockCaseTab();
         }
     }
-
+    private void refreshCasesAssigned(){
+        casesAssignedList.getItems().clear();
+        casesAssignedList.getItems().addAll(model.getObservableCasesAssigned());
+    }
 
     private void blockPatientTab(){
         patientOverviewTab.setDisable(true);
@@ -789,7 +808,16 @@ public class TeacherMainCTLL {
 
     @FXML
     private void unmarkCaseAsGraded(ActionEvent event) {
-
+        if(casesGradedList.getSelectionModel().getSelectedItem()!= null){
+            try{
+                model.unmarkCaseAsGraded(casesGradedList.getSelectionModel().getSelectedItem());
+            }catch (DalException dalException){
+                new SoftAlert(dalException.getMessage());
+            }
+            model.moveCaseToAssignedList(casesGradedList.getSelectionModel().getSelectedItem());
+            refreshCasesGraded();
+            refreshCasesAssigned();
+        }
     }
 
     private void openView(String resource, String css, String title, int width, int height, boolean resizable, int operationType) {

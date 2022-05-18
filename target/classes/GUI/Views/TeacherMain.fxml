@@ -79,7 +79,7 @@
                <children>
                   <Button layoutX="269.0" layoutY="110.0" mnemonicParsing="false" onAction="#openGradeCase" prefHeight="35.0" prefWidth="150.0" text="Grade case" />
                   <Button layoutX="269.0" layoutY="170.0" mnemonicParsing="false" onAction="#markCaseAsGraded" prefHeight="35.0" prefWidth="150.0" text="Mark case as graded" />
-                  <Button layoutX="459.0" layoutY="110.0" mnemonicParsing="false" onAction="#unmarkCaseAsGraded" prefHeight="35.0" prefWidth="150.0" text="Unmark case as graded" />
+                  <Button layoutX="458.0" layoutY="170.0" mnemonicParsing="false" onAction="#unmarkCaseAsGraded" prefHeight="35.0" prefWidth="150.0" text="Unmark case as graded" />
                   <AnchorPane layoutX="40.0" layoutY="14.0" prefHeight="65.0" prefWidth="800.0" style="-fx-background-color: ffffff;">
                      <children>
                         <Label layoutX="66.0" layoutY="8.0" text="Group name:" />
@@ -90,7 +90,7 @@
                      </children>
                   </AnchorPane>
                   <Button layoutX="269.0" layoutY="290.0" mnemonicParsing="false" onAction="#unassignSelectedCase" prefHeight="35.0" prefWidth="150.0" text="Unassign case" textOverrun="CLIP" />
-                  <Button layoutX="459.0" layoutY="170.0" mnemonicParsing="false" onAction="#openGradedCase" prefHeight="35.0" prefWidth="150.0" text="See graded case" />
+                  <Button layoutX="458.0" layoutY="110.0" mnemonicParsing="false" onAction="#openGradedCase" prefHeight="35.0" prefWidth="150.0" text="See graded case" />
                   <TableView fx:id="casesAssignedList" layoutX="40.0" layoutY="110.0" onMouseClicked="#assignedCaseIsSelected" prefHeight="465.0" prefWidth="200.0">
                      <columns>
                         <TableColumn fx:id="nameColCases" prefWidth="199.20001220703125" text="Cases assigned" />
@@ -112,7 +112,7 @@
                   <Label layoutX="514.0" layoutY="40.0" text="Category" />
                   <ComboBox fx:id="caseSubcategoryComboBox" layoutX="599.0" layoutY="75.0" prefHeight="26.0" prefWidth="220.0" />
                   <Label layoutX="514.0" layoutY="79.0" text="Subcategory" />
-                  <ComboBox fx:id="caseCategoryComboBox" layoutX="599.0" layoutY="35.0" onAction="#categorySelected" prefHeight="26.0" prefWidth="220.0" />
+                  <ComboBox fx:id="caseCategoryComboBox" layoutX="599.0" layoutY="35.0" onMouseClicked="#categorySelected" prefHeight="26.0" prefWidth="220.0" />
                   <Label layoutX="40.0" layoutY="100.0" prefHeight="18.0" prefWidth="170.0" text="Description of the case:" />
                   <Button layoutX="689.0" layoutY="540.0" mnemonicParsing="false" onAction="#saveChangesOnCase" prefHeight="40.0" prefWidth="130.0" text="Save changes" />
                   <TextField fx:id="caseNameField" layoutX="125.0" layoutY="36.0" prefHeight="26.0" prefWidth="320.0" />

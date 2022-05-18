@@ -29,7 +29,6 @@
                         <Label fx:id="groupNameLable" layoutX="166.0" layoutY="8.0" prefWidth="350.0" text="&lt;Group name&gt;" />
                      </children>
                   </AnchorPane>
-                  <Button layoutX="340.0" layoutY="284.0" mnemonicParsing="false" onAction="#openQuestionnaire" prefHeight="50.0" prefWidth="200.0" text="Open Questionaire" />
                </children>
             </AnchorPane>
          </content>

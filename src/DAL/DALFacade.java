@@ -89,4 +89,8 @@ public interface DALFacade {
     void unassignCase(Case selectedItem) throws DalException;
 
     void markCaseAsGraded(Case selectedItem) throws DalException;
+
+    void unmarkCaseAsGraded(Case selectedItem) throws DalException;
+
+    List<Case> getCasesGradedOf(Group group) throws DalException;
 }

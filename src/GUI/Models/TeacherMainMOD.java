@@ -19,6 +19,7 @@ public class TeacherMainMOD {
     private ObservableList<Patient> allPatients;
     private ObservableList<User> allStudents;
     private ObservableList<User> groupParticipants;
+    private ObservableList<Case> casesGraded;
     private static TeacherMainMOD instance;
     private Patient patientOfCase;
 
@@ -33,6 +34,7 @@ public class TeacherMainMOD {
         allGroups = FXCollections.observableArrayList();
         allCases = FXCollections.observableArrayList();
         casesAssigned = FXCollections.observableArrayList();
+        casesGraded = FXCollections.observableArrayList();
         allPatients = FXCollections.observableArrayList();
         allStudents = FXCollections.observableArrayList();
         groupParticipants = FXCollections.observableArrayList();
@@ -243,5 +245,29 @@ public class TeacherMainMOD {
 
     public void markCaseAsGraded(Case selectedItem) throws DalException {
         bllFacade.markCaseAsGraded(selectedItem);
+    }
+
+    public void unmarkCaseAsGraded(Case selectedItem) throws DalException {
+        bllFacade.unmarkCaseAsGraded(selectedItem);
+    }
+
+    public void moveCaseToGradedList(Case selectedItem){
+        casesAssigned.remove(selectedItem);
+        casesGraded.add(selectedItem);
+    }
+
+    public ObservableList<Case> getObservableCasesGraded(){
+        return casesGraded;
+    }
+
+    public void moveCaseToAssignedList(Case selectedItem) {
+        casesGraded.remove(selectedItem);
+        casesAssigned.add(selectedItem);
+    }
+
+    public ObservableList<Case> getCasesGradedOfGroup(Group group) throws DalException {
+        casesGraded.clear();
+        casesGraded.addAll(bllFacade.getCasesGradedOf(group));
+        return casesGraded;
     }
 }

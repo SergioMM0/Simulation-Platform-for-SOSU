@@ -241,4 +241,14 @@ public class Manager implements DALFacade {
         daoCase.markCaseAsGraded(selectedItem);
     }
 
+    @Override
+    public void unmarkCaseAsGraded(Case selectedItem) throws DalException {
+        daoCase.unmarkCaseAsGraded(selectedItem);
+    }
+
+    @Override
+    public List<Case> getCasesGradedOf(Group group) throws DalException {
+        return daoCase.getCasesGradedOf(group);
+    }
+
 }
