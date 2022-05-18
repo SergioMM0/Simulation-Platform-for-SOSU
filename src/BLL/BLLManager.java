@@ -194,6 +194,14 @@ public class BLLManager implements BLLFacade {
     public List<StudentQuestion> getQuestionnaireQuestions(int questionnaireId) throws DalException {
         return dalFacade.getQuestionnaireQuestions(questionnaireId);
     }
+    public Patient getPatientOfCase(Case selectedCase, Group group) throws DalException {
+        return dalFacade.getPatientOfCase(selectedCase, group);
+    }
+
+    @Override
+    public void unassignCase(Case selectedItem) throws DalException {
+        dalFacade.unassignCase(selectedItem);
+    }
 
     @Override
     public void saveStudentQuestionAnswer(StudentQuestionnaireAnswer answer) throws DalException {

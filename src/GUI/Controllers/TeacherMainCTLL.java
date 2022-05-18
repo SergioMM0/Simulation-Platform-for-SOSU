@@ -141,6 +141,7 @@ public class TeacherMainCTLL {
     private final String generalCSS = "";
     private TeacherMainMOD model;
     private final CatAndSubC catAndSubC;
+    private boolean patientGV;
 
     private ArrayList<Stage> listOfStages = new ArrayList<>();
 
@@ -272,35 +273,41 @@ public class TeacherMainCTLL {
         //population of case in case info when selected in general view
 
         caseCategoryComboBox.getSelectionModel().select(
-                caseCategoryComboBox.getItems().indexOf(
-                        casesListGV.getSelectionModel().getSelectedItem().getCategory()));
+                caseCategoryComboBox.getItems().indexOf(selectedCase.getCategory()));
         //selects the category specified for the case
 
         caseSubcategoryComboBox.getSelectionModel().select(
-                caseSubcategoryComboBox.getItems().indexOf(
-                        casesListGV.getSelectionModel().getSelectedItem().getSubCategory()));
+                caseSubcategoryComboBox.getItems().indexOf(selectedCase.getSubCategory()));
         //selects the subcategory specified for the case
     }
 
     @FXML
     private void patientIsSelected(MouseEvent event) {
+        Patient patient = patientsListGV.getSelectionModel().getSelectedItem();
+        if(patient != null){
+            this.patientGV = true;
+            displayPatientInfo(patient);
+        }
+    }
+
+    private void displayPatientInfo(Patient patient) {
         if (patientOverviewTab.isDisabled()) {
             patientOverviewTab.setDisable(false);
         }
-        patientOverviewTab.setText(patientsListGV.getSelectionModel().getSelectedItem().getFirst_name());
-        nameField.setText(patientsListGV.getSelectionModel().getSelectedItem().getFirst_name());
-        familyNameField.setText(patientsListGV.getSelectionModel().getSelectedItem().getLast_name());
-        dateOfBirthPicker.setValue(patientsListGV.getSelectionModel().getSelectedItem().getDateOfBirth());
+        patientOverviewTab.setText(patient.getFirst_name());
+        nameField.setText(patient.getFirst_name());
+        familyNameField.setText(patient.getLast_name());
+        dateOfBirthPicker.setValue(patient.getDateOfBirth());
 
         genderComboBox.getItems().clear();
-        genderComboBox.getItems().addAll(model.getGenders()); //TODO Update
+        genderComboBox.getItems().addAll(model.getGenders());
         genderComboBox.getSelectionModel().select(
-                genderComboBox.getItems().indexOf(patientsListGV.getSelectionModel().getSelectedItem().getGender()));
+                genderComboBox.getItems().indexOf(patient.getGender()));
         //Selects in the gender combo box the gender that matches the gender of the patient
-        weightField.setText(patientsListGV.getSelectionModel().getSelectedItem().getWeight());
-        heightField.setText(patientsListGV.getSelectionModel().getSelectedItem().getHeight());
-        cprField.setText(patientsListGV.getSelectionModel().getSelectedItem().getCpr());
-        phoneNumberField.setText(patientsListGV.getSelectionModel().getSelectedItem().getPhoneNumber());
+        weightField.setText(patient.getWeight());
+        heightField.setText(patient.getHeight());
+        cprField.setText(patient.getCpr());
+        phoneNumberField.setText(patient.getPhoneNumber());
     }
 
     @FXML
@@ -310,25 +317,40 @@ public class TeacherMainCTLL {
                     "Are you sure you want to update this patient?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
             alert.showAndWait();
             if (alert.getResult() == ButtonType.YES) {
-                try {
-                    Patient patient = patientsListGV.getSelectionModel().getSelectedItem();
-                    patient.setFirst_name(nameField.getText());
-                    patient.setLast_name(familyNameField.getText());
-                    patient.setDateOfBirth(dateOfBirthPicker.getValue());
-                    patient.setGender(genderComboBox.getValue());
-                    patient.setWeight(weightField.getText());
-                    patient.setHeight(heightField.getText());
-                    patient.setCpr(cprField.getText());
-                    patient.setPhoneNumber(phoneNumberField.getText());
-                    model.updatePatient(patient);
-                    model.updatePatientInTable(patient);
-                    refreshPatientsList();
-                } catch (DalException dalException) {
-                    dalException.printStackTrace();
-                    new SoftAlert(dalException.getMessage());
+                Patient patient;
+                if(!patientGV){
+                    patient = model.getPatientOfCase();
+                    try {
+                        updatePatientInDB(patient);
+                    } catch (DalException dalException) {
+                        dalException.printStackTrace();
+                        new SoftAlert(dalException.getMessage());
+                    }
+                }else {
+                    patient = patientsListGV.getSelectionModel().getSelectedItem();
+                    try {
+                        updatePatientInDB(patient);
+                        model.updatePatientInTable(patient);
+                        refreshPatientsList();
+                    } catch (DalException dalException) {
+                        dalException.printStackTrace();
+                        new SoftAlert(dalException.getMessage());
+                    }
                 }
             }
         }
+    }
+
+    private void updatePatientInDB(Patient patient) throws DalException{
+        patient.setFirst_name(nameField.getText());
+        patient.setLast_name(familyNameField.getText());
+        patient.setDateOfBirth(dateOfBirthPicker.getValue());
+        patient.setGender(genderComboBox.getValue());
+        patient.setWeight(weightField.getText());
+        patient.setHeight(heightField.getText());
+        patient.setCpr(cprField.getText());
+        patient.setPhoneNumber(phoneNumberField.getText());
+        model.updatePatient(patient);
     }
 
     private boolean patientFieldsAreFilled() {
@@ -383,10 +405,9 @@ public class TeacherMainCTLL {
 
     @FXML
     private void groupIsSelected(MouseEvent event) {
-        Group selectedGroup = groupsTable.getSelectionModel().getSelectedItem();
-        if(selectedGroup != null){
-            populateParticipantsTable(selectedGroup);
-            populateGroupsTab(selectedGroup);
+        if(groupsTable.getSelectionModel().getSelectedItem() != null){
+            populateParticipantsTable(groupsTable.getSelectionModel().getSelectedItem());
+            populateGroupsTab(groupsTable.getSelectionModel().getSelectedItem());
         }
     }
 
@@ -474,8 +495,15 @@ public class TeacherMainCTLL {
     @FXML
     private void assignedCaseIsSelected(MouseEvent event) {
         Case selectedCase = casesAssignedList.getSelectionModel().getSelectedItem();
+        Group group = groupsTable.getSelectionModel().getSelectedItem();
         if(selectedCase != null){
             displayCaseInfo(selectedCase);
+            try{
+                displayPatientInfo(model.getPatientOfCaseInGroup(selectedCase, group));
+                this.patientGV = false;
+            }catch (DalException dalException){
+                new SoftAlert(dalException.getMessage());
+            }
         }
     }
 
@@ -522,11 +550,6 @@ public class TeacherMainCTLL {
 
     private void handleAssignCaseToGroup() {
         openView("GUI/Views/AssignNewCaseToGroup.fxml",generalCSS,"Assign case to group",530,400,false,0);
-    }
-
-    @FXML
-    private void assignNewCaseToGroup(ActionEvent event) {
-
     }
 
     @FXML
@@ -584,6 +607,7 @@ public class TeacherMainCTLL {
                     model.deleteCase(casesListGV.getSelectionModel().getSelectedItem());
                     model.deleteObservableCase(casesListGV.getSelectionModel().getSelectedItem());
                     refreshCasesList();
+                    blockCaseTab();
                 } catch (DalException dalException) {
                     dalException.printStackTrace();
                     new SoftAlert(dalException.getMessage());
@@ -607,6 +631,7 @@ public class TeacherMainCTLL {
                     model.deletePatient(patientsListGV.getSelectionModel().getSelectedItem());
                     model.deleteObservablePatient(patientsListGV.getSelectionModel().getSelectedItem());
                     refreshPatientsList();
+                    blockPatientTab();
                 } catch (DalException dalException) {
                     dalException.printStackTrace();
                     new SoftAlert(dalException.getMessage());
@@ -727,7 +752,29 @@ public class TeacherMainCTLL {
 
     @FXML
     private void unassignSelectedCase(ActionEvent event) {
+        if(casesAssignedList.getSelectionModel().getSelectedItem()!= null){
+            try{
+                model.unassignCase(casesAssignedList.getSelectionModel().getSelectedItem());
+            }catch (DalException dalException){
+                new SoftAlert(dalException.getMessage());
+            }
+            model.deleteAssignedCaseInList(casesAssignedList.getSelectionModel().getSelectedItem());
+            casesAssignedList.getItems().clear();
+            casesAssignedList.getItems().addAll(model.getObservableCasesAssigned());
+            blockPatientTab();
+            blockCaseTab();
+        }
+    }
 
+
+    private void blockPatientTab(){
+        patientOverviewTab.setDisable(true);
+        patientOverviewTab.setText("Patient info");
+    }
+
+    private void blockCaseTab() {
+        caseTab.setDisable(true);
+        caseTab.setText("Case info");
     }
 
     @FXML

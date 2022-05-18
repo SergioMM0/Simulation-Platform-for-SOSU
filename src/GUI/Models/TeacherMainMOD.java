@@ -20,6 +20,7 @@ public class TeacherMainMOD {
     private ObservableList<User> allStudents;
     private ObservableList<User> groupParticipants;
     private static TeacherMainMOD instance;
+    private Patient patientOfCase;
 
     public static TeacherMainMOD getInstance() {
         if (instance == null)
@@ -138,8 +139,8 @@ public class TeacherMainMOD {
 
     public void updatePatientInTable(Patient patient) {
         for (Patient p : allPatients) {
-            if (p.getFirst_name().equals(patient.getFirst_name())) {
-                p = patient; //TODO Implement method to make sure name is not repeated
+            if (p.getId() == patient.getId()) {
+                p = patient;
             }
         }
     }
@@ -155,7 +156,7 @@ public class TeacherMainMOD {
     public void updateObservableGroup(Group group) {
         for (Group g : allGroups) {
             if (g.getId() == group.getId()) {
-                g = group; //TODO implement a method to make sure name is not repeated
+                g = group;
             }
         }
     }
@@ -222,5 +223,21 @@ public class TeacherMainMOD {
 
     public ObservableList<Case> getObservableCasesAssigned() {
         return casesAssigned;
+    }
+
+    public Patient getPatientOfCaseInGroup(Case selectedCase, Group group) throws DalException {
+        this.patientOfCase = bllFacade.getPatientOfCase(selectedCase, group);
+        return patientOfCase;
+    }
+    public Patient getPatientOfCase(){
+        return this.patientOfCase;
+    }
+
+    public void unassignCase(Case selectedItem) throws DalException{
+        bllFacade.unassignCase(selectedItem);
+    }
+
+    public void deleteAssignedCaseInList(Case caseAssigned) {
+        casesAssigned.remove(caseAssigned);
     }
 }

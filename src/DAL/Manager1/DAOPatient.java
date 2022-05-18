@@ -1,5 +1,7 @@
 package DAL.Manager1;
 
+import BE.Case;
+import BE.Group;
 import BE.Patient;
 import DAL.DataAccess.DataAccess;
 import DAL.util.CopyChecker;
@@ -12,7 +14,8 @@ import java.util.List;
 public class DAOPatient {
     private final DataAccess dataAccess;
     private CopyChecker copyChecker;
-
+    private final int isTrue = 1;
+    private final int isFalse = 0;
 
     public DAOPatient() {
         dataAccess = new DataAccess();
@@ -25,7 +28,7 @@ public class DAOPatient {
             String sql = "SELECT * FROM Patient WHERE schoolid = ? AND isCopy = ?";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setInt(1, schoolid);
-            statement.setInt(2,0);
+            statement.setInt(2,isFalse);
             statement.execute();
             ResultSet rs = statement.getResultSet();
             while (rs.next()){
@@ -163,4 +166,37 @@ public class DAOPatient {
     }
 
 
+    public Patient getPatientOfCase(Case selectedCase, Group group) throws DalException {
+        try(Connection connection = dataAccess.getConnection()){
+            String sql = "SELECT a.id, a.first_name, a.last_name, a.dateofBirth, a.gender, a.weight ," +
+                    " a.height, a.cpr, a.phone_number, a.schoolid, a.isCopy FROM [Patient] AS a " +
+                    "INNER JOIN SickPatient AS b ON a.id = b.patientid WHERE b.Groupid = ? AND b.caseid = ? AND a.[isCopy] = ?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1,group.getId());
+            st.setInt(2,selectedCase.getId());
+            st.setInt(3, isTrue);
+            st.execute();
+            ResultSet rs = st.getResultSet();
+            while(rs.next()){
+                int id = rs.getInt("id");
+                return new Patient(id,
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        convertToLocalDateViaSqlDate(rs.getDate("dateofBirth")),
+                        rs.getString("gender"),
+                        rs.getString("weight"),
+                        rs.getString("height"),
+                        rs.getString("cpr"),
+                        rs.getString("phone_number"),
+                        getObservationsOf(id),
+                        rs.getInt("schoolid"),
+                        copyChecker.checkIfCopy(rs.getInt("isCopy"))
+                        );
+            }
+
+        }catch (SQLException sqlException){
+            throw new DalException("Not able to get the patient for the case", sqlException);
+        }
+        return null;
+    }
 }
