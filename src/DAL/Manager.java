@@ -251,4 +251,9 @@ public class Manager implements DALFacade {
         return daoCase.getCasesGradedOf(group);
     }
 
+    @Override
+    public void addObservationToPatient(String text, Patient currentPatient) throws DalException {
+        daoPatient.addObservation(text,currentPatient);
+    }
+
 }

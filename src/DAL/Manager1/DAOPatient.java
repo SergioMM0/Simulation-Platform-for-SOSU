@@ -81,7 +81,7 @@ public class DAOPatient {
             prs.setInt(10,patient.getIsCopyDB());
             prs.executeUpdate();
 
-            addObservation(patient.getObservationsList().get(0),patient.getId());
+            addObservation(patient.getObservationsList().get(0),patient);
 
             prs2.setString(1 , patient.getFirst_name());
             prs2.setString(2 , patient.getLast_name());
@@ -103,15 +103,15 @@ public class DAOPatient {
         }
     }
 
-    public void addObservation(String observation, int patientID) throws DalException{
+    public void addObservation(String observation, Patient currentPatient) throws DalException{
         try(Connection con = dataAccess.getConnection()){
-            String sql = "INSERT INTO [dbo].[observationstable] ([patientid] [content]) VALUES (?,?)";
+            String sql = "INSERT INTO [observationstable] ([patientid],[content]) VALUES (?,?)";
             PreparedStatement st = con.prepareStatement(sql);
-            st.setInt(1,patientID);
+            st.setInt(1,currentPatient.getId());
             st.setString(2,observation);
             st.executeUpdate();
         }catch (SQLException sqlException){
-            new DalException("Not able to add the observation",sqlException);
+            throw new DalException("Not able to add the observation",sqlException);
         }
     }
 
@@ -148,12 +148,12 @@ public class DAOPatient {
         }
     }
 
-    private ArrayList<String> getObservationsOf(int id) throws DalException{
+    private ArrayList<String> getObservationsOf(int patientID) throws DalException{
         ArrayList<String> observations = new ArrayList<>();
         try(Connection connection = dataAccess.getConnection()){
             String sql = "SELECT [content] FROM observationstable WHERE [patientid] = ?";
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1,id);
+            st.setInt(1,patientID);
             st.execute();
             ResultSet rs = st.getResultSet();
             while(rs.next()){

@@ -270,4 +270,8 @@ public class TeacherMainMOD {
         casesGraded.addAll(bllFacade.getCasesGradedOf(group));
         return casesGraded;
     }
+
+    public void addObservationToPatient(String text, Patient currentPatient) throws DalException {
+        bllFacade.addObservationToPatient(text,currentPatient);
+    }
 }

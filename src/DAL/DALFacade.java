@@ -93,4 +93,6 @@ public interface DALFacade {
     void unmarkCaseAsGraded(Case selectedItem) throws DalException;
 
     List<Case> getCasesGradedOf(Group group) throws DalException;
+
+    void addObservationToPatient(String text, Patient currentPatient) throws DalException;
 }

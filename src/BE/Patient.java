@@ -185,4 +185,8 @@ public class Patient {
     public void setCopy(boolean copy) {
         isCopy = copy;
     }
+
+    public void addObservation(String text) {
+        this.observationsList.add(text);
+    }
 }

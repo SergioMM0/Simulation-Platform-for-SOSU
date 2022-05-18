@@ -8,6 +8,8 @@ import DAL.util.DalException;
 import javafx.collections.ObservableList;
 
 import java.security.InvalidParameterException;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public class BLLManager implements BLLFacade {
@@ -216,6 +218,11 @@ public class BLLManager implements BLLFacade {
     @Override
     public List<Case> getCasesGradedOf(Group group) throws DalException {
         return dalFacade.getCasesGradedOf(group);
+    }
+
+    @Override
+    public void addObservationToPatient(String text, Patient currentPatient) throws DalException {
+        dalFacade.addObservationToPatient(text, currentPatient);
     }
 
     @Override
