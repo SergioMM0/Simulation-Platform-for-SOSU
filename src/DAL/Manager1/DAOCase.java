@@ -57,7 +57,7 @@ public class DAOCase {
                     "FROM [Case] AS a INNER JOIN SickPatient AS b ON a.id = b.caseid WHERE b.Groupid = ? AND a.[isCopy] = ?";
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setInt(1 , group.getId());
-            prs.setInt(2, 1);
+            prs.setInt(2, 0);
             prs.execute();
             ResultSet rs = prs.getResultSet();
             while (rs.next()){
@@ -103,7 +103,7 @@ public class DAOCase {
             while(rs.next()){
                 assignedCase.setId(rs.getInt("id"));
             }
-            //first_name, last_name, dateofBirth, gender,weight ,height ,cpr , phone_number, schoolid, isCopy
+
             prs3.setString(1,patient.getFirst_name());
             prs3.setString(2,patient.getLast_name());
             prs3.setDate(3, Date.valueOf(patient.getDateOfBirth()));
@@ -130,8 +130,8 @@ public class DAOCase {
             prs5.setInt(4, 0);
             prs5.execute();
 
-        } catch (SQLException e) {
-            throw new DalException("Cant preform this task at this moment " , e);
+        } catch (SQLException sqlException) {
+            throw new DalException("Not able to assign the case to the group" , sqlException);
         }
     }
 

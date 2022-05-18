@@ -224,4 +224,9 @@ public class Manager implements DALFacade {
         return daoStudentQuestion.getQuestionnaireOf(group);
     }
 
+    @Override
+    public Patient getPatientOfCase(Case selectedCase, Group group) throws DalException {
+        return daoPatient.getPatientOfCase(selectedCase, group);
+    }
+
 }
