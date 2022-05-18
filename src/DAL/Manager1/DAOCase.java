@@ -53,8 +53,8 @@ public class DAOCase {
     public List<Case> getCasesAssignedTo(Group group)throws DalException{
         ArrayList<Case> cases = new ArrayList<>();
         try(Connection con = dataAccess.getConnection()) {
-            String sql = "select a.id, a.Description_of_the_condition, a.CategoryName, a.SubCategoryName, a.name, a.schoolid , b.graded " +
-                    "FROM [Case] as a inner join SickPatient as b on a.id = b.caseid where b.Groupid = ? AND a.[isCopy] = ?";
+            String sql = "SELECT a.id, a.Description_of_the_condition, a.CategoryName, a.SubCategoryName, a.name, a.schoolid , b.graded " +
+                    "FROM [Case] AS a INNER JOIN SickPatient AS b ON a.id = b.caseid WHERE b.Groupid = ? AND a.[isCopy] = ?";
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setInt(1 , group.getId());
             prs.setInt(2, 1);
