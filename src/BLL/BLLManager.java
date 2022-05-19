@@ -9,6 +9,8 @@ import javafx.collections.ObservableList;
 
 import java.security.InvalidParameterException;
 import java.time.LocalDate;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -163,6 +165,13 @@ public class BLLManager implements BLLFacade {
     @Override
     public List<User> getALLUsers(int schoolid, String utype) throws DalException {
 
+        Collections.sort(dalFacade.getAllUSERS(schoolid , utype), new Comparator<User>() {
+
+            @Override
+            public int compare(User o1, User o2) {
+                return o2.getName().compareTo(o1.getName());
+            }
+        });
         return dalFacade.getAllUSERS(schoolid , utype);
 
     }

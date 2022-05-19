@@ -4,24 +4,22 @@ import BE.Case;
 import BE.Group;
 import BE.Patient;
 import DAL.DataAccess.DataAccess;
+import DAL.DataAccess.JDBCConnectionPool;
 import DAL.util.CopyChecker;
 import DAL.util.DalException;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
-
-import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DAOCase {
 
-    private final DataAccess dataAccess;
+    private final JDBCConnectionPool dataAccess;
     private CopyChecker copyChecker;
     private final int isFalse = 0;
     private final int isTrue = 1;
 
     public DAOCase() {
-        dataAccess = new DataAccess();
+        dataAccess = new JDBCConnectionPool();
         copyChecker = CopyChecker.getInstance();
     }
 

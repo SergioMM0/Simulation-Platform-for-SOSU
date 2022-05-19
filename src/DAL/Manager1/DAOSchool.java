@@ -2,6 +2,7 @@ package DAL.Manager1;
 
 import BE.School;
 import DAL.DataAccess.DataAccess;
+import DAL.DataAccess.JDBCConnectionPool;
 import DAL.util.DalException;
 
 import java.sql.*;
@@ -10,10 +11,10 @@ import java.util.List;
 
 public class DAOSchool {
 
-    private final DataAccess dataAccess;
+    private final JDBCConnectionPool dataAccess;
 
     public DAOSchool() {
-        dataAccess = new DataAccess();
+        dataAccess = new JDBCConnectionPool();
     }
 
 
