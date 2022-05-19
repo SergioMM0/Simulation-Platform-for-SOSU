@@ -94,7 +94,7 @@ public class AdminCTLL implements Initializable {
             StudnetEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
 
         } catch (DalException e) {
-            e.printStackTrace();
+           new ConfirmationAlert("couldn't retrieve data from the database ");
         }
     }
 
@@ -143,7 +143,7 @@ public class AdminCTLL implements Initializable {
         });
     }
 
-    public void CreateTeacherBtn(ActionEvent event) {
+    public void iWillInsertYou(String text){
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
@@ -173,48 +173,19 @@ public class AdminCTLL implements Initializable {
             int i = Integer.parseInt(String.valueOf(school.getText()));
 
             try {
-                adminMOD.createUser(new User(1,i ,username.getText(),email.getText(),"TEACHER"));
-            } catch (DalException e) {
-               new ConfirmationAlert("please enter valid data ");
-            }
-        });
-    }
-
-    public void CreateStudentBTN(ActionEvent event) {
-
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(0, 10, 0, 10));
-        final javafx.scene.control.TextField username = new TextField();
-        username.setPromptText("Username");
-        final javafx.scene.control.TextField email = new TextField();
-        username.setPromptText("email");
-        final javafx.scene.control.TextField school = new TextField();
-        username.setPromptText("enter username");
-        email.setPromptText("enter email");
-        username.setPromptText("enter schoolID");
-        Button button = new Button();
-        button.setText("Create");
-        grid.add(new Label("Username:"), 0, 0);
-        grid.add(username, 1, 0);
-        grid.add(new Label("email:"), 0, 1);
-        grid.add(email , 1 , 1);
-        grid.add(new Label("school") ,0 ,2);
-        grid.add(school,1,2);
-        grid.add(button, 2, 2);
-        Stage stage = new Stage();
-        Scene scene = new Scene(grid);
-        stage.setScene(scene);
-        stage.show();
-        button.setOnAction(event1 -> {
-            int i=Integer.parseInt(String.valueOf(school.getText()));
-            try {
-                adminMOD.createUser(new User(1,i ,username.getText(),email.getText(),"STUDENT"));
+                adminMOD.createUser(new User(1,i ,username.getText(),email.getText(),text));
             } catch (DalException e) {
                 new ConfirmationAlert("please enter valid data ");
             }
         });
+    }
+
+    public void CreateTeacherBtn(ActionEvent event) {
+        iWillInsertYou("TEACHER");
+    }
+
+    public void CreateStudentBTN(ActionEvent event) {
+        iWillInsertYou("STUDENT");
     }
 
     public void DeleteSchoolbtn(ActionEvent event) {
@@ -258,12 +229,11 @@ public class AdminCTLL implements Initializable {
 
     public void displayusersinschool(MouseEvent mouseEvent) {
         if(SchoolTalbeView.getSelectionModel().getSelectedIndex() != -1){
-            System.out.println("test");
             try {
                 TeacherTableView.setItems(adminMOD.getAllTeachers(SchoolTalbeView.getSelectionModel().getSelectedItem().getId()));
                 StudentTableView.setItems(adminMOD.getAllSudents(SchoolTalbeView.getSelectionModel().getSelectedItem().getId()));
             } catch (DalException e) {
-                new ConfirmationAlert("displayusers");
+                new ConfirmationAlert("No Users Found");
             }
         }
     }

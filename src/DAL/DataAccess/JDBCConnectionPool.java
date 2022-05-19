@@ -2,6 +2,8 @@ package DAL.DataAccess;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import org.apache.log4j.Logger;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,6 +17,7 @@ import java.util.Properties;
 
 public class JDBCConnectionPool {
 
+    private static final Logger LOGGER = Logger.getLogger(JDBCConnectionPool.class);
     private final SQLServerDataSource dataSource;
     private long connectionExpirationTimeMillis = 10_000;
     private HashMap<Connection, Long> locked = new HashMap<>();
@@ -35,7 +38,7 @@ public class JDBCConnectionPool {
             // get the property value and print it out
 
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("Unable to establish a connection", e);
         }
 
 
@@ -98,7 +101,7 @@ public class JDBCConnectionPool {
         }
         catch(SQLException ex)
         {
-            ex.getErrorCode();
+            LOGGER.error("Unable to close the connection", ex);
         }
     }
 
@@ -107,7 +110,7 @@ public class JDBCConnectionPool {
         try {
             return !(o.isClosed());
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error("Unable to check if connection is closed", e);
             return false;
         }
     }
