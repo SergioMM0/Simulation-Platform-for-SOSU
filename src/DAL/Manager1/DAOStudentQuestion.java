@@ -18,7 +18,7 @@ public class DAOStudentQuestion {
         dataAccess = new DataAccess();
     }
 
-    public void addStudentQuestionAnswer(StudentQuestionnaireAnswer answer) throws DalException {
+    public void addStudentQuestionAnswer(StudentQuestionnaireAnswer answer) throws DalException {  //to save question answer in answer table
         try (Connection con = dataAccess.getConnection()) {
             String sql = "insert  into [dbo].[StudentQuestionAnswer] (questionId,state,questionaireId )values  (?,?,?)";
             PreparedStatement prs = con.prepareStatement(sql);
@@ -32,12 +32,12 @@ public class DAOStudentQuestion {
         }
     }
 
-    public int addQuestionaire() throws DalException {
+    public int addQuestionaire() throws DalException {              //to create new questionnaire and save it in database
         try (Connection con = dataAccess.getConnection()) {
-            String sql = "insert  into [dbo].[Questionaire] (date )values  (getdate())";
-            PreparedStatement prs = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            String sql = "insert  into [dbo].[Questionaire] (date )values  (getdate())";  //id is identity and will be generated in database and we save only current date
+            PreparedStatement prs = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);  // RETURN_GENERATED_KEYS is for returning generated questionnaire id
             prs.execute();
-            ResultSet rs = prs.getGeneratedKeys();
+            ResultSet rs = prs.getGeneratedKeys();  //get generated id
             rs.next();
             return rs.getInt(1);
 
@@ -114,7 +114,7 @@ public class DAOStudentQuestion {
         }
     }
 
-    public List<StudentQuestion> getQuestionnaireQuestions(int questionnaireId) throws DalException {
+    public List<StudentQuestion> getQuestionnaireQuestions(int questionnaireId) throws DalException { //get all questions that exist in specific questionnaire
         List<StudentQuestion> studentQuestions=new ArrayList<>();
         String query="\n" +
                 "  select q.category,q.title,q.question,q.color,qa.id,qa.questionId,qa.state,qa.QuestionaireId from StudentQuestion q\n" +

@@ -12,16 +12,16 @@ import java.util.List;
 
 public class StudentQuestionMOD {
     private BLLFacade bll;
-    private int questionaireId;     //to store current questionaire Id to use in answers
+    private int questionnaireId;     //to store current questionaire Id to use in answers
 
     public StudentQuestionMOD() {
         bll = new BLLManager();
     }
 
-    public StudentQuestion GetFirstQuestion() {
+    public StudentQuestion GetFirstQuestion() {         //load first question of question collection and start
         try {
-            StudentQuestion firstQuestion = bll.getFirstQuestion();
-            this.questionaireId = firstQuestion.getQuestionaireId();        //set questionaire Id
+            StudentQuestion firstQuestion = bll.getFirstQuestion();     //get first question from bll
+            this.questionnaireId = firstQuestion.getQuestionaireId();        //set questionaire Id
             return firstQuestion;
         } catch (DalException e) {
             e.printStackTrace();
@@ -30,7 +30,7 @@ public class StudentQuestionMOD {
     }
 
     public void saveStudentQuestionAnswer(StudentQuestionnaireAnswer answer) {
-        answer.setQuestionnaireId(questionaireId);           //using questionaire Id in answers
+        answer.setQuestionnaireId(questionnaireId);           //using questionaire Id in answers
         try {
             bll.saveStudentQuestionAnswer(answer);
         } catch (DalException e) {
@@ -60,15 +60,15 @@ public class StudentQuestionMOD {
 
     public StudentQuestionnaireAnswer getAnswer(int questionId) {
         try {
-            return bll.getQuestionaireAnswer(questionId,questionaireId);
+            return bll.getQuestionaireAnswer(questionId, questionnaireId);
         } catch (DalException e) {
             e.printStackTrace();
         }
         return null;
     }
-    public List<StudentQuestion> getQuestionnaireQuestions(){
+    public List<StudentQuestion> getQuestionnaireQuestions(){  //get all questions that exist in current questionnaire as list
         try {
-            return bll.getQuestionnaireQuestions(80);
+            return bll.getQuestionnaireQuestions(questionnaireId);
         } catch (DalException e) {
             e.printStackTrace();
         }
