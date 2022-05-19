@@ -37,9 +37,11 @@ public class AssignCaseCTLL {
     private Case selectedCase;
     private TeacherMainCTLL teacherMainCTLL;
     private static TeacherMainMOD teacherMainMOD;
+    private static SoftAlert softAlert;
 
     public AssignCaseCTLL(){
         teacherMainMOD = TeacherMainMOD.getInstance();
+        softAlert = SoftAlert.getInstance();
     }
 
     public void initializeView(){
@@ -60,7 +62,7 @@ public class AssignCaseCTLL {
                         group, patient);
             }catch (DalException dalException){
                 dalException.printStackTrace();
-                new SoftAlert(dalException.getMessage());
+                softAlert.displayAlert(dalException.getMessage());
             }
             teacherMainCTLL.populateCasesAssigned(group);
             closeView();

@@ -73,11 +73,13 @@ public class NewPatientCTLL implements Initializable {
     private NewPatientMOD model;
     private User user;
     private TeacherMainCTLL teacherMainCTLL;
+    private static SoftAlert softAlert;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         model = new NewPatientMOD();
         populateComboBoxes();
+        softAlert = SoftAlert.getInstance();
     }
 
     private void populateComboBoxes() {
@@ -113,32 +115,32 @@ public class NewPatientCTLL implements Initializable {
                 closeWindow();
             } catch(DalException dalException){
                 dalException.printStackTrace();
-                new SoftAlert(dalException.getMessage());
+                softAlert.displayAlert(dalException.getMessage());
             }
         }
     }
 
     private boolean fieldsAreFiled() {
         if (nameField.getText().isEmpty()) {
-            new SoftAlert("Please introduce the name of the patient");
+            softAlert.displayAlert("Please introduce the name of the patient");
             return false;
         } else if (familyNameField.getText().isEmpty()) {
-            new SoftAlert("Please introduce the family name of the patient");
+            softAlert.displayAlert("Please introduce the family name of the patient");
             return false;
         } else if (dateOfBirthPicker.getValue().isAfter(LocalDate.now()) || dateOfBirthPicker.getValue() == null) {
-            new SoftAlert("Please select a correct date of birth for the patient");
+            softAlert.displayAlert("Please select a correct date of birth for the patient");
             return false;
         } else if (genderComboBox.getSelectionModel().isEmpty() || genderComboBox.hasProperties()) {
-            new SoftAlert("Please introduce the gender of the patient");
+            softAlert.displayAlert("Please introduce the gender of the patient");
             return false;
         } else if (weightField.getText().isEmpty()) {
-            new SoftAlert("Please introduce the weight of the patient");
+            softAlert.displayAlert("Please introduce the weight of the patient");
             return false;
         } else if (heightField.getText().isEmpty()) {
-            new SoftAlert("Please introduce the height of the patient");
+            softAlert.displayAlert("Please introduce the height of the patient");
             return false;
         } else if (cprField.getText().isEmpty()) {
-            new SoftAlert("Please introduce the CPR of the patient");
+            softAlert.displayAlert("Please introduce the CPR of the patient");
             return false;
         } else if (phoneNumberField.getText().isEmpty()) { //Phone number is optional
             phoneNumberField.setText("No phone number");

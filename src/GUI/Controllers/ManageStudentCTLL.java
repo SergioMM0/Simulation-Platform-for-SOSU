@@ -24,9 +24,11 @@ public class ManageStudentCTLL {
     private int operationType = 0;
     private ManageStudentMOD model;
     private User student;
+    private static SoftAlert softAlert;
 
     public ManageStudentCTLL(){
         model = new ManageStudentMOD();
+        softAlert = SoftAlert.getInstance();
     }
 
     @FXML
@@ -48,7 +50,7 @@ public class ManageStudentCTLL {
                     teacherMainCTLL.addStudentToTable(model.addNewStudent(user));
                     closeWindow();
                 } catch (DalException dalException) {
-                    new SoftAlert(dalException.getMessage());
+                    softAlert.displayAlert(dalException.getMessage());
                 }
             }
         }
@@ -61,7 +63,7 @@ public class ManageStudentCTLL {
                     teacherMainCTLL.updateStudentInTable(student);
                     closeWindow();
                 }catch (DalException dalException){
-                    new SoftAlert(dalException.getMessage());
+                    softAlert.displayAlert(dalException.getMessage());
                 }
             }
             if(fieldsAreFilled() && isTheSame()){
@@ -77,10 +79,10 @@ public class ManageStudentCTLL {
 
     private boolean fieldsAreFilled() {
         if (nameField.getText().isEmpty()) {
-            new SoftAlert("Please introduce a name for the student");
+            softAlert.displayAlert("Please introduce a name for the student");
             return false;
         } else if (emailField.getText().isEmpty()) {
-            new SoftAlert("Please introduce an email for the student");
+            softAlert.displayAlert("Please introduce an email for the student");
             return false;
         } else return true;
     }
