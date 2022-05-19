@@ -390,10 +390,10 @@ public class StudentMainCTLL {
         }
         assert root != null;
         if (resource.equals("GUI/Views/EvaluateCase.fxml")) {
-            //loader.<StudentQuestionCTL>getController().setUser(logedUser);
-            //loader.<StudentQuestionCTL>getController().setGroup(logedGroup);
-            //loader.<StudentQuestionCTL>getController().setCase();
-            //loader.<StudentQuestionCTL>getController().setPatient();
+            //loader.<StudentQuestionCTL>getController().setUser(currentStudent);
+            //loader.<StudentQuestionCTL>getController().setGroup(currentGroup);
+            //loader.<StudentQuestionCTL>getController().setCase(currentPatient);
+            //loader.<StudentQuestionCTL>getController().setPatient(currentPatient);
         }
         root.getStylesheets().add(css);
         Stage stage = new Stage();
