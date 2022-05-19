@@ -213,7 +213,7 @@ public class DAOUser {
 
                 result.setId(rs.getInt("id"));
                 result.setName(rs.getString( "name"));
-                result.setSchoolID(rs.getInt( "Schoolid"));
+                result.setSchoolId(rs.getInt( "Schoolid"));
             }
 
         } catch (SQLException e) {

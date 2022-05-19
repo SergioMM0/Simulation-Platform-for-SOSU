@@ -4,7 +4,6 @@ import BE.Group;
 import BE.User;
 import DAL.DataAccess.DataAccess;
 import DAL.util.DalException;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -49,7 +48,7 @@ public class DAOGroup {
             PreparedStatement prs = con.prepareStatement(sql);
             PreparedStatement prs2 = con.prepareStatement(sql2);
             prs.setString(1 , group.getName());
-            prs.setInt(2 , group.getSchoolID());
+            prs.setInt(2 , group.getSchoolId());
             prs.executeUpdate();
             prs2.setString(1,group.getName());
             prs2.execute();
@@ -153,5 +152,22 @@ public class DAOGroup {
         } catch (SQLException e) {
            throw new DalException("Couldn't preform this task " , e);
         }
+    }
+
+    public Group getGroupOf(User student) throws DalException {
+        Group group = null;
+        try(Connection con = dataAccess.getConnection()){
+            String sql = "SELECT g.id, g.name, g.Schoolid FROM [Groups] g LEFT JOIN GroupUsers gu on g.id = gu.[Groupid] WHERE gu.studentid = ?";
+            PreparedStatement st = con.prepareStatement(sql);
+            st.setInt(1,student.getId());
+            st.execute();
+            ResultSet rs = st.getResultSet();
+            while(rs.next()){
+                group = new Group(rs.getInt("id"), rs.getString("name"), rs.getInt("Schoolid"));
+            }
+        }catch (SQLException sqlException){
+            throw new DalException("Not able to get the group of the student", sqlException);
+        }
+        return group;
     }
 }

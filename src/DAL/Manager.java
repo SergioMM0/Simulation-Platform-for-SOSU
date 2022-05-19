@@ -216,7 +216,7 @@ public class Manager implements DALFacade {
 
     @Override
     public Group getGroupOf(User student) throws DalException {
-        return daoUser.getGroupOf(student);
+        return daoGroup.getGroupOf(student);
     }
 
     @Override

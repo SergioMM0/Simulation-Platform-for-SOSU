@@ -144,7 +144,7 @@ public class StudentMainCTLL {
     private void populateCasesGraded() {
         try {
             casesGradedList.getItems().addAll(model.getCasesGradedOf(currentGroup));
-            nameCOLCasesAssigned.setCellValueFactory(new PropertyValueFactory<>("name"));
+            nameCOLCasesGraded.setCellValueFactory(new PropertyValueFactory<>("name"));
         } catch (DalException dalException) {
             softAlert.displayAlert(dalException.getMessage());
         }
