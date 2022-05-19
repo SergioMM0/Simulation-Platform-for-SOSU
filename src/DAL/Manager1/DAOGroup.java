@@ -154,22 +154,4 @@ public class DAOGroup {
            throw new DalException("Couldn't preform this task " , e);
         }
     }
-
-    private int newestidforGroup() throws DalException {
-        int newid = -1;
-
-        try (Connection con = dataAccess.getConnection()) {
-            String sql = "SELECT TOP(1) * FROM Groups ORDER by id desc";
-            PreparedStatement prs = con.prepareStatement(sql);
-            ResultSet rs = prs.executeQuery();
-            while (rs.next()) {
-                newid = rs.getInt("id");
-            }
-        } catch (SQLException e) {
-            throw new DalException("Connection Lost " , e);
-        }
-        return newid;
-    }
-
-
 }

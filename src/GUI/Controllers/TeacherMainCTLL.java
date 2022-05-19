@@ -905,5 +905,6 @@ public class TeacherMainCTLL {
             listOfStage.close();
         }
         listOfStages.clear();
+        model.clearLists();
     }
 }

@@ -59,7 +59,7 @@ public class LoginCTLL implements Initializable {
                 logedUser = loginMOD.checkCredentials(emailField.getText(),passwordField.getText());
                 switch (logedUser.getUserType()) {
                     case "STUDENT":
-                        openView("GUI/Views/StudentMain.fxml", generalCSS, "FS3 for Students", 0, 0, false, logedUser);
+                        openView("GUI/Views/StudentMain.fxml", generalCSS, "FS3 for Students", 880, 660, false, logedUser);
                         break;
                     case "TEACHER":
                         openView("GUI/Views/TeacherMain.fxml", generalCSS, "Simulation platform FS3", 880, 660, false, logedUser);
@@ -85,15 +85,17 @@ public class LoginCTLL implements Initializable {
         }
         assert root != null;
         root.getStylesheets().add(css);
-        if(logedUser.getUserType().equals("STUDENT")){
-            loader.<StudentMainCTLL>getController().setUser(logedUser);
-        }else if(logedUser.getUserType().equals("TEACHER")){
-            loader.<TeacherMainCTLL>getController().setUser(logedUser);
-            loader.<TeacherMainCTLL>getController().initializeView();
-        }else if (logedUser.getUserType().equals("ADMIN")){
-            loader.<AdminCTLL>getController().setUser(logedUser);
+        switch (logedUser.getUserType()) {
+            case "STUDENT" -> {
+                loader.<StudentMainCTLL>getController().setUser(logedUser);
+                loader.<StudentMainCTLL>getController().initializeView();
+            }
+            case "TEACHER" -> {
+                loader.<TeacherMainCTLL>getController().setUser(logedUser);
+                loader.<TeacherMainCTLL>getController().initializeView();
+            }
+            case "ADMIN" -> loader.<AdminCTLL>getController().setUser(logedUser);
         }
-        //  loader.<TeacherMainCTLL>getController().setController(this);
         Stage stage = new Stage();
         stage.setTitle(title);
         stage.setScene(new Scene(root,width,height));

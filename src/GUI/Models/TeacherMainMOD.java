@@ -274,4 +274,14 @@ public class TeacherMainMOD {
     public void addObservationToPatient(String text, Patient currentPatient) throws DalException {
         bllFacade.addObservationToPatient(text,currentPatient);
     }
+
+    public void clearLists(){
+        allGroups.clear();
+        allCases.clear();
+        casesAssigned.clear();
+        casesGraded.clear();
+        allPatients.clear();
+        allStudents.clear();
+        groupParticipants.clear();
+    }
 }
