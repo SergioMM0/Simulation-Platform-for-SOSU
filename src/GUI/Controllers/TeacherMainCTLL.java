@@ -141,6 +141,7 @@ public class TeacherMainCTLL {
     private boolean fromGeneralView;
     private Patient currentPatient;
     private ArrayList<Stage> listOfStages = new ArrayList<>();
+    private static SoftAlert softAlert;
 
     public void setUser(User user) {
         logedUser = user;
@@ -149,6 +150,7 @@ public class TeacherMainCTLL {
     public TeacherMainCTLL() {
         model = TeacherMainMOD.getInstance();
         catAndSubC = CatAndSubC.getInstance();
+        softAlert = SoftAlert.getInstance();
     }
 
     protected void initializeView() {
@@ -173,7 +175,7 @@ public class TeacherMainCTLL {
             groupNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         } catch (DalException dalException) {
             dalException.printStackTrace();
-            new SoftAlert(dalException.getMessage());
+            softAlert.displayAlert(dalException.getMessage());
         }
     }
 
@@ -183,7 +185,7 @@ public class TeacherMainCTLL {
             nameColCasesGV.setCellValueFactory(new PropertyValueFactory<>("name"));
         } catch (DalException dalException) {
             dalException.printStackTrace();
-            new SoftAlert(dalException.getMessage());
+            softAlert.displayAlert(dalException.getMessage());
         }
     }
 
@@ -193,7 +195,7 @@ public class TeacherMainCTLL {
             nameColPatientsGV.setCellValueFactory(new PropertyValueFactory<>("first_name"));
         } catch (DalException dalException) {
             dalException.printStackTrace();
-            new SoftAlert(dalException.getMessage());
+            softAlert.displayAlert(dalException.getMessage());
         }
     }
 
@@ -203,7 +205,7 @@ public class TeacherMainCTLL {
             studentNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         } catch (DalException dalException) {
             dalException.printStackTrace();
-            new SoftAlert(dalException.getMessage());
+            softAlert.displayAlert(dalException.getMessage());
         }
     }
 
@@ -333,7 +335,7 @@ public class TeacherMainCTLL {
             try{
                 model.addObservationToPatient(observation, currentPatient);
             }catch (DalException dalException){
-                new SoftAlert(dalException.getMessage());
+                softAlert.displayAlert(dalException.getMessage());
             }
             currentPatient.addObservation(observation);
             medicalHistoryTextArea.setText(handleObservationsOfPatient(currentPatient));
@@ -355,7 +357,7 @@ public class TeacherMainCTLL {
                         updatePatientInDB(patient);
                     } catch (DalException dalException) {
                         dalException.printStackTrace();
-                        new SoftAlert(dalException.getMessage());
+                        softAlert.displayAlert(dalException.getMessage());
                     }
                 }else {
                     patient = patientsListGV.getSelectionModel().getSelectedItem();
@@ -365,7 +367,7 @@ public class TeacherMainCTLL {
                         refreshPatientsList();
                     } catch (DalException dalException) {
                         dalException.printStackTrace();
-                        new SoftAlert(dalException.getMessage());
+                        softAlert.displayAlert(dalException.getMessage());
                     }
                 }
             }
@@ -386,28 +388,28 @@ public class TeacherMainCTLL {
 
     private boolean patientFieldsAreFilled() {
         if (nameField.getText().isEmpty()) {
-            new SoftAlert("Please introduce a new name for the patient");
+            softAlert.displayAlert("Please introduce a new name for the patient");
             return false;
         } else if (familyNameField.getText().isEmpty()) {
-            new SoftAlert("Please introduce a new family name for the patient");
+            softAlert.displayAlert("Please introduce a new family name for the patient");
             return false;
         } else if (dateOfBirthPicker.getValue().isAfter(LocalDate.now()) || dateOfBirthPicker.getValue() == null) {
-            new SoftAlert("Please introduce a new date of birth for the patient");
+            softAlert.displayAlert("Please introduce a new date of birth for the patient");
             return false;
         } else if (genderComboBox.getSelectionModel().isEmpty() || genderComboBox.hasProperties()) {
-            new SoftAlert("Please introduce a new gender combo box for the patient");
+            softAlert.displayAlert("Please introduce a new gender combo box for the patient");
             return false;
         } else if (weightField.getText().isEmpty()) {
-            new SoftAlert("Please introduce a new valid weight for the patient");
+            softAlert.displayAlert("Please introduce a new valid weight for the patient");
             return false;
         } else if (heightField.getText().isEmpty()) {
-            new SoftAlert("Please introduce a new valid height for the patient");
+            softAlert.displayAlert("Please introduce a new valid height for the patient");
             return false;
         } else if (cprField.getText().isEmpty()) {
-            new SoftAlert("Please introduce a valid CPR for the patient");
+            softAlert.displayAlert("Please introduce a valid CPR for the patient");
             return false;
         } else if (phoneNumberField.getText().isEmpty()) {
-            new SoftAlert("Please introduce a valid phone number for the patient");
+            softAlert.displayAlert("Please introduce a valid phone number for the patient");
             return false;
         } else return true;
     }
@@ -424,13 +426,13 @@ public class TeacherMainCTLL {
                     populateParticipantsTable(group);
                     setUpGroup(group);
                 } catch (DalException dalException) {
-                    new SoftAlert(dalException.getMessage());
+                    softAlert.displayAlert(dalException.getMessage());
                 }
-            } else new SoftAlert("This student is already in the group");
+            } else softAlert.displayAlert("This student is already in the group");
         } else {
             if (studentsTable.getSelectionModel().getSelectedItem() == null) {
-                new SoftAlert("Please select a student");
-            } else new SoftAlert("Please select a group");
+                softAlert.displayAlert("Please select a student");
+            } else softAlert.displayAlert("Please select a group");
         }
     }
 
@@ -471,7 +473,7 @@ public class TeacherMainCTLL {
             casesGradedList.getItems().addAll(model.getCasesGradedOfGroup(group));
             nameColCasesGraded.setCellValueFactory(new PropertyValueFactory<>("name"));
         }catch (DalException dalException){
-            new SoftAlert(dalException.getMessage());
+            softAlert.displayAlert(dalException.getMessage());
         }
     }
 
@@ -482,7 +484,7 @@ public class TeacherMainCTLL {
             nameColCases.setCellValueFactory(new PropertyValueFactory<>("name"));
         }catch (DalException dalException){
             dalException.printStackTrace();
-            new SoftAlert(dalException.getMessage());
+            softAlert.displayAlert(dalException.getMessage());
         }
     }
 
@@ -529,7 +531,7 @@ public class TeacherMainCTLL {
             populateParticipantsTable(group);
             setUpGroup(group);
         } catch (DalException dalException) {
-            new SoftAlert(dalException.getMessage());
+            softAlert.displayAlert(dalException.getMessage());
         }
         return group;
     }
@@ -554,7 +556,7 @@ public class TeacherMainCTLL {
                 displayPatientInfo(currentPatient);
                 this.fromGeneralView = false;
             }catch (DalException dalException){
-                new SoftAlert(dalException.getMessage());
+                softAlert.displayAlert(dalException.getMessage());
             }
         }
     }
@@ -568,7 +570,7 @@ public class TeacherMainCTLL {
     private void editStudent(ActionEvent event) {
         if (studentsTable.getSelectionModel().getSelectedItem() != null) {
             openView("GUI/Views/ManageStudent.fxml", generalCSS, "Edit student", 400, 220, false, 2);
-        } else new SoftAlert("Please select a student");
+        } else softAlert.displayAlert("Please select a student");
     }
 
     protected void addStudentToTable(User user) {
@@ -592,7 +594,7 @@ public class TeacherMainCTLL {
     private void assignCaseToGroup(ActionEvent event) {
         if(casesListGV.getSelectionModel().getSelectedItem() != null){
             handleAssignCaseToGroup();
-        }else new SoftAlert("Please select a case");
+        }else softAlert.displayAlert("Please select a case");
     }
 
     private void handleAssignCaseToGroup() {
@@ -608,7 +610,7 @@ public class TeacherMainCTLL {
     private void editGroup(ActionEvent event) {
         if (groupsTable.getSelectionModel().getSelectedItem() != null) {
             openView("GUI/Views/ManageGroup.fxml", generalCSS, "Edit group", 400, 180, false, 2);
-        } else new SoftAlert("Please select a group");
+        } else softAlert.displayAlert("Please select a group");
     }
 
     protected void addGroupToList(Group group) {
@@ -632,7 +634,7 @@ public class TeacherMainCTLL {
             try {
                 model.deleteGroup(groupsTable.getSelectionModel().getSelectedItem());
             } catch (DalException dalException) {
-                new SoftAlert(dalException.getMessage());
+                softAlert.displayAlert(dalException.getMessage());
             }
             model.removeObservableGroup(groupsTable.getSelectionModel().getSelectedItem());
             refreshGroupList();
@@ -657,7 +659,7 @@ public class TeacherMainCTLL {
                     blockCaseTab();
                 } catch (DalException dalException) {
                     dalException.printStackTrace();
-                    new SoftAlert(dalException.getMessage());
+                    softAlert.displayAlert(dalException.getMessage());
                 }
             }
         }
@@ -681,7 +683,7 @@ public class TeacherMainCTLL {
                     blockPatientTab();
                 } catch (DalException dalException) {
                     dalException.printStackTrace();
-                    new SoftAlert(dalException.getMessage());
+                    softAlert.displayAlert(dalException.getMessage());
                 }
             }
         }
@@ -693,7 +695,7 @@ public class TeacherMainCTLL {
         try {
             model.deleteStudent(student);
         } catch (DalException dalException) {
-            new SoftAlert(dalException.getMessage());
+            softAlert.displayAlert(dalException.getMessage());
         }
         model.deleteObservableStudent(student);
         model.deleteStudentFromGroups(student);
@@ -733,7 +735,7 @@ public class TeacherMainCTLL {
                 handleMarkCaseAsGraded(casesAssignedList.getSelectionModel().getSelectedItem());
             } catch (DalException dalException){
                 dalException.printStackTrace();
-                new SoftAlert(dalException.getMessage());
+                softAlert.displayAlert(dalException.getMessage());
             }
             model.moveCaseToGradedList(casesAssignedList.getSelectionModel().getSelectedItem());
             refreshCasesAssigned();
@@ -747,7 +749,7 @@ public class TeacherMainCTLL {
             try{
                 model.unmarkCaseAsGraded(casesGradedList.getSelectionModel().getSelectedItem());
             }catch (DalException dalException){
-                new SoftAlert(dalException.getMessage());
+                softAlert.displayAlert(dalException.getMessage());
             }
             model.moveCaseToAssignedList(casesGradedList.getSelectionModel().getSelectedItem());
             refreshCasesGraded();
@@ -797,7 +799,7 @@ public class TeacherMainCTLL {
                     refreshCasesList();
                 } catch (DalException dalException) {
                     dalException.printStackTrace();
-                    new SoftAlert(dalException.getMessage());
+                    softAlert.displayAlert(dalException.getMessage());
                 }
             }
         }
@@ -805,10 +807,10 @@ public class TeacherMainCTLL {
 
     private boolean caseFieldsAreFilled() {
         if (caseNameField.getText().isEmpty()) {
-            new SoftAlert("Please introduce a valid name for the case");
+            softAlert.displayAlert("Please introduce a valid name for the case");
             return false;
         } else if (descriptionOfConditionText.getText().isEmpty()) {
-            new SoftAlert("Please introduce a valid description for the case");
+            softAlert.displayAlert("Please introduce a valid description for the case");
             return false;
         } else return true;
     }
@@ -819,7 +821,7 @@ public class TeacherMainCTLL {
             try{
                 model.unassignCase(casesAssignedList.getSelectionModel().getSelectedItem());
             }catch (DalException dalException){
-                new SoftAlert(dalException.getMessage());
+                softAlert.displayAlert(dalException.getMessage());
             }
             model.deleteAssignedCaseInList(casesAssignedList.getSelectionModel().getSelectedItem());
             refreshCasesAssigned();

@@ -22,9 +22,11 @@ public class ManageGroupCTLL {
     private TeacherMainCTLL teacherMainCTLL;
     private int operationType = 0;
     private ManageGroupMOD model;
+    private static SoftAlert softAlert;
 
     public ManageGroupCTLL(){
         model = new ManageGroupMOD();
+        softAlert = SoftAlert.getInstance();
     }
 
     @FXML
@@ -46,7 +48,7 @@ public class ManageGroupCTLL {
                     closeWindow();
                 }catch (DalException dalException){
                     dalException.printStackTrace();
-                    new SoftAlert(dalException.getMessage());
+                    softAlert.displayAlert(dalException.getMessage());
                 }
             }
         }
@@ -59,7 +61,7 @@ public class ManageGroupCTLL {
                     teacherMainCTLL.setUpGroup(selectedGroup);
                     closeWindow();
                 }catch (DalException dalException){
-                    new SoftAlert(dalException.getMessage());
+                    softAlert.displayAlert(dalException.getMessage());
                 }
             }
         }
@@ -71,7 +73,7 @@ public class ManageGroupCTLL {
 
     private boolean fieldsAreFilled(){
         if(nameField.getText().isEmpty()){
-            new SoftAlert("Please introduce a name for the group");
+            softAlert.displayAlert("Please introduce a name for the group");
             return false;
         }else return true;
     }

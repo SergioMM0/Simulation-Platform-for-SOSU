@@ -42,9 +42,15 @@ public class LoginCTLL implements Initializable {
     private Label passwordLBL;
 
     private User logedUser;
-    private BLLFacade bllFacade;
     private final String generalCSS = "";
     private LoginMOD loginMOD;
+    private static SoftAlert softAlert;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        loginMOD = new LoginMOD();
+        softAlert = SoftAlert.getInstance();
+    }
 
     @FXML
     void loginAct(ActionEvent event) {
@@ -60,7 +66,7 @@ public class LoginCTLL implements Initializable {
                         break;
                 }
             }catch (DalException | BLLException exception){ //TODO review message in DAL
-                new SoftAlert(exception.getMessage());
+                softAlert.displayAlert(exception.getMessage());
             }
         }
     }
@@ -95,10 +101,4 @@ public class LoginCTLL implements Initializable {
         stage.show();
         closeWindow();
     }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        loginMOD = new LoginMOD();
-    }
-
 }

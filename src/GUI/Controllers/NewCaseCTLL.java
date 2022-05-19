@@ -42,11 +42,13 @@ public class NewCaseCTLL implements Initializable {
     private TeacherMainCTLL teacherMainCTLL;
     private CatAndSubC catAndSubC;
     private User logedUser;
+    private static SoftAlert softAlert;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         model = new NewCaseMOD();
         catAndSubC = CatAndSubC.getInstance();
+        softAlert = SoftAlert.getInstance();
         populateCategories();
     }
 
@@ -83,26 +85,26 @@ public class NewCaseCTLL implements Initializable {
                 closeWindow();
                 teacherMainCTLL.addCaseToList(model.createCase(newCase));
             } catch (DalException dalException) {
-                new SoftAlert(dalException.getMessage());
+                softAlert.displayAlert(dalException.getMessage());
             }
         }
     }
 
     private boolean fieldsAreFiled() {
         if(nameField.getText().isEmpty()){
-            new SoftAlert("Please introduce a name for the Case");
+            softAlert.displayAlert("Please introduce a name for the Case");
             return false;
         }
         else if(categoryComboBox.getValue().isEmpty()){
-            new SoftAlert("Please select a category for the Case");
+            softAlert.displayAlert("Please select a category for the Case");
             return false;
         }
         else if(subcategoryComboBox.getValue().isEmpty()){
-            new SoftAlert("Please select a subcategory for the Case");
+            softAlert.displayAlert("Please select a subcategory for the Case");
             return false;
         }
         else if(descriptionOfConditionText.getText().isEmpty()){
-            new SoftAlert("Please introduce a valid description of the case");
+            softAlert.displayAlert("Please introduce a valid description of the case");
             return false;
         }
         else return true;
