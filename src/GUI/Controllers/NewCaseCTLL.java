@@ -5,7 +5,7 @@ import BE.User;
 import DAL.util.DalException;
 import GUI.Alerts.SoftAlert;
 import GUI.Models.NewCaseMOD;
-import GUI.Util.CatAndSubC;
+import GUI.Util.StaticData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -40,14 +40,14 @@ public class NewCaseCTLL implements Initializable {
 
     private NewCaseMOD model;
     private TeacherMainCTLL teacherMainCTLL;
-    private CatAndSubC catAndSubC;
+    private StaticData catAndSubC;
     private User logedUser;
     private static SoftAlert softAlert;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         model = new NewCaseMOD();
-        catAndSubC = CatAndSubC.getInstance();
+        catAndSubC = StaticData.getInstance();
         softAlert = SoftAlert.getInstance();
         populateCategories();
     }

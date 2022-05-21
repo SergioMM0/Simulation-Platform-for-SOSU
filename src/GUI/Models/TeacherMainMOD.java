@@ -40,17 +40,6 @@ public class TeacherMainMOD {
         groupParticipants = FXCollections.observableArrayList();
     }
 
-    //TODO DELETE THE FOLLOWING WHEN IMPLEMENTED TO READ FROM FILE
-
-    public ObservableList<String> getGenders() {
-        ObservableList<String> genders = FXCollections.observableArrayList();
-        genders.add("Male");
-        genders.add("Female");
-        genders.add("Lockheed Martin F-16 Fighting Falcon lol");
-        return genders;
-    }
-
-
     public ObservableList<Group> getAllGroups(int schoolID) throws DalException {
         allGroups.addAll(bllFacade.getAllGroups(schoolID));
         return allGroups;

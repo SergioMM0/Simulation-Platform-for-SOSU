@@ -7,7 +7,8 @@ import BE.User;
 import DAL.util.DalException;
 import GUI.Alerts.SoftAlert;
 import GUI.Models.TeacherMainMOD;
-import GUI.Util.CatAndSubC;
+import GUI.Util.StaticData;
+import GUI.Util.FieldsManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +21,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -137,11 +137,12 @@ public class TeacherMainCTLL {
     private User logedUser;
     private final String generalCSS = "";
     private TeacherMainMOD model;
-    private final CatAndSubC catAndSubC;
+    private final StaticData staticData;
     private boolean fromGeneralView;
     private Patient currentPatient;
     private ArrayList<Stage> listOfStages = new ArrayList<>();
     private static SoftAlert softAlert;
+    private FieldsManager fieldsManager;
 
     public void setUser(User user) {
         logedUser = user;
@@ -149,8 +150,9 @@ public class TeacherMainCTLL {
 
     public TeacherMainCTLL() {
         model = TeacherMainMOD.getInstance();
-        catAndSubC = CatAndSubC.getInstance();
+        staticData = StaticData.getInstance();
         softAlert = SoftAlert.getInstance();
+        fieldsManager = new FieldsManager();
     }
 
     protected void initializeView() {
@@ -245,107 +247,37 @@ public class TeacherMainCTLL {
     private void caseIsSelected(MouseEvent event) {
         Case selectedCase = casesListGV.getSelectionModel().getSelectedItem();
         if (selectedCase != null) {
-            displayCaseInfo(selectedCase);
+            fieldsManager.displayCaseInfo(caseTab, selectedCase, caseCategoryComboBox,caseSubcategoryComboBox,caseNameField,descriptionOfConditionText);
         }
-    }
-
-    private void displayCaseInfo(Case selectedCase){
-        if (caseTab.isDisabled()) {
-            caseTab.setDisable(false);
-        }
-        caseTab.setText(selectedCase.getName());
-        caseCategoryComboBox.getItems().clear();
-        caseSubcategoryComboBox.getItems().clear();
-
-        String[] allCat = catAndSubC.getCategories();
-        String[] allSubCat = catAndSubC.getSubcategoriesOf(selectedCase.getCategory());
-
-        caseNameField.setText(selectedCase.getName());
-        descriptionOfConditionText.setText(selectedCase.getConditionDescription());
-
-        for (String cat : allCat) {
-            caseCategoryComboBox.getItems().add(cat); //population of the categories
-        }
-        for (String subCat : allSubCat) {
-            caseSubcategoryComboBox.getItems().add(subCat); // population of the subcategories of the category
-        }
-        //population of case in case info when selected in general view
-
-        caseCategoryComboBox.getSelectionModel().select(
-                caseCategoryComboBox.getItems().indexOf(selectedCase.getCategory()));
-        //selects the category specified for the case
-
-        caseSubcategoryComboBox.getSelectionModel().select(
-                caseSubcategoryComboBox.getItems().indexOf(selectedCase.getSubCategory()));
-        //selects the subcategory specified for the case
     }
 
     @FXML
-    private void categorySelected(MouseEvent event) { //TODO Bugged but okay xd click twice to make it work
+    private void categorySelected(MouseEvent event) {
         if (caseCategoryComboBox.getValue() != null) {
             caseSubcategoryComboBox.getItems().clear();
             caseSubcategoryComboBox.getItems().addAll(
-                    CatAndSubC.getInstance().getSubcategoriesOf(caseCategoryComboBox.getValue()));
+                    staticData.getSubcategoriesOf(caseCategoryComboBox.getValue()));
         }
     }
 
     @FXML
     private void patientIsSelected(MouseEvent event) {
-        Patient patient = patientsListGV.getSelectionModel().getSelectedItem();
-        if(patient != null){
+        this.currentPatient = patientsListGV.getSelectionModel().getSelectedItem();
+        if(currentPatient != null){
             this.fromGeneralView = true;
-            displayPatientInfo(patient);
-            this.currentPatient = patient;
+            fieldsManager.displayPatientInfo(patientOverviewTab, currentPatient, nameField,familyNameField,dateOfBirthPicker,
+                    genderComboBox,weightField,heightField,cprField,phoneNumberField,medicalHistoryTextArea);
         }
-    }
-
-    private void displayPatientInfo(Patient patient) {
-        if (patientOverviewTab.isDisabled()) {
-            patientOverviewTab.setDisable(false);
-        }
-        patientOverviewTab.setText(patient.getFirst_name());
-        nameField.setText(patient.getFirst_name());
-        familyNameField.setText(patient.getLast_name());
-        dateOfBirthPicker.setValue(patient.getDateOfBirth());
-
-        genderComboBox.getItems().clear();
-        genderComboBox.getItems().addAll(model.getGenders());
-        genderComboBox.getSelectionModel().select(
-                genderComboBox.getItems().indexOf(patient.getGender()));
-        //Selects in the gender combo box the gender that matches the gender of the patient
-        weightField.setText(patient.getWeight());
-        heightField.setText(patient.getHeight());
-        cprField.setText(patient.getCpr());
-        phoneNumberField.setText(patient.getPhoneNumber());
-        medicalHistoryTextArea.setText(handleObservationsOfPatient(patient));
-    }
-
-    private String handleObservationsOfPatient(Patient patient){
-        StringBuilder sb = new StringBuilder();
-        for(String observation : patient.getObservationsList()){
-            sb.append(observation).append("\n");
-        }
-        return sb.toString();
     }
 
     @FXML
     private void newObservation(ActionEvent event) {
-        if(!newObservationTextArea.getText().isEmpty()){
-            String observation = LocalDate.now() + ": " + newObservationTextArea.getText();
-            try{
-                model.addObservationToPatient(observation, currentPatient);
-            }catch (DalException dalException){
-                softAlert.displayAlert(dalException.getMessage());
-            }
-            currentPatient.addObservation(observation);
-            medicalHistoryTextArea.setText(handleObservationsOfPatient(currentPatient));
-            newObservationTextArea.clear();
-        }
+        fieldsManager.handleObservationTeacherView(newObservationTextArea,model,currentPatient,medicalHistoryTextArea);
     }
 
     @FXML
     private void updatePatient(ActionEvent actionEvent) {
-        if (patientFieldsAreFilled()) {
+        if (fieldsManager.patientFieldsAreFilled(nameField,familyNameField,dateOfBirthPicker,genderComboBox,weightField,heightField,cprField,phoneNumberField)) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                     "Are you sure you want to update this patient?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
             alert.showAndWait();
@@ -375,43 +307,9 @@ public class TeacherMainCTLL {
     }
 
     private void updatePatientInDB(Patient patient) throws DalException{
-        patient.setFirst_name(nameField.getText());
-        patient.setLast_name(familyNameField.getText());
-        patient.setDateOfBirth(dateOfBirthPicker.getValue());
-        patient.setGender(genderComboBox.getValue());
-        patient.setWeight(weightField.getText());
-        patient.setHeight(heightField.getText());
-        patient.setCpr(cprField.getText());
-        patient.setPhoneNumber(phoneNumberField.getText());
+        fieldsManager.updateVariablesOfPatient(currentPatient, nameField,familyNameField,dateOfBirthPicker,genderComboBox,
+                weightField,heightField,cprField,phoneNumberField);
         model.updatePatient(patient);
-    }
-
-    private boolean patientFieldsAreFilled() {
-        if (nameField.getText().isEmpty()) {
-            softAlert.displayAlert("Please introduce a new name for the patient");
-            return false;
-        } else if (familyNameField.getText().isEmpty()) {
-            softAlert.displayAlert("Please introduce a new family name for the patient");
-            return false;
-        } else if (dateOfBirthPicker.getValue().isAfter(LocalDate.now()) || dateOfBirthPicker.getValue() == null) {
-            softAlert.displayAlert("Please introduce a new date of birth for the patient");
-            return false;
-        } else if (genderComboBox.getSelectionModel().isEmpty() || genderComboBox.hasProperties()) {
-            softAlert.displayAlert("Please introduce a new gender combo box for the patient");
-            return false;
-        } else if (weightField.getText().isEmpty()) {
-            softAlert.displayAlert("Please introduce a new valid weight for the patient");
-            return false;
-        } else if (heightField.getText().isEmpty()) {
-            softAlert.displayAlert("Please introduce a new valid height for the patient");
-            return false;
-        } else if (cprField.getText().isEmpty()) {
-            softAlert.displayAlert("Please introduce a valid CPR for the patient");
-            return false;
-        } else if (phoneNumberField.getText().isEmpty()) {
-            softAlert.displayAlert("Please introduce a valid phone number for the patient");
-            return false;
-        } else return true;
     }
 
     @FXML
@@ -550,10 +448,11 @@ public class TeacherMainCTLL {
         Case selectedCase = tableCases.getSelectionModel().getSelectedItem();
         Group group = tableGroups.getSelectionModel().getSelectedItem();
         if(selectedCase != null){
-            displayCaseInfo(selectedCase);
+            fieldsManager.displayCaseInfo(caseTab, selectedCase, caseCategoryComboBox,caseSubcategoryComboBox,caseNameField,descriptionOfConditionText);
             try{
                 this.currentPatient = model.getPatientOfCaseInGroup(selectedCase, group);
-                displayPatientInfo(currentPatient);
+                fieldsManager.displayPatientInfo(patientOverviewTab,currentPatient,nameField,familyNameField,dateOfBirthPicker,
+                        genderComboBox,weightField,heightField,cprField,phoneNumberField,medicalHistoryTextArea);
                 this.fromGeneralView = false;
             }catch (DalException dalException){
                 softAlert.displayAlert(dalException.getMessage());
@@ -783,7 +682,7 @@ public class TeacherMainCTLL {
 
     @FXML
     private void saveChangesOnCase(ActionEvent event) {
-        if (caseFieldsAreFilled()) {
+        if (fieldsManager.caseFieldsAreFilled(caseNameField,descriptionOfConditionText)) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                     "Are you sure you want to update this case?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
             alert.showAndWait();
@@ -803,16 +702,6 @@ public class TeacherMainCTLL {
                 }
             }
         }
-    }
-
-    private boolean caseFieldsAreFilled() {
-        if (caseNameField.getText().isEmpty()) {
-            softAlert.displayAlert("Please introduce a valid name for the case");
-            return false;
-        } else if (descriptionOfConditionText.getText().isEmpty()) {
-            softAlert.displayAlert("Please introduce a valid description for the case");
-            return false;
-        } else return true;
     }
 
     @FXML

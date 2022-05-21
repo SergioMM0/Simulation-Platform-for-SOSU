@@ -1,14 +1,17 @@
 package GUI.Util;
 
-public class CatAndSubC {
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
-    private static CatAndSubC instance;
+public class StaticData {
 
-    private CatAndSubC(){}
+    private static StaticData instance;
 
-    public static CatAndSubC getInstance(){
+    private StaticData(){}
+
+    public static StaticData getInstance(){
         if (instance == null){
-            instance = new CatAndSubC();
+            instance = new StaticData();
         }
         return instance;
     }
@@ -57,5 +60,13 @@ public class CatAndSubC {
 
             default -> null;
         };
+    }
+
+    public ObservableList<String> getGenders() {
+        ObservableList<String> genders = FXCollections.observableArrayList();
+        genders.add("Male");
+        genders.add("Female");
+        genders.add("Lockheed Martin F-16 Fighting Falcon lol");
+        return genders;
     }
 }
