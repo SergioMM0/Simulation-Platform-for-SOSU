@@ -290,6 +290,8 @@ public class StudentMainCTLL {
             loader.<EvaluateCaseCTLL>getController().setGroup(currentGroup);
             loader.<EvaluateCaseCTLL>getController().setCase(currentCase);
             loader.<EvaluateCaseCTLL>getController().setPatient(currentPatient);
+            loader.<EvaluateCaseCTLL>getController().initializeView();
+
         }
         root.getStylesheets().add(css);
         Stage stage = new Stage();

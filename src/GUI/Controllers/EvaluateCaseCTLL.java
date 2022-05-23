@@ -9,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.input.TouchPoint;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,6 +20,67 @@ public class EvaluateCaseCTLL {
     private ArrayList<Stage> listOfStages = new ArrayList<>();
     private String generalCSS = "";
 
+    @FXML
+    private Label caseIdLabel;
+
+    @FXML
+    private Label caseNameLabel;
+
+    @FXML
+    private Label categoryNameLabel;
+
+    @FXML
+    private Label causeLabel;
+
+    @FXML
+    private Label conditionLabel;
+
+    @FXML
+    private Label cprLabel;
+
+    @FXML
+    private Label dataOfBirthLabel;
+
+    @FXML
+    private Label descriptionLabel;
+
+    @FXML
+    private Label diagonseLabel;
+
+    @FXML
+    private Label firstNameLabel;
+
+    @FXML
+    private Label goalLabel;
+
+    @FXML
+    private Label lastNameLabel;
+
+    @FXML
+    private Label phoneLabel;
+
+    @FXML
+    private Label subCategoryLabel;
+
+    public void initializeView() {
+        if (currentCase == null || currentPatient == null) return;
+        caseIdLabel.setText(currentCase.getId() + "");
+        caseNameLabel.setText(currentCase.getName());
+        categoryNameLabel.setText(currentCase.getCategory());
+        subCategoryLabel.setText(currentCase.getSubCategory());
+        conditionLabel.setText(currentCase.getConditionDescription());
+        firstNameLabel.setText(currentPatient.getFirst_name());
+        lastNameLabel.setText(currentPatient.getLast_name());
+        cprLabel.setText(currentPatient.getCpr());
+        dataOfBirthLabel.setText(currentPatient.getDateOfBirth().toString());
+        phoneLabel.setText(currentPatient.getPhoneNumber());
+    }
+
+    @FXML
+    void close(ActionEvent event) {
+        Stage stage = (Stage) firstNameLabel.getScene().getWindow();
+        stage.close();
+    }
 
     public void setGroup(Group currentGroup) {
         this.currentGroup = currentGroup;
@@ -38,21 +101,9 @@ public class EvaluateCaseCTLL {
 
     @FXML
     void openQuestionnaire(ActionEvent event) {
-//        FXMLLoader loader = new FXMLLoader();
-//        loader.setLocation(getClass().getClassLoader().getResource("GUI/Views/StudentQuestion.fxml"));
-//        Parent root = null;
-//        try{root = loader.load();}
-//        catch (IOException e){
-//            e.printStackTrace();
-//        }
-//        Stage stage = new Stage();
-//        stage.setTitle("Student Question");
-//        stage.setScene(new Scene(root,880,660));
-//
-//        stage.show();
-        System.out.println("currentGroup = " + currentGroup.getName());
         openView("GUI/Views/StudentQuestion.fxml", generalCSS, "Student Question", 880, 660, false);
     }
+
 
     private void openView(String resource, String css, String title, int width, int height, boolean resizable) {
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(resource));
