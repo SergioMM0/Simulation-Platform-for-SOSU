@@ -10,13 +10,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.skin.TableColumnHeader;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -25,91 +28,108 @@ import java.util.ResourceBundle;
 
 public class AdminCTLL implements Initializable {
     @FXML
-    private TableView<School> SchoolTalbeView;
+    private AnchorPane anchorpane;
+    @FXML
+    private TableView<School> schoolTalbeView;
     @FXML
     private TableColumn<School , Integer> schoolID;
     @FXML
-    private TableColumn<School , String> SchoolName;
+    private TableColumn<School , String> schoolName;
     @FXML
-    private TableView<User> TeacherTableView;
+    private TableView<User> teacherTableView;
     @FXML
-    private TableColumn<User , Integer> TeacherID;
+    private TableColumn<User , Integer> teacherID;
     @FXML
-    private TableColumn<User , String> TeacherName;
+    private TableColumn<User , String> teacherName;
     @FXML
-    private TableColumn<User , String> TeacherEmail;
+    private TableColumn<User , String> teacherEmail;
     @FXML
     private TableView<User> StudentTableView;
     @FXML
-    private TableColumn<User , Integer> StudnetID;
+    private TableColumn<User , Integer> studnetID;
     @FXML
-    private TableColumn<User , String > StudnetName;
+    private TableColumn<User , String > studnetName;
     @FXML
-    private TableColumn<User , String> StudnetEmail;
+    private TableColumn<User , String> studnetEmail;
     @FXML
     private TextField filterid;
     @FXML
     private ImageView filterImageid;
     @FXML
-    private Button CreateSchoolID;
-    @FXML
-    private Button CreateTeacherid;
-    @FXML
-    private Button CreateStudnetid;
-    @FXML
-    private Button DeleteSchoolID;
-    @FXML
-    private Button DeleteTeacherid;
-    @FXML
-    private Button DeleteStudentid;
-    @FXML
     private Button Closeid;
     @FXML
-    private Label AdminNameLbl;
+    private ContextMenu contextMenu;
 
     private AdminMOD adminMOD ;
     private User logedUser ;
+
+    MenuItem addSchool = new MenuItem("Create New School");
+    MenuItem updateSchool = new MenuItem("Update ");
+    MenuItem help = new MenuItem("Help");
+    MenuItem deleteSchool = new MenuItem("Delete");
+    MenuItem addUser = new MenuItem("Create new User");
+    MenuItem deleteUser = new MenuItem("Delete");
+    MenuItem updateUser = new MenuItem("Update");
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Image image = new Image("/res/felterimage.png");
         filterImageid.setImage(image);
         adminMOD = AdminMOD.getInstance();
         displaySchools();
+        navigateBetweenNode();
+       // task();
 
 
     }
 
     public void displaySchools(){
         try {
-            SchoolTalbeView.setItems(adminMOD.getAllSchools());
+            schoolTalbeView.setItems(adminMOD.getAllSchools());
             schoolID.setCellValueFactory(new PropertyValueFactory<>("id"));
-            SchoolName.setCellValueFactory(new PropertyValueFactory<>("name"));
-            TeacherTableView.setItems(adminMOD.getAllTeachers(1));
-            TeacherID.setCellValueFactory(new PropertyValueFactory<>("id"));
-            TeacherName.setCellValueFactory(new PropertyValueFactory<>("name"));
-            TeacherEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-            StudentTableView.setItems(adminMOD.getAllSudents(1));
-            StudnetID.setCellValueFactory(new PropertyValueFactory<>("id"));
-            StudnetName.setCellValueFactory(new PropertyValueFactory<>("name"));
-            StudnetEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+            schoolName.setCellValueFactory(new PropertyValueFactory<>("name"));
+            teacherID.setCellValueFactory(new PropertyValueFactory<>("id"));
+            teacherName.setCellValueFactory(new PropertyValueFactory<>("name"));
+            teacherEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+            studnetID.setCellValueFactory(new PropertyValueFactory<>("id"));
+            studnetName.setCellValueFactory(new PropertyValueFactory<>("name"));
+            studnetEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+            if(schoolTalbeView.getSelectionModel().getSelectedIndex() != -1){
+                teacherTableView.setItems(adminMOD.getAllTeachers(schoolTalbeView.getSelectionModel().getSelectedItem().getId()));
+                StudentTableView.setItems(adminMOD.getAllSudents(schoolTalbeView.getSelectionModel().getSelectedItem().getId()));
+            }
 
         } catch (DalException e) {
            new ConfirmationAlert("couldn't retrieve data from the database ");
         }
     }
 
+    public void task(){
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    schoolTalbeView.setItems(adminMOD.getAllSchools());
+                } catch (DalException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+    }
+
     public void filterField(KeyEvent keyEvent)  {
             try {
                 if (filterid.getText() == null || filterid.getText().length() <= 0) {
-                TeacherTableView.setItems(adminMOD.getallusers(SchoolTalbeView.getSelectionModel().getSelectedItem().getId() ,"TEACHER"));
-                StudentTableView.setItems(adminMOD.getallusers(SchoolTalbeView.getSelectionModel().getSelectedItem().getId() ,"STUDENT"));
+                teacherTableView.setItems(adminMOD.getallusers(schoolTalbeView.getSelectionModel().getSelectedItem().getId() ,"TEACHER"));
+                StudentTableView.setItems(adminMOD.getallusers(schoolTalbeView.getSelectionModel().getSelectedItem().getId() ,"STUDENT"));
                 } else {
                     ObservableList<User> foundStudents;
-                    foundStudents = adminMOD.searchforUser(adminMOD.getallusers(SchoolTalbeView.getSelectionModel().getSelectedItem().getId() ,"STUDENT"), filterid.getText());
+                    foundStudents = adminMOD.searchforUser(adminMOD.getallusers(schoolTalbeView.getSelectionModel().getSelectedItem().getId() ,"STUDENT"), filterid.getText());
                     ObservableList<User> foundTeachers;
-                    foundTeachers = adminMOD.searchforUser(adminMOD.getallusers(SchoolTalbeView.getSelectionModel().getSelectedItem().getId() ,"TEACHER"), filterid.getText());
+                    foundTeachers = adminMOD.searchforUser(adminMOD.getallusers(schoolTalbeView.getSelectionModel().getSelectedItem().getId() ,"TEACHER"), filterid.getText());
 
-                    TeacherTableView.setItems(foundTeachers);
+                    teacherTableView.setItems(foundTeachers);
                     StudentTableView.setItems(foundStudents);
 
                 }
@@ -118,7 +138,7 @@ public class AdminCTLL implements Initializable {
             }
     }
 
-    public void CreateSchoolbtn(ActionEvent event) {
+    public void createSchoolbtn(ActionEvent event) {
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
@@ -180,27 +200,27 @@ public class AdminCTLL implements Initializable {
         });
     }
 
-    public void CreateTeacherBtn(ActionEvent event) {
+    public void createTeacherBtn(ActionEvent event) {
         iWillInsertYou("TEACHER");
     }
 
-    public void CreateStudentBTN(ActionEvent event) {
+    public void createStudentBTN(ActionEvent event) {
         iWillInsertYou("STUDENT");
     }
 
-    public void DeleteSchoolbtn(ActionEvent event) {
+    public void deleteSchoolbtn(ActionEvent event) {
         try {
-            if(SchoolTalbeView.getSelectionModel().getSelectedIndex() != -1)
-            adminMOD.deleteSchool(SchoolTalbeView.getSelectionModel().getSelectedItem());
+            if(schoolTalbeView.getSelectionModel().getSelectedIndex() != -1)
+            adminMOD.deleteSchool(schoolTalbeView.getSelectionModel().getSelectedItem());
         } catch (DalException e) {
             new ConfirmationAlert("please select school ");
         }
     }
 
-    public void DeleteTeacherBtn(ActionEvent event) {
+    public void deleteTeacherBtn(ActionEvent event) {
             try {
-                if(TeacherTableView.getSelectionModel().getSelectedIndex() != -1 ) {
-                    adminMOD.removeUser(TeacherTableView.getSelectionModel().getSelectedItem());
+                if(teacherTableView.getSelectionModel().getSelectedIndex() != -1 ) {
+                    adminMOD.removeUser(teacherTableView.getSelectionModel().getSelectedItem());
                 }
             } catch (DalException e) {
                new ConfirmationAlert("please select a Teacher ");
@@ -208,7 +228,7 @@ public class AdminCTLL implements Initializable {
 
     }
 
-    public void DeleteStudentbtn(ActionEvent event) {
+    public void deleteStudentbtn(ActionEvent event) {
         try {
             if(StudentTableView.getSelectionModel().getSelectedIndex() != -1 ) {
                 adminMOD.removeUser(StudentTableView.getSelectionModel().getSelectedItem());
@@ -227,14 +247,81 @@ public class AdminCTLL implements Initializable {
         this.logedUser = logedUser;
     }
 
+    public void exitmenu(MouseEvent mouseEvent) {
+        contextMenu.hide();
+    }
+
     public void displayusersinschool(MouseEvent mouseEvent) {
-        if(SchoolTalbeView.getSelectionModel().getSelectedIndex() != -1){
+        if(schoolTalbeView.getSelectionModel().getSelectedIndex() != -1){
             try {
-                TeacherTableView.setItems(adminMOD.getAllTeachers(SchoolTalbeView.getSelectionModel().getSelectedItem().getId()));
-                StudentTableView.setItems(adminMOD.getAllSudents(SchoolTalbeView.getSelectionModel().getSelectedItem().getId()));
+                teacherTableView.setItems(adminMOD.getAllTeachers(schoolTalbeView.getSelectionModel().getSelectedItem().getId()));
+                StudentTableView.setItems(adminMOD.getAllSudents(schoolTalbeView.getSelectionModel().getSelectedItem().getId()));
             } catch (DalException e) {
                 new ConfirmationAlert("No Users Found");
             }
         }
+    }
+
+    public void navigateBetweenNode() {
+        anchorpane.setOnContextMenuRequested(event -> {
+            if (event.getTarget().getClass() == AnchorPane.class) {
+                changeOptionAnchorPane();
+            } else {
+                String tableid = "";
+                if (((Node) event.getTarget()).getParent() != null) {
+                    if (((Node) event.getTarget()).getParent().getClass() == javafx.scene.control.TableView.class) {
+                        TableView tableRow = (TableView) ((Node) event.getTarget()).getParent();
+                        tableid = tableRow.getId();
+                    }
+                    if (((Node) event.getTarget()).getParent().getClass() == javafx.scene.control.TableRow.class) {
+                        TableRow tableRow = (TableRow) ((Node) event.getTarget()).getParent();
+                        tableid = tableRow.getTableView().getId();
+                    }
+                    if (((Node) event.getTarget()).getParent().getClass() == javafx.scene.control.skin.TableColumnHeader.class) {
+                        TableColumnHeader tableHeader = (TableColumnHeader) ((Node) event.getTarget()).getParent();
+                        tableid = tableHeader.getParent().getParent().getParent().getId();
+                    }
+                    if (((Node) event.getTarget()).getParent().getParent() != null) {
+                        if (((Node) event.getTarget()).getParent().getParent().getClass() == javafx.scene.control.TableRow.class) {
+                            TableRow tableRow = (TableRow) ((Node) event.getTarget()).getParent().getParent();
+                            tableid = tableRow.getTableView().getId();
+                        }
+                        if (((Node) event.getTarget()).getParent().getParent().getClass() == javafx.scene.control.skin.TableColumnHeader.class) {
+                            TableColumnHeader tableHeader = (TableColumnHeader) ((Node) event.getTarget()).getParent().getParent();
+                            tableid = tableHeader.getParent().getParent().getParent().getId();
+                        }
+                    }
+                }
+                if (tableid.contains("schoolNodeID")) {
+                    schools();
+                } else if (tableid.contains("teacherNodeID")) {
+                    teachers();
+                } else if (tableid.contains("studentNodeID")) {
+                    students();
+                }
+            }
+            contextMenu.show(anchorpane, event.getScreenX(), event.getScreenY());
+
+        });
+    }
+
+    private void schools() {
+       contextMenu.getItems().clear();
+       contextMenu.getItems().addAll(deleteSchool , updateSchool);
+    }
+
+    private void teachers() {
+        contextMenu.getItems().clear();
+        contextMenu.getItems().addAll( updateUser ,  deleteUser);
+    }
+
+    private void changeOptionAnchorPane() {
+        contextMenu.getItems().clear();
+        contextMenu.getItems().addAll(addUser , addSchool , help);
+    }
+
+    private void students() {
+       contextMenu.getItems().clear();
+       contextMenu.getItems().addAll( updateUser ,  deleteUser);
     }
 }

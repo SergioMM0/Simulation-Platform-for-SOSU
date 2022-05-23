@@ -164,15 +164,10 @@ public class BLLManager implements BLLFacade {
 
     @Override
     public List<User> getALLUsers(int schoolid, String utype) throws DalException {
+        List<User> sortedusers = dalFacade.getAllUSERS(schoolid , utype);
+      sortedusers.sort((o1, o2) -> o2.getName().compareTo(o1.getName()));
 
-        Collections.sort(dalFacade.getAllUSERS(schoolid , utype), new Comparator<User>() {
-
-            @Override
-            public int compare(User o1, User o2) {
-                return o2.getName().compareTo(o1.getName());
-            }
-        });
-        return dalFacade.getAllUSERS(schoolid , utype);
+     return sortedusers ;
 
     }
 

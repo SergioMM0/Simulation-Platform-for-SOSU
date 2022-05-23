@@ -13,13 +13,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 
-<TabPane prefHeight="660.0" prefWidth="880.0" tabClosingPolicy="UNAVAILABLE" tabMinHeight="40.0" tabMinWidth="100.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.StudentMainCTLL">
+<TabPane prefHeight="660.0" prefWidth="880.0" tabClosingPolicy="UNAVAILABLE" tabMinHeight="40.0" tabMinWidth="100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.StudentMainCTLL">
    <tabs>
       <Tab text="General">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Button layoutX="340.0" layoutY="130.0" mnemonicParsing="false" onAction="#evaluateCase" prefHeight="50.0" prefWidth="200.0" text="Evaluate case" />
+                  <Button fx:id="evaluateCaseButton" disable="true" layoutX="340.0" layoutY="130.0" mnemonicParsing="false" onAction="#evaluateCase" prefHeight="50.0" prefWidth="200.0" text="Evaluate case" />
                   <Button layoutX="340.0" layoutY="207.0" mnemonicParsing="false" onAction="#seeGradedCase" prefHeight="50.0" prefWidth="200.0" text="See graded case" />
                   <AnchorPane layoutX="40.0" layoutY="14.0" prefHeight="65.0" prefWidth="800.0" style="-fx-background-color: ffffff;">
                      <children>
