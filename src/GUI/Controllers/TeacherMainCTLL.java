@@ -344,16 +344,20 @@ public class TeacherMainCTLL {
     @FXML
     private void groupIsSelected(MouseEvent event) {
         if(groupsTable.getSelectionModel().getSelectedItem() != null){
+            this.currentGroup = groupsTable.getSelectionModel().getSelectedItem();
             populateParticipantsTable(groupsTable.getSelectionModel().getSelectedItem());
             populateGroupsTab(groupsTable.getSelectionModel().getSelectedItem());
         }
     }
 
     private void populateParticipantsTable(Group group) {
-        if (!group.getMembers().isEmpty()) {
+        if (group.getMembers() != null) {
             participantsTable.getItems().clear();
             participantsTable.getItems().addAll(model.getObservableParticipants(group));
             participantsNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        }
+        else{
+            groupsTable.getItems().clear();
         }
     }
 
@@ -444,23 +448,22 @@ public class TeacherMainCTLL {
     @FXML
     private void assignedCaseIsSelected(MouseEvent event) {
         this.caseFromGV = false;
-        handleCaseSelected(casesAssignedList,groupsTable);
+        handleCaseSelected(casesAssignedList);
     }
 
     @FXML
     private void gradedCaseIsSelected(MouseEvent event) {
         this.caseFromGV = false;
-        handleCaseSelected(casesGradedList,groupsTable);
+        handleCaseSelected(casesGradedList);
     }
 
-    private void handleCaseSelected(TableView<Case> tableCases,TableView<Group> tableGroups){
+    private void handleCaseSelected(TableView<Case> tableCases){
         this.currentCase = tableCases.getSelectionModel().getSelectedItem();
-        this.currentGroup = tableGroups.getSelectionModel().getSelectedItem();
         if(currentCase != null){
             fieldsManager.displayCaseInfo(caseTab, currentCase, caseCategoryComboBox,caseSubcategoryComboBox,caseNameField,descriptionOfConditionText);
             try{
                 this.patientFromGV = false;
-                this.currentPatient = model.getPatientOfCaseInGroup(currentCase, currentGroup);
+                this.currentPatient = model.getPatientOfCaseInGroup(currentCase,currentGroup);
                 fieldsManager.displayPatientInfo(patientOverviewTab,currentPatient,nameField,familyNameField,dateOfBirthPicker,
                         genderComboBox,weightField,heightField,cprField,phoneNumberField,medicalHistoryTextArea);
             }catch (DalException dalException){
