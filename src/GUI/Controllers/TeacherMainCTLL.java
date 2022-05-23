@@ -135,7 +135,7 @@ public class TeacherMainCTLL {
     private Tab studentsGroupsTab;
 
     private User logedUser;
-    private final String generalCSS = "";
+    private final String generalCSS = "GUI/Views/CSS/GeneralCSS.css";
     private TeacherMainMOD model;
     private final StaticData staticData;
     private boolean patientFromGV;

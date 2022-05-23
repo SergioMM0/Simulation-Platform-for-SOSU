@@ -42,7 +42,7 @@ public class LoginCTLL implements Initializable {
     private Label passwordLBL;
 
     private User logedUser;
-    private final String generalCSS = "";
+    private final String generalCSS = "GUI/Views/CSS/GeneralCSS.css";
     private LoginMOD loginMOD;
     private static SoftAlert softAlert;
 
