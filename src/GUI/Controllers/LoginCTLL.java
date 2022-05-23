@@ -64,6 +64,8 @@ public class LoginCTLL implements Initializable {
                     case "TEACHER":
                         openView("GUI/Views/TeacherMain.fxml", generalCSS, "Simulation platform FS3", 880, 660, false, logedUser);
                         break;
+                    case "ADMIN":
+                        openView("GUI/Views/TeacherMain.fxml", generalCSS,"Admin view", 880,660,false, logedUser);
                 }
             }catch (DalException | BLLException exception){ //TODO review message in DAL
                 softAlert.displayAlert(exception.getMessage());
