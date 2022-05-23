@@ -141,10 +141,11 @@ public class TeacherMainCTLL {
     private boolean patientFromGV;
     private boolean caseFromGV;
     private boolean fromGeneralView;
+    private Group currentGroup;
     private Patient currentPatient;
     private Case currentCase;
     private ArrayList<Stage> listOfStages = new ArrayList<>();
-    private static SoftAlert softAlert;
+    private SoftAlert softAlert;
     private FieldsManager fieldsManager;
 
     public void setUser(User user) {
@@ -289,16 +290,20 @@ public class TeacherMainCTLL {
                 if(!patientFromGV){
                     this.currentPatient = model.getPatientOfCase();
                     try {
-                        updatePatientInDB(currentPatient);
+                        updatePatientInDB(currentPatient);  //TODO check if debugged
+                        fieldsManager.displayPatientInfo(patientOverviewTab, currentPatient,nameField,familyNameField,
+                                dateOfBirthPicker,genderComboBox,weightField,heightField,cprField,phoneNumberField,medicalHistoryTextArea);
                     } catch (DalException dalException) {
                         dalException.printStackTrace();
                         softAlert.displayAlert(dalException.getMessage());
                     }
                 }else {
                     try {
-                        updatePatientInDB(currentPatient);
+                        updatePatientInDB(currentPatient); //TODO check if debugged
                         model.updatePatientInTable(currentPatient);
                         refreshPatientsList();
+                        fieldsManager.displayPatientInfo(patientOverviewTab, currentPatient,nameField,familyNameField,
+                                dateOfBirthPicker,genderComboBox,weightField,heightField,cprField,phoneNumberField,medicalHistoryTextArea);
                     } catch (DalException dalException) {
                         dalException.printStackTrace();
                         softAlert.displayAlert(dalException.getMessage());
@@ -450,14 +455,14 @@ public class TeacherMainCTLL {
 
     private void handleCaseSelected(TableView<Case> tableCases,TableView<Group> tableGroups){
         this.currentCase = tableCases.getSelectionModel().getSelectedItem();
-        Group group = tableGroups.getSelectionModel().getSelectedItem();
+        this.currentGroup = tableGroups.getSelectionModel().getSelectedItem();
         if(currentCase != null){
             fieldsManager.displayCaseInfo(caseTab, currentCase, caseCategoryComboBox,caseSubcategoryComboBox,caseNameField,descriptionOfConditionText);
             try{
-                this.currentPatient = model.getPatientOfCaseInGroup(currentCase, group);
+                this.patientFromGV = false;
+                this.currentPatient = model.getPatientOfCaseInGroup(currentCase, currentGroup);
                 fieldsManager.displayPatientInfo(patientOverviewTab,currentPatient,nameField,familyNameField,dateOfBirthPicker,
                         genderComboBox,weightField,heightField,cprField,phoneNumberField,medicalHistoryTextArea);
-                this.patientFromGV = false;
             }catch (DalException dalException){
                 softAlert.displayAlert(dalException.getMessage());
             }
