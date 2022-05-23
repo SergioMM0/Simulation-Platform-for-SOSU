@@ -100,4 +100,8 @@ public class AdminMOD {
         return manager.searchUser(user , search);
     }
 
+    public void updateUser(User user) throws DalException{
+            manager.updateStudent(user);
+    }
+
 }

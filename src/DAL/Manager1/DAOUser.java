@@ -92,14 +92,14 @@ public class DAOUser {
 
     public void updateuser(User user) throws DalException {
         try (Connection con = dataAccess.getConnection()) {
-            String sql = "UPDATE users SET username = ?  , email = ?  , usertype = ?  WHERE userid = ? ";
+            String sql = "UPDATE users SET username = ?  , email = ?  , usertype = ? , schoolid = ?  WHERE userid = ? ";
 
             PreparedStatement prs = con.prepareStatement(sql);
             prs.setString(1, user.getName());
             prs.setString(2, user.getEmail());
             prs.setString(3, user.getUserType());
-            prs.setInt(4, user.getId());
-
+            prs.setInt(4, user.getSchoolID());
+            prs.setInt(5 , user.getId());
             prs.executeUpdate();
 
         } catch (SQLException e) {

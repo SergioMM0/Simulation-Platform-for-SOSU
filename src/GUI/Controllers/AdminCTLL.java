@@ -15,18 +15,24 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.skin.TableColumnHeader;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.WeakHashMap;
 
 public class AdminCTLL implements Initializable {
+    @FXML
+    private Label welcomeLbl;
     @FXML
     private AnchorPane anchorpane;
     @FXML
@@ -67,9 +73,11 @@ public class AdminCTLL implements Initializable {
     MenuItem updateSchool = new MenuItem("Update ");
     MenuItem help = new MenuItem("Help");
     MenuItem deleteSchool = new MenuItem("Delete");
-    MenuItem addUser = new MenuItem("Create new User");
+    MenuItem addTeacher = new MenuItem("Create new Teacher");
+    MenuItem addStudent  = new MenuItem("Create new Student");
     MenuItem deleteUser = new MenuItem("Delete");
-    MenuItem updateUser = new MenuItem("Update");
+    MenuItem updateTeacher = new MenuItem("Update");
+    MenuItem updateStudent= new MenuItem("Update");
 
 
     @Override
@@ -79,9 +87,8 @@ public class AdminCTLL implements Initializable {
         adminMOD = AdminMOD.getInstance();
         displaySchools();
         navigateBetweenNode();
-       // task();
-
-
+        menuOption();
+        // task();
     }
 
     public void displaySchools(){
@@ -163,6 +170,112 @@ public class AdminCTLL implements Initializable {
         });
     }
 
+    public void menuOption(){
+        addSchool.setOnAction(event -> {
+                GridPane grid = new GridPane();
+                grid.setHgap(10);
+                grid.setVgap(10);
+                grid.setPadding(new Insets(0, 10, 0, 10));
+                final javafx.scene.control.TextField name = new TextField();
+                name.setPromptText("Username");
+                Button button = new Button();
+                button.setText("Create");
+                grid.add(new Label("name:"), 0, 0);
+                grid.add(name, 1, 0);
+                grid.add(button, 1, 2);
+                Stage stage = new Stage();
+                Scene scene = new Scene(grid);
+                stage.setScene(scene);
+                stage.show();
+                button.setOnAction(event1 -> {
+                    try {
+                        adminMOD.createSchools(name.getText());
+                    } catch (DalException e) {
+                        new ConfirmationAlert("please insert valid name");
+                    }
+                });
+
+        });
+
+        addTeacher.setOnAction(event -> {
+            iWillInsertYou("TEACHER");
+        });
+
+        addStudent.setOnAction(event -> {
+            iWillInsertYou("STUDENT");
+        });
+
+
+
+        updateSchool.setOnAction(event -> {
+            GridPane grid = new GridPane();
+            grid.setHgap(10);
+            grid.setVgap(10);
+            grid.setPadding(new Insets(0, 10, 0, 10));
+            final javafx.scene.control.TextField name = new TextField();
+            name.setText(schoolTalbeView.getSelectionModel().getSelectedItem().getName());
+            Button button = new Button();
+            button.setText("Update");
+            grid.add(new Label("name:"), 0, 0);
+            grid.add(name, 1, 0);
+            grid.add(button, 1, 2);
+            Stage stage = new Stage();
+            Scene scene = new Scene(grid);
+            stage.setScene(scene);
+            stage.show();
+            button.setOnAction(event1 -> {
+                try {
+                    schoolTalbeView.getSelectionModel().getSelectedItem().setName(name.getText());
+                    adminMOD.updateSchool(schoolTalbeView.getSelectionModel().getSelectedItem());
+                } catch (DalException e) {
+                    new ConfirmationAlert("please insert valid name");
+                }
+            });
+        });
+
+
+        updateTeacher.setOnAction(event -> {
+            GridPane grid = new GridPane();
+            grid.setHgap(10);
+            grid.setVgap(10);
+            grid.setPadding(new Insets(0, 10, 0, 10));
+            final javafx.scene.control.TextField username = new TextField();
+            username.setText(teacherTableView.getSelectionModel().getSelectedItem().getName());
+            final javafx.scene.control.TextField email = new TextField();
+            email.setText(teacherTableView.getSelectionModel().getSelectedItem().getEmail());
+            final javafx.scene.control.TextField school = new TextField();
+            school.setText(String.valueOf(teacherTableView.getSelectionModel().getSelectedItem().getSchoolID()));
+            Button button = new Button();
+            button.setText("Update");
+            grid.add(new Label("Username:"), 0, 0);
+            grid.add(username, 1, 0);
+            grid.add(new Label("email:"), 0, 1);
+            grid.add(email , 1 , 1);
+            grid.add(new Label("school") ,0 ,2);
+            grid.add(school,1,2);
+            grid.add(button, 2, 2);
+            Stage stage = new Stage();
+            Scene scene = new Scene(grid);
+            stage.setScene(scene);
+            stage.show();
+            button.setOnAction(event1 -> {
+                int i = Integer.parseInt(String.valueOf(school.getText()));
+
+                try {
+                    teacherTableView.getSelectionModel().getSelectedItem().setName(username.getText());
+                    teacherTableView.getSelectionModel().getSelectedItem().setEmail(email.getText());
+                    teacherTableView.getSelectionModel().getSelectedItem().setSchoolID(i);
+                    adminMOD.updateUser(teacherTableView.getSelectionModel().getSelectedItem());
+                   // teacherTableView.setItems(adminMOD.getAllTeachers(teacherTableView.getSelectionModel().getSelectedItem().getSchoolID()));
+                } catch (DalException e) {
+                    new ConfirmationAlert("please enter valid data ");
+                }
+            });
+        });
+    }
+
+
+
     public void iWillInsertYou(String text){
         GridPane grid = new GridPane();
         grid.setHgap(10);
@@ -221,6 +334,7 @@ public class AdminCTLL implements Initializable {
             try {
                 if(teacherTableView.getSelectionModel().getSelectedIndex() != -1 ) {
                     adminMOD.removeUser(teacherTableView.getSelectionModel().getSelectedItem());
+                   teacherTableView.setItems(adminMOD.getAllTeachers(teacherTableView.getSelectionModel().getSelectedItem().getSchoolID()));
                 }
             } catch (DalException e) {
                new ConfirmationAlert("please select a Teacher ");
@@ -232,6 +346,7 @@ public class AdminCTLL implements Initializable {
         try {
             if(StudentTableView.getSelectionModel().getSelectedIndex() != -1 ) {
                 adminMOD.removeUser(StudentTableView.getSelectionModel().getSelectedItem());
+                StudentTableView.setItems(adminMOD.getAllSudents(StudentTableView.getSelectionModel().getSelectedItem().getSchoolID()));
             }
         } catch (DalException e) {
             new ConfirmationAlert("please select a Student ");
@@ -245,7 +360,12 @@ public class AdminCTLL implements Initializable {
 
     public void setUser(User logedUser) {
         this.logedUser = logedUser;
+        welcomeLbl.setText("Welcome Back "+logedUser.getName());
+        welcomeLbl.setEffect(new DropShadow(2.0, Color.BLACK));
+        welcomeLbl.setTextFill(Color.RED);
+        welcomeLbl.setFont(new Font("serif" ,20));
     }
+
 
     public void exitmenu(MouseEvent mouseEvent) {
         contextMenu.hide();
@@ -307,21 +427,22 @@ public class AdminCTLL implements Initializable {
 
     private void schools() {
        contextMenu.getItems().clear();
-       contextMenu.getItems().addAll(deleteSchool , updateSchool);
+       contextMenu.getItems().addAll(addSchool,deleteSchool , updateSchool);
     }
 
     private void teachers() {
         contextMenu.getItems().clear();
-        contextMenu.getItems().addAll( updateUser ,  deleteUser);
+        contextMenu.getItems().addAll(addTeacher, updateTeacher ,  deleteUser);
     }
 
     private void changeOptionAnchorPane() {
         contextMenu.getItems().clear();
-        contextMenu.getItems().addAll(addUser , addSchool , help);
+        contextMenu.getItems().addAll(help);
     }
 
     private void students() {
        contextMenu.getItems().clear();
-       contextMenu.getItems().addAll( updateUser ,  deleteUser);
+       contextMenu.getItems().addAll(addStudent ,updateStudent ,  deleteUser);
     }
+
 }

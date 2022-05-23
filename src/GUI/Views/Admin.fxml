@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <?import javafx.scene.control.ContextMenu?>
-<AnchorPane id="anchorpaneNodeID" onMousePressed="#exitmenu" fx:id="anchorpane" prefHeight="660.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.AdminCTLL">
+<AnchorPane id="anchorpaneNodeID" fx:id="anchorpane" onMousePressed="#exitmenu" prefHeight="660.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controllers.AdminCTLL">
    <children>
        <fx:define>
            <ContextMenu fx:id="contextMenu">
@@ -48,5 +48,6 @@
       <Button layoutX="514.0" layoutY="565.0" mnemonicParsing="false" onAction="#deleteStudentbtn" prefHeight="25.0" prefWidth="164.0" text="DeleteStudent" />
       <Button fx:id="Closeid" layoutX="769.0" layoutY="621.0" mnemonicParsing="false" onAction="#ClloseBtn" prefHeight="25.0" prefWidth="89.0" style="-fx-background-radius: 45;" text="Close" />
       <Label layoutX="24.0" layoutY="634.0" />
+      <Label fx:id="welcomeLbl" layoutX="24.0" layoutY="613.0" />
    </children>
 </AnchorPane>

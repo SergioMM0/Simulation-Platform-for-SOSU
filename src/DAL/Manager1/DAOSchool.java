@@ -69,6 +69,7 @@ public class DAOSchool {
         String sql ="Delete from School where id = ?";
         PreparedStatement prs = con.prepareStatement(sql);
         prs.setInt(1 , school.getId() );
+        prs.execute();
     } catch (SQLException e) {
       throw new DalException("Couldnot delete this school at this moment " , e);
     }
