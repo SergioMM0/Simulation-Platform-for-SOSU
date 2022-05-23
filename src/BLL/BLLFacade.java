@@ -93,6 +93,10 @@ public interface BLLFacade {
     List<Case> getCasesGradedOf(Group group) throws DalException;
 
     void addObservationToPatient(String text, Patient patient) throws DalException;
+
+    void UpdateQuestionnaire(int questionnaireId, Case currentCase, Patient currentPatient, Group currentGroup) throws DalException;
+
+    int getQuestionnaireOf(int caseId, int groupId) throws DalException;
 }
 
 

@@ -1,7 +1,6 @@
 package GUI.Models;
 
-import BE.StudentQuestion;
-import BE.StudentQuestionnaireAnswer;
+import BE.*;
 import BLL.BLLFacade;
 import BLL.BLLManager;
 import BLL.Exceptions.BLLException;
@@ -73,5 +72,26 @@ public class StudentQuestionMOD {
             e.printStackTrace();
         }
         return new ArrayList<>();
+    }
+
+    public void setCurrentSickPatientId(Patient currentPatient, Case currentCase, Group currentGroup) {
+        try {
+            bll.UpdateQuestionnaire(questionnaireId,currentCase,currentPatient,currentGroup);
+        } catch (DalException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setQuestionnaireId(int questionnaireId) {
+        this.questionnaireId=questionnaireId;
+    }
+
+    public int getQuestionnaireId(int caseId, int groupId) {
+        try {
+            return  bll.getQuestionnaireOf(caseId,groupId);
+        } catch (DalException e) {
+            e.printStackTrace();
+        }
+        return -1;
     }
 }

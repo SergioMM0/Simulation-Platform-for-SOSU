@@ -256,4 +256,24 @@ public class Manager implements DALFacade {
         daoPatient.addObservation(text,currentPatient);
     }
 
+    @Override
+    public StudentQuestionnaire getQuestionnaire(int questionnaireId) throws DalException {
+        return  daoStudentQuestion.getQuestionnaire(questionnaireId);
+    }
+
+    @Override
+    public int getSickPatientId(Patient currentPatient, Case currentCase, Group currentGroup) throws DalException {
+        return daoStudentQuestion.getSickPatientId(currentPatient,currentCase,currentGroup);
+    }
+
+    @Override
+    public void updateQuestionnaire(StudentQuestionnaire questionnaire) throws DalException {
+        daoStudentQuestion.updateQuestionnaireSickPatient(questionnaire);
+    }
+
+    @Override
+    public int getQuestionnaireOf(int caseId, int groupId) throws DalException {
+       return daoStudentQuestion.getQuestionnaireOf(caseId,groupId);
+    }
+
 }

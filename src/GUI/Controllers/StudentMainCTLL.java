@@ -10,6 +10,7 @@ import GUI.Alerts.SoftAlert;
 import GUI.Models.StudentMOD;
 import GUI.Util.StaticData;
 import GUI.Util.FieldsManager;
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -93,6 +94,8 @@ public class StudentMainCTLL {
 
     @FXML
     private TextField weightField;
+    @FXML
+    private Button evaluateCaseButton;
 
     private User currentStudent;
     private Group currentGroup;
@@ -117,6 +120,12 @@ public class StudentMainCTLL {
         setUpTabs();
         populateCasesAssigned();
         populateCasesGraded();
+        casesAssignedList.getSelectionModel().getSelectedItems().addListener(new ListChangeListener<Case>() {
+            @Override
+            public void onChanged(Change<? extends Case> c) {
+                    evaluateCaseButton.setDisable(casesAssignedList.getSelectionModel().getSelectedItem()==null);
+            }
+        });
     }
 
     private void setUpTabs() {
@@ -276,10 +285,11 @@ public class StudentMainCTLL {
         }
         assert root != null;
         if (resource.equals("GUI/Views/EvaluateCase.fxml")) {
-            //loader.<StudentQuestionCTL>getController().setUser(currentStudent);
-            //loader.<StudentQuestionCTL>getController().setGroup(currentGroup);
-            //loader.<StudentQuestionCTL>getController().setCase(currentPatient);
-            //loader.<StudentQuestionCTL>getController().setPatient(currentPatient);
+
+            loader.<EvaluateCaseCTLL>getController().setUser(currentStudent);
+            loader.<EvaluateCaseCTLL>getController().setGroup(currentGroup);
+            loader.<EvaluateCaseCTLL>getController().setCase(currentCase);
+            loader.<EvaluateCaseCTLL>getController().setPatient(currentPatient);
         }
         root.getStylesheets().add(css);
         Stage stage = new Stage();

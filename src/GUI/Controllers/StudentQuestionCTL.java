@@ -1,7 +1,6 @@
 package GUI.Controllers;
 
-import BE.StudentQuestion;
-import BE.StudentQuestionnaireAnswer;
+import BE.*;
 import GUI.Models.StudentQuestionMOD;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
@@ -56,8 +55,16 @@ public class StudentQuestionCTL implements Initializable {
     private Tab overviewTab;
     @FXML
     private TabPane tabPane;
+    @FXML
+    private Tab questionTab;
+
+
+    private Group currentGroup;
+    private Patient currentPatient;
+    private Case currentCase;
     StudentQuestionMOD model = new StudentQuestionMOD();    //use model to operation and contact with bll
     StudentQuestion currentQuestion;  //question that is currently showing to user
+    private User currentStudent;
 
     public void saveQuestionAndLoadNext(ActionEvent event) {
         if (currentQuestion == null) {
@@ -70,8 +77,8 @@ public class StudentQuestionCTL implements Initializable {
         if (questionIdLabel.getText() == "null") return; //end of loading next questions
         int questionId = Integer.parseInt(questionIdLabel.getText());  //read question Id
         StudentQuestionnaireAnswer answer = new StudentQuestionnaireAnswer(0   //automatically will  set in database
-                                , questionId, state, 0 //questionnaire id will set in StudentMod class
-                            ); //create answer object
+                , questionId, state, 0 //questionnaire id will set in StudentMod class
+        ); //create answer object
 
         model.saveStudentQuestionAnswer(answer);            //save answer to database
         currentQuestion = model.getNextQuestion(currentQuestion);       //load next question
@@ -85,11 +92,11 @@ public class StudentQuestionCTL implements Initializable {
         setAnswer(model.getAnswer(currentQuestion.getId()));   //set selected radio button by data from database
     }
 
-    private void openOverViewTab() {  //open tab that shows overview of questions
+    public void openOverViewTab() {  //open tab that shows overview of questions
         tabPane.getSelectionModel().select(overviewTab);
     }
 
-    private void fillOverviewList() {   //fill table view
+    public void fillOverviewList() {   //fill table view
         TableColumn<StudentQuestion, String> categoryColumn = new TableColumn<>("Category");
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
         TableColumn<StudentQuestion, String> titleColumn = new TableColumn<>("Title");
@@ -98,8 +105,8 @@ public class StudentQuestionCTL implements Initializable {
         questionColumn.setCellValueFactory(new PropertyValueFactory<>("question"));
         TableColumn<StudentQuestion, String> answerColumn = new TableColumn<>("Answer");
         answerColumn.setCellValueFactory(param -> getStateDescription(param.getValue().getAnswer().getState()));        //answer column will show the answer text
-                                                                                                                         //  and because it is stored as int number we should convert
-                                                                                                                     //   it into state description so I used getStateDescription method to do this conversion
+        //  and because it is stored as int number we should convert
+        //   it into state description so I used getStateDescription method to do this conversion
         questionTable.getColumns().clear();
         questionTable.getColumns().add(categoryColumn);
         questionTable.getColumns().add(titleColumn);
@@ -115,7 +122,8 @@ public class StudentQuestionCTL implements Initializable {
         int currentQuestionId = 0;
         if (questionIdLabel.getText() == "null")       //if we are at end of questions
             currentQuestionId = Integer.MAX_VALUE;        //set currentQuestion with biggest integer value
-        else if (questionIdLabel.getText() != "") currentQuestionId = Integer.parseInt(questionIdLabel.getText()); ///read question id from label
+        else if (questionIdLabel.getText() != "")
+            currentQuestionId = Integer.parseInt(questionIdLabel.getText()); ///read question id from label
         StudentQuestion previousQuestion = getPreviousQuestionId(currentQuestionId);
         if (previousQuestion == null) return;           //we are at start of question list
         currentQuestion = previousQuestion;
@@ -134,6 +142,7 @@ public class StudentQuestionCTL implements Initializable {
         insertImage();
         currentQuestion = model.GetFirstQuestion();       //get first question
         setQuestion(currentQuestion);           //set controls with quesiton data
+
     }
 
     private void setQuestion(BE.StudentQuestion question) {
@@ -205,4 +214,38 @@ public class StudentQuestionCTL implements Initializable {
         return new ReadOnlyObjectWrapper<>(descriptions[state - 1]);
     }
 
+
+    public void setGroup(Group currentGroup) {
+        this.currentGroup = currentGroup;
+    }
+
+    public void setPatient(Patient currentPatient) {
+        this.currentPatient = currentPatient;
+        setModelSickPatient(currentPatient, currentCase, currentGroup);
+    }
+
+    private void setModelSickPatient(Patient currentPatient, Case currentCase, Group currentGroup) {
+        if (currentCase == null || currentGroup == null || currentPatient == null)
+            return;
+        model.setCurrentSickPatientId(currentPatient, currentCase, currentGroup);
+    }
+
+    public void setCase(Case currentCase) {
+        this.currentCase = currentCase;
+    }
+
+    public void setUser(User currentStudent) {
+        this.currentStudent = currentStudent;
+    }
+
+    public void disableQuestionTab() {
+        questionTab.setDisable(true);
+
+    }
+
+    public void setModelQuestionnaireId() {             //set questionnaire Id in model according to case and group
+        int questionnaireId = model.getQuestionnaireId(currentCase.getId(), currentGroup.getId());
+        if (questionnaireId > 0)
+            model.setQuestionnaireId(questionnaireId);
+    }
 }

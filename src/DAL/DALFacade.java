@@ -95,4 +95,12 @@ public interface DALFacade {
     List<Case> getCasesGradedOf(Group group) throws DalException;
 
     void addObservationToPatient(String text, Patient currentPatient) throws DalException;
+
+    StudentQuestionnaire getQuestionnaire(int questionnaireId) throws DalException;
+
+    int getSickPatientId(Patient currentPatient, Case currentCase, Group currentGroup) throws DalException;
+
+    void updateQuestionnaire(StudentQuestionnaire questionnaire) throws DalException;
+
+    int getQuestionnaireOf(int caseId, int groupId) throws DalException;
 }

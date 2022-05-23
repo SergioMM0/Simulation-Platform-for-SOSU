@@ -247,7 +247,7 @@ public class TeacherMainCTLL {
     private void caseIsSelected(MouseEvent event) {
         Case selectedCase = casesListGV.getSelectionModel().getSelectedItem();
         if (selectedCase != null) {
-            fieldsManager.displayCaseInfo(caseTab, selectedCase, caseCategoryComboBox,caseSubcategoryComboBox,caseNameField,descriptionOfConditionText);
+            fieldsManager.displayCaseInfo(caseTab, selectedCase, caseCategoryComboBox, caseSubcategoryComboBox, caseNameField, descriptionOfConditionText);
         }
     }
 
@@ -263,27 +263,27 @@ public class TeacherMainCTLL {
     @FXML
     private void patientIsSelected(MouseEvent event) {
         this.currentPatient = patientsListGV.getSelectionModel().getSelectedItem();
-        if(currentPatient != null){
+        if (currentPatient != null) {
             this.fromGeneralView = true;
-            fieldsManager.displayPatientInfo(patientOverviewTab, currentPatient, nameField,familyNameField,dateOfBirthPicker,
-                    genderComboBox,weightField,heightField,cprField,phoneNumberField,medicalHistoryTextArea);
+            fieldsManager.displayPatientInfo(patientOverviewTab, currentPatient, nameField, familyNameField, dateOfBirthPicker,
+                    genderComboBox, weightField, heightField, cprField, phoneNumberField, medicalHistoryTextArea);
         }
     }
 
     @FXML
     private void newObservation(ActionEvent event) {
-        fieldsManager.handleObservationTeacherView(newObservationTextArea,model,currentPatient,medicalHistoryTextArea);
+        fieldsManager.handleObservationTeacherView(newObservationTextArea, model, currentPatient, medicalHistoryTextArea);
     }
 
     @FXML
     private void updatePatient(ActionEvent actionEvent) {
-        if (fieldsManager.patientFieldsAreFilled(nameField,familyNameField,dateOfBirthPicker,genderComboBox,weightField,heightField,cprField,phoneNumberField)) {
+        if (fieldsManager.patientFieldsAreFilled(nameField, familyNameField, dateOfBirthPicker, genderComboBox, weightField, heightField, cprField, phoneNumberField)) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                     "Are you sure you want to update this patient?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
             alert.showAndWait();
             if (alert.getResult() == ButtonType.YES) {
                 Patient patient;
-                if(!fromGeneralView){
+                if (!fromGeneralView) {
                     patient = model.getPatientOfCase();
                     try {
                         updatePatientInDB(patient);
@@ -291,7 +291,7 @@ public class TeacherMainCTLL {
                         dalException.printStackTrace();
                         softAlert.displayAlert(dalException.getMessage());
                     }
-                }else {
+                } else {
                     patient = patientsListGV.getSelectionModel().getSelectedItem();
                     try {
                         updatePatientInDB(patient);
@@ -306,9 +306,9 @@ public class TeacherMainCTLL {
         }
     }
 
-    private void updatePatientInDB(Patient patient) throws DalException{
-        fieldsManager.updateVariablesOfPatient(currentPatient, nameField,familyNameField,dateOfBirthPicker,genderComboBox,
-                weightField,heightField,cprField,phoneNumberField);
+    private void updatePatientInDB(Patient patient) throws DalException {
+        fieldsManager.updateVariablesOfPatient(currentPatient, nameField, familyNameField, dateOfBirthPicker, genderComboBox,
+                weightField, heightField, cprField, phoneNumberField);
         model.updatePatient(patient);
     }
 
@@ -319,7 +319,7 @@ public class TeacherMainCTLL {
         if (student != null && group != null) {
             if (!group.containsMember(student)) {
                 try {
-                    model.addStudentToGroup(group,student);
+                    model.addStudentToGroup(group, student);
                     model.updateObservableGroup(group.addMember(student));
                     populateParticipantsTable(group);
                     setUpGroup(group);
@@ -336,7 +336,7 @@ public class TeacherMainCTLL {
 
     @FXML
     private void groupIsSelected(MouseEvent event) {
-        if(groupsTable.getSelectionModel().getSelectedItem() != null){
+        if (groupsTable.getSelectionModel().getSelectedItem() != null) {
             populateParticipantsTable(groupsTable.getSelectionModel().getSelectedItem());
             populateGroupsTab(groupsTable.getSelectionModel().getSelectedItem());
         }
@@ -350,7 +350,7 @@ public class TeacherMainCTLL {
         }
     }
 
-    protected void setUpGroup(Group group){
+    protected void setUpGroup(Group group) {
         groupTab.setText(group.getName());
         groupNameLBL.setText(group.getName());
         setUpStudentsLBL(group);
@@ -366,21 +366,21 @@ public class TeacherMainCTLL {
     }
 
     private void populateCasesGraded(Group group) {
-        try{
+        try {
             casesGradedList.getItems().clear();
             casesGradedList.getItems().addAll(model.getCasesGradedOfGroup(group));
             nameColCasesGraded.setCellValueFactory(new PropertyValueFactory<>("name"));
-        }catch (DalException dalException){
+        } catch (DalException dalException) {
             softAlert.displayAlert(dalException.getMessage());
         }
     }
 
     protected void populateCasesAssigned(Group group) {
-        try{
+        try {
             casesAssignedList.getItems().clear();
             casesAssignedList.getItems().addAll(model.getCasesAssignedToGroup(group));
             nameColCases.setCellValueFactory(new PropertyValueFactory<>("name"));
-        }catch (DalException dalException){
+        } catch (DalException dalException) {
             dalException.printStackTrace();
             softAlert.displayAlert(dalException.getMessage());
         }
@@ -415,7 +415,7 @@ public class TeacherMainCTLL {
 
     @FXML
     private void removeStudentFromGroup(ActionEvent event) {
-        if(participantsTable.getSelectionModel().getSelectedItem() != null){
+        if (participantsTable.getSelectionModel().getSelectedItem() != null) {
             removeParticipant();
         }
     }
@@ -424,8 +424,8 @@ public class TeacherMainCTLL {
         Group group = groupsTable.getSelectionModel().getSelectedItem();
         User participant = participantsTable.getSelectionModel().getSelectedItem();
         try {
-            model.removeParticipant(group,participant);
-            model.removeObservableParticipant(group,participant);
+            model.removeParticipant(group, participant);
+            model.removeObservableParticipant(group, participant);
             populateParticipantsTable(group);
             setUpGroup(group);
         } catch (DalException dalException) {
@@ -436,25 +436,25 @@ public class TeacherMainCTLL {
 
     @FXML
     private void assignedCaseIsSelected(MouseEvent event) {
-        handleCaseSelected(casesAssignedList,groupsTable);
+        handleCaseSelected(casesAssignedList, groupsTable);
     }
 
     @FXML
     private void gradedCaseIsSelected(MouseEvent event) {
-        handleCaseSelected(casesGradedList,groupsTable);
+        handleCaseSelected(casesGradedList, groupsTable);
     }
 
-    private void handleCaseSelected(TableView<Case> tableCases,TableView<Group> tableGroups){
+    private void handleCaseSelected(TableView<Case> tableCases, TableView<Group> tableGroups) {
         Case selectedCase = tableCases.getSelectionModel().getSelectedItem();
         Group group = tableGroups.getSelectionModel().getSelectedItem();
-        if(selectedCase != null){
-            fieldsManager.displayCaseInfo(caseTab, selectedCase, caseCategoryComboBox,caseSubcategoryComboBox,caseNameField,descriptionOfConditionText);
-            try{
+        if (selectedCase != null) {
+            fieldsManager.displayCaseInfo(caseTab, selectedCase, caseCategoryComboBox, caseSubcategoryComboBox, caseNameField, descriptionOfConditionText);
+            try {
                 this.currentPatient = model.getPatientOfCaseInGroup(selectedCase, group);
-                fieldsManager.displayPatientInfo(patientOverviewTab,currentPatient,nameField,familyNameField,dateOfBirthPicker,
-                        genderComboBox,weightField,heightField,cprField,phoneNumberField,medicalHistoryTextArea);
+                fieldsManager.displayPatientInfo(patientOverviewTab, currentPatient, nameField, familyNameField, dateOfBirthPicker,
+                        genderComboBox, weightField, heightField, cprField, phoneNumberField, medicalHistoryTextArea);
                 this.fromGeneralView = false;
-            }catch (DalException dalException){
+            } catch (DalException dalException) {
                 softAlert.displayAlert(dalException.getMessage());
             }
         }
@@ -491,13 +491,13 @@ public class TeacherMainCTLL {
 
     @FXML
     private void assignCaseToGroup(ActionEvent event) {
-        if(casesListGV.getSelectionModel().getSelectedItem() != null){
+        if (casesListGV.getSelectionModel().getSelectedItem() != null) {
             handleAssignCaseToGroup();
-        }else softAlert.displayAlert("Please select a case");
+        } else softAlert.displayAlert("Please select a case");
     }
 
     private void handleAssignCaseToGroup() {
-        openView("GUI/Views/AssignNewCaseToGroup.fxml",generalCSS,"Assign case to group",530,400,false,0);
+        openView("GUI/Views/AssignNewCaseToGroup.fxml", generalCSS, "Assign case to group", 530, 400, false, 0);
     }
 
     @FXML
@@ -629,10 +629,10 @@ public class TeacherMainCTLL {
 
     @FXML
     private void markCaseAsGraded(ActionEvent event) {
-        if(casesAssignedList.getSelectionModel().getSelectedItem() != null){
-            try{
+        if (casesAssignedList.getSelectionModel().getSelectedItem() != null) {
+            try {
                 handleMarkCaseAsGraded(casesAssignedList.getSelectionModel().getSelectedItem());
-            } catch (DalException dalException){
+            } catch (DalException dalException) {
                 dalException.printStackTrace();
                 softAlert.displayAlert(dalException.getMessage());
             }
@@ -644,10 +644,10 @@ public class TeacherMainCTLL {
 
     @FXML
     private void unmarkCaseAsGraded(ActionEvent event) {
-        if(casesGradedList.getSelectionModel().getSelectedItem()!= null){
-            try{
+        if (casesGradedList.getSelectionModel().getSelectedItem() != null) {
+            try {
                 model.unmarkCaseAsGraded(casesGradedList.getSelectionModel().getSelectedItem());
-            }catch (DalException dalException){
+            } catch (DalException dalException) {
                 softAlert.displayAlert(dalException.getMessage());
             }
             model.moveCaseToAssignedList(casesGradedList.getSelectionModel().getSelectedItem());
@@ -667,7 +667,7 @@ public class TeacherMainCTLL {
 
     @FXML
     private void openGradeCase(ActionEvent event) {
-
+        openView("GUI/Views/StudentQuestion.fxml", "", "Question Overview", 880, 660, false, 0);
     }
 
     @FXML
@@ -682,7 +682,7 @@ public class TeacherMainCTLL {
 
     @FXML
     private void saveChangesOnCase(ActionEvent event) {
-        if (fieldsManager.caseFieldsAreFilled(caseNameField,descriptionOfConditionText)) {
+        if (fieldsManager.caseFieldsAreFilled(caseNameField, descriptionOfConditionText)) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                     "Are you sure you want to update this case?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
             alert.showAndWait();
@@ -706,10 +706,10 @@ public class TeacherMainCTLL {
 
     @FXML
     private void unassignSelectedCase(ActionEvent event) {
-        if(casesAssignedList.getSelectionModel().getSelectedItem()!= null){
-            try{
+        if (casesAssignedList.getSelectionModel().getSelectedItem() != null) {
+            try {
                 model.unassignCase(casesAssignedList.getSelectionModel().getSelectedItem());
-            }catch (DalException dalException){
+            } catch (DalException dalException) {
                 softAlert.displayAlert(dalException.getMessage());
             }
             model.deleteAssignedCaseInList(casesAssignedList.getSelectionModel().getSelectedItem());
@@ -718,12 +718,13 @@ public class TeacherMainCTLL {
             blockCaseTab();
         }
     }
-    private void refreshCasesAssigned(){
+
+    private void refreshCasesAssigned() {
         casesAssignedList.getItems().clear();
         casesAssignedList.getItems().addAll(model.getObservableCasesAssigned());
     }
 
-    private void blockPatientTab(){
+    private void blockPatientTab() {
         patientOverviewTab.setDisable(true);
         patientOverviewTab.setText("Patient info");
     }
@@ -775,10 +776,20 @@ public class TeacherMainCTLL {
             loader.<ManageGroupCTLL>getController().setOperationType(operationType);
             loader.<ManageGroupCTLL>getController().populateGroupField();
         }
-        if(resource.equals("GUI/Views/AssignNewCaseToGroup.fxml")){
+        if (resource.equals("GUI/Views/AssignNewCaseToGroup.fxml")) {
             loader.<AssignCaseCTLL>getController().setCase(casesListGV.getSelectionModel().getSelectedItem());
             loader.<AssignCaseCTLL>getController().setController(this);
             loader.<AssignCaseCTLL>getController().initializeView();
+        }
+        if (resource.equals("GUI/Views/StudentQuestion.fxml")) {
+            StudentQuestionCTL controller = loader.<StudentQuestionCTL>getController();
+            Case selectedCase = casesAssignedList.getSelectionModel().getSelectedItem();  //find selected case from case list
+            controller.setCase(selectedCase);
+            controller.setGroup(groupsTable.getSelectionModel().getSelectedItem());     //find selected group
+            controller.disableQuestionTab();            //student question tab will be disabled
+            controller.setModelQuestionnaireId();       //set questionnaire Id in application according to selected case and group
+            controller.fillOverviewList();      //laod data from database and fill it in overview list
+            controller.openOverViewTab();
         }
         root.getStylesheets().add(css);
         Stage stage = new Stage();
